@@ -1,0 +1,73 @@
+﻿<Window x:Class="Cloc.StartupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cloc"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+    WindowStyle="None"
+        Title="CLOC" Height="auto" Width="auto">
+    <Grid FocusManager.FocusedElement="{Binding ElementName=tb1}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" ></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Background="#FFD2D0C4" Grid.Row="0"></Border>
+        <Border Background="#FFD2D0C4" Grid.Row="1"></Border>
+        <Border Background="#FFD2D0C4" Grid.Row="2"></Border>
+
+        <Label Content="Ресторантьорска система за управление CLOC" Grid.Row="0" HorizontalAlignment="center" FontSize="22" FontWeight="Bold" FontStyle="Normal"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="600" Width="400" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" ></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*" ></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                <Button x:Name="btn1" Content="1" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="0" Background="AliceBlue" Click="btn1_Click"/>
+                <Button x:Name="btn2" Content="2" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="0" Background="AliceBlue" Click="btn2_Click"/>
+                <Button x:Name="btn3" Content="3" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="0" Background="AliceBlue" Click="btn3_Click"/>
+                <Button x:Name="btn4" Content="4" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="1" Background="AliceBlue" Click="btn4_Click"/>
+                <Button x:Name="btn5" Content="5" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="1" Background="AliceBlue" Click="btn5_Click"/>
+                <Button x:Name="btn6" Content="6" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="1" Background="AliceBlue" Click="btn6_Click"/>
+                <Button x:Name="btn7" Content="7" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="2" Background="AliceBlue" Click="btn7_Click"/>
+                <Button x:Name="btn8" Content="8" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="2" Background="AliceBlue" Click="btn8_Click"/>
+                <Button x:Name="btn9" Content="9" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="2" Background="AliceBlue" Click="btn9_Click"/>
+                <Button x:Name="btnX" Content="X" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="3" Background="AliceBlue" Click="btnX_Click"/>
+                <Button x:Name="btn0" Content="0" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="3" Background="AliceBlue" Click="btn0_Click"/>
+                <Button x:Name="btnBack" Content="&lt;--" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="3" Background="AliceBlue" Click="btnBack_Click"/>
+            </Grid>
+
+            <Image Height="auto" Width="auto" Grid.Column="1">
+                <Image.Source>
+                    <BitmapImage UriSource="images/restaurant.png"></BitmapImage>
+                </Image.Source>
+            </Image>
+
+            <Label Content="Въведи своя 5-цифрен" HorizontalAlignment="Center" Grid.Column="1" Margin="0,220,0,0" FontWeight="Bold" FontSize="25"/>
+            <Label Content="код за достъп:"  HorizontalAlignment="Center" Grid.Column="1" Margin="0,260,0,0" FontWeight="Bold" FontSize="25"/>
+            <TextBox x:Name="tb1" MaxLength="5" HorizontalAlignment="center" VerticalAlignment="center" TextWrapping="Wrap" Width="100" Height="30" Grid.Column="1" FontSize="22" FontFamily="Verdana" TextAlignment="Center"/>
+            <Button x:Name="btnEnter" Content="Вход" FontSize="22" Height="40" Width="100" Grid.Column="1" Margin="79,179,79,95" Background="AliceBlue" HorizontalAlignment="center" Click="btnEnter_Click" IsDefault="True"/>
+            <Button x:Name="btnExit" Content="Изход от програмата" Grid.Column="2" Grid.Row="1" Height="50" Width="300" Background="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="center" Click="btnExit_Click"/>
+
+        </Grid>
+        <Label Content="Валентин Дренков, София, 2022" Grid.Row="2" HorizontalAlignment="center" FontStyle="Italic" FontSize="20" FontWeight="Bold" ></Label>
+    </Grid>
+</Window>
