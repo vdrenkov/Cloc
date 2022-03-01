@@ -9,10 +9,14 @@
 
   <ItemGroup>
     <None Remove="Images\restaurant.png" />
+    <None Remove="Images\restaurantLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Images\restaurant.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\restaurantLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
