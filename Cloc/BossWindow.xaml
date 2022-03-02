@@ -1,5 +1,5 @@
-﻿<Window x:Class="Cloc.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window x:Class="Cloc.BossWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,9 +9,10 @@
     WindowStyle="None"
         Title="CLOC" Height="auto" Width="auto">
     <Grid>
+        <Label Content="Boss Window" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
         <StackPanel Orientation="horizontal" Height="70" Width="500" VerticalAlignment="top">
             <Button Content="Main Page" Click="btnMain_Click" Width="auto"></Button>
-            <Button Content="Check" Width="auto" Click="btnCheck_Click"></Button>
+            <Button Content="Boss Options" Width="auto" Click="btnBossOptions_Click"></Button>
             <Button Content="My Profile" Width="auto" Click="btnProfile_Click"></Button>
             <Button Content="My Logs"   Click="btnLogs_Click" Width="auto"></Button>
             <Button Content="Exit" Click="btnExit_Click" Width="auto"></Button>

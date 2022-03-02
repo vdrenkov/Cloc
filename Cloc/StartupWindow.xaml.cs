@@ -26,9 +26,18 @@ namespace Cloc
 
         private void btnEnter_Click(object? sender, RoutedEventArgs? e)
         {
-            MainWindow mw = new MainWindow();
-            mw.Show();
-            this.Close();
+            if ((tb1.Text.ToString()) == "77777")
+            {
+                BossWindow bw = new BossWindow();
+                bw.Show();
+                this.Close();
+            }
+            else
+            {
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                this.Close();
+            } 
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
