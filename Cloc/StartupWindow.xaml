@@ -79,6 +79,9 @@
                 </Image>
                 <Label Content="Lotus" Height="83" Width="400" HorizontalContentAlignment="center" VerticalContentAlignment="center" FontWeight="Bold" FontSize="50" Background="white" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,427,0,0" FontStyle="Italic" FontFamily="Algerian"/>
             </Grid>
+            <Grid HorizontalAlignment="right" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="1" Height="55" Width="305" Background="Green">
+                <Button x:Name="btnCredits" Content="Кредити" Grid.Column="2" Grid.Row="1" Height="50" Width="300" Background="Azure" HorizontalAlignment="Center" VerticalAlignment="center" Click="btnCredits_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+            </Grid>
         </Grid>
         <Label Content="Валентин Дренков, София, 2022" Grid.Row="2" HorizontalAlignment="center" FontStyle="Italic" FontSize="20" FontWeight="Bold" ></Label>
     </Grid>

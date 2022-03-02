@@ -24,7 +24,13 @@ namespace Cloc
         public MainWindow()
         {
             InitializeComponent();
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             Main.Navigate(new Pages.MainPage());
+        }
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
         private void btnMain_Click(object sender, RoutedEventArgs e)
         {

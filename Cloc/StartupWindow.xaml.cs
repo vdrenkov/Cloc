@@ -22,8 +22,13 @@ namespace Cloc
         public StartupWindow()
         {
             InitializeComponent();
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
-
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
+        }
         private void btnEnter_Click(object? sender, RoutedEventArgs? e)
         {
             if ((tb1.Text.ToString()) == "77777")
@@ -44,7 +49,12 @@ namespace Cloc
         {
             Close();
         }
-
+        private void btnCredits_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Настоящият сайт бе разработен от Валентин Дренков, студент от ТУ - София, ФКСТ, специалност КСИ, IV курс, 51. група, факултетен номер: 121218025, като задание за дипломна работа." +
+                "\nВсички права запазени.\n" +
+                "Валентин Дренков, София, 03.03.2022");
+        }
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
             if (tb1.Text.Length < 5)
