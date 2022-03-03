@@ -8,10 +8,13 @@ namespace Cloc
 {
     internal class UserInfo
     {
-        //public string Name {get;set;}
-        //public string Surname { get;set;}
-        //public string EGN { get;set;}
-        //public string Email { get;set;}
+        public string UserUCN { get; set; }
+        public string AccessCode { get; set; } 
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
+        public double HourPayment { get; set; }
+        public double TotalHours { get; set; }
+        public double Percent { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cloc.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,18 +32,25 @@ namespace Cloc
         }
         private void btnEnter_Click(object? sender, RoutedEventArgs? e)
         {
-            if ((tb1.Text.ToString()) == "77777")
+            if (EntryRegex.ValidateEntry(tb1.Text.ToString()))
             {
-                BossWindow bw = new BossWindow();
-                bw.Show();
-                this.Close();
+                if ((tb1.Text.ToString()) == "77777")
+                {
+                    BossWindow bw = new BossWindow();
+                    bw.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MainWindow mw = new MainWindow();
+                    mw.Show();
+                    this.Close();
+                }
             }
             else
             {
-                MainWindow mw = new MainWindow();
-                mw.Show();
-                this.Close();
-            } 
+                tb1.Text = "";
+            }
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)

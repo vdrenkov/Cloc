@@ -18,7 +18,6 @@ namespace Cloc
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    //TODO Program exit with Esc
     public partial class MainWindow : Window
     {
         public MainWindow()
