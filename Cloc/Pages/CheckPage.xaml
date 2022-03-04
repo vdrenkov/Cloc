@@ -10,6 +10,6 @@
 
     <Grid>
         <TextBlock Text="Check Page" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Възможност за check-in и check-out, проверка на текуща сума за изплащане от фирмата" HorizontalAlignment="Left" Margin="50,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Text="Възможност за check-in и check-out, смяна на код за достъп,overtime option,възстановяване на код, хеш, проверка на текуща сума за изплащане от фирмата" HorizontalAlignment="Left" Margin="50,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 </Page>
