@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+//TODO Button Refactoring
 namespace Cloc
 {
     /// <summary>
@@ -30,7 +31,7 @@ namespace Cloc
             if (e.Key == Key.Escape)
                 Close();
         }
-        private void btnEnter_Click(object? sender, RoutedEventArgs? e)
+        private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
             if (EntryRegex.ValidateEntry(tb1.Text.ToString()))
             {
