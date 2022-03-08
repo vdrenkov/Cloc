@@ -13,7 +13,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-//TODO Button Refactoring
+//TODO Button Refactoring, Settings Button, Change Access Code Button -> Startup Window
+//TODO ReadMe.txt, overtime option, хеш, queries
+
+/*Check -in +IsCheckedIn->DB
+Check -out -> DB
+ Check-out - check-in -> DB (total hours)
+ucn + check -in +check -out -> Checks.txt
+ Ucn + logs -> Logs.txt */
+
 namespace Cloc
 {
     /// <summary>
