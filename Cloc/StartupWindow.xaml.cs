@@ -13,14 +13,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-//TODO Button Refactoring, Settings Button, Change Access Code Button -> Startup Window
-//TODO ReadMe.txt, overtime option, хеш, queries
+//TODO Settings Button + README.txt, Change Access Code Button -> StartupWindow
 
-/*Check -in +IsCheckedIn->DB
-Check -out -> DB
- Check-out - check-in -> DB (total hours)
-ucn + check -in +check -out -> Checks.txt
- Ucn + logs -> Logs.txt */
+/*
+Hash accessCode & ucn
+Ucn + check-in + check-out -> Checks.txt
+Ucn + logs -> Logs.txt
+overtime option
+
+Check-in +IsCheckedIn (true) -> DB
+Check-out + IsCheckedIn (false) -> DB
+Check-out - check-in -> DB (total hours)
+*/
 
 namespace Cloc
 {
@@ -39,11 +43,11 @@ namespace Cloc
             if (e.Key == Key.Escape)
                 Close();
         }
-        private void btnEnter_Click(object sender, RoutedEventArgs e)
+        private void buttonEnter_Click(object sender, RoutedEventArgs e)
         {
-            if (EntryRegex.ValidateEntry(tb1.Text.ToString()))
+            if (EntryRegex.ValidateEntry(textboxKey.Text.ToString()))
             {
-                if ((tb1.Text.ToString()) == "77777")
+                if ((textboxKey.Text.ToString()) == "77777")
                 {
                     BossWindow bw = new BossWindow();
                     bw.Show();
@@ -58,99 +62,99 @@ namespace Cloc
             }
             else
             {
-                tb1.Text = "";
+                textboxKey.Text = "";
             }
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
+        private void buttonExit_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-        private void btnCredits_Click(object sender, RoutedEventArgs e)
+        private void buttonCredits_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Настоящият сайт бе разработен от Валентин Дренков, студент от ТУ - София, ФКСТ, специалност КСИ, IV курс, 51. група, факултетен номер: 121218025, като задание за дипломна работа." +
                 "\nВсички права запазени.\n" +
                 "Валентин Дренков, София, 03.03.2022");
         }
-        private void btn1_Click(object sender, RoutedEventArgs e)
+        private void button1_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length < 5)
+            if (textboxKey.Text.Length < 5)
             {
-                tb1.Text += 1;
+                textboxKey.Text += 1;
             }
         }
-        private void btn2_Click(object sender, RoutedEventArgs e)
+        private void button2_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length < 5)
+            if (textboxKey.Text.Length < 5)
             {
-                tb1.Text += 2;
+                textboxKey.Text += 2;
             }
         }
-        private void btn3_Click(object sender, RoutedEventArgs e)
+        private void button3_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length < 5)
+            if (textboxKey.Text.Length < 5)
             {
-                tb1.Text += 3;
+                textboxKey.Text += 3;
             }
         }
-        private void btn4_Click(object sender, RoutedEventArgs e)
+        private void button4_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length < 5)
+            if (textboxKey.Text.Length < 5)
             {
-                tb1.Text += 4;
+                textboxKey.Text += 4;
             }
         }
-        private void btn5_Click(object sender, RoutedEventArgs e)
+        private void button5_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length < 5)
+            if (textboxKey.Text.Length < 5)
             {
-                tb1.Text += 5;
+                textboxKey.Text += 5;
             }
         }
-        private void btn6_Click(object sender, RoutedEventArgs e)
+        private void button6_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length < 5)
+            if (textboxKey.Text.Length < 5)
             {
-                tb1.Text += 6;
+                textboxKey.Text += 6;
             }
         }
-        private void btn7_Click(object sender, RoutedEventArgs e)
+        private void button7_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length < 5)
+            if (textboxKey.Text.Length < 5)
             {
-                tb1.Text += 7;
+                textboxKey.Text += 7;
             }
         }
-        private void btn8_Click(object sender, RoutedEventArgs e)
+        private void button8_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length < 5)
+            if (textboxKey.Text.Length < 5)
             {
-                tb1.Text += 8;
+                textboxKey.Text += 8;
             }
         }
-        private void btn9_Click(object sender, RoutedEventArgs e)
+        private void button9_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length < 5)
+            if (textboxKey.Text.Length < 5)
             {
-                tb1.Text += 9;
+                textboxKey.Text += 9;
             }
         }
-        private void btnX_Click(object sender, RoutedEventArgs e)
+        private void buttonX_Click(object sender, RoutedEventArgs e)
         {
-               tb1.Text = "";
+               textboxKey.Text = "";
         }
-        private void btn0_Click(object sender, RoutedEventArgs e)
+        private void button0_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length < 5)
+            if (textboxKey.Text.Length < 5)
             {
-                tb1.Text += 0;
+                textboxKey.Text += 0;
             }
         }
-        private void btnBack_Click(object sender, RoutedEventArgs e)
+        private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
-            if (tb1.Text.Length>0)
+            if (textboxKey.Text.Length>0)
             {
-                tb1.Text = tb1.Text.Remove(tb1.Text.Length - 1);
+                textboxKey.Text = textboxKey.Text.Remove(textboxKey.Text.Length - 1);
             }
         }
     }

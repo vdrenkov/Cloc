@@ -30,23 +30,23 @@ namespace Cloc
             if (e.Key == Key.Escape)
                 Close();
         }
-        private void btnMain_Click(object sender, RoutedEventArgs e)
+        private void buttonMain_Click(object sender, RoutedEventArgs e)
             {
                 Main.Navigate(new Pages.MainPage());
             }
-            private void btnBossOptions_Click(object sender, RoutedEventArgs e)
+            private void buttonBossOptions_Click(object sender, RoutedEventArgs e)
             {
                 Main.Navigate(new Pages.BossOptionsPage());
             }
-            private void btnProfile_Click(object sender, RoutedEventArgs e)
+            private void buttonProfile_Click(object sender, RoutedEventArgs e)
             {
                 Main.Navigate(new Pages.ProfilePage());
             }
-            private void btnLogs_Click(object sender, RoutedEventArgs e)
+            private void buttonLogs_Click(object sender, RoutedEventArgs e)
             {
                 Main.Navigate(new Pages.LogsPage());
             }
-            private void btnExit_Click(object sender, RoutedEventArgs e)
+            private void buttonExit_Click(object sender, RoutedEventArgs e)
             {
                 StartupWindow sw = new StartupWindow();
                 sw.Show();

@@ -8,7 +8,7 @@
         WindowState="Maximized"
     WindowStyle="None"
         Title="CLOC" Height="auto" Width="auto">
-    <Grid FocusManager.FocusedElement="{Binding ElementName=tb1}">
+    <Grid FocusManager.FocusedElement="{Binding ElementName=textboxKey}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" ></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -42,18 +42,18 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="btn1"  Content="1" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="0" Background="Azure" Click="btn1_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btn2"  Content="2" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="0" Background="Azure" Click="btn2_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btn3"  Content="3" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="0" Background="Azure" Click="btn3_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btn4"  Content="4" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="1" Background="Azure" Click="btn4_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btn5"  Content="5" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="1" Background="Azure" Click="btn5_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btn6"  Content="6" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="1" Background="Azure" Click="btn6_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btn7"  Content="7" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="2" Background="Azure" Click="btn7_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btn8"  Content="8" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="2" Background="Azure" Click="btn8_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btn9"  Content="9" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="2" Background="Azure" Click="btn9_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btnX"  Content="X" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="3" Background="Azure" Click="btnX_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btn0"  Content="0" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="3" Background="Azure" Click="btn0_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
-                    <Button x:Name="btnBack"  Content="&lt;--" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="3" Background="Azure" Click="btnBack_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="button1"  Content="1" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="0" Background="Azure" Click="button1_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="button2"  Content="2" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="0" Background="Azure" Click="button2_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="button3"  Content="3" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="0" Background="Azure" Click="button3_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="button4"  Content="4" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="1" Background="Azure" Click="button4_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="button5"  Content="5" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="1" Background="Azure" Click="button5_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="button6"  Content="6" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="1" Background="Azure" Click="button6_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="button7"  Content="7" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="2" Background="Azure" Click="button7_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="button8"  Content="8" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="2" Background="Azure" Click="button8_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="button9"  Content="9" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="2" Background="Azure" Click="button9_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="buttonX"  Content="X" Grid.Column="0" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="3" Background="Azure" Click="buttonX_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="button0"  Content="0" Grid.Column="1" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="3" Background="Azure" Click="button0_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                    <Button x:Name="buttonBack"  Content="&lt;--" Grid.Column="2" FontSize="22" Height="auto" Width="auto" HorizontalAlignment="Stretch" Grid.Row="3" Background="Azure" Click="buttonBack_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
                 </Grid>
             </Grid>
 
@@ -65,11 +65,11 @@
 
             <Label Content="Въведи своя 5-цифрен" HorizontalAlignment="Center" Grid.Column="1" Margin="0,220,0,0" FontWeight="Bold" FontSize="25"/>
             <Label Content="код за достъп:"  HorizontalAlignment="Center" Grid.Column="1" Margin="0,260,0,0" FontWeight="Bold" FontSize="25"/>
-            <TextBox x:Name="tb1" MaxLength="5" HorizontalAlignment="center" VerticalAlignment="center" TextWrapping="Wrap" Width="100" Height="30" Grid.Column="1" FontSize="22" FontFamily="Verdana" TextAlignment="Center" FontStyle="Oblique" MaxLines="1"/>
-            <Button x:Name="btnEnter" Content="Вход" FontSize="22" Height="40" Width="100" Grid.Column="1" Margin="79,179,79,95" Background="Azure" HorizontalAlignment="center" Click="btnEnter_Click" IsDefault="True" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+            <TextBox x:Name="textboxKey" MaxLength="5" HorizontalAlignment="center" VerticalAlignment="center" TextWrapping="Wrap" Width="100" Height="30" Grid.Column="1" FontSize="22" FontFamily="Verdana" TextAlignment="Center" FontStyle="Oblique" MaxLines="1"/>
+            <Button x:Name="buttonEnter" Content="Вход" FontSize="22" Height="40" Width="100" Grid.Column="1" Margin="79,179,79,95" Background="Azure" HorizontalAlignment="center" Click="buttonEnter_Click" IsDefault="True" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
 
             <Grid HorizontalAlignment="right" VerticalAlignment="top" Grid.Column="2" Grid.Row="1" Height="55" Width="305" Background="red">
-                <Button x:Name="btnExit" Content="Изход от програмата" Grid.Column="2" Grid.Row="1" Height="50" Width="300" Background="Azure" HorizontalAlignment="Center" VerticalAlignment="center" Click="btnExit_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                <Button x:Name="buttonExit" Content="Изход от програмата" Grid.Column="2" Grid.Row="1" Height="50" Width="300" Background="Azure" HorizontalAlignment="Center" VerticalAlignment="center" Click="buttonExit_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
             </Grid>
             <Grid Background="white" Height="auto" Width="auto" Grid.Column="2" Grid.Row="1" HorizontalAlignment="center" VerticalAlignment="center">
                 <Image Height="600" Width="400" Grid.Column="2" Grid.Row="1" HorizontalAlignment="center" VerticalAlignment="center">
@@ -80,7 +80,7 @@
                 <Label Content="Lotus" Height="83" Width="400" HorizontalContentAlignment="center" VerticalContentAlignment="center" FontWeight="Bold" FontSize="50" Background="white" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,427,0,0" FontStyle="Italic" FontFamily="Algerian"/>
             </Grid>
             <Grid HorizontalAlignment="right" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="1" Height="55" Width="305" Background="Green">
-                <Button x:Name="btnCredits" Content="Кредити" Grid.Column="2" Grid.Row="1" Height="50" Width="300" Background="Azure" HorizontalAlignment="Center" VerticalAlignment="center" Click="btnCredits_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
+                <Button x:Name="buttonCredits" Content="Кредити" Grid.Column="2" Grid.Row="1" Height="50" Width="300" Background="Azure" HorizontalAlignment="Center" VerticalAlignment="center" Click="buttonCredits_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
             </Grid>
         </Grid>
         <Label Content="Валентин Дренков, София, 2022" Grid.Row="2" HorizontalAlignment="center" FontStyle="Italic" FontSize="20" FontWeight="Bold" ></Label>
