@@ -10,6 +10,6 @@
 
     <Grid>
         <TextBlock Text="Logs Page" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Списък с логовете на човека, които ще се пазят в лог файл" HorizontalAlignment="Left" Margin="50,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Text="Списък с логовете на човека + чековете, които ще се пазят във файлове" HorizontalAlignment="Left" Margin="50,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 </Page>

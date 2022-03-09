@@ -10,6 +10,6 @@
 
     <Grid>
         <TextBlock Text="Boss Options Page" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Шефски опции - добавяне на нов служител, изтриване на съществуващ, промяна на код на служител, смяна бонус %, проверка логове на служител, оттам -> проверка сума за изплащане и възможност за нулиране" HorizontalAlignment="Left" Margin="50,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Text="Шефски опции - добавяне на нов служител, изтриване на съществуващ, промяна на код на служител, смяна бонус %, проверка логове или чекове на служител, проверка сума за изплащане и възможност за нулиране" HorizontalAlignment="Left" Margin="50,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 </Page>

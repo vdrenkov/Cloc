@@ -51,28 +51,5 @@ namespace Cloc.Classes
             }
             return checks;
         }
-
-        public static bool HasOvertime(User user)
-        {
-            double totalHours = 0;
-            List<string> checks = UserChecks(user, 30);
-
-            foreach (string check in checks)
-            {
-                string[] results = check.Split(';', ';');
-                DateTime checkIn = DateTime.Parse(results[1]);
-                DateTime checkOut = DateTime.Parse(results[2]);
-                totalHours += (checkOut - checkIn).TotalHours;
-            }
-
-            if (totalHours > 176)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
     }
 }

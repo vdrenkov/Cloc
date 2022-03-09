@@ -9,7 +9,20 @@ namespace Cloc.Classes
 {
     public static class Logger
     {
-        static public List<string> UserLogs(User user, int count)
+        static public void AddLog(string UCN, string activity)
+        {
+            string activityLine = DateTime.Now + ";" + UCN + ";" + activity;
+
+            if (File.Exists(".\\Logs.txt"))
+            {
+                File.AppendAllText(".\\Logs.txt", activityLine + Environment.NewLine);
+            }
+            else
+            {
+                File.Create(".\\Logs.txt");
+            }
+        }
+        static public List<string> UserLogs(string UCN, int count)
         {
             List<string> logs = new List<string>();
             List<string> allLogs = new List<string>();
@@ -19,7 +32,7 @@ namespace Cloc.Classes
             {
                 string[] results = line.Split(';', ';');
 
-                if (results[1] == user.UserUCN)
+                if (results[1] == UCN)
                 {
                     string temp = results[0] + ";" + results[1] + ";" + results[2];
                     allLogs.Add(temp);
@@ -36,20 +49,6 @@ namespace Cloc.Classes
                 }
             }
             return logs;
-        }
-
-        static public void AddLog(User user, string activity)
-        {
-            string activityLine = DateTime.Now + ";" + user.UserUCN + ";" + activity;
-
-            if (File.Exists(".\\Logs.txt"))
-            {
-                File.AppendAllText(".\\Logs.txt", activityLine + Environment.NewLine);
-            }
-            else
-            {
-                File.Create(".\\Logs.txt");
-            }
         }
     }
 }
