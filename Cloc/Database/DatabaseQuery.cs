@@ -30,6 +30,36 @@ namespace Cloc.Database
             return true;
         }
 
+        public static User GetUserByKeyQuery(string accessCode)
+        {
+            User user = new User();
+            var DBConn = DatabaseConnection.Instance();
+
+            if (DBConn.IsConnect())
+            {
+                string query = $"use ClocDB; select * from Users where accessCode ='{accessCode}';";
+                var cmd = new MySqlCommand(query, DBConn.Connection);
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    user.UserUCN = reader.GetString(0);
+                    user.AccessCode = reader.GetString(1);
+                    user.CheckIn = reader.GetDateTime(2);
+                    user.CheckOut = reader.GetDateTime(3);
+                    user.IsCheckedIn = reader.GetBoolean(4);
+                    user.TotalHours = reader.GetDouble(5);
+                    user.HourPayment = reader.GetDouble(6);
+                    user.Percent = reader.GetDouble(7);
+                }
+
+                DBConn.Close();
+            }
+            return user;
+        }
+
+
         public static bool AddWorkerQuery(Person person, User user)
         {
             var DBConn = DatabaseConnection.Instance();
