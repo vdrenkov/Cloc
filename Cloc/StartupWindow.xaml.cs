@@ -13,17 +13,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+//TODO FIRST -> Hash UCN, UserUCN, AccessCode -> DB ! ! !
 //TODO Settings Button + README.txt, Change Access Code Button -> StartupWindow
 
 /*
-Hash accessCode & ucn
-Ucn + check-in + check-out -> Checks.txt
-Ucn + logs -> Logs.txt
-overtime option
-
-Check-in +IsCheckedIn (true) -> DB
-Check-out + IsCheckedIn (false) -> DB
-Check-out - check-in -> DB (total hours)
+CheckIn + IsCheckedIn (true) -> DB
+CheckOut + IsCheckedIn (false) -> DB
+CheckOut - CheckIn -> DB (TotalHours)
+UCN + CheckIn + CheckOut -> Checks.txt
+DateTime + UCN + Activity -> Logs.txt
 */
 
 namespace Cloc

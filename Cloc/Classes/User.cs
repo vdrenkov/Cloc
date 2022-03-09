@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cloc.Classes
 {
-    internal class User
+    public class User
     {
         public string UserUCN { get; set; }
         public string AccessCode { get; set; }
