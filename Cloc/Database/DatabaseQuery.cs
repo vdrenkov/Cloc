@@ -1,6 +1,7 @@
 ﻿using Cloc.Classes;
 using MySql.Data.MySqlClient;
 using System;
+using static Cloc.Classes.Hasher;
 
 namespace Cloc.Database
 {
@@ -18,12 +19,12 @@ namespace Cloc.Database
             cmd.CommandText = "drop database if exists ClocDB; create database if not exists ClocDB; use ClocDB; create table if not exists People(ucn char(10) not null primary key unique," +
                 "name varchar(50) not null,surname varchar(50) not null,email varchar(50) not null,phoneNumber varchar(20) not null,country varchar(50) not null,city varchar(50) not null," +
                 "address varchar(50) not null, position varchar(10) not null); create table if not exists Users(userUcn char(10) not null unique primary key," +
-                "accessCode char(5) not null, checkIn DateTime not null default Now(),checkOut DateTime not null default Now(), isCheckedIn boolean default false not null, totalHours double default 0 not null," +
+                "accessCode text not null, checkIn DateTime not null default Now(),checkOut DateTime not null default Now(), isCheckedIn boolean default false not null, totalHours double default 0 not null," +
                 "hourPayment double not null default 0,percent double not null default 0, " +
                 "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade);" +
                 " insert into People(ucn, name, surname, email, phoneNumber, country, city, address, position)" +
                 " values('9902130044', 'Valentin', 'Drenkov', 'vdrenkov@tu-sofia.bg', '0888992278', 'Bulgaria', 'Razlog', 'Tsar Ivan Asen II 5', 'Boss');" +
-                " insert into Users(userUcn, accessCode) values('9902130044', '77777'); ";
+                " insert into Users(userUcn, accessCode) values('9902130044', '1EDBD6222E713057328079D39A08C276D1C3E89911A1ED15B5E0B30F02536EDB'); ";
             cmd.ExecuteNonQuery();
 
             connection.Close();
@@ -33,6 +34,7 @@ namespace Cloc.Database
         public static User GetUserByKeyQuery(string accessCode)
         {
             User user = new User();
+            accessCode = HashKey(accessCode);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -62,6 +64,7 @@ namespace Cloc.Database
 
         public static bool AddWorkerQuery(Person person, User user)
         {
+            user.AccessCode=HashKey(user.AccessCode);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -131,6 +134,7 @@ namespace Cloc.Database
 
         public static bool ChangeAccessCodeQuery(string UCN, string accessCode)
         {
+            accessCode = HashKey(accessCode);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -151,6 +155,7 @@ namespace Cloc.Database
 
         public static bool CheckInQuery(User user)
         {
+            user.AccessCode= HashKey(user.AccessCode);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -179,6 +184,7 @@ namespace Cloc.Database
 
         public static bool CheckOutQuery(User user)
         {
+            user.AccessCode = HashKey(user.AccessCode);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -207,6 +213,7 @@ namespace Cloc.Database
 
         public static bool ChangeTotalHoursQuery(User user)
         {
+            user.AccessCode = HashKey(user.AccessCode);
             double totalHours = (user.CheckOut - user.CheckIn).TotalHours;
             var DBConn = DatabaseConnection.Instance();
 

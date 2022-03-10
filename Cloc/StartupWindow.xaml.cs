@@ -12,9 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Cloc.Classes.Hasher;
 
-//TODO FIRST -> Hash UCN, UserUCN, AccessCode -> DB ! ! !
-//TODO Settings Button + README.txt, Change Access Code Button -> StartupWindow
+//TODO FIRST -> Crypt UCN, UserUCN -> DB ! ! !
+//TODO Settings Button + Boss ACC Info + README.txt, Change Access Code Button -> StartupWindow
 
 /*
 CheckIn + IsCheckedIn (true) -> DB
@@ -45,7 +46,7 @@ namespace Cloc
         {
             if (EntryRegex.ValidateEntry(textboxKey.Text.ToString()))
             {
-                if ((textboxKey.Text.ToString()) == "77777")
+                if (HashKey(textboxKey.Text.ToString()) == "1EDBD6222E713057328079D39A08C276D1C3E89911A1ED15B5E0B30F02536EDB")
                 {
                     BossWindow bw = new BossWindow();
                     bw.Show();
@@ -139,7 +140,7 @@ namespace Cloc
         }
         private void buttonX_Click(object sender, RoutedEventArgs e)
         {
-               textboxKey.Text = "";
+            textboxKey.Text = "";
         }
         private void button0_Click(object sender, RoutedEventArgs e)
         {
@@ -150,7 +151,7 @@ namespace Cloc
         }
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length>0)
+            if (textboxKey.Text.Length > 0)
             {
                 textboxKey.Text = textboxKey.Text.Remove(textboxKey.Text.Length - 1);
             }
