@@ -45,7 +45,7 @@ namespace Cloc
         }
         private void buttonLogs_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Pages.LogsPage());
+            Main.Navigate(new Pages.ActivityPage());
         }
         private void buttonExit_Click(object sender, RoutedEventArgs e)
         {

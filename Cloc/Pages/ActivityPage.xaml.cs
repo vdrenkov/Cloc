@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Cloc.Pages
 {
     /// <summary>
-    /// Interaction logic for LogsPage.xaml
+    /// Interaction logic for ActivityPage.xaml
     /// </summary>
-    public partial class LogsPage : Page
+    public partial class ActivityPage : Page
     {
-        public LogsPage()
+        public ActivityPage()
         {
             InitializeComponent();
         }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Cloc.Classes.Security;
 
 namespace Cloc.Classes
 {
@@ -11,6 +12,7 @@ namespace Cloc.Classes
     {
         static public void AddCheck(User user)
         {
+            user.UserUCN = EncryptString(user.UserUCN);
             string checkLine = user.UserUCN + ";" + user.CheckIn + ";" + user.CheckOut;
 
             if (File.Exists(".\\Checks.txt"))
@@ -31,6 +33,7 @@ namespace Cloc.Classes
             foreach (string line in lines)
             {
                 string[] results = line.Split(';', ';');
+                results[0] = DecryptString(results[0]);
 
                 if (results[0] == user.UserUCN)
                 {

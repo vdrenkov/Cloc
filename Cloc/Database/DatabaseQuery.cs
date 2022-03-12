@@ -1,14 +1,14 @@
 ﻿using Cloc.Classes;
 using MySql.Data.MySqlClient;
 using System;
-using static Cloc.Classes.Hasher;
+using static Cloc.Classes.Security;
 
 namespace Cloc.Database
 {
     internal class DatabaseQuery
     {
 
-        public static bool StartupQuery(string server, string user, string password, string port)
+        public static bool StartupQuery(string server, string user, string password, string port,Person person, string accessCode)
         {
             string connectionString = $"server={server};user={user};password={password}; port={port};";
             var connection = new MySqlConnection(connectionString);
@@ -16,25 +16,29 @@ namespace Cloc.Database
 
             connection.Open();
 
-            cmd.CommandText = "drop database if exists ClocDB; create database if not exists ClocDB; use ClocDB; create table if not exists People(ucn char(10) not null primary key unique," +
-                "name varchar(50) not null,surname varchar(50) not null,email varchar(50) not null,phoneNumber varchar(20) not null,country varchar(50) not null,city varchar(50) not null," +
+            person.UCN = EncryptString(person.UCN);
+            accessCode=HashString(accessCode);
+            cmd.CommandText = "drop database if exists ClocDB; create database if not exists ClocDB; use ClocDB; " +
+                "create table if not exists People(ucn char(10) not null primary key unique," +
+                "name varchar(50) not null,surname varchar(50) not null,email varchar(50) not null,phoneNumber varchar(20) not null," +
+                "country varchar(50) not null,city varchar(50) not null," +
                 "address varchar(50) not null, position varchar(10) not null); create table if not exists Users(userUcn char(10) not null unique primary key," +
-                "accessCode text not null, checkIn DateTime not null default Now(),checkOut DateTime not null default Now(), isCheckedIn boolean default false not null, totalHours double default 0 not null," +
-                "hourPayment double not null default 0,percent double not null default 0, " +
-                "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade);" +
-                " insert into People(ucn, name, surname, email, phoneNumber, country, city, address, position)" +
-                " values('9902130044', 'Valentin', 'Drenkov', 'vdrenkov@tu-sofia.bg', '0888992278', 'Bulgaria', 'Razlog', 'Tsar Ivan Asen II 5', 'Boss');" +
-                " insert into Users(userUcn, accessCode) values('9902130044', '1EDBD6222E713057328079D39A08C276D1C3E89911A1ED15B5E0B30F02536EDB'); ";
+                "accessCode text not null, checkIn DateTime not null default Now(),checkOut DateTime not null default Now(), isCheckedIn boolean default false not null," +
+                "totalHours double default 0 not null, hourPayment double not null default 0,percent double not null default 0," +
+                "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade); " +
+                "insert into People(ucn, name, surname, email, phoneNumber, country, city, address, position)" +
+                $" values('{person.UCN}', '{person.Name}', '{person.Surname}', '{person.Email}', '{person.PhoneNumber}', '{person.Country}'," +
+                $"'{person.City}', '{person.Address}', '{person.Position}'); insert into Users(userUcn, accessCode) values('{person.UCN}', '{accessCode}'); ";
             cmd.ExecuteNonQuery();
 
             connection.Close();
             return true;
         }
 
-        public static User GetUserByKeyQuery(string accessCode)
+        public static User GetUserByAccessCodeQuery(string accessCode)
         {
             User user = new User();
-            accessCode = HashKey(accessCode);
+            accessCode = HashString(accessCode);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -47,7 +51,7 @@ namespace Cloc.Database
                 while (reader.Read())
                 {
                     user.UserUCN = reader.GetString(0);
-                    user.AccessCode = reader.GetString(1);
+                    user.AccessCode = accessCode;
                     user.CheckIn = reader.GetDateTime(2);
                     user.CheckOut = reader.GetDateTime(3);
                     user.IsCheckedIn = reader.GetBoolean(4);
@@ -58,13 +62,16 @@ namespace Cloc.Database
 
                 DBConn.Close();
             }
+            user.UserUCN = DecryptString(user.UserUCN);
             return user;
         }
 
 
         public static bool AddWorkerQuery(Person person, User user)
         {
-            user.AccessCode=HashKey(user.AccessCode);
+            person.UCN = EncryptString(person.UCN);
+            user.UserUCN= EncryptString(user.UserUCN);
+            user.AccessCode=HashString(user.AccessCode);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -109,6 +116,7 @@ namespace Cloc.Database
 
         public static bool DeleteWorkerQuery(string UCN)
         {
+            UCN=EncryptString(UCN);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -134,7 +142,8 @@ namespace Cloc.Database
 
         public static bool ChangeAccessCodeQuery(string UCN, string accessCode)
         {
-            accessCode = HashKey(accessCode);
+            UCN=EncryptString(UCN);
+            accessCode = HashString(accessCode);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -155,7 +164,8 @@ namespace Cloc.Database
 
         public static bool CheckInQuery(User user)
         {
-            user.AccessCode= HashKey(user.AccessCode);
+            user.UserUCN=EncryptString(user.UserUCN);
+            user.AccessCode= HashString(user.AccessCode);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -184,7 +194,8 @@ namespace Cloc.Database
 
         public static bool CheckOutQuery(User user)
         {
-            user.AccessCode = HashKey(user.AccessCode);
+            user.UserUCN = EncryptString(user.UserUCN);
+            user.AccessCode = HashString(user.AccessCode);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -213,7 +224,8 @@ namespace Cloc.Database
 
         public static bool ChangeTotalHoursQuery(User user)
         {
-            user.AccessCode = HashKey(user.AccessCode);
+            user.UserUCN = EncryptString(user.UserUCN);
+            user.AccessCode = HashString(user.AccessCode);
             double totalHours = (user.CheckOut - user.CheckIn).TotalHours;
             var DBConn = DatabaseConnection.Instance();
 
@@ -237,6 +249,7 @@ namespace Cloc.Database
 
         public static bool ChangeHourPaymentQuery(string userUCN, double hourPayment)
         {
+            userUCN=EncryptString(userUCN);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -257,6 +270,7 @@ namespace Cloc.Database
 
         public static bool ChangePercentQuery(string userUCN, double percent)
         {
+            userUCN = EncryptString(userUCN);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -277,6 +291,7 @@ namespace Cloc.Database
 
         public static bool ChangePersonQuery(string UCN, string fieldParam, string changeParam)
         {
+            UCN = EncryptString(UCN);
             var DBConn = DatabaseConnection.Instance();
 
             if (DBConn.IsConnect())
@@ -297,6 +312,7 @@ namespace Cloc.Database
 
         public static Person SelectPersonQuery(string UCN)
         {
+            UCN = EncryptString(UCN);
             var DBConn = DatabaseConnection.Instance();
             Person person = new Person();
 
@@ -321,12 +337,14 @@ namespace Cloc.Database
                 }
                 DBConn.Close();
             }
+            person.UCN=DecryptString(person.UCN);
             return person;
         }
 
         public static User SelectUserQuery(string UserUCN)
         {
-            var DBConn = DatabaseConnection.Instance();
+            UserUCN = EncryptString(UserUCN); 
+                var DBConn = DatabaseConnection.Instance();
             User user = new User();
 
             if (DBConn.IsConnect())
@@ -350,6 +368,7 @@ namespace Cloc.Database
                 }
                 DBConn.Close();
             }
+            user.UserUCN=DecryptString(user.UserUCN);
             return user;
         }
     }

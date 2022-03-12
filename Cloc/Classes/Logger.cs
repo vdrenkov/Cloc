@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Cloc.Classes.Security;
 
 namespace Cloc.Classes
 {
@@ -11,6 +12,7 @@ namespace Cloc.Classes
     {
         static public void AddLog(string UCN, string activity)
         {
+            UCN = EncryptString(UCN);
             string activityLine = DateTime.Now + ";" + UCN + ";" + activity;
 
             if (File.Exists(".\\Logs.txt"))
@@ -31,6 +33,7 @@ namespace Cloc.Classes
             foreach (string line in lines)
             {
                 string[] results = line.Split(';', ';');
+                results[1]= DecryptString(results[1]);
 
                 if (results[1] == UCN)
                 {
