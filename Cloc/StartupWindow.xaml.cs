@@ -1,4 +1,5 @@
-﻿using Cloc.Classes;
+﻿using Cloc.AdditionalWindows;
+using Cloc.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static Cloc.Classes.Security;
+using static Cloc.Database.DatabaseQuery;
 
 //TODO Settings Button + README.txt, Change Access Code Button -> StartupWindow
 
@@ -62,6 +64,25 @@ namespace Cloc
             {
                 textboxKey.Text = "";
             }
+        }
+
+        private void buttonTest_Click(object sender, RoutedEventArgs e)
+        {
+            Person p = new Person();
+            p = SelectPersonQuery("9902130044");
+            MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address);
+        }
+
+        private void buttonChangeAccessCode_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void buttonSetup_Click(object sender, RoutedEventArgs e)
+        {
+            SetupWindow sw=new SetupWindow();
+            sw.Show();
+            this.Close();
         }
 
         private void buttonExit_Click(object sender, RoutedEventArgs e)

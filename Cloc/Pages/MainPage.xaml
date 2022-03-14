@@ -9,6 +9,14 @@
       Title="MainPage">
 
     <Grid>
+        <!--<Grid>
+            <Image Height="auto" Width="auto" Grid.Column="1"  HorizontalAlignment="center" VerticalAlignment="center">
+                <Image.Source>
+                    <BitmapImage UriSource="../images/background.jpg"></BitmapImage>
+                </Image.Source>
+            </Image>
+        </Grid> -->
+        <TextBlock Text="Здравейте, + името ти!"></TextBlock>
         <TextBlock Text="Main Page" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <TextBlock Text="Основна страница при вход - ще съдържа нещо като приветствие, цитат (днес времето е прекрасно за...) и т.н." HorizontalAlignment="Left" Margin="50,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
