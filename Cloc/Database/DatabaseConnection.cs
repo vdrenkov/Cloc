@@ -8,7 +8,7 @@ namespace Cloc.Database
         public string Server = "localhost";
         public string DatabaseName = "ClocDB";
         public string UserName = "root";
-        public string Password = "";
+        public string Password = "348_sha765_KaD3l";
 
         public MySqlConnection Connection { get; set; }
 
