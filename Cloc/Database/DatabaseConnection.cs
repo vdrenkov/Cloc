@@ -22,16 +22,25 @@ namespace Cloc.Database
 
         public bool IsConnect()
         {
+            bool flag = true;
+
             if (Connection == null)
             {
                 if (String.IsNullOrEmpty(DatabaseName))
-                    return false;
+                    flag= false;
                 string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}", Server, DatabaseName, UserName, Password);
-                Connection = new MySqlConnection(connstring);
-                Connection.Open();
+                try
+                {
+                    Connection = new MySqlConnection(connstring);
+                    Connection.Open();
+                }
+                catch (Exception)
+                {
+                    flag = false;     
+                }
             }
 
-            return true;
+            return flag;
         }
 
         public void Close()

@@ -1,0 +1,17 @@
+﻿<Window x:Class="Cloc.AdditionalWindows.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cloc.AdditionalWindows"
+        mc:Ignorable="d"
+         WindowState="Maximized"
+    WindowStyle="None"
+        Title="HelpWindow" Height="auto" Width="auto">
+    <Grid>
+        <Label FontSize="22" Height="50" Width="160" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Въведи ЕГН:" Margin="10,10,0,0"/>
+        <PasswordBox  x:Name="passwordBox" Margin="225,200,345,217"/>
+        <Button Name="backButton" Height="20" Width="50" Content="Назад" Click="backButton_Click" Margin="160,335,590,79"/>
+        <Button Name="actionButton" Height="20" Width="70" Content="Проверка" Click="actionButton_Click" Margin="430,330,275,85"/>
+    </Grid>
+</Window>

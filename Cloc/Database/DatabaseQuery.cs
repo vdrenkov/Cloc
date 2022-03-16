@@ -1,6 +1,7 @@
 ﻿using Cloc.Classes;
 using MySql.Data.MySqlClient;
 using System;
+using System.Windows;
 using static Cloc.Classes.Security;
 
 namespace Cloc.Database
@@ -14,24 +15,33 @@ namespace Cloc.Database
             var connection = new MySqlConnection(connectionString);
             var cmd = connection.CreateCommand();
 
-            connection.Open();
+            try
+            {
+                connection.Open();
+                person.UCN = EncryptString(person.UCN);
+                accessCode = HashString(accessCode);
+                cmd.CommandText = "drop database if exists ClocDB; create database if not exists ClocDB; use ClocDB; " +
+                    "create table if not exists People(ucn varchar(100) not null primary key unique," +
+                    "name varchar(50) not null,surname varchar(50) not null,email varchar(50) not null,phoneNumber varchar(20) not null," +
+                    "country varchar(50) not null,city varchar(50) not null," +
+                    "address varchar(50) not null, position varchar(10) not null); create table if not exists Users(userUcn varchar(100) not null unique primary key," +
+                    "accessCode text not null, checkIn DateTime not null default Now(),checkOut DateTime not null default Now(), isCheckedIn boolean default false not null," +
+                    "totalHours double default 0 not null, hourPayment double not null default 0,percent double not null default 0," +
+                    "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade); " +
+                    "insert into People(ucn, name, surname, email, phoneNumber, country, city, address, position)" +
+                    $" values('{person.UCN}', '{person.Name}', '{person.Surname}', '{person.Email}', '{person.PhoneNumber}', '{person.Country}'," +
+                    $"'{person.City}', '{person.Address}', '{person.Position}'); insert into Users(userUcn, accessCode) values('{person.UCN}', '{accessCode}'); ";
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
 
-            person.UCN = EncryptString(person.UCN);
-            accessCode = HashString(accessCode);
-            cmd.CommandText = "drop database if exists ClocDB; create database if not exists ClocDB; use ClocDB; " +
-                "create table if not exists People(ucn varchar(100) not null primary key unique," +
-                "name varchar(50) not null,surname varchar(50) not null,email varchar(50) not null,phoneNumber varchar(20) not null," +
-                "country varchar(50) not null,city varchar(50) not null," +
-                "address varchar(50) not null, position varchar(10) not null); create table if not exists Users(userUcn varchar(100) not null unique primary key," +
-                "accessCode text not null, checkIn DateTime not null default Now(),checkOut DateTime not null default Now(), isCheckedIn boolean default false not null," +
-                "totalHours double default 0 not null, hourPayment double not null default 0,percent double not null default 0," +
-                "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade); " +
-                "insert into People(ucn, name, surname, email, phoneNumber, country, city, address, position)" +
-                $" values('{person.UCN}', '{person.Name}', '{person.Surname}', '{person.Email}', '{person.PhoneNumber}', '{person.Country}'," +
-                $"'{person.City}', '{person.Address}', '{person.Position}'); insert into Users(userUcn, accessCode) values('{person.UCN}', '{accessCode}'); ";
-            cmd.ExecuteNonQuery();
-
-            connection.Close();
             return true;
         }
 

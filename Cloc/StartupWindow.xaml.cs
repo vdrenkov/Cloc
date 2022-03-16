@@ -16,6 +16,9 @@ using System.Windows.Shapes;
 using static Cloc.Classes.Security;
 using static Cloc.Database.DatabaseQuery;
 
+//Keydown -> Escape
+//try, catch, finally
+//DB Settings -> DatabaseConnection
 //TODO Settings Button + README.txt, Change Access Code Button -> StartupWindow
 
 /*
@@ -45,9 +48,9 @@ namespace Cloc
         }
         private void buttonEnter_Click(object sender, RoutedEventArgs e)
         {
-            if (EntryRegex.ValidateEntry(textboxKey.Text.ToString()))
+            if (Validator.ValidateAccessCode(passwordBoxAccessCode.Password.ToString()))
             {
-                if (textboxKey.Text.ToString() == "77777")
+                if (passwordBoxAccessCode.Password.ToString() == "77777")
                 {
                     BossWindow bw = new BossWindow();
                     bw.Show();
@@ -62,7 +65,7 @@ namespace Cloc
             }
             else
             {
-                textboxKey.Text = "";
+                passwordBoxAccessCode.Password = "";
             }
         }
 
@@ -70,7 +73,7 @@ namespace Cloc
         {
             Person p = new Person();
             p = SelectPersonQuery("9902130044");
-            MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address);
+            MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address+p.Position);
         }
 
         private void buttonChangeAccessCode_Click(object sender, RoutedEventArgs e)
@@ -80,8 +83,8 @@ namespace Cloc
 
         private void buttonSetup_Click(object sender, RoutedEventArgs e)
         {
-            SetupWindow sw=new SetupWindow();
-            sw.Show();
+            HelpWindow hw=new HelpWindow();
+            hw.Show();
             this.Close();
         }
 
@@ -97,83 +100,83 @@ namespace Cloc
         }
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length < 5)
+            if (passwordBoxAccessCode.Password.Length < 5)
             {
-                textboxKey.Text += 1;
+                passwordBoxAccessCode.Password += 1;
             }
         }
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length < 5)
+            if (passwordBoxAccessCode.Password.Length < 5)
             {
-                textboxKey.Text += 2;
+                passwordBoxAccessCode.Password += 2;
             }
         }
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length < 5)
+            if (passwordBoxAccessCode.Password.Length < 5)
             {
-                textboxKey.Text += 3;
+                passwordBoxAccessCode.Password += 3;
             }
         }
         private void button4_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length < 5)
+            if (passwordBoxAccessCode.Password.Length < 5)
             {
-                textboxKey.Text += 4;
+                passwordBoxAccessCode.Password += 4;
             }
         }
         private void button5_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length < 5)
+            if (passwordBoxAccessCode.Password.Length < 5)
             {
-                textboxKey.Text += 5;
+                passwordBoxAccessCode.Password += 5;
             }
         }
         private void button6_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length < 5)
+            if (passwordBoxAccessCode.Password.Length < 5)
             {
-                textboxKey.Text += 6;
+                passwordBoxAccessCode.Password += 6;
             }
         }
         private void button7_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length < 5)
+            if (passwordBoxAccessCode.Password.Length < 5)
             {
-                textboxKey.Text += 7;
+                passwordBoxAccessCode.Password += 7;
             }
         }
         private void button8_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length < 5)
+            if (passwordBoxAccessCode.Password.Length < 5)
             {
-                textboxKey.Text += 8;
+                passwordBoxAccessCode.Password += 8;
             }
         }
         private void button9_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length < 5)
+            if (passwordBoxAccessCode.Password.Length < 5)
             {
-                textboxKey.Text += 9;
+                passwordBoxAccessCode.Password += 9;
             }
         }
         private void buttonX_Click(object sender, RoutedEventArgs e)
         {
-            textboxKey.Text = "";
+            passwordBoxAccessCode.Password = "";
         }
         private void button0_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length < 5)
+            if (passwordBoxAccessCode.Password.Length < 5)
             {
-                textboxKey.Text += 0;
+                passwordBoxAccessCode.Password += 0;
             }
         }
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
-            if (textboxKey.Text.Length > 0)
+            if (passwordBoxAccessCode.Password.Length > 0)
             {
-                textboxKey.Text = textboxKey.Text.Remove(textboxKey.Text.Length - 1);
+                passwordBoxAccessCode.Password = passwordBoxAccessCode.Password.Remove(passwordBoxAccessCode.Password.Length - 1);
             }
         }
     }

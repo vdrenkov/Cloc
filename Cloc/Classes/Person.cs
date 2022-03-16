@@ -8,7 +8,9 @@ namespace Cloc.Classes
 {
     enum WorkPosition
     {
+        Guest,
         Bartender,
+        Barmaid,
         Barista,
         Waiter,
         Waitress,
@@ -16,7 +18,8 @@ namespace Cloc.Classes
         Host,
         Hostess,
         Manager,
-        Boss
+        Boss,
+        Admin
     }
     internal class Person
     {

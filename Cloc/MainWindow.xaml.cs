@@ -29,7 +29,11 @@ namespace Cloc
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
-                Close();
+            {
+                StartupWindow sw = new StartupWindow();
+                sw.Show();
+                this.Close();
+            }
         }
         private void buttonMain_Click(object sender, RoutedEventArgs e)
         {
