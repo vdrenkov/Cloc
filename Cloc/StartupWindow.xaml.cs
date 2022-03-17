@@ -17,9 +17,6 @@ using static Cloc.Classes.Security;
 using static Cloc.Database.DatabaseQuery;
 using static Cloc.Database.DatabaseConnection;
 
-//Queries -> flag
-//TODO Settings Button + README.txt, Change Access Code Button -> StartupWindow
-
 /*
 CheckIn + IsCheckedIn (true) -> DB
 CheckOut + IsCheckedIn (false) -> DB
@@ -27,8 +24,8 @@ CheckOut - CheckIn -> DB (TotalHours)
 UCN + CheckIn + CheckOut -> Checks.txt
 DateTime + UCN + Activity -> Logs.txt
 
+StartupWindow -> Exit confirmation uncomment
 Password -> 348_sha765_KaD3l
-StartupWindow -> Exit confirmation
 */
 
 namespace Cloc
