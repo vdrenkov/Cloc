@@ -36,7 +36,12 @@ namespace Cloc.Database
                 cmd.ExecuteNonQuery();
                 connection.Close();
                 SetSettings(server, username, password, port);
-                flag = true;
+
+                User user = GetUserByAccessCodeQuery(accessCode);
+                if (user != null)
+                {
+                    flag = true;
+                }
             }
             catch (Exception)
             {
@@ -47,9 +52,10 @@ namespace Cloc.Database
 
         public static User GetUserByAccessCodeQuery(string accessCode)
         {
-            User user = new User();
             accessCode = HashString(accessCode);
             DatabaseConnection dbConn = new DatabaseConnection();
+            User user = new User();
+            MySqlDataReader reader = null;
 
             try
             {
@@ -58,12 +64,12 @@ namespace Cloc.Database
                     string query = $"use ClocDB; select * from Users where accessCode ='{accessCode}';";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
 
-                    MySqlDataReader reader = cmd.ExecuteReader();
+                     reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
                         user.UserUCN = reader.GetString(0);
-                        user.AccessCode = accessCode;
+                        user.AccessCode = reader.GetString(1);
                         user.CheckIn = reader.GetDateTime(2);
                         user.CheckOut = reader.GetDateTime(3);
                         user.IsCheckedIn = reader.GetBoolean(4);
@@ -71,6 +77,7 @@ namespace Cloc.Database
                         user.HourPayment = reader.GetDouble(6);
                         user.Percent = reader.GetDouble(7);
                     }
+                    reader.Close();
                     dbConn.Close();
                     user.UserUCN = DecryptString(user.UserUCN);
                 }
@@ -122,10 +129,10 @@ namespace Cloc.Database
                     command.Parameters.AddWithValue("@hourPayment", user.HourPayment);
                     command.Parameters.AddWithValue("@totalHours", user.TotalHours);
                     command.Parameters.AddWithValue("@percent", user.Percent);
-                    command.ExecuteNonQuery();
 
+                    if (cmd.ExecuteNonQuery() > 0)
+                    { flag = true; }
                     dbConn.Close();
-                    flag = true;
                 }
                 catch (Exception)
                 {
@@ -153,9 +160,9 @@ namespace Cloc.Database
                     string secondQuery = $"use ClocDB; delete from Users where userUcn = {UCN};";
                     var command = new MySqlCommand(secondQuery, dbConn.Connection);
 
-                    command.ExecuteNonQuery();
+                    if (cmd.ExecuteNonQuery() > 0)
+                    { flag = true; }
                     dbConn.Close();
-                    flag = true;
                 }
                 catch (Exception)
                 {
@@ -179,11 +186,10 @@ namespace Cloc.Database
                 {
                     string query = $"use ClocDB; update Users set accessCode = '{accessCode}' where userUcn ='{UCN}';";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
-                    if ((cmd.ExecuteNonQuery()) > 0)
-                    {
-                        flag = true;
-                    }
-                        dbConn.Close();
+                    if (cmd.ExecuteNonQuery() > 0)
+                    { flag = true; }
+                    dbConn.Close();
+                    dbConn.Close();
                 }
                 catch (Exception)
                 {
@@ -215,9 +221,10 @@ namespace Cloc.Database
                     var command = new MySqlCommand(secondQuery, dbConn.Connection);
 
                     command.Parameters.AddWithValue("@userUcn", user.UserUCN);
-                    command.ExecuteNonQuery();
+
+                    if (cmd.ExecuteNonQuery() > 0)
+                    { flag = true; }
                     dbConn.Close();
-                    flag = true;
                 }
                 catch (Exception)
                 {
@@ -251,9 +258,10 @@ namespace Cloc.Database
                     var command = new MySqlCommand(secondQuery, dbConn.Connection);
 
                     command.Parameters.AddWithValue("@userUcn", user.UserUCN);
-                    command.ExecuteNonQuery();
+
+                    if (cmd.ExecuteNonQuery() > 0)
+                    { flag = true; }
                     dbConn.Close();
-                    flag= true;
                 }
                 catch (Exception)
                 {
@@ -281,9 +289,10 @@ namespace Cloc.Database
 
                     cmd.Parameters.AddWithValue("@totalHours", totalHours);
                     cmd.Parameters.AddWithValue("@userUcn", user.UserUCN);
-                    cmd.ExecuteNonQuery();
+
+                    if (cmd.ExecuteNonQuery() > 0)
+                    { flag = true; }
                     dbConn.Close();
-                    flag= true;
                 }
                 catch (Exception)
                 {
@@ -307,9 +316,9 @@ namespace Cloc.Database
                     string query = $"use ClocDB; update Users set hourPayment = {hourPayment} where userUcn ={userUCN};";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
 
-                    cmd.ExecuteNonQuery();
+                    if (cmd.ExecuteNonQuery() > 0)
+                    { flag = true; }
                     dbConn.Close();
-                    flag= true;
                 }
                 catch (Exception)
                 {
@@ -332,9 +341,9 @@ namespace Cloc.Database
                     string query = $"use ClocDB; update Users set percent = {percent} where userUcn ={userUCN};";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
 
-                    cmd.ExecuteNonQuery();
+                    if (cmd.ExecuteNonQuery() > 0)
+                    { flag = true; }
                     dbConn.Close();
-                    flag= true;
                 }
                 catch (Exception)
                 {
@@ -357,10 +366,9 @@ namespace Cloc.Database
                     string query = $"use ClocDB; update People set {fieldParam} = '{changeParam}' where ucn = {UCN};";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
 
-                    cmd.ExecuteNonQuery();
+                    if (cmd.ExecuteNonQuery() > 0)
+                    { flag = true; }
                     dbConn.Close();
-                    flag= true;
-
                 }
                 catch (Exception)
                 {
@@ -446,7 +454,7 @@ namespace Cloc.Database
                 {
                     MessageBox.Show("Потребител с посоченото ЕГН не беше намерен.");
                 }
-             }
+            }
             return user;
         }
     }

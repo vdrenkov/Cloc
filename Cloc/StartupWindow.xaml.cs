@@ -18,8 +18,8 @@ using static Cloc.Database.DatabaseQuery;
 using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
 
-//Queries
-// User/Person token
+//Queries -> Entry check
+// Current user token
 /*
 CheckIn + IsCheckedIn (true) -> DB
 CheckOut + IsCheckedIn (false) -> DB
@@ -58,7 +58,7 @@ namespace Cloc
             Person p = SelectPersonQuery("9902130044");
             MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address + p.Position);
             User u = SelectUserQuery("9902130044");
-            MessageBox.Show(u.UserUCN + u.AccessCode + u.CheckIn);
+            MessageBox.Show(u.UserUCN + u.AccessCode + u.CheckIn + u.CheckOut + u.Percent);
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -76,12 +76,12 @@ namespace Cloc
         }
         private void buttonEnter_Click(object sender, RoutedEventArgs e)
         {
-           if( ValidateEntry(passwordBoxAccessCode.Password.ToString()))
+            if (ValidateEntry(passwordBoxAccessCode.Password.ToString()))
             {
                 Person person = new Person(); //TODO here +1 below
-                person.Position = WorkPosition.Chef;
+                person.Position = WorkPosition.Admin;
 
-                if(isAdmin(person))
+                if (isAdmin(person))
                 {
                     AdminWindow aw = new AdminWindow();
                     aw.Show();
@@ -94,7 +94,7 @@ namespace Cloc
                     this.Close();
                 }
             }
-           else
+            else
             {
                 passwordBoxAccessCode.Password = null;
             }

@@ -67,7 +67,6 @@ namespace Cloc.AdditionalWindows
             }
             else
             {
-                MessageBox.Show("Възникна грешка. Промяната не беше успешна.");
                 textBox.Text = null;
                 passwordBox.Password = null;
             }

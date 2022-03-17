@@ -61,6 +61,10 @@ namespace Cloc.Classes
                     {
                         flag = true;
                     }
+                    else
+                    {
+                        MessageBox.Show("Промяната не беше успешна. Моля, въведете съществуващо ЕГН!");
+                    }
                 }
                 else
                 {
@@ -77,21 +81,21 @@ namespace Cloc.Classes
         public static bool ValidateEntry(string accessCode)
         {
             bool flag = false;
+            Person currentPerson = null;
+            User currentUser = null;
 
             if (ValidateAccessCode(accessCode))
+            { currentUser = GetUserByAccessCodeQuery(accessCode); }
+
+            if (object.ReferenceEquals(null, currentUser)) { }else
+            { currentPerson = SelectPersonQuery(currentUser.UserUCN); }
+
+            if (object.ReferenceEquals(null, currentPerson)) { }else
             {
-                User currentUser = GetUserByAccessCodeQuery(accessCode);
-
-                if (currentUser != null)
-                {
-                    Person currentPerson = SelectPersonQuery(currentUser.UserUCN);
-
-                    if (currentPerson != null)
-                    {
-                        flag = true;
-                    }
-                }
+                flag = true;
+                MessageBox.Show(currentPerson.UCN+currentUser.AccessCode);
             }
+
             return flag;
         }
 
