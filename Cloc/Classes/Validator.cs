@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc.Classes
 {
@@ -13,13 +14,13 @@ namespace Cloc.Classes
         public static bool ValidateUCN(string UCN)
         {
             Regex rx = new Regex("^[0-9]{10}$");
-            MatchCollection matches=null;
+            MatchCollection matches = null;
 
             try
             { matches = rx.Matches(UCN); }
             catch (Exception)
             {
-                MessageBox.Show("Възникна грешка при валидация на вашето ЕГН.");
+                MessageBox.Show("Грешка при валидация на ЕГН..");
             }
 
             if (matches.Count > 0)
@@ -39,12 +40,70 @@ namespace Cloc.Classes
                 Regex rx = new Regex("^[0-9]{5}$");
                 MatchCollection matches = rx.Matches(accessCode);
                 if (matches.Count > 0)
-                { flag= true; }
+                { flag = true; }
             }
-            catch(Exception)
+            catch (Exception)
             {
-                MessageBox.Show("Възникна грешка при валидация на вашия код за достъп.");
+                MessageBox.Show("Грешка при валидация на кода за достъп.");
             }
+            return flag;
+        }
+
+        public static bool ValidateAccessCodeChange(string ucn, string accessCode)
+        {
+            bool flag = false;
+
+            if (ValidateUCN(ucn))
+            {
+                if (ValidateAccessCode(accessCode))
+                {
+                    if (ChangeAccessCodeQuery(ucn, accessCode))
+                    {
+                        flag = true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Моля, въведете 5-цифрен код за достъп!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Моля, въведете съществуващо ЕГН!");
+            }
+            return flag;
+        }
+
+        public static bool ValidateEntry(string accessCode)
+        {
+            bool flag = false;
+
+            if (ValidateAccessCode(accessCode))
+            {
+                User currentUser = GetUserByAccessCodeQuery(accessCode);
+
+                if (currentUser != null)
+                {
+                    Person currentPerson = SelectPersonQuery(currentUser.UserUCN);
+
+                    if (currentPerson != null)
+                    {
+                        flag = true;
+                    }
+                }
+            }
+            return flag;
+        }
+
+        public static bool isAdmin(Person person)
+        {
+            bool flag = false;
+
+            if (person.Position == WorkPosition.Admin)
+            {
+                flag = true;
+            }
+
             return flag;
         }
     }

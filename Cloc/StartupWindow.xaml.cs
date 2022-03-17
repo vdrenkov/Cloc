@@ -16,7 +16,10 @@ using System.Windows.Shapes;
 using static Cloc.Classes.Security;
 using static Cloc.Database.DatabaseQuery;
 using static Cloc.Database.DatabaseConnection;
+using static Cloc.Classes.Validator;
 
+//Queries
+// User/Person token
 /*
 CheckIn + IsCheckedIn (true) -> DB
 CheckOut + IsCheckedIn (false) -> DB
@@ -24,8 +27,16 @@ CheckOut - CheckIn -> DB (TotalHours)
 UCN + CheckIn + CheckOut -> Checks.txt
 DateTime + UCN + Activity -> Logs.txt
 
-StartupWindow -> Exit confirmation uncomment
+StartupWindow -> Exit confirmation uncomment, delete test button
 Password -> 348_sha765_KaD3l
+
+ //private static DatabaseConnection _instance = null;
+        //public static DatabaseConnection Instance()
+        //{
+        //    if (_instance == null)
+        //        _instance = new DatabaseConnection();
+        //    return _instance;
+        //}
 */
 
 namespace Cloc
@@ -40,6 +51,16 @@ namespace Cloc
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
+
+        private void buttonTest_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeAccessCodeQuery("9902130044", "77777");
+            Person p = SelectPersonQuery("9902130044");
+            MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address + p.Position);
+            User u = SelectUserQuery("9902130044");
+            MessageBox.Show(u.UserUCN + u.AccessCode + u.CheckIn);
+        }
+
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
@@ -48,19 +69,22 @@ namespace Cloc
                 //switch (result)
                 //{
                 //    case MessageBoxResult.Yes:
-                        Close();
+                Close();
                 //        break;
                 //}
             }
         }
         private void buttonEnter_Click(object sender, RoutedEventArgs e)
         {
-            if (Validator.ValidateAccessCode(passwordBoxAccessCode.Password.ToString()))
+           if( ValidateEntry(passwordBoxAccessCode.Password.ToString()))
             {
-                if (passwordBoxAccessCode.Password.ToString() == "77777")
+                Person person = new Person(); //TODO here +1 below
+                person.Position = WorkPosition.Chef;
+
+                if(isAdmin(person))
                 {
-                    BossWindow bw = new BossWindow();
-                    bw.Show();
+                    AdminWindow aw = new AdminWindow();
+                    aw.Show();
                     this.Close();
                 }
                 else
@@ -70,17 +94,10 @@ namespace Cloc
                     this.Close();
                 }
             }
-            else
+           else
             {
-                passwordBoxAccessCode.Password = "";
+                passwordBoxAccessCode.Password = null;
             }
-        }
-
-        private void buttonTest_Click(object sender, RoutedEventArgs e)
-        {
-            Person p = new Person();
-            p = SelectPersonQuery("9902130044");
-            MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address + p.Position);
         }
 
         private void buttonChangeAccessCode_Click(object sender, RoutedEventArgs e)

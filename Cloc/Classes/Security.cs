@@ -46,19 +46,18 @@ namespace Cloc.Classes
             catch (Exception)
             {
                 cipherText = null;
-                MessageBox.Show("Възникна грешка при обработката на вашето ЕГН.");
             }
             return cipherText;
         }
 
         public static string DecryptString(string cipherText)
         {
-            string plainText;
             byte[] iv = new byte[16];
 
             try
             {
                 byte[] buffer = Convert.FromBase64String(cipherText);
+
                 using (Aes aes = Aes.Create())
                 {
                     aes.Key = Encoding.UTF8.GetBytes(key);
@@ -71,18 +70,16 @@ namespace Cloc.Classes
                         {
                             using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
                             {
-                                plainText = streamReader.ReadToEnd();
+                                return streamReader.ReadToEnd();
                             }
                         }
                     }
                 }
             }
-            catch (Exception) 
+            catch(Exception)
             {
-                plainText = null;
-                MessageBox.Show("Възникна грешка при обработката на вашето ЕГН.");
+                return null;
             }
-            return plainText;
         }
 
         public static string HashString(string accessCode)

@@ -17,9 +17,9 @@ namespace Cloc
     /// <summary>
     /// Interaction logic for BossWindow.xaml
     /// </summary>
-    public partial class BossWindow : Window
+    public partial class AdminWindow : Window
     {
-        public BossWindow() 
+        public AdminWindow() 
         { 
                 InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);

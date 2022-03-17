@@ -58,31 +58,18 @@ namespace Cloc.AdditionalWindows
 
         private void ChangeAccessCodeButton_Click(object sender, RoutedEventArgs e)
         {
-            string ucn = textBox.Text.ToString();
-            string accessCode = passwordBox.Password.ToString();
-
-            if (ValidateUCN(ucn))
+            if (ValidateAccessCodeChange(textBox.Text.ToString(), passwordBox.Password.ToString()))
             {
-                if (ValidateAccessCode(accessCode))
-                {
-                    if (ChangeAccessCodeQuery(ucn, accessCode))
-                    {
-                        MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {passwordBox.Password.ToString()}");
-                    }
-                    StartupWindow stw = new StartupWindow();
-                    stw.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Моля, въведете 5-цифрен код за достъп!");
-                    passwordBox.Password = "";
-                }
+                MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {passwordBox.Password.ToString()}");
+                StartupWindow stw = new StartupWindow();
+                stw.Show();
+                this.Close();
             }
             else
             {
-                MessageBox.Show("Моля, въведете съществуващо ЕГН!");
-                textBox.Text = "";
+                MessageBox.Show("Възникна грешка. Промяната не беше успешна.");
+                textBox.Text = null;
+                passwordBox.Password = null;
             }
         }
 

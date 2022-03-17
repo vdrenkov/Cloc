@@ -10,16 +10,7 @@ namespace Cloc.Database
         public string Password = GetPassword();
         public string Port = GetPort();
 
-
         public MySqlConnection Connection { get; set; }
-
-        private static DatabaseConnection _instance = null;
-        public static DatabaseConnection Instance()
-        {
-            if (_instance == null)
-                _instance = new DatabaseConnection();
-            return _instance;
-        }
 
         public bool IsConnect()
         {
