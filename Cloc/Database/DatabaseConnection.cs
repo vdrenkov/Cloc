@@ -5,10 +5,11 @@ namespace Cloc.Database
 {
     public class DatabaseConnection
     {
-        public string Server = "localhost";
-        public string DatabaseName = "ClocDB";
-        public string UserName = "root";
-        public string Password = "348_sha765_KaD3l";
+        public string Server = GetServer();
+        public string Username = GetUsername();
+        public string Password = GetPassword();
+        public string Port = GetPort();
+
 
         public MySqlConnection Connection { get; set; }
 
@@ -26,9 +27,7 @@ namespace Cloc.Database
 
             if (Connection == null)
             {
-                if (String.IsNullOrEmpty(DatabaseName))
-                    flag= false;
-                string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}", Server, DatabaseName, UserName, Password);
+                string connstring = string.Format("Server={0}; Username={1}; Password={2}; Port={3}", Server, Username, Password, Port);
                 try
                 {
                     Connection = new MySqlConnection(connstring);
@@ -36,7 +35,7 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    flag = false;     
+                    flag = false;
                 }
             }
 
@@ -46,6 +45,34 @@ namespace Cloc.Database
         public void Close()
         {
             Connection.Close();
+        }
+
+        public static string GetServer()
+        {
+            return Settings.Settings.Default.Server.ToString();
+        }
+
+        public static string GetUsername()
+        {
+            return Settings.Settings.Default.Username.ToString();
+        }
+
+        public static string GetPassword()
+        {
+            return Settings.Settings.Default.Password.ToString();
+        }
+        public static string GetPort()
+        {
+            return Settings.Settings.Default.Port.ToString();
+        }
+
+        public static void SetSettings(string server, string username, string password,string port)
+        {
+            Settings.Settings.Default.Server = server;
+            Settings.Settings.Default.Username = username;
+            Settings.Settings.Default.Password = password;
+            Settings.Settings.Default.Port = port;
+            Settings.Settings.Default.Save();
         }
     }
 }

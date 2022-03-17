@@ -15,10 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static Cloc.Classes.Security;
 using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.DatabaseConnection;
 
-//Keydown -> Escape
-//try, catch, finally
-//DB Settings -> DatabaseConnection
+//Queries -> flag
 //TODO Settings Button + README.txt, Change Access Code Button -> StartupWindow
 
 /*
@@ -27,6 +26,9 @@ CheckOut + IsCheckedIn (false) -> DB
 CheckOut - CheckIn -> DB (TotalHours)
 UCN + CheckIn + CheckOut -> Checks.txt
 DateTime + UCN + Activity -> Logs.txt
+
+Password -> 348_sha765_KaD3l
+StartupWindow -> Exit confirmation
 */
 
 namespace Cloc
@@ -44,7 +46,15 @@ namespace Cloc
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
-                Close();
+            {
+                //MessageBoxResult result = MessageBox.Show("Сигурни ли сте, че искате да излезнете от приложението?", "CLOC", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                //switch (result)
+                //{
+                //    case MessageBoxResult.Yes:
+                        Close();
+                //        break;
+                //}
+            }
         }
         private void buttonEnter_Click(object sender, RoutedEventArgs e)
         {
@@ -73,24 +83,36 @@ namespace Cloc
         {
             Person p = new Person();
             p = SelectPersonQuery("9902130044");
-            MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address+p.Position);
+            MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address + p.Position);
         }
 
         private void buttonChangeAccessCode_Click(object sender, RoutedEventArgs e)
         {
-            
+            HelpWindow hw = new HelpWindow();
+            hw.label.Content = "Моля, въведете ЕГН и желания код за достъп:";
+            hw.actionButton.Visibility = Visibility.Hidden;
+            hw.Show();
+            this.Close();
         }
 
         private void buttonSetup_Click(object sender, RoutedEventArgs e)
         {
-            HelpWindow hw=new HelpWindow();
+            HelpWindow hw = new HelpWindow();
+            hw.textBox.Visibility = Visibility.Hidden;
+            hw.changeAccessCodeButton.Visibility = Visibility.Hidden;
             hw.Show();
             this.Close();
         }
 
         private void buttonExit_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            MessageBoxResult result = MessageBox.Show("Сигурни ли сте, че искате да излезнете от приложението?", "CLOC", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    Close();
+                    break;
+            }
         }
         private void buttonCredits_Click(object sender, RoutedEventArgs e)
         {

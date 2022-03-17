@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using static Cloc.Classes.Security;
 
 namespace Cloc.Classes
@@ -15,34 +16,45 @@ namespace Cloc.Classes
             UCN = EncryptString(UCN);
             string activityLine = DateTime.Now + ";" + UCN + ";" + activity;
 
-            if (File.Exists(".\\Logs.txt"))
+            try
             {
-                File.AppendAllText(".\\Logs.txt", activityLine + Environment.NewLine);
+                if (File.Exists(".\\Logs.txt"))
+                {
+                    File.AppendAllText(".\\Logs.txt", activityLine + Environment.NewLine);
+                }
+                else
+                {
+                    File.Create(".\\Logs.txt");
+                }
             }
-            else
-            {
-                File.Create(".\\Logs.txt");
-            }
+            catch (Exception)
+            { MessageBox.Show("Възникна неочаквана грешка при записване на вашата активност."); }
         }
         static public List<string> UserLogs(string UCN, int count)
         {
             List<string> logs = new List<string>();
             List<string> allLogs = new List<string>();
-            string[] lines = File.ReadAllLines(".\\Logs.txt");
 
-            foreach (string line in lines)
+            try
             {
-                string[] results = line.Split(';', ';');
-                results[1]= DecryptString(results[1]);
+                string[] lines = File.ReadAllLines(".\\Logs.txt");
 
-                if (results[1] == UCN)
+                foreach (string line in lines)
                 {
-                    string temp = results[0] + ";" + results[1] + ";" + results[2];
-                    allLogs.Add(temp);
-                }
-            }
+                    string[] results = line.Split(';', ';');
+                    results[1] = DecryptString(results[1]);
 
-            allLogs.Reverse();
+                    if (results[1] == UCN)
+                    {
+                        string temp = results[0] + ";" + results[1] + ";" + results[2];
+                        allLogs.Add(temp);
+                    }
+                }
+                allLogs.Reverse();
+            }
+            catch (Exception)
+            { MessageBox.Show("Възникна неочаквана грешка при извличане на вашата активност."); }
+
             for (int i = 0; i < allLogs.Count; i++)
             {
                 logs.Add(allLogs[i]);

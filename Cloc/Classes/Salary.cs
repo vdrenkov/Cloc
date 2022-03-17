@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Cloc.Database.DatabaseQuery;
 using static Cloc.Classes.Checker;
+using System.Windows;
 
 namespace Cloc.Classes
 {
@@ -14,22 +15,28 @@ namespace Cloc.Classes
         {
             int count = 0;
             double totalHours = 0;
-            List<string> checks = UserChecks(user, 30);
 
-            foreach (string check in checks)
+            try
             {
-                string[] results = check.Split(';', ';');
-                DateTime checkIn = DateTime.Parse(results[1]);
-                DateTime checkOut = DateTime.Parse(results[2]);
+                List<string> checks = UserChecks(user, 30);
 
-                totalHours += (checkOut - checkIn).TotalHours;
-                count++;
-
-                if (count >= 30)
+                foreach (string check in checks)
                 {
-                    break;
+                    string[] results = check.Split(';', ';');
+                    DateTime checkIn = DateTime.Parse(results[1]);
+                    DateTime checkOut = DateTime.Parse(results[2]);
+
+                    totalHours += (checkOut - checkIn).TotalHours;
+                    count++;
+
+                    if (count >= 30)
+                    {
+                        break;
+                    }
                 }
             }
+            catch (Exception)
+            { MessageBox.Show("Възникна неочаквана грешка при пресмятане на вашата заплата."); }
 
             if (totalHours > 176)
             {
@@ -44,19 +51,25 @@ namespace Cloc.Classes
         public static double CheckSalary(string UCN)
         {
             double salary = 0, overtime = 0;
-            User user = SelectUserQuery(UCN);
 
-            if (HasOvertime(user))
+            try
             {
-                overtime = 1.5;
-            }
-            else
-            {
-                overtime = 1;
-            }
+                User user = SelectUserQuery(UCN);
 
-            salary = user.TotalHours * user.HourPayment * overtime;
-            salary += (salary * user.Percent) / 100;
+                if (HasOvertime(user))
+                {
+                    overtime = 1.5;
+                }
+                else
+                {
+                    overtime = 1;
+                }
+
+                salary = user.TotalHours * user.HourPayment * overtime;
+                salary += (salary * user.Percent) / 100;
+            }
+            catch (Exception)
+            { MessageBox.Show("Възникна неочаквана грешка при пресмятане на вашата заплата."); }
 
             return salary;
         }

@@ -26,6 +26,7 @@ namespace Cloc.AdditionalWindows
         public SetupWindow()
         {
             InitializeComponent();
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -75,7 +76,6 @@ namespace Cloc.AdditionalWindows
             if (ValidateAccessCode(passwordBoxAccessCode.Password.ToString()))
             {
                 accessCode = passwordBoxAccessCode.Password.ToString();
-
             }
             else
             {

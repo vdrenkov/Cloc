@@ -8,7 +8,13 @@ namespace Cloc.Classes
 {
     enum WorkPosition
     {
-        Guest,
+        OnTrial,
+        Hygienist,
+        PrepCook,
+        LineCook,
+        Cook,
+        SousChef,
+        Chef,
         Bartender,
         Barmaid,
         Barista,
@@ -17,8 +23,9 @@ namespace Cloc.Classes
         Busser,
         Host,
         Hostess,
+        FnB,
         Manager,
-        Boss,
+        Owner,
         Admin
     }
     internal class Person
