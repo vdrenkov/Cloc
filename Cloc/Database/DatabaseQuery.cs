@@ -22,22 +22,22 @@ namespace Cloc.Database
                 person.UCN = EncryptString(person.UCN);
                 accessCode = HashString(accessCode);
                 cmd.CommandText = "drop database if exists ClocDB; create database if not exists ClocDB; use ClocDB; " +
-                    "create table if not exists People(ucn varchar(100) not null primary key unique," +
-                    "name varchar(50) not null,surname varchar(50) not null,email varchar(50) not null,phoneNumber varchar(20) not null," +
-                    "country varchar(50) not null,city varchar(50) not null," +
-                    "address varchar(50) not null, position varchar(10) not null); create table if not exists Users(userUcn varchar(100) not null unique primary key," +
-                    "accessCode text not null, checkIn DateTime not null default Now(),checkOut DateTime not null default Now(), isCheckedIn boolean default false not null," +
-                    "totalHours double default 0 not null, hourPayment double not null default 0,percent double not null default 0," +
+                    "create table if not exists People(ucn varchar(255) not null primary key unique," +
+                    "name varchar(50),surname varchar(50),email varchar(50),phoneNumber varchar(20)," +
+                    "country varchar(50),city varchar(50)," +
+                    "address varchar(50), position varchar(20)); create table if not exists Users(userUcn varchar(255) not null unique primary key," +
+                    "accessCode text, checkIn DateTime default Now(),checkOut DateTime default Now(), isCheckedIn boolean default false," +
+                    "totalHours double default 0, hourPayment double default 0,percent double default 0," +
                     "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade); " +
                     "insert into People(ucn, name, surname, email, phoneNumber, country, city, address, position)" +
                     $" values('{person.UCN}', '{person.Name}', '{person.Surname}', '{person.Email}', '{person.PhoneNumber}', '{person.Country}'," +
-                    $"'{person.City}', '{person.Address}', '{person.Position}'); insert into Users(userUcn, accessCode) values('{person.UCN}', '{accessCode}'); ";
+                    $"'{person.City}', '{person.Address}', '{person.Position}'); insert into Users(userUcn, accessCode) values('{person.UCN}', '{accessCode}');";
 
                 cmd.ExecuteNonQuery();
                 connection.Close();
                 SetSettings(server, username, password, port);
 
-                User user = GetUserByAccessCodeQuery(accessCode);
+                User user = SelectUserByAccessCodeQuery(accessCode);
                 if (user != null)
                 {
                     flag = true;
@@ -49,46 +49,6 @@ namespace Cloc.Database
             }
             return flag;
         }
-
-        public static User GetUserByAccessCodeQuery(string accessCode)
-        {
-            accessCode = HashString(accessCode);
-            DatabaseConnection dbConn = new DatabaseConnection();
-            User user = new User();
-            MySqlDataReader reader = null;
-
-            try
-            {
-                if (dbConn.IsConnect())
-                {
-                    string query = $"use ClocDB; select * from Users where accessCode ='{accessCode}';";
-                    var cmd = new MySqlCommand(query, dbConn.Connection);
-
-                     reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        user.UserUCN = reader.GetString(0);
-                        user.AccessCode = reader.GetString(1);
-                        user.CheckIn = reader.GetDateTime(2);
-                        user.CheckOut = reader.GetDateTime(3);
-                        user.IsCheckedIn = reader.GetBoolean(4);
-                        user.TotalHours = reader.GetDouble(5);
-                        user.HourPayment = reader.GetDouble(6);
-                        user.Percent = reader.GetDouble(7);
-                    }
-                    reader.Close();
-                    dbConn.Close();
-                    user.UserUCN = DecryptString(user.UserUCN);
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Потребител с посочения код за достъп не беше намерен!");
-            }
-            return user;
-        }
-
 
         public static bool AddWorkerQuery(Person person, User user)
         {
@@ -103,7 +63,7 @@ namespace Cloc.Database
                 try
                 {
                     string query = "use ClocDB; insert into People (ucn,name,surname,email,phoneNumber,country,city,address,position) values" +
-                       "(@ucn,@name,@surname,@email,@phoneNumber,@country,@city,@address,@position)";
+                       "(@ucn,@name,@surname,@email,@phoneNumber,@country,@city,@address,@position);";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
 
                     cmd.Parameters.AddWithValue("@ucn", person.UCN);
@@ -118,7 +78,7 @@ namespace Cloc.Database
                     cmd.ExecuteNonQuery();
 
                     string secondQuery = "use ClocDB; insert into Users (userUcn,accessCode,checkIn,checkOut,isCheckedIn,hourPayment,totalHours,percent) values" +
-                        "(@userUcn,@accessCode,@checkIn,@checkOut,@isCheckedIn,@hourPayment,@totalHours,@percent)";
+                        "(@userUcn,@accessCode,@checkIn,@checkOut,@isCheckedIn,@hourPayment,@totalHours,@percent);";
                     var command = new MySqlCommand(secondQuery, dbConn.Connection);
 
                     command.Parameters.AddWithValue("@userUcn", user.UserUCN);
@@ -193,7 +153,7 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Промяната на кода за достъп не беше успешна.");
+                    Console.WriteLine("Промяната на кода за достъп не беше успешна.");
                 }
             }
             return flag;
@@ -383,16 +343,15 @@ namespace Cloc.Database
             UCN = EncryptString(UCN);
             DatabaseConnection dbConn = new DatabaseConnection();
             Person person = new Person();
-            MySqlDataReader reader = null;
 
             if (dbConn.IsConnect())
             {
                 try
                 {
-                    string query = $"use ClocDB; select * from People where ucn='{UCN}'";
+                    string query = $"use ClocDB; select * from People where ucn='{UCN}';";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
 
-                    reader = cmd.ExecuteReader();
+                    MySqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
@@ -406,13 +365,14 @@ namespace Cloc.Database
                         person.Address = reader.GetString(7);
                         person.Position = (WorkPosition)Enum.Parse(typeof(WorkPosition), reader.GetString(8));
                     }
+
                     reader.Close();
                     dbConn.Close();
                     person.UCN = DecryptString(person.UCN);
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Човек с посоченото ЕГН не беше намерен.");
+                    Console.WriteLine("Човек с посоченото ЕГН не беше намерен.");
                 }
             }
             return person;
@@ -423,16 +383,15 @@ namespace Cloc.Database
             UserUCN = EncryptString(UserUCN);
             DatabaseConnection dbConn = new DatabaseConnection();
             User user = new User();
-            MySqlDataReader reader = null;
 
             if (dbConn.IsConnect())
             {
                 try
                 {
-                    string query = $"use ClocDB; select * from Users where userUcn='{UserUCN}'";
+                    string query = $"use ClocDB; select * from Users where userUcn='{UserUCN}';";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
 
-                    reader = cmd.ExecuteReader();
+                    MySqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
@@ -452,7 +411,45 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Потребител с посоченото ЕГН не беше намерен.");
+                    Console.WriteLine("Потребител с посоченото ЕГН не беше намерен.");
+                }
+            }
+            return user;
+        }
+
+        public static User SelectUserByAccessCodeQuery(string accessCode)
+        {
+            accessCode = HashString(accessCode);
+            DatabaseConnection dbConn = new DatabaseConnection();
+            User user = new User();
+
+            if (dbConn.IsConnect())
+            {
+                try
+                {
+                    string query = $"use ClocDB; select * from Users where accessCode='{accessCode}';";
+                    var cmd = new MySqlCommand(query, dbConn.Connection);
+
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        user.UserUCN = reader.GetString(0);
+                        user.AccessCode = reader.GetString(1);
+                        user.CheckIn = reader.GetDateTime(2);
+                        user.CheckOut = reader.GetDateTime(3);
+                        user.IsCheckedIn = reader.GetBoolean(4);
+                        user.TotalHours = reader.GetDouble(5);
+                        user.HourPayment = reader.GetDouble(6);
+                        user.Percent = reader.GetDouble(7);
+                    }
+                    reader.Close();
+                    dbConn.Close();
+                    user.UserUCN = DecryptString(user.UserUCN);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Потребител с посоченото ЕГН не беше намерен.");
                 }
             }
             return user;

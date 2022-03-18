@@ -18,7 +18,6 @@ using static Cloc.Database.DatabaseQuery;
 using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
 
-//Queries -> Entry check
 // Current user token
 /*
 CheckIn + IsCheckedIn (true) -> DB
@@ -28,15 +27,8 @@ UCN + CheckIn + CheckOut -> Checks.txt
 DateTime + UCN + Activity -> Logs.txt
 
 StartupWindow -> Exit confirmation uncomment, delete test button
-Password -> 348_sha765_KaD3l
-
- //private static DatabaseConnection _instance = null;
-        //public static DatabaseConnection Instance()
-        //{
-        //    if (_instance == null)
-        //        _instance = new DatabaseConnection();
-        //    return _instance;
-        //}
+Access Password -> 1cm13*8vCt19_xRc
+DB Password -> 348_sha765_KaD3l
 */
 
 namespace Cloc
