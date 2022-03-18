@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using static Cloc.Classes.Security;
 using static Cloc.Database.DatabaseConnection;
+using static Cloc.Settings.SystemSetup;
 
 namespace Cloc.Database
 {

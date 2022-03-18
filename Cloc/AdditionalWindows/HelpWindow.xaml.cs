@@ -67,6 +67,7 @@ namespace Cloc.AdditionalWindows
             }
             else
             {
+                MessageBox.Show("Въвели сте грешни данни!");
                 textBox.Text = null;
                 passwordBox.Password = null;
             }

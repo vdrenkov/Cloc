@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using static Cloc.Settings.SystemSetup;
 
 namespace Cloc.Database
 {
@@ -36,34 +37,6 @@ namespace Cloc.Database
         public void Close()
         {
             Connection.Close();
-        }
-
-        public static string GetServer()
-        {
-            return Settings.Settings.Default.Server.ToString();
-        }
-
-        public static string GetUsername()
-        {
-            return Settings.Settings.Default.Username.ToString();
-        }
-
-        public static string GetPassword()
-        {
-            return Settings.Settings.Default.Password.ToString();
-        }
-        public static string GetPort()
-        {
-            return Settings.Settings.Default.Port.ToString();
-        }
-
-        public static void SetSettings(string server, string username, string password,string port)
-        {
-            Settings.Settings.Default.Server = server;
-            Settings.Settings.Default.Username = username;
-            Settings.Settings.Default.Password = password;
-            Settings.Settings.Default.Port = port;
-            Settings.Settings.Default.Save();
         }
     }
 }

@@ -17,14 +17,15 @@ using static Cloc.Classes.Security;
 using static Cloc.Database.DatabaseQuery;
 using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
+using static Cloc.Session.UserToken;
 
-// Current user token
 /*
 CheckIn + IsCheckedIn (true) -> DB
 CheckOut + IsCheckedIn (false) -> DB
 CheckOut - CheckIn -> DB (TotalHours)
 UCN + CheckIn + CheckOut -> Checks.txt
 DateTime + UCN + Activity -> Logs.txt
+Language menu
 
 StartupWindow -> Exit confirmation uncomment, delete test button
 Access Password -> 1cm13*8vCt19_xRc
@@ -46,11 +47,12 @@ namespace Cloc
 
         private void buttonTest_Click(object sender, RoutedEventArgs e)
         {
-            ChangeAccessCodeQuery("9902130044", "77777");
-            Person p = SelectPersonQuery("9902130044");
-            MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address + p.Position);
-            User u = SelectUserQuery("9902130044");
-            MessageBox.Show(u.UserUCN + u.AccessCode + u.CheckIn + u.CheckOut + u.Percent);
+            MessageBox.Show(GetData());
+            //ChangeAccessCodeQuery("9902130044", "77777");
+            //Person p = SelectPersonQuery("9902130044");
+            //MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address + p.Position);
+            //User u = SelectUserQuery("9902130044");
+            //MessageBox.Show(u.UserUCN + u.AccessCode + u.CheckIn + u.CheckOut + u.Percent);
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -70,8 +72,7 @@ namespace Cloc
         {
             if (ValidateEntry(passwordBoxAccessCode.Password.ToString()))
             {
-                Person person = new Person(); //TODO here +1 below
-                person.Position = WorkPosition.Admin;
+                Person person = SelectPersonQuery(GetData());
 
                 if (isAdmin(person))
                 {

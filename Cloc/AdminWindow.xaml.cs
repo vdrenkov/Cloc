@@ -32,6 +32,7 @@ namespace Cloc
                 StartupWindow sw = new StartupWindow();
                 sw.Show();
                 this.Close();
+                Session.UserToken.RemoveData();
             }
         }
         private void buttonMain_Click(object sender, RoutedEventArgs e)
@@ -55,6 +56,7 @@ namespace Cloc
                 StartupWindow sw = new StartupWindow();
                 sw.Show();
                 this.Close();
-            }
+            Session.UserToken.RemoveData();
         }
+    }
     }
