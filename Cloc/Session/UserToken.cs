@@ -9,17 +9,17 @@ namespace Cloc.Session
 {
     internal class UserToken
     {
-        public static string GetData()
+        public static string GetLoginData()
         {
             return ConfigurationManager.AppSettings.Get("UCN").ToString();
         }
 
-        public static void SetData(string ucn)
+        public static void SetLoginData(string ucn)
         {
             ConfigurationManager.AppSettings.Set("UCN", ucn);
         }
 
-        public static void RemoveData()
+        public static void RemoveLoginData()
         {
             ConfigurationManager.AppSettings.Set("UCN","");
         }

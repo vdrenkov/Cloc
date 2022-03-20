@@ -96,7 +96,7 @@ namespace Cloc.Classes
 
             if (currentPerson.UCN != null)
             {
-                Session.UserToken.SetData(currentPerson.UCN);
+                Session.UserToken.SetLoginData(currentPerson.UCN);
                 flag = true;
             }
 

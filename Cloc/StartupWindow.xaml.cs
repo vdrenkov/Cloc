@@ -19,6 +19,7 @@ using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
 using static Cloc.Session.UserToken;
 
+// Logger, Checker, Salary
 /*
 CheckIn + IsCheckedIn (true) -> DB
 CheckOut + IsCheckedIn (false) -> DB
@@ -47,12 +48,47 @@ namespace Cloc
 
         private void buttonTest_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(GetData());
-            //ChangeAccessCodeQuery("9902130044", "77777");
-            //Person p = SelectPersonQuery("9902130044");
-            //MessageBox.Show(p.UCN + p.Name + p.Surname + p.Email + p.PhoneNumber + p.Country + p.City + p.Address + p.Position);
-            //User u = SelectUserQuery("9902130044");
-            //MessageBox.Show(u.UserUCN + u.AccessCode + u.CheckIn + u.CheckOut + u.Percent);
+            Person person = new Person();
+            Person p1=new Person();
+            User user = new User();
+            User u1=new User();
+    
+            person.UCN = "9902130044";
+            person.Name = "Валентин";
+            person.Surname = "Дренков";
+            person.Email = "vdrenkov@tu-sofia.bg";
+            person.PhoneNumber = "+359888992278";
+            person.Country = "България";
+            person.City = "Разлог";
+            person.Address = "Цар Иван Асен II 5";
+            person.Position = WorkPosition.Admin;
+
+            user.UserUCN = person.UCN;
+            user.AccessCode = "77777";
+            user.CheckIn = DateTime.Now;
+            user.CheckOut = DateTime.Now;
+            user.HourPayment = 1;
+            user.TotalHours = 1;
+            user.Percent = 1;
+
+            p1.UCN = "9988776655";
+            p1.Name = "Любомира";
+            p1.Surname = "Петрова";
+            p1.Email = "lpetrova@tu-sofia.bg";
+            p1.PhoneNumber = "+359889153573";
+            p1.Country = "България";
+            p1.City = "Банско";
+            p1.Address = "Струма 6";
+            p1.Position = WorkPosition.Manager;
+
+            u1.UserUCN = p1.UCN;
+            u1.AccessCode = "55555";
+            u1.CheckIn = DateTime.Now;
+            u1.CheckOut = DateTime.Now.AddHours(177);
+            u1.IsCheckedIn = false;
+            u1.HourPayment = 11;
+            u1.TotalHours = 12;
+            u1.Percent = 13;
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -72,7 +108,7 @@ namespace Cloc
         {
             if (ValidateEntry(passwordBoxAccessCode.Password.ToString()))
             {
-                Person person = SelectPersonQuery(GetData());
+                Person person = SelectPersonQuery(GetLoginData());
 
                 if (isAdmin(person))
                 {

@@ -27,13 +27,20 @@ namespace Cloc.Settings
             return Settings.Default.Port.ToString();
         }
 
-        public static void SetSettings(string server, string username, string password, string port)
+        public static bool SetSettings(string server, string username, string password, string port)
         {
-            Settings.Default.Server = server;
-            Settings.Default.Username = username;
-            Settings.Default.Password = password;
-            Settings.Default.Port = port;
-            Settings.Default.Save();
+            try
+            {
+                Settings.Default.Server = server;
+                Settings.Default.Username = username;
+                Settings.Default.Password = password;
+                Settings.Default.Port = port;
+                Settings.Default.Save();
+                Settings.Default.Reload();
+                return true;
+            }
+            catch (Exception)
+            { return false; }
         }
     }
 }
