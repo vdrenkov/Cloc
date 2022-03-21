@@ -43,7 +43,7 @@ namespace Cloc.Database
                     flag = true;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

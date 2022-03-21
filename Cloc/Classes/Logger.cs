@@ -11,7 +11,7 @@ namespace Cloc.Classes
 {
     public static class Logger
     {
-        static public void AddLog(string UCN, string activity)
+        static public bool AddLog(string UCN, string activity)
         {
             UCN = EncryptString(UCN);
             string activityLine = DateTime.Now + ";" + UCN + ";" + activity;
@@ -24,12 +24,18 @@ namespace Cloc.Classes
                 }
                 else
                 {
-                    File.Create(".\\Logs.txt");
+                    File.Create(".\\Logs.txt").Close();
                 }
+                UCN = DecryptString(UCN);
+                return true;
             }
             catch (Exception)
-            { MessageBox.Show("Възникна неочаквана грешка при записване на вашата активност."); }
+            {
+                Console.WriteLine("Възникна неочаквана грешка при записване на вашата активност.");
+                return false;
+            }
         }
+
         static public List<string> UserLogs(string UCN, int count)
         {
             List<string> logs = new List<string>();
@@ -37,32 +43,41 @@ namespace Cloc.Classes
 
             try
             {
-                string[] lines = File.ReadAllLines(".\\Logs.txt");
-
-                foreach (string line in lines)
+                using (StreamReader reader = new StreamReader(".\\Logs.txt"))
                 {
-                    string[] results = line.Split(';', ';');
-                    results[1] = DecryptString(results[1]);
+                    var line = reader.ReadLine();
 
-                    if (results[1] == UCN)
+                    while (line != null)
                     {
-                        string temp = results[0] + ";" + results[1] + ";" + results[2];
-                        allLogs.Add(temp);
+                        string[] results = line.Split(';', ';');
+                        results[1] = DecryptString(results[1]);
+
+                        if (results[1] == UCN)
+                        {
+                            string temp = results[0] + "     ЕГН: " + results[1] + "     Действие: " + results[2];
+                            allLogs.Add(temp);
+                        }
+                        line = reader.ReadLine();
                     }
                 }
-                allLogs.Reverse();
-            }
-            catch (Exception)
-            { MessageBox.Show("Възникна неочаквана грешка при извличане на вашата активност."); }
 
-            for (int i = 0; i < allLogs.Count; i++)
-            {
-                logs.Add(allLogs[i]);
-                if (i == (count - 1))
+                allLogs.Reverse();
+
+                for (int i = 0; i < allLogs.Count; i++)
                 {
-                    break;
+                    logs.Add(allLogs[i]);
+                    if (i == (count - 1))
+                    {
+                        break;
+                    }
                 }
             }
+            catch (Exception)
+            {
+                Console.WriteLine("Възникна неочаквана грешка при извличане на вашата активност.");
+                return null;
+            }
+
             return logs;
         }
     }

@@ -19,13 +19,13 @@ using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
 using static Cloc.Session.UserToken;
 
-// Logger, Checker, Salary
 /*
 CheckIn + IsCheckedIn (true) -> DB
 CheckOut + IsCheckedIn (false) -> DB
 CheckOut - CheckIn -> DB (TotalHours)
 UCN + CheckIn + CheckOut -> Checks.txt
 DateTime + UCN + Activity -> Logs.txt
+AddLog + AddCheck -> StartupQuery
 Language menu
 
 StartupWindow -> Exit confirmation uncomment, delete test button

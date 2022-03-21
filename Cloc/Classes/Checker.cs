@@ -9,9 +9,9 @@ using static Cloc.Classes.Security;
 
 namespace Cloc.Classes
 {
-    internal class Checker
+    public static class Checker
     {
-        static public void AddCheck(User user)
+        static public bool AddCheck(User user)
         {
             user.UserUCN = EncryptString(user.UserUCN);
             string checkLine = user.UserUCN + ";" + user.CheckIn + ";" + user.CheckOut;
@@ -24,46 +24,82 @@ namespace Cloc.Classes
                 }
                 else
                 {
-                    File.Create(".\\Checks.txt");
+                    File.Create(".\\Checks.txt").Close();
                 }
+                user.UserUCN = DecryptString(user.UserUCN);
+                return true;
             }
             catch (Exception)
-            { MessageBox.Show("Възникна неочаквана грешка при чекиране."); }
+            {
+                Console.WriteLine("Възникна неочаквана грешка при чекиране.");
+                return false;
+            }
         }
-        static public List<string> UserChecks(User user, int count)
+
+        static public List<string> UserChecks(string ucn, int count)
         {
             List<string> checks = new List<string>();
             List<string> allChecks = new List<string>();
 
             try
             {
-                string[] lines = File.ReadAllLines(".\\Checks.txt");
-
-                foreach (string line in lines)
+                using (StreamReader reader = new StreamReader(".\\Checks.txt"))
                 {
-                    string[] results = line.Split(';', ';');
-                    results[0] = DecryptString(results[0]);
+                    var line = reader.ReadLine();
 
-                    if (results[0] == user.UserUCN)
+                    while (line != null)
                     {
-                        string temp = results[0] + ";" + results[1] + ";" + results[2];
-                        allChecks.Add(temp);
+                        string[] results = line.Split(';', ';');
+                        results[0] = DecryptString(results[0]);
+
+                        if (results[0] == ucn)
+                        {
+                            string temp = results[0] + ";" + results[1] + ";" + results[2];
+                            allChecks.Add(temp);
+                        }
+                        line = reader.ReadLine();
                     }
                 }
-                allChecks.Reverse();
-            }
-            catch (Exception)
-            { MessageBox.Show("Възникна неочаквана грешка при чекиране."); }
 
-            for (int i = 0; i < allChecks.Count; i++)
-            {
-                checks.Add(allChecks[i]);
-                if (i == (count - 1))
+                allChecks.Reverse();
+
+                for (int i = 0; i < allChecks.Count; i++)
                 {
-                    break;
+                    checks.Add(allChecks[i]);
+                    if (i == (count - 1))
+                    {
+                        break;
+                    }
                 }
             }
+            catch (Exception)
+            {
+                Console.WriteLine("Възникна неочаквана грешка при извличане на вашите чекирания.");
+                return null;
+            }
+
             return checks;
+        }
+
+        public static List<string> PrintChosenChecks(string ucn, int count)
+        {
+            List<string> list = new List<string>();
+            List<string> printList = new List<string>();
+
+            try
+            {
+                list = UserChecks(ucn, count);
+                foreach (string check in list)
+                {
+                    string[] results = check.Split(';', ';');
+
+                    string temp = "ЕГН: " + results[0] + "     Check-in: " + results[1] + "     Check-out: " + results[2];
+                    printList.Add(temp);
+                }
+                return printList;
+            }
+            catch (Exception)
+            { return null; }
         }
     }
 }
