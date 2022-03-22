@@ -89,6 +89,9 @@ namespace Cloc
             u1.HourPayment = 11;
             u1.TotalHours = 12;
             u1.Percent = 13;
+
+            MessageBox.Show(person.UCN + person.Position);
+            MessageBox.Show(user.UserUCN + user.AccessCode);
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)

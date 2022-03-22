@@ -18,9 +18,9 @@ namespace Cloc.Pages
     /// <summary>
     /// Interaction logic for BossOptionsPage.xaml
     /// </summary>
-    public partial class BossOptionsPage : Page
+    public partial class AdminOptionsPage : Page
     {
-        public BossOptionsPage()
+        public AdminOptionsPage()
         {
             InitializeComponent();
         }

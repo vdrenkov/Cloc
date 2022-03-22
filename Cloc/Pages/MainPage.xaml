@@ -16,8 +16,8 @@
                 </Image.Source>
             </Image>
         </Grid> -->
-        <TextBlock Text="Здравейте, + името ти!"></TextBlock>
-        <TextBlock Text="Main Page" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Основна страница при вход - ще съдържа нещо като приветствие, цитат (днес времето е прекрасно за...) и т.н." HorizontalAlignment="Left" Margin="50,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Name="greetingTextBlock" HorizontalAlignment="left" VerticalAlignment="top"/>
+        <Label Name="clockLabel"  Height="148" HorizontalAlignment="center" Margin="0,46,0,0" VerticalAlignment="Center" Width="378" FontSize="60" FontFamily="Forte" />
+        <Label Content="Използвай парите си за неща, които могат да се купят с пари. Използвай времето си за неща, които не могат да се купят с пари.- Харуки Мураками" HorizontalAlignment="center" VerticalAlignment="Bottom"/>
     </Grid>
 </Page>

@@ -41,7 +41,7 @@ namespace Cloc
             }
             private void buttonBossOptions_Click(object sender, RoutedEventArgs e)
             {
-                Main.Navigate(new Pages.BossOptionsPage());
+                Main.Navigate(new Pages.AdminOptionsPage());
             }
             private void buttonProfile_Click(object sender, RoutedEventArgs e)
             {

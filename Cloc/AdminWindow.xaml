@@ -9,12 +9,11 @@
     WindowStyle="None"
         Title="CLOC" Height="auto" Width="auto">
     <Grid>
-        <Label Content="Admin Window" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
         <StackPanel Orientation="horizontal" Height="70" Width="500" VerticalAlignment="top">
             <Button Content="Main Page" Click="buttonMain_Click" Width="auto"></Button>
             <Button Content="Admin Options" Width="auto" Click="buttonBossOptions_Click"></Button>
-            <Button Content="My Profile" Width="auto" Click="buttonProfile_Click"></Button>
-            <Button Content="My Logs"   Click="buttonLogs_Click" Width="auto"></Button>
+            <Button Content="Profile Page" Width="auto" Click="buttonProfile_Click"></Button>
+            <Button Content="Activity Page"   Click="buttonLogs_Click" Width="auto"></Button>
             <Button Content="Exit" Click="buttonExit_Click" Width="auto"></Button>
         </StackPanel>
         <Frame x:Name="Main" Margin="0,35,0,0" NavigationUIVisibility="Hidden"></Frame>
