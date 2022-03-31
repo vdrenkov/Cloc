@@ -24,40 +24,45 @@ namespace Cloc.Pages
     public partial class MainPage : Page
     {
         System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer();
+        Person person = new Person();
+        static string ucn;
 
         public MainPage()
         {
-            Greeter();
-
-            Timer.Tick += new EventHandler(Timer_Click);
-
-            Timer.Interval = new TimeSpan(0, 0, 1);
-
-            Timer.Start();
-
-            InitializeComponent();
-        }
-
-        private void Greeter()
-        {
             try
             {
-                string ucn = Session.UserToken.GetLoginData();
+                ucn = Session.UserToken.GetLoginData();
                 Person person = SelectPersonQuery(ucn);
 
-                if (person.UCN != null)
-                {
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() => 
-                    {   greetingTextBlock.Text = "Здравейте, " + person.Name + " " + person.Surname + "!";}));
-                }
+                Greeter(person);
+
+                Timer.Tick += new EventHandler(Timer_Click);
+                Timer.Interval = new TimeSpan(0, 0, 1);
+                Timer.Start();
             }
-            catch(Exception) { }
+            catch (Exception)
+            { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните!"); }
+            finally
+            { InitializeComponent(); }
+        }
+
+        private void Greeter(Person person)
+        {
+            if (person.UCN != null)
+            {
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                { greetingTextBlock.Text = "Здравейте, " + person.Name + " " + person.Surname + "!"; }));
+            }
+            else
+            {
+                MessageBox.Show("Възникна неочаквана грешка при зареждане на данните!");
+            }
         }
 
         private void Timer_Click(object sender, EventArgs e)
 
         {
-            DateTime now= DateTime.Now;
+            DateTime now = DateTime.Now;
 
             clockLabel.Content = now.Hour + " : " + now.Minute + " : " + now.Second;
         }

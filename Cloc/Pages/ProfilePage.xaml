@@ -9,7 +9,30 @@
       Title="ProfilePage">
 
     <Grid>
-        <TextBlock Text="My Profile Page" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Основната информация за служителя/шефа (име фамилия, позиция, часова ставка, имейл и всичко останало" HorizontalAlignment="Left" Margin="50,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Grid.RowDefinitions>
+              <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Name="TextBlockUCN" HorizontalAlignment="Center" Height="auto" Width="300"/>
+        <TextBlock Grid.Row="1" Name="TextBlockName" HorizontalAlignment="center" Height="auto" Width="300"/>
+        <TextBlock Grid.Row="2" Name="TextBlockSurname" HorizontalAlignment="Center" Height="auto" Width="300"/>
+        <TextBlock Grid.Row="3" Name="TextBlockEmail" HorizontalAlignment="Center" Height="auto" Width="300"/>
+        <TextBlock Grid.Row="4" Name="TextBlockPhoneNumber" HorizontalAlignment="Center" Height="auto" Width="300"/>
+        <TextBlock Grid.Row="5" Name="TextBlockCountry" HorizontalAlignment="Center" Height="auto" Width="300"/>
+        <TextBlock Grid.Row="6" Name="TextBlockCity" HorizontalAlignment="Center" Height="auto" Width="300"/>
+        <TextBlock Grid.Row="7" Name="TextBlockAddress" HorizontalAlignment="Center" Height="auto" Width="300"/>
+        <TextBlock Grid.Row="8" Name="TextBlockPosition" HorizontalAlignment="Center" Height="auto" Width="300"/>
+        <TextBlock Grid.Row="9" Name="TextBlockHourPayment" HorizontalAlignment="center" Height="auto" Width="300"/>
+        <TextBlock Grid.Row="10" Name="TextBlockPercent" HorizontalAlignment="center" Height="auto" Width="300"/>
     </Grid>
 </Page>

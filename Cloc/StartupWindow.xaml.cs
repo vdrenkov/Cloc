@@ -19,6 +19,7 @@ using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
 using static Cloc.Session.UserToken;
 
+//CheckOut Button, брой логове/чекове, AddLog, AddCheck
 /*
 CheckIn + IsCheckedIn (true) -> DB
 CheckOut + IsCheckedIn (false) -> DB
@@ -84,14 +85,13 @@ namespace Cloc
             u1.UserUCN = p1.UCN;
             u1.AccessCode = "55555";
             u1.CheckIn = DateTime.Now;
-            u1.CheckOut = DateTime.Now.AddHours(177);
+            u1.CheckOut = DateTime.Now.AddHours(7);
             u1.IsCheckedIn = false;
             u1.HourPayment = 11;
-            u1.TotalHours = 12;
+            u1.TotalHours = 13;
             u1.Percent = 13;
 
-            MessageBox.Show(person.UCN + person.Position);
-            MessageBox.Show(user.UserUCN + user.AccessCode);
+            MessageBox.Show(Logger.AddLog(u1.UserUCN, "Logging...").ToString());
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)

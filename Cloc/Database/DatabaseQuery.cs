@@ -204,7 +204,7 @@ namespace Cloc.Database
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
             user.AccessCode = HashString(user.AccessCode);
-            double totalHours = Math.Round(((user.CheckOut - user.CheckIn).TotalHours), 4);
+            double totalHours = Math.Round((((user.CheckOut - user.CheckIn).TotalHours)+user.TotalHours), 4);
             DatabaseConnection dbConn = new DatabaseConnection();
 
             if (dbConn.IsConnect())

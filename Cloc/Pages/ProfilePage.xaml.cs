@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cloc.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc.Pages
 {
@@ -20,9 +22,42 @@ namespace Cloc.Pages
     /// </summary>
     public partial class ProfilePage : Page
     {
+        Person person=new Person();
+        User user = new User();
+        static string ucn;
+
         public ProfilePage()
         {
-            InitializeComponent();
+            try
+            {
+                ucn = Session.UserToken.GetLoginData();
+                person = SelectPersonQuery(ucn);
+                user = SelectUserQuery(ucn);
+
+                FillData(person, user);
+            }
+            catch (Exception)
+            { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните!"); }
+            finally
+            { InitializeComponent(); }
+        }
+
+        private void FillData(Person person, User user)
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                TextBlockUCN.Text ="UCN: " + person.UCN;
+                TextBlockName.Text = "Name: " + person.Name;
+                TextBlockSurname.Text = "Surname: " + person.Surname;
+                TextBlockEmail.Text = "Email: " + person.Email;
+                TextBlockPhoneNumber.Text = "Phone number: " + person.PhoneNumber;
+                TextBlockCountry.Text = "Country: " + person.Country;
+                TextBlockCity.Text = "City: " + person.City;
+                TextBlockAddress.Text = "Address: " + person.Address;
+                TextBlockPosition.Text = "Position: " + person.Position.ToString();
+                TextBlockHourPayment.Text = "Hour payment: " + user.HourPayment.ToString();
+                TextBlockPercent.Text = "Percent: " + user.Percent.ToString();
+            }));
         }
     }
 }

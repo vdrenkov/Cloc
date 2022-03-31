@@ -4,12 +4,30 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cloc.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      mc:Ignorable="d"
       Title="ActivityPage">
 
     <Grid>
-        <TextBlock Text="Activity Page" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Списък с логовете на човека + чековете, които ще се пазят във файлове" HorizontalAlignment="Left" Margin="50,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+        <ComboBox x:Name="ComboBoxCount" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Height="100" Width="200">
+            <ComboBoxItem Content="5"/>
+            <ComboBoxItem Content="10"/>
+            <ComboBoxItem Content="15"/>
+            <ComboBoxItem Content="20"/>
+            <ComboBoxItem Content="25"/>
+            <ComboBoxItem Content="30"/>
+        </ComboBox>
+        <Button x:Name="ActionButton" Grid.Row="0" Grid.Column="1" Click="ActionButton_Click"/>
+        <ListBox x:Name="ListBoxChecks" Grid.Row="1" Grid.Column="0"  Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ListBox x:Name="ListBoxLogs" Grid.Row="1" Grid.Column="1"  Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Page>
