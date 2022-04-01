@@ -24,7 +24,7 @@ namespace Cloc.Pages
     public partial class ActivityPage : Page
     {
         static string ucn;
-        int count = 15;
+        static int count = 15;
         public ActivityPage()
         {
             try
@@ -44,13 +44,26 @@ namespace Cloc.Pages
         {
             List<string> checks = new List<string>();
 
-            checks = Checker.PrintChosenChecks(ucn, 15);
+            checks = Checker.PrintChosenChecks(ucn, count);
 
-            foreach (string check in checks)
+            //if (ListBoxChecks.SelectedItem > 0)
+            // { ListBoxChecks.Items.Clear(); }
+
+            if (checks.Count > 0)
+            {
+                foreach (string check in checks)
+                {
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        ListBoxChecks.Items.Add(check);
+                    }));
+                }
+            }
+            else
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    ListBoxChecks.Items.Add(check);
+                    ListBoxChecks.Items.Add("Няма чекирания за показване...");
                 }));
             }
         }
@@ -59,26 +72,37 @@ namespace Cloc.Pages
         {
             List<string> logs = new List<string>();
 
-            logs = Logger.UserLogs(ucn, 15);
+            logs = Logger.UserLogs(ucn, count);
 
-            foreach (string log in logs)
+            //   if (ListBoxLogs.Items.Count > 0)
+            // { ListBoxLogs.Items.Clear(); }
+
+            if (logs.Count > 0)
+            {
+                foreach (string log in logs)
+                {
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        ListBoxLogs.Items.Add(log);
+                    }));
+                }
+            }
+            else
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    ListBoxLogs.Items.Add(log);
+                    ListBoxLogs.Items.Add("Няма логове за показване...");
                 }));
             }
         }
 
         private void ActionButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ComboBoxCount.SelectedItem != null)
-            { count = Convert.ToInt32(ComboBoxCount.SelectedValue); }
-            else
-            { count = 15; }
-
-            FillChecks(ucn, count);
-            FillLogs(ucn, count);
+            if (Int32.TryParse(this.ComboBoxCount.Text, out count))
+            {
+                FillChecks(ucn, count);
+                FillLogs(ucn, count);
+            }
         }
     }
 }

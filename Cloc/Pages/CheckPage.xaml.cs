@@ -64,6 +64,8 @@ namespace Cloc.Pages
                 MessageBox.Show(CheckOutQuery(user).ToString());
 
                 MessageBox.Show(ChangeTotalHoursQuery(user).ToString());
+
+                user = SelectUserQuery(ucn);
             }
             else
             {
