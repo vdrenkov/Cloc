@@ -11,7 +11,7 @@ namespace Cloc.Classes
 {
     internal class Security
     {
-        private static string key = "b14ca5898a4e4133bbce2ea2315a1916";
+        private readonly static string key = "b14ca5898a4e4133bbce2ea2315a1916";
 
         public static string EncryptString(string plainText)
         {
@@ -28,18 +28,14 @@ namespace Cloc.Classes
 
                     ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
-                    using (MemoryStream memoryStream = new MemoryStream())
+                    using MemoryStream memoryStream = new ();
+                    using CryptoStream cryptoStream = new ((Stream)memoryStream, encryptor, CryptoStreamMode.Write);
+                    using (StreamWriter streamWriter = new ((Stream)cryptoStream))
                     {
-                        using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))
-                        {
-                            using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))
-                            {
-                                streamWriter.Write(plainText);
-                            }
-
-                            array = memoryStream.ToArray();
-                        }
+                        streamWriter.Write(plainText);
                     }
+
+                    array = memoryStream.ToArray();
                 }
                 cipherText = Convert.ToBase64String(array);
             }
@@ -58,23 +54,15 @@ namespace Cloc.Classes
             {
                 byte[] buffer = Convert.FromBase64String(cipherText);
 
-                using (Aes aes = Aes.Create())
-                {
-                    aes.Key = Encoding.UTF8.GetBytes(key);
-                    aes.IV = iv;
-                    ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+                using Aes aes = Aes.Create();
+                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.IV = iv;
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
-                    using (MemoryStream memoryStream = new MemoryStream(buffer))
-                    {
-                        using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
-                        {
-                            using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
-                            {
-                                return streamReader.ReadToEnd();
-                            }
-                        }
-                    }
-                }
+                using MemoryStream memoryStream = new (buffer);
+                using CryptoStream cryptoStream = new((Stream)memoryStream, decryptor, CryptoStreamMode.Read);
+                using StreamReader streamReader = new((Stream)cryptoStream);
+                return streamReader.ReadToEnd();
             }
             catch(Exception)
             {

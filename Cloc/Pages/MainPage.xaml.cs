@@ -23,16 +23,17 @@ namespace Cloc.Pages
     /// </summary>
     public partial class MainPage : Page
     {
-        System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer();
-        Person person = new Person();
+        readonly System.Windows.Threading.DispatcherTimer Timer = new();
+        readonly Person person = new();
         static string ucn;
 
         public MainPage()
         {
+
             try
             {
                 ucn = Session.UserToken.GetLoginData();
-                Person person = SelectPersonQuery(ucn);
+                person = SelectPersonQuery(ucn);
 
                 Greeter(person);
 
@@ -51,7 +52,7 @@ namespace Cloc.Pages
             if (person.UCN != null)
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                { greetingTextBlock.Text = "Здравейте, " + person.Name + " " + person.Surname + "!"; }));
+                { GreetingTextBlock.Text = "Здравейте, " + person.Name + " " + person.Surname + "!"; }));
             }
             else
             {
@@ -64,7 +65,7 @@ namespace Cloc.Pages
         {
             DateTime now = DateTime.Now;
 
-            clockLabel.Content = now.Hour + " : " + now.Minute + " : " + now.Second;
+            ClockLabel.Content = now.Hour + " : " + now.Minute + " : " + now.Second;
         }
     }
 }

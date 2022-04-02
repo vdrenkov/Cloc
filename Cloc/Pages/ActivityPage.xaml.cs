@@ -23,8 +23,10 @@ namespace Cloc.Pages
     /// </summary>
     public partial class ActivityPage : Page
     {
+        const int COUNT = 20;
         static string ucn;
-        static int count = 15;
+        static int count = COUNT;
+
         public ActivityPage()
         {
             try
@@ -34,20 +36,30 @@ namespace Cloc.Pages
                 FillChecks(ucn, count);
                 FillLogs(ucn, count);
             }
+
             catch (Exception)
             { MessageBox.Show("Възникнa неочаквана грешка при зареждане на данните!"); }
+
             finally
             { InitializeComponent(); }
         }
 
         private void FillChecks(string ucn, int count)
         {
-            List<string> checks = new List<string>();
+            List<string> checks = new();
 
             checks = Checker.PrintChosenChecks(ucn, count);
 
-            //if (ListBoxChecks.SelectedItem > 0)
-            // { ListBoxChecks.Items.Clear(); }
+            if (ListBoxChecks != null)
+            {
+                if (Int32.TryParse(this.ListBoxChecks.Items.Count.ToString(), out count))
+                {
+                    if (count > 0)
+                    {
+                        ListBoxChecks.Items.Clear();
+                    }
+                }
+            }
 
             if (checks.Count > 0)
             {
@@ -70,12 +82,20 @@ namespace Cloc.Pages
 
         private void FillLogs(string ucn, int count)
         {
-            List<string> logs = new List<string>();
+            List<string> logs = new();
 
             logs = Logger.UserLogs(ucn, count);
 
-            //   if (ListBoxLogs.Items.Count > 0)
-            // { ListBoxLogs.Items.Clear(); }
+            if (ListBoxLogs != null)
+            {
+                if (Int32.TryParse(this.ListBoxLogs.Items.Count.ToString(), out count))
+                {
+                    if (count > 0)
+                    {
+                        ListBoxLogs.Items.Clear();
+                    }
+                }
+            }
 
             if (logs.Count > 0)
             {
@@ -96,13 +116,19 @@ namespace Cloc.Pages
             }
         }
 
-        private void ActionButton_Click(object sender, RoutedEventArgs e)
+        private void ComboBoxCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Int32.TryParse(this.ComboBoxCount.Text, out count))
+            if (Int32.TryParse((e.AddedItems[0] as ComboBoxItem).Content.ToString(), out count))
             {
                 FillChecks(ucn, count);
                 FillLogs(ucn, count);
             }
+            else
+            {
+                ListBoxChecks.Items.Clear();
+                ListBoxLogs.Items.Clear();
+            }
+            count = COUNT;
         }
     }
 }

@@ -22,8 +22,8 @@ namespace Cloc.Pages
     /// </summary>
     public partial class ProfilePage : Page
     {
-        Person person=new Person();
-        User user = new User();
+      readonly  Person person=new();
+       readonly User user = new();
         static string ucn;
 
         public ProfilePage()

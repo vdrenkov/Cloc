@@ -38,12 +38,12 @@ namespace Cloc.Classes
 
         static public List<string> UserLogs(string UCN, int count)
         {
-            List<string> logs = new List<string>();
-            List<string> allLogs = new List<string>();
+            List<string> logs = new();
+            List<string> allLogs = new();
 
             try
             {
-                using (StreamReader reader = new StreamReader(".\\Logs.txt"))
+                using (StreamReader reader = new(".\\Logs.txt"))
                 {
                     var line = reader.ReadLine();
 

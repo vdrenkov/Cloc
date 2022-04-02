@@ -38,12 +38,12 @@ namespace Cloc.Classes
 
         static public List<string> UserChecks(string ucn, int count)
         {
-            List<string> checks = new List<string>();
-            List<string> allChecks = new List<string>();
+            List<string> checks = new();
+            List<string> allChecks = new();
 
             try
             {
-                using (StreamReader reader = new StreamReader(".\\Checks.txt"))
+                using (StreamReader reader = new(".\\Checks.txt"))
                 {
                     var line = reader.ReadLine();
 
@@ -83,12 +83,11 @@ namespace Cloc.Classes
 
         public static List<string> PrintChosenChecks(string ucn, int count)
         {
-            List<string> list = new List<string>();
-            List<string> printList = new List<string>();
+            List<string> printList = new();
 
             try
             {
-                list = UserChecks(ucn, count);
+                List<string> list = UserChecks(ucn, count);
                 foreach (string check in list)
                 {
                     string[] results = check.Split(';', ';');

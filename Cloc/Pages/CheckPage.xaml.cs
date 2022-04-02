@@ -24,7 +24,7 @@ namespace Cloc.Pages
     public partial class CheckPage : Page
     {
         static string ucn;
-        User user = new User();
+        User user = new();
 
         public CheckPage()
         {

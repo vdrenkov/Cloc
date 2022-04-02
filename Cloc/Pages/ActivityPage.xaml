@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-        <ComboBox x:Name="ComboBoxCount" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Height="100" Width="200">
+        <ComboBox x:Name="ComboBoxCount" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Height="100" Width="200" SelectionChanged="ComboBoxCount_SelectionChanged">
             <ComboBoxItem Content="5"/>
             <ComboBoxItem Content="10"/>
             <ComboBoxItem Content="15"/>
@@ -26,12 +26,9 @@
             <ComboBoxItem Content="25"/>
             <ComboBoxItem Content="30"/>
         </ComboBox>
-        <Button x:Name="ActionButton" Grid.Row="0" Grid.Column="1" Click="ActionButton_Click"/>
-        <ListBox x:Name="ListBoxChecks" Grid.Row="1" Grid.Column="0"  Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ListBoxItem Content="Няма чекирания за показване..."></ListBoxItem>
-        </ListBox>
-        <ListBox x:Name="ListBoxLogs" Grid.Row="1" Grid.Column="1"  Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ListBoxItem Content="Няма логове за показване..."></ListBoxItem>
-        </ListBox>
+        
+        <ListBox x:Name="ListBoxChecks" Grid.Row="1" Grid.Column="0"  Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ListBox x:Name="ListBoxLogs" Grid.Row="1" Grid.Column="1"  Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+   
     </Grid>
 </Page>

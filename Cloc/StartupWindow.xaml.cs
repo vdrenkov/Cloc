@@ -19,7 +19,7 @@ using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
 using static Cloc.Session.UserToken;
 
-//CheckOut Button, брой логове/чекове, AddLog, AddCheck
+//CheckOut Button, AddLog, AddCheck
 /*
 CheckIn + IsCheckedIn (true) -> DB
 CheckOut + IsCheckedIn (false) -> DB
@@ -47,12 +47,12 @@ namespace Cloc
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
-        private void buttonTest_Click(object sender, RoutedEventArgs e)
+        private void ButtonTest_Click(object sender, RoutedEventArgs e)
         {
-            Person person = new Person();
-            Person p1=new Person();
-            User user = new User();
-            User u1=new User();
+            Person person = new();
+            Person p1=new();
+            User user = new();
+            User u1=new();
     
             person.UCN = "9902130044";
             person.Name = "Валентин";
@@ -107,50 +107,50 @@ namespace Cloc
                 //}
             }
         }
-        private void buttonEnter_Click(object sender, RoutedEventArgs e)
+        private void ButtonEnter_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidateEntry(passwordBoxAccessCode.Password.ToString()))
+            if (ValidateEntry(PasswordBoxAccessCode.Password.ToString()))
             {
                 Person person = SelectPersonQuery(GetLoginData());
 
-                if (isAdmin(person))
+                if (IsAdmin(person))
                 {
-                    AdminWindow aw = new AdminWindow();
+                    AdminWindow aw = new();
                     aw.Show();
                     this.Close();
                 }
                 else
                 {
-                    MainWindow mw = new MainWindow();
+                    MainWindow mw = new();
                     mw.Show();
                     this.Close();
                 }
             }
             else
             {
-                passwordBoxAccessCode.Password = null;
+                PasswordBoxAccessCode.Password = null;
             }
         }
 
-        private void buttonChangeAccessCode_Click(object sender, RoutedEventArgs e)
+        private void ButtonChangeAccessCode_Click(object sender, RoutedEventArgs e)
         {
-            HelpWindow hw = new HelpWindow();
-            hw.label.Content = "Моля, въведете ЕГН и желания код за достъп:";
-            hw.actionButton.Visibility = Visibility.Hidden;
+            HelpWindow hw = new();
+            hw.InfoLabel.Content = "Моля, въведете ЕГН и желания код за достъп:";
+            hw.ActionButton.Visibility = Visibility.Hidden;
             hw.Show();
             this.Close();
         }
 
-        private void buttonSetup_Click(object sender, RoutedEventArgs e)
+        private void ButtonSetup_Click(object sender, RoutedEventArgs e)
         {
-            HelpWindow hw = new HelpWindow();
-            hw.textBox.Visibility = Visibility.Hidden;
-            hw.changeAccessCodeButton.Visibility = Visibility.Hidden;
+            HelpWindow hw = new();
+            hw.TextBox.Visibility = Visibility.Hidden;
+            hw.ChangeAccessCodeButton.Visibility = Visibility.Hidden;
             hw.Show();
             this.Close();
         }
 
-        private void buttonExit_Click(object sender, RoutedEventArgs e)
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Сигурни ли сте, че искате да излезнете от приложението?", "CLOC", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
             switch (result)
@@ -160,91 +160,91 @@ namespace Cloc
                     break;
             }
         }
-        private void buttonCredits_Click(object sender, RoutedEventArgs e)
+        private void ButtonCredits_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Настоящият сайт бе разработен от Валентин Дренков, студент от ТУ - София, ФКСТ, специалност КСИ, IV курс, 51. група, факултетен номер: 121218025, като задание за дипломна работа." +
                 "\nВсички права запазени.\n" +
                 "Валентин Дренков, София, 03.03.2022");
         }
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length < 5)
+            if (PasswordBoxAccessCode.Password.Length < 5)
             {
-                passwordBoxAccessCode.Password += 1;
+                PasswordBoxAccessCode.Password += 1;
             }
         }
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length < 5)
+            if (PasswordBoxAccessCode.Password.Length < 5)
             {
-                passwordBoxAccessCode.Password += 2;
+                PasswordBoxAccessCode.Password += 2;
             }
         }
-        private void button3_Click(object sender, RoutedEventArgs e)
+        private void Button3_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length < 5)
+            if (PasswordBoxAccessCode.Password.Length < 5)
             {
-                passwordBoxAccessCode.Password += 3;
+                PasswordBoxAccessCode.Password += 3;
             }
         }
-        private void button4_Click(object sender, RoutedEventArgs e)
+        private void Button4_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length < 5)
+            if (PasswordBoxAccessCode.Password.Length < 5)
             {
-                passwordBoxAccessCode.Password += 4;
+                PasswordBoxAccessCode.Password += 4;
             }
         }
-        private void button5_Click(object sender, RoutedEventArgs e)
+        private void Button5_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length < 5)
+            if (PasswordBoxAccessCode.Password.Length < 5)
             {
-                passwordBoxAccessCode.Password += 5;
+                PasswordBoxAccessCode.Password += 5;
             }
         }
-        private void button6_Click(object sender, RoutedEventArgs e)
+        private void Button6_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length < 5)
+            if (PasswordBoxAccessCode.Password.Length < 5)
             {
-                passwordBoxAccessCode.Password += 6;
+                PasswordBoxAccessCode.Password += 6;
             }
         }
-        private void button7_Click(object sender, RoutedEventArgs e)
+        private void Button7_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length < 5)
+            if (PasswordBoxAccessCode.Password.Length < 5)
             {
-                passwordBoxAccessCode.Password += 7;
+                PasswordBoxAccessCode.Password += 7;
             }
         }
-        private void button8_Click(object sender, RoutedEventArgs e)
+        private void Button8_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length < 5)
+            if (PasswordBoxAccessCode.Password.Length < 5)
             {
-                passwordBoxAccessCode.Password += 8;
+                PasswordBoxAccessCode.Password += 8;
             }
         }
-        private void button9_Click(object sender, RoutedEventArgs e)
+        private void Button9_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length < 5)
+            if (PasswordBoxAccessCode.Password.Length < 5)
             {
-                passwordBoxAccessCode.Password += 9;
+                PasswordBoxAccessCode.Password += 9;
             }
         }
-        private void buttonX_Click(object sender, RoutedEventArgs e)
+        private void ButtonX_Click(object sender, RoutedEventArgs e)
         {
-            passwordBoxAccessCode.Password = "";
+            PasswordBoxAccessCode.Password = "";
         }
-        private void button0_Click(object sender, RoutedEventArgs e)
+        private void Button0_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length < 5)
+            if (PasswordBoxAccessCode.Password.Length < 5)
             {
-                passwordBoxAccessCode.Password += 0;
+                PasswordBoxAccessCode.Password += 0;
             }
         }
-        private void buttonBack_Click(object sender, RoutedEventArgs e)
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBoxAccessCode.Password.Length > 0)
+            if (PasswordBoxAccessCode.Password.Length > 0)
             {
-                passwordBoxAccessCode.Password = passwordBoxAccessCode.Password.Remove(passwordBoxAccessCode.Password.Length - 1);
+                PasswordBoxAccessCode.Password = PasswordBoxAccessCode.Password.Remove(PasswordBoxAccessCode.Password.Length - 1);
             }
         }
     }

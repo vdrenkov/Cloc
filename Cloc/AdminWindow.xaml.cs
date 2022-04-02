@@ -29,31 +29,31 @@ namespace Cloc
         {
             if (e.Key == Key.Escape)
             {
-                StartupWindow sw = new StartupWindow();
+                StartupWindow sw = new();
                 sw.Show();
                 this.Close();
                 Session.UserToken.RemoveLoginData();
             }
         }
-        private void buttonMain_Click(object sender, RoutedEventArgs e)
+        private void ButtonMain_Click(object sender, RoutedEventArgs e)
             {
                 Main.Navigate(new Pages.MainPage());
             }
-            private void buttonBossOptions_Click(object sender, RoutedEventArgs e)
+            private void ButtonBossOptions_Click(object sender, RoutedEventArgs e)
             {
                 Main.Navigate(new Pages.AdminOptionsPage());
             }
-            private void buttonProfile_Click(object sender, RoutedEventArgs e)
+            private void ButtonProfile_Click(object sender, RoutedEventArgs e)
             {
                 Main.Navigate(new Pages.ProfilePage());
             }
-            private void buttonLogs_Click(object sender, RoutedEventArgs e)
+            private void ButtonLogs_Click(object sender, RoutedEventArgs e)
             {
                 Main.Navigate(new Pages.ActivityPage());
             }
-            private void buttonExit_Click(object sender, RoutedEventArgs e)
+            private void ButtonExit_Click(object sender, RoutedEventArgs e)
             {
-                StartupWindow sw = new StartupWindow();
+                StartupWindow sw = new();
                 sw.Show();
                 this.Close();
             Session.UserToken.RemoveLoginData();

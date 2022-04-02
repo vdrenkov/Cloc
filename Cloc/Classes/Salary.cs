@@ -18,11 +18,10 @@ namespace Cloc.Classes
         {
             double totalHours = 0;
             DateTime monthAgo = DateTime.Now.AddDays(-30);
-            List<string> monthChecks = new List<string>();
 
             try
             {
-                monthChecks = UserChecks(user.UserUCN, MaxWorkShiftsForAMonth);
+                List<string> monthChecks = UserChecks(user.UserUCN, MaxWorkShiftsForAMonth);
 
                 foreach (string item in monthChecks)
                 {

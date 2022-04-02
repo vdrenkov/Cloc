@@ -15,7 +15,7 @@ namespace Cloc.Classes
         {
             try
             {
-                Regex rx = new Regex("^[0-9]{10}$");
+                Regex rx = new("^[0-9]{10}$");
                 MatchCollection matches;
 
                 matches = rx.Matches(UCN);
@@ -41,7 +41,7 @@ namespace Cloc.Classes
 
             try
             {
-                Regex rx = new Regex("^[0-9]{5}$");
+                Regex rx = new("^[0-9]{5}$");
                 MatchCollection matches = rx.Matches(accessCode);
                 if (matches.Count > 0)
                 { flag = true; }
@@ -85,8 +85,8 @@ namespace Cloc.Classes
         public static bool ValidateEntry(string accessCode)
         {
             bool flag = false;
-            Person currentPerson = new Person();
-            User currentUser = new User();
+            Person currentPerson = new();
+            User currentUser = new();
 
             if (ValidateAccessCode(accessCode))
             { currentUser = SelectUserByAccessCodeQuery(accessCode); }
@@ -103,7 +103,7 @@ namespace Cloc.Classes
             return flag;
         }
 
-        public static bool isAdmin(Person person)
+        public static bool IsAdmin(Person person)
         {
             bool flag = false;
 

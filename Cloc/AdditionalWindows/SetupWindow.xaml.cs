@@ -33,65 +33,65 @@ namespace Cloc.AdditionalWindows
         {
             if (e.Key == Key.Escape)
             {
-                StartupWindow sw = new StartupWindow();
+                StartupWindow sw = new();
                 sw.Show();
                 this.Close();
             }
         }
 
-        private void buttonExit_Click(object sender, RoutedEventArgs e)
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-            StartupWindow sw = new StartupWindow();
+            StartupWindow sw = new();
             sw.Show();
             this.Close();
         }
 
-        private void buttonSetup_Click(object sender, RoutedEventArgs e)
+        private void ButtonSetup_Click(object sender, RoutedEventArgs e)
         {
-            Person person = new Person();
-            string accessCode = null, server = null, user = null, password = null, port = null;
+            Person person = new();
+            string accessCode, server, user, password, port;
 
-            if (ValidateUCN(textboxUCN.Text.ToString()))
+            if (ValidateUCN(TextBoxUCN.Text.ToString()))
             {
-                person.UCN = textboxUCN.Text.ToString();
+                person.UCN = TextBoxUCN.Text.ToString();
             }
             else
             {
                 MessageBox.Show("Моля въведете правилно ЕГН!");
-                SetupWindow sw=new SetupWindow();
+                SetupWindow sw=new();
                 sw.Show();
                 this.Close();
                 return;
             }
 
-            person.Name = textboxName.Text.ToString();
-            person.Surname = textboxSurname.Text.ToString();
-            person.Email = textboxEmail.Text.ToString();
-            person.PhoneNumber = textboxPhoneNumber.Text.ToString();
-            person.Country = textboxCountry.Text.ToString();
-            person.City = textboxCity.Text.ToString();
-            person.Address = textboxAddress.Text.ToString();
+            person.Name = TextBoxName.Text.ToString();
+            person.Surname = TextBoxSurname.Text.ToString();
+            person.Email = TextBoxEmail.Text.ToString();
+            person.PhoneNumber = TextBoxPhoneNumber.Text.ToString();
+            person.Country = TextBoxCountry.Text.ToString();
+            person.City = TextBoxCity.Text.ToString();
+            person.Address = TextBoxAddress.Text.ToString();
                 person.Position = WorkPosition.Admin;
 
-            if (ValidateAccessCode(passwordBoxAccessCode.Password.ToString()))
+            if (ValidateAccessCode(PasswordBoxAccessCode.Password.ToString()))
             {
-                accessCode = passwordBoxAccessCode.Password.ToString();
+                accessCode = PasswordBoxAccessCode.Password.ToString();
             }
             else
             {
-                    Random random = new Random();
+                    Random random = new();
                     accessCode = random.Next(10000, 99999).ToString();
             } 
 
-            server = textboxServer.Text.ToString();
-            user = textboxUser.Text.ToString();
-            password = passwordBoxDBPassword.Password.ToString();
-            port = textboxPort.Text.ToString();
+            server = TextBoxServer.Text.ToString();
+            user = TextBoxUser.Text.ToString();
+            password = PasswordBoxDBPassword.Password.ToString();
+            port = TextBoxPort.Text.ToString();
 
             if (StartupQuery(server, user, password, port, person, accessCode))
             {
                 MessageBox.Show($"Настройката на системата беше успешна!\nВашият код за достъп е: {accessCode}");
-                StartupWindow sw = new StartupWindow();
+                StartupWindow sw = new();
                 sw.Show();
                 this.Close();
             }

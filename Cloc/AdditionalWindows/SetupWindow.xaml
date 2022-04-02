@@ -8,7 +8,7 @@
         WindowState="Maximized"
     WindowStyle="None"
         Title="SetupWindow" Height="auto" Width="auto">
-    <Grid Name="myGrid">
+    <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -29,35 +29,35 @@
         </Grid.RowDefinitions>
         
         <Label Content="Server:" Grid.Column="2" Grid.Row="0"/>
-        <TextBox x:Name="textboxServer"   TextWrapping="Wrap" Grid.Column="2" Grid.Row="1"/>
+        <TextBox x:Name="TextBoxServer"   TextWrapping="Wrap" Grid.Column="2" Grid.Row="1"/>
         <Label Content="User:"  Grid.Column="2" Grid.Row="2"/>
-        <TextBox x:Name="textboxUser"  TextWrapping="Wrap" Text=""  Grid.Column="2" Grid.Row="3"/>
+        <TextBox x:Name="TextBoxUser"  TextWrapping="Wrap" Text=""  Grid.Column="2" Grid.Row="3"/>
         <Label Content="Password:" Grid.Column="2" Grid.Row="4"/>
-        <PasswordBox x:Name="passwordBoxDBPassword" Grid.Column="2" Grid.Row="5"/>
+        <PasswordBox x:Name="PasswordBoxDBPassword" Grid.Column="2" Grid.Row="5"/>
         <Label Content="Port:"  Grid.Column="2" Grid.Row="6"/>
-        <TextBox x:Name="textboxPort"  TextWrapping="Wrap" Text=""  Grid.Column="2" Grid.Row="7"/>
+        <TextBox x:Name="TextBoxPort"  TextWrapping="Wrap" Text=""  Grid.Column="2" Grid.Row="7"/>
 
         <Label Content="ЕГН:" Grid.Column="0" Grid.Row="0"/>
-        <TextBox x:Name="textboxUCN"  TextWrapping="Wrap" Grid.Column="0" Grid.Row="1"/>
+        <TextBox x:Name="TextBoxUCN"  TextWrapping="Wrap" Grid.Column="0" Grid.Row="1"/>
         <Label Content="Име:"  Grid.Column="0" Grid.Row="2"/>
-        <TextBox x:Name="textboxName"  TextWrapping="Wrap" Text=""  Grid.Column="0" Grid.Row="3"/>
+        <TextBox x:Name="TextBoxName"  TextWrapping="Wrap" Text=""  Grid.Column="0" Grid.Row="3"/>
         <Label Content="Фамилия:"  Grid.Column="0" Grid.Row="4"/>
-        <TextBox x:Name="textboxSurname" TextWrapping="Wrap" Text=""  Grid.Column="0" Grid.Row="5"/>
+        <TextBox x:Name="TextBoxSurname" TextWrapping="Wrap" Text=""  Grid.Column="0" Grid.Row="5"/>
         <Label Content="Имейл:"  Grid.Column="0" Grid.Row="6"/>
-        <TextBox x:Name="textboxEmail" TextWrapping="Wrap" Text="" Grid.Column="0" Grid.Row="7"/>
+        <TextBox x:Name="TextBoxEmail" TextWrapping="Wrap" Text="" Grid.Column="0" Grid.Row="7"/>
         <Label Content="Телефонен номер" Grid.Column="0" Grid.Row="8"/>
-        <TextBox x:Name="textboxPhoneNumber"  TextWrapping="Wrap" Text="" Grid.Column="0" Grid.Row="9"/>
+        <TextBox x:Name="TextBoxPhoneNumber"  TextWrapping="Wrap" Text="" Grid.Column="0" Grid.Row="9"/>
 
         <Label Content="Държава:"  Grid.Column="1" Grid.Row="0"/>
-        <TextBox x:Name="textboxCountry"  TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="1"/>
+        <TextBox x:Name="TextBoxCountry"  TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="1"/>
         <Label Content="Град:"  Grid.Column="1" Grid.Row="2"/>
-        <TextBox x:Name="textboxCity"  TextWrapping="Wrap" Text=""  Grid.Column="1" Grid.Row="3"/>
+        <TextBox x:Name="TextBoxCity"  TextWrapping="Wrap" Text=""  Grid.Column="1" Grid.Row="3"/>
         <Label Content="Адрес:"  Grid.Column="1" Grid.Row="4"/>
-        <TextBox x:Name="textboxAddress"  TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="5"/>
+        <TextBox x:Name="TextBoxAddress"  TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="5"/>
         <Label Content="Код за достъп:"  Grid.Column="1" Grid.Row="6"/>
-        <PasswordBox x:Name="passwordBoxAccessCode"  Grid.Column="1" Grid.Row="7"/>
+        <PasswordBox x:Name="PasswordBoxAccessCode"  Grid.Column="1" Grid.Row="7"/>
 
-        <Button x:Name="buttonExit" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="top" Content="Изход" Click="buttonExit_Click" Grid.Column="3" Grid.Row="0"/>
-        <Button x:Name="buttonSetup" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="Bottom" Content="Настройка" Click="buttonSetup_Click" Grid.Column="3" Grid.Row="9"/>
+        <Button x:Name="ButtonExit" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="top" Content="Изход" Click="ButtonExit_Click" Grid.Column="3" Grid.Row="0"/>
+        <Button x:Name="ButtonSetup" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="Bottom" Content="Настройка" Click="ButtonSetup_Click" Grid.Column="3" Grid.Row="9"/>
     </Grid>
 </Window>

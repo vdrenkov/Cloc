@@ -31,7 +31,7 @@ namespace Cloc.AdditionalWindows
         {
             if (e.Key == Key.Escape)
             {
-                StartupWindow sw = new StartupWindow();
+                StartupWindow sw = new();
                 sw.Show();
                 this.Close();
             }
@@ -40,17 +40,17 @@ namespace Cloc.AdditionalWindows
         private void SetupButton_Click(object sender, RoutedEventArgs e)
         {
             string password = "1cm13*8vCt19_xRc";
-            if (passwordBox.Password == password)
+            if (PasswordBox.Password == password)
             {
                 MessageBox.Show("Внимание!\nМоля уверете се, че сте прочели README.txt файла, преди да продължите!");
-                SetupWindow sw = new SetupWindow();
+                SetupWindow sw = new();
                 sw.Show();
                 this.Close();
             }
             else
             {
                 MessageBox.Show("Въвели сте грешна парола!");
-                StartupWindow stw = new StartupWindow();
+                StartupWindow stw = new();
                 stw.Show();
                 this.Close();
             }
@@ -58,24 +58,24 @@ namespace Cloc.AdditionalWindows
 
         private void ChangeAccessCodeButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidateAccessCodeChange(textBox.Text.ToString(), passwordBox.Password.ToString()))
+            if (ValidateAccessCodeChange(TextBox.Text.ToString(), PasswordBox.Password.ToString()))
             {
-                MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {passwordBox.Password.ToString()}");
-                StartupWindow stw = new StartupWindow();
+                MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {PasswordBox.Password}");
+                StartupWindow stw = new();
                 stw.Show();
                 this.Close();
             }
             else
             {
                 MessageBox.Show("Въвели сте грешни данни!");
-                textBox.Text = null;
-                passwordBox.Password = null;
+                TextBox.Text = null;
+                PasswordBox.Password = null;
             }
         }
 
-        private void backButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            StartupWindow stw = new StartupWindow();
+            StartupWindow stw = new();
             stw.Show();
             this.Close();
         }

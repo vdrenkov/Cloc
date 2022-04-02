@@ -57,7 +57,7 @@ namespace Cloc.Database
             user.UserUCN = person.UCN;
             user.AccessCode = HashString(user.AccessCode);
 
-            DatabaseConnection dbConn = new DatabaseConnection();
+            DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
@@ -72,7 +72,7 @@ namespace Cloc.Database
                     var cmd = new MySqlCommand(query, dbConn.Connection);
 
                     string secondQuery = "use ClocDB; insert into Users (userUcn,accessCode,checkIn,checkOut,isCheckedIn,hourPayment,totalHours,percent) values" +
-                        $"('{user.UserUCN}','{user.AccessCode}','{user.CheckIn.ToString("yyyy-MM-dd HH:mm:ss")}','{user.CheckOut.ToString("yyyy-MM-dd HH:mm:ss")}',{user.IsCheckedIn},{user.HourPayment},{user.TotalHours},{user.Percent});";
+                        $"('{user.UserUCN}','{user.AccessCode}','{user.CheckIn:yyyy-MM-dd HH:mm:ss}','{user.CheckOut:yyyy-MM-dd HH:mm:ss}',{user.IsCheckedIn},{user.HourPayment},{user.TotalHours},{user.Percent});";
                     var command = new MySqlCommand(secondQuery, dbConn.Connection);
 
                     if (cmd.ExecuteNonQuery() > 0 && command.ExecuteNonQuery() > 0)
@@ -91,7 +91,7 @@ namespace Cloc.Database
         {
             bool flag = false;
             UCN = EncryptString(UCN);
-            DatabaseConnection dbConn = new DatabaseConnection();
+            DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
@@ -118,7 +118,7 @@ namespace Cloc.Database
             bool flag = false;
             UCN = EncryptString(UCN);
             accessCode = HashString(accessCode);
-            DatabaseConnection dbConn = new DatabaseConnection();
+            DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
@@ -143,13 +143,13 @@ namespace Cloc.Database
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
             user.AccessCode = HashString(user.AccessCode);
-            DatabaseConnection dbConn = new DatabaseConnection();
+            DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
                 try
                 {
-                    string query = $"use ClocDB; update Users set checkIn = '{user.CheckIn.ToString("yyyy-MM-dd HH:mm:ss")}' where userUcn = '{user.UserUCN}';";
+                    string query = $"use ClocDB; update Users set checkIn = '{user.CheckIn:yyyy-MM-dd HH:mm:ss}' where userUcn = '{user.UserUCN}';";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
 
                     string secondQuery = $"use ClocDB; update Users set isCheckedIn = true where userUcn = '{user.UserUCN}';";
@@ -173,14 +173,14 @@ namespace Cloc.Database
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
             user.AccessCode = HashString(user.AccessCode);
-            DatabaseConnection dbConn = new DatabaseConnection();
+            DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
 
                 try
                 {
-                    string query = $"use ClocDB; update Users set checkOut = '{user.CheckOut.ToString("yyyy-MM-dd HH:mm:ss")}' where userUcn = '{user.UserUCN}';";
+                    string query = $"use ClocDB; update Users set checkOut = '{user.CheckOut:yyyy-MM-dd HH:mm:ss}' where userUcn = '{user.UserUCN}';";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
 
                     string secondQuery = $"use ClocDB; update Users set isCheckedIn = false where userUcn = '{user.UserUCN}';";
@@ -205,7 +205,7 @@ namespace Cloc.Database
             user.UserUCN = EncryptString(user.UserUCN);
             user.AccessCode = HashString(user.AccessCode);
             double totalHours = Math.Round((((user.CheckOut - user.CheckIn).TotalHours)+user.TotalHours), 4);
-            DatabaseConnection dbConn = new DatabaseConnection();
+            DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
@@ -232,7 +232,7 @@ namespace Cloc.Database
             bool flag = false;
             userUCN = EncryptString(userUCN);
             hourPayment = Math.Round(hourPayment, 4);
-            DatabaseConnection dbConn = new DatabaseConnection();
+            DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
@@ -258,7 +258,7 @@ namespace Cloc.Database
             bool flag = false;
             userUCN = EncryptString(userUCN);
             percent = Math.Round(percent, 4);
-            DatabaseConnection dbConn = new DatabaseConnection();
+            DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
@@ -283,7 +283,7 @@ namespace Cloc.Database
         {
             bool flag = false;
             UCN = EncryptString(UCN);
-            DatabaseConnection dbConn = new DatabaseConnection();
+            DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
@@ -307,8 +307,8 @@ namespace Cloc.Database
         public static Person SelectPersonQuery(string UCN)
         {
             UCN = EncryptString(UCN);
-            DatabaseConnection dbConn = new DatabaseConnection();
-            Person person = new Person();
+            DatabaseConnection dbConn = new();
+            Person person = new();
 
             if (dbConn.IsConnect())
             {
@@ -347,8 +347,8 @@ namespace Cloc.Database
         public static User SelectUserQuery(string UserUCN)
         {
             UserUCN = EncryptString(UserUCN);
-            DatabaseConnection dbConn = new DatabaseConnection();
-            User user = new User();
+            DatabaseConnection dbConn = new();
+            User user = new();
 
             if (dbConn.IsConnect())
             {
@@ -386,8 +386,8 @@ namespace Cloc.Database
         public static User SelectUserByAccessCodeQuery(string accessCode)
         {
             accessCode = HashString(accessCode);
-            DatabaseConnection dbConn = new DatabaseConnection();
-            User user = new User();
+            DatabaseConnection dbConn = new();
+            User user = new();
 
             if (dbConn.IsConnect())
             {
