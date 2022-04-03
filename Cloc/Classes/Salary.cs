@@ -12,7 +12,7 @@ namespace Cloc.Classes
     internal class Salary
     {
         const int MonthWorkHours = 176;
-        const int MaxWorkShiftsForAMonth = 62;
+        const int MaxWorkShifts = 255;
 
         public static bool HasOvertime(User user)
         {
@@ -21,7 +21,7 @@ namespace Cloc.Classes
 
             try
             {
-                List<string> monthChecks = UserChecks(user.UserUCN, MaxWorkShiftsForAMonth);
+                List<string> monthChecks = UserChecks(user.UserUCN, MaxWorkShifts);
 
                 foreach (string item in monthChecks)
                 {

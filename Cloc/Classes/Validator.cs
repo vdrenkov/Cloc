@@ -61,7 +61,7 @@ namespace Cloc.Classes
             {
                 if (ValidateAccessCode(accessCode))
                 {
-                    if (ChangeAccessCodeQuery(ucn, accessCode))
+                    if (!SelectAccessCodeQuery(accessCode) && ChangeAccessCodeQuery(ucn, accessCode))
                     {
                         flag = true;
                     }

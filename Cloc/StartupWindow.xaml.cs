@@ -19,19 +19,16 @@ using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
 using static Cloc.Session.UserToken;
 
-//CheckOut Button, AddLog, AddCheck
+//TODO AdminWindow
 /*
-CheckIn + IsCheckedIn (true) -> DB
-CheckOut + IsCheckedIn (false) -> DB
-CheckOut - CheckIn -> DB (TotalHours)
-UCN + CheckIn + CheckOut -> Checks.txt
-DateTime + UCN + Activity -> Logs.txt
-AddLog + AddCheck -> StartupQuery
+Full System Setup + Installation
 Language menu
-
 StartupWindow -> Exit confirmation uncomment, delete test button
+
 Access Password -> 1cm13*8vCt19_xRc
 DB Password -> 348_sha765_KaD3l
+
+Задание: Да се разработи информационна система за управление на човешките ресурси.
 */
 
 namespace Cloc
@@ -50,10 +47,10 @@ namespace Cloc
         private void ButtonTest_Click(object sender, RoutedEventArgs e)
         {
             Person person = new();
-            Person p1=new();
+            Person p1 = new();
             User user = new();
-            User u1=new();
-    
+            User u1 = new();
+
             person.UCN = "9902130044";
             person.Name = "Валентин";
             person.Surname = "Дренков";
@@ -68,9 +65,9 @@ namespace Cloc
             user.AccessCode = "77777";
             user.CheckIn = DateTime.Now;
             user.CheckOut = DateTime.Now;
-            user.HourPayment = 1;
-            user.TotalHours = 1;
-            user.Percent = 1;
+            user.HourPayment = 0;
+            user.TotalHours = 0;
+            user.Percent = 0;
 
             p1.UCN = "9988776655";
             p1.Name = "Любомира";
@@ -83,15 +80,16 @@ namespace Cloc
             p1.Position = WorkPosition.Manager;
 
             u1.UserUCN = p1.UCN;
-            u1.AccessCode = "55555";
+            u1.AccessCode = "00000";
             u1.CheckIn = DateTime.Now;
-            u1.CheckOut = DateTime.Now.AddHours(7);
+            u1.CheckOut = DateTime.Now.AddHours(8);
             u1.IsCheckedIn = false;
-            u1.HourPayment = 11;
-            u1.TotalHours = 13;
-            u1.Percent = 13;
+            u1.HourPayment = 15;
+            u1.TotalHours = 10;
+            u1.Percent = 20;
 
-            MessageBox.Show(Logger.AddLog(u1.UserUCN, "Logging...").ToString());
+           // MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
+            //MessageBox.Show(AddWorkerQuery(p1, u1).ToString());
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -112,6 +110,7 @@ namespace Cloc
             if (ValidateEntry(PasswordBoxAccessCode.Password.ToString()))
             {
                 Person person = SelectPersonQuery(GetLoginData());
+                Logger.AddLog(person.UCN, "Вход в системата.");
 
                 if (IsAdmin(person))
                 {
@@ -144,8 +143,9 @@ namespace Cloc
         private void ButtonSetup_Click(object sender, RoutedEventArgs e)
         {
             HelpWindow hw = new();
-            hw.TextBox.Visibility = Visibility.Hidden;
+            hw.TextBoxUCN.Visibility = Visibility.Hidden;
             hw.ChangeAccessCodeButton.Visibility = Visibility.Hidden;
+            hw.PasswordBox.MaxLength = 255;
             hw.Show();
             this.Close();
         }

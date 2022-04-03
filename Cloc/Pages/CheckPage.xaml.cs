@@ -24,7 +24,7 @@ namespace Cloc.Pages
     public partial class CheckPage : Page
     {
         static string ucn;
-        User user = new();
+       readonly User user = new();
 
         public CheckPage()
         {
@@ -33,8 +33,10 @@ namespace Cloc.Pages
                 ucn = GetLoginData();
                 user = SelectUserQuery(ucn);
             }
+
             catch (Exception)
             { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните!"); }
+
             finally
             { InitializeComponent(); }
         }
@@ -44,10 +46,10 @@ namespace Cloc.Pages
             if (user.IsCheckedIn == false)
             {
                 user.CheckIn = DateTime.Now;
+                user.IsCheckedIn = true;
 
                 MessageBox.Show(CheckInQuery(user).ToString());
-
-                user = SelectUserQuery(ucn);
+                MessageBox.Show(Logger.AddLog(user.UserUCN, "Check - in.").ToString());
             }
             else
             {
@@ -60,12 +62,13 @@ namespace Cloc.Pages
             if (user.IsCheckedIn == true)
             {
                 user.CheckOut = DateTime.Now;
+                user.IsCheckedIn = false;
 
                 MessageBox.Show(CheckOutQuery(user).ToString());
-
                 MessageBox.Show(ChangeTotalHoursQuery(user).ToString());
 
-                user = SelectUserQuery(ucn);
+                MessageBox.Show(Logger.AddLog(user.UserUCN, "Check - out.").ToString());
+                MessageBox.Show(Checker.AddCheck(user).ToString());
             }
             else
             {
@@ -76,6 +79,7 @@ namespace Cloc.Pages
         private void CheckSalary_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(Salary.CheckSalary(ucn).ToString());
+            Logger.AddLog(user.UserUCN, "Проверка на текуща сума за изплащане.");
         }
     }
 }

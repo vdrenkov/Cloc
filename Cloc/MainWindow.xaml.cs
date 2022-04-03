@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cloc.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,14 +27,22 @@ namespace Cloc
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             Main.Navigate(new Pages.MainPage());
         }
+
+        public void ExitCurrentSession()
+        {
+            Logger.AddLog(Session.UserToken.GetLoginData(), "Изход от системата.");
+            Session.UserToken.RemoveLoginData();
+
+            StartupWindow sw = new();
+            sw.Show();
+            this.Close();
+        }
+
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
-                StartupWindow sw = new();
-                sw.Show();
-                this.Close();
-                Session.UserToken.RemoveLoginData();
+                ExitCurrentSession();
             }
         }
         private void ButtonMain_Click(object sender, RoutedEventArgs e)
@@ -54,10 +63,7 @@ namespace Cloc
         }
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-            StartupWindow sw = new();
-            sw.Show();
-            this.Close();
-            Session.UserToken.RemoveLoginData();
+            ExitCurrentSession();
         }
     }
 }

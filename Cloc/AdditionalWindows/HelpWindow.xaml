@@ -10,8 +10,8 @@
         Title="HelpWindow" Height="auto" Width="auto">
     <Grid>
         <Label x:Name="InfoLabel" FontSize="22" Height="80" Width="700" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Въведи парола:" Margin="10,10,0,0"/>
-        <PasswordBox  x:Name="PasswordBox"  FontSize="20" Width="100" Height="30"  HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="TextBox" FontSize="20" Width="100" Height="30" HorizontalAlignment="left" VerticalAlignment="Center"/>
+        <PasswordBox  x:Name="PasswordBox" MaxLength="5" FontSize="20" Width="100" Height="30"  HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="TextBoxUCN" MaxLength="10" FontSize="20" Width="100" Height="30" HorizontalAlignment="left" VerticalAlignment="Center"/>
         <Button Name="BackButton" Height="20" Width="50" Content="Назад" Click="BackButton_Click" Margin="160,335,590,79"/>
         <Button Name="ActionButton" Height="20" Width="70" Content="Напред" Click="SetupButton_Click" Margin="430,330,275,85"/>
         <Button Name="ChangeAccessCodeButton" Height="20" Width="70" Content="Напред" Click="ChangeAccessCodeButton_Click" Margin="430,330,275,85"/>

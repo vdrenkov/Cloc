@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static Cloc.Database.DatabaseQuery;
 using static Cloc.Classes.Validator;
+using Cloc.Classes;
 
 namespace Cloc.AdditionalWindows
 {
@@ -58,8 +59,9 @@ namespace Cloc.AdditionalWindows
 
         private void ChangeAccessCodeButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidateAccessCodeChange(TextBox.Text.ToString(), PasswordBox.Password.ToString()))
+            if (ValidateAccessCodeChange(TextBoxUCN.Text.ToString(), PasswordBox.Password.ToString()))
             {
+                Logger.AddLog(TextBoxUCN.Text.ToString(), "Промяна на кода за достъп.");
                 MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {PasswordBox.Password}");
                 StartupWindow stw = new();
                 stw.Show();
@@ -67,8 +69,8 @@ namespace Cloc.AdditionalWindows
             }
             else
             {
-                MessageBox.Show("Въвели сте грешни данни!");
-                TextBox.Text = null;
+                MessageBox.Show("Въвели сте грешни или вече съществуващи данни!");
+                TextBoxUCN.Text = null;
                 PasswordBox.Password = null;
             }
         }

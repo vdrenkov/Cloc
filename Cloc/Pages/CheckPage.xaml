@@ -9,8 +9,8 @@
       Title="CheckPage">
 
     <Grid>
-        <Button Name="CheckIn" Content="Check In" HorizontalAlignment="left" VerticalAlignment="center" Width="100" Height="50" Click="CheckIn_Click"/>
-        <Button Name="CheckOut" Content="Check Out" HorizontalAlignment="Center" VerticalAlignment="center" Width="100" Height="50" Click="CheckOut_Click"/>
+        <Button Name="CheckIn" Content="Check - In" HorizontalAlignment="left" VerticalAlignment="center" Width="100" Height="50" Click="CheckIn_Click"/>
+        <Button Name="CheckOut" Content="Check - Out" HorizontalAlignment="Center" VerticalAlignment="center" Width="100" Height="50" Click="CheckOut_Click"/>
         <Button Name="CheckSalary" Content="Check Salary" HorizontalAlignment="right" VerticalAlignment="center" Width="100" Height="50" Click="CheckSalary_Click"/>
     </Grid>
 </Page>

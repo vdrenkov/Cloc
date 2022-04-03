@@ -37,8 +37,10 @@ namespace Cloc.Database
                 cmd.ExecuteNonQuery();
                 connection.Close();
 
-                User user = SelectUserQuery(DecryptString(person.UCN));
-                if (user.UserUCN != null && SetSettings(server, username, password, port))
+                person.UCN = DecryptString(person.UCN);
+                User user = SelectUserQuery(person.UCN);
+                                            
+                if (user.UserUCN != null && SetSettings(server, username, password, port) && Logger.AddLog(person.UCN, "Начална инициализация.") && Checker.AddCheck(SelectUserQuery(person.UCN)))
                 {
                     flag = true;
                 }
@@ -83,6 +85,11 @@ namespace Cloc.Database
                 {
                     return false;
                 }
+                finally
+                {
+                    person.UCN = DecryptString(person.UCN);
+                    user.UserUCN = person.UCN;
+                }
             }
             return flag;
         }
@@ -108,7 +115,6 @@ namespace Cloc.Database
                 {
                     return false;
                 }
-
             }
             return flag;
         }
@@ -163,7 +169,10 @@ namespace Cloc.Database
                 {
                     return false;
                 }
-
+                finally
+                {
+                    user.UserUCN = DecryptString(user.UserUCN);
+                }
             }
             return flag;
         }
@@ -194,7 +203,10 @@ namespace Cloc.Database
                 {
                     return false;
                 }
-
+                finally
+                {
+                    user.UserUCN = DecryptString(user.UserUCN);
+                }
             }
             return flag;
         }
@@ -204,8 +216,10 @@ namespace Cloc.Database
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
             user.AccessCode = HashString(user.AccessCode);
-            double totalHours = Math.Round((((user.CheckOut - user.CheckIn).TotalHours)+user.TotalHours), 4);
-            DatabaseConnection dbConn = new();
+            TimeSpan span=user.CheckOut.Subtract(user.CheckIn);
+            double totalHours = Math.Round((span.Hours + user.TotalHours), 4);
+
+              DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
@@ -222,7 +236,10 @@ namespace Cloc.Database
                 {
                     return false;
                 }
-
+                finally
+                {
+                    user.UserUCN = DecryptString(user.UserUCN);
+                }
             }
             return flag;
         }
@@ -419,6 +436,44 @@ namespace Cloc.Database
                 }
             }
             return user;
+        }
+
+        public static bool SelectAccessCodeQuery(string accessCode)
+        {
+            bool flag = false;
+            string DBAccessCode = null;
+            accessCode = HashString(accessCode);
+            DatabaseConnection dbConn = new();
+
+            if (dbConn.IsConnect())
+            {
+                try
+                {
+                    string query = $"use ClocDB; select accessCode from Users where accessCode='{accessCode}';";
+                    var cmd = new MySqlCommand(query, dbConn.Connection);
+
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                         DBAccessCode = reader.GetString(0);
+                    }
+
+                    if(!String.IsNullOrEmpty(DBAccessCode))
+                    {
+                        flag = true;
+                    }
+
+                    reader.Close();
+                    dbConn.Close();
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Възникна неочаквана грешка при обработката на вашата заявка.");
+                }
+            }
+ 
+            return flag; 
         }
     }
 }
