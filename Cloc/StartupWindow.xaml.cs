@@ -19,7 +19,7 @@ using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
 using static Cloc.Session.UserToken;
 
-//TODO AdminWindow
+//TODO AdminWindow, ActivityPage -> count + IsSelected
 /*
 Full System Setup + Installation
 Language menu

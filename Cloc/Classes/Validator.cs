@@ -114,5 +114,18 @@ namespace Cloc.Classes
 
             return flag;
         }
+
+        public static bool IsAdmin(string ucn)
+        {
+            bool flag = false;
+            Person person = SelectPersonQuery(ucn);
+
+            if(person.UCN != null)
+            {
+                flag=IsAdmin(person);
+            }
+
+            return flag;
+        }
     }
 }

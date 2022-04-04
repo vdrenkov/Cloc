@@ -22,7 +22,12 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
+
+        <ComboBox x:Name="ComboBoxPerson" HorizontalAlignment="Left" VerticalAlignment="center" Grid.Row="5" Height="50" Width="200" Visibility="Hidden" SelectionChanged="ComboBoxPerson_SelectionChanged">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+        </ComboBox>
+
         <TextBlock Grid.Row="0" Name="TextBlockUCN" HorizontalAlignment="Center" Height="auto" Width="300"/>
         <TextBlock Grid.Row="1" Name="TextBlockName" HorizontalAlignment="center" Height="auto" Width="300"/>
         <TextBlock Grid.Row="2" Name="TextBlockSurname" HorizontalAlignment="Center" Height="auto" Width="300"/>

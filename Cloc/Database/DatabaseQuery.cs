@@ -1,6 +1,7 @@
 ﻿using Cloc.Classes;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using static Cloc.Classes.Security;
 using static Cloc.Database.DatabaseConnection;
@@ -39,7 +40,7 @@ namespace Cloc.Database
 
                 person.UCN = DecryptString(person.UCN);
                 User user = SelectUserQuery(person.UCN);
-                                            
+
                 if (user.UserUCN != null && SetSettings(server, username, password, port) && Logger.AddLog(person.UCN, "Начална инициализация.") && Checker.AddCheck(SelectUserQuery(person.UCN)))
                 {
                     flag = true;
@@ -138,7 +139,7 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Промяната на кода за достъп не беше успешна.");
+                    MessageBox.Show("Промяната на кода за достъп не беше успешна.");
                 }
             }
             return flag;
@@ -216,10 +217,10 @@ namespace Cloc.Database
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
             user.AccessCode = HashString(user.AccessCode);
-            TimeSpan span=user.CheckOut.Subtract(user.CheckIn);
+            TimeSpan span = user.CheckOut.Subtract(user.CheckIn);
             double totalHours = Math.Round((span.Hours + user.TotalHours), 4);
 
-              DatabaseConnection dbConn = new();
+            DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
@@ -355,10 +356,53 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Човек с посоченото ЕГН не беше намерен.");
+                    MessageBox.Show("Човек с посоченото ЕГН не беше намерен.");
                 }
             }
             return person;
+        }
+
+        public static List<Person> SelectAllPeopleQuery()
+        {
+            DatabaseConnection dbConn = new();
+            Person person = new();
+            List<Person> people = new();
+
+            if (dbConn.IsConnect())
+            {
+                try
+                {
+                    string query = $"use ClocDB; select * from People;";
+                    var cmd = new MySqlCommand(query, dbConn.Connection);
+
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        person.UCN = reader.GetString(0);
+                        person.Name = reader.GetString(1);
+                        person.Surname = reader.GetString(2);
+                        person.Email = reader.GetString(3);
+                        person.PhoneNumber = reader.GetString(4);
+                        person.Country = reader.GetString(5);
+                        person.City = reader.GetString(6);
+                        person.Address = reader.GetString(7);
+                        person.Position = (WorkPosition)Enum.Parse(typeof(WorkPosition), reader.GetString(8));
+
+                        person.UCN = DecryptString(person.UCN);
+                        people.Add(person);
+                        person = new Person();
+                    }
+
+                    reader.Close();
+                    dbConn.Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Човек с посоченото ЕГН не беше намерен.");
+                }
+            }
+            return people;
         }
 
         public static User SelectUserQuery(string UserUCN)
@@ -394,7 +438,7 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Потребител с посоченото ЕГН не беше намерен.");
+                    MessageBox.Show("Потребител с посоченото ЕГН не беше намерен.");
                 }
             }
             return user;
@@ -432,7 +476,7 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Потребител с посоченото ЕГН не беше намерен.");
+                    MessageBox.Show("Потребител с посоченото ЕГН не беше намерен.");
                 }
             }
             return user;
@@ -456,10 +500,10 @@ namespace Cloc.Database
 
                     while (reader.Read())
                     {
-                         DBAccessCode = reader.GetString(0);
+                        DBAccessCode = reader.GetString(0);
                     }
 
-                    if(!String.IsNullOrEmpty(DBAccessCode))
+                    if (!String.IsNullOrEmpty(DBAccessCode))
                     {
                         flag = true;
                     }
@@ -469,11 +513,11 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Възникна неочаквана грешка при обработката на вашата заявка.");
+                    MessageBox.Show("Възникна неочаквана грешка при обработката на вашата заявка.");
                 }
             }
- 
-            return flag; 
+
+            return flag;
         }
     }
 }

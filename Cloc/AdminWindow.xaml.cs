@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cloc.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc
 {
@@ -19,9 +21,9 @@ namespace Cloc
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow() 
-        { 
-                InitializeComponent();
+        public AdminWindow()
+        {
+            InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             Main.Navigate(new Pages.MainPage());
         }
@@ -36,27 +38,44 @@ namespace Cloc
             }
         }
         private void ButtonMain_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Navigate(new Pages.MainPage());
+        }
+        private void ButtonBossOptions_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Navigate(new Pages.AdminOptionsPage());
+        }
+
+        private void ButtonProfile_Click(object sender, RoutedEventArgs e)
+        {
+            Pages.ProfilePage pp = new();
+
+            if (pp.ComboBoxPerson != null)
             {
-                Main.Navigate(new Pages.MainPage());
+                pp.ComboBoxPerson.Visibility = Visibility.Visible;
+                pp.ComboBoxPerson.Items.Clear();
             }
-            private void ButtonBossOptions_Click(object sender, RoutedEventArgs e)
+
+            List<Person> people = SelectAllPeopleQuery();
+
+            foreach (Person person in people)
             {
-                Main.Navigate(new Pages.AdminOptionsPage());
+                    pp.ComboBoxPerson.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
             }
-            private void ButtonProfile_Click(object sender, RoutedEventArgs e)
-            {
-                Main.Navigate(new Pages.ProfilePage());
-            }
-            private void ButtonLogs_Click(object sender, RoutedEventArgs e)
-            {
-                Main.Navigate(new Pages.ActivityPage());
-            }
-            private void ButtonExit_Click(object sender, RoutedEventArgs e)
-            {
-                StartupWindow sw = new();
-                sw.Show();
-                this.Close();
+
+            Main.Navigate(pp);
+        }
+
+        private void ButtonLogs_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Navigate(new Pages.ActivityPage());
+        }
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
+        {
+            StartupWindow sw = new();
+            sw.Show();
+            this.Close();
             Session.UserToken.RemoveLoginData();
         }
     }
-    }
+}
