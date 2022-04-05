@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static Cloc.Session.UserToken;
 using static Cloc.Database.DatabaseQuery;
+using Cloc.Session;
 
 namespace Cloc.Pages
 {
@@ -141,8 +142,8 @@ namespace Cloc.Pages
                 FillChecks(ucn, count);
                 FillLogs(ucn, count);
 
-                if (Session.UserToken.GetLoginData() != split[1])
-                { Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед активността на профила на " + split[0] + "."); }
+                if (GetLoginData() != split[1])
+                { Logger.AddLog(GetLoginData(), "Преглед активността на профила на " + split[0] + "."); }
             }
             catch (Exception)
             {

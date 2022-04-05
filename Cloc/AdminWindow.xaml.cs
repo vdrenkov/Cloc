@@ -55,12 +55,26 @@ namespace Cloc
 
         private void ButtonAdminOptions_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Pages.AdminOptionsPage());
+            AdminOptionsPage aop = new();
+
+            if (aop.ComboBoxUsers != null)
+            {
+                aop.ComboBoxUsers.Items.Clear();
+            }
+
+            List<Person> people = SelectAllPeopleQuery();
+
+            foreach (Person person in people)
+            {
+                aop.ComboBoxUsers.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
+            }
+
+            Main.Navigate(aop);
         }
 
         private void ButtonProfile_Click(object sender, RoutedEventArgs e)
         {
-            Pages.ProfilePage pp = new();
+            ProfilePage pp = new();
 
             if (pp.ComboBoxPerson != null)
             {
@@ -72,7 +86,7 @@ namespace Cloc
 
             foreach (Person person in people)
             {
-                    pp.ComboBoxPerson.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
+                pp.ComboBoxPerson.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
             }
 
             Main.Navigate(pp);
@@ -80,7 +94,7 @@ namespace Cloc
 
         private void ButtonActivity_Click(object sender, RoutedEventArgs e)
         {
-            Pages.ActivityPage ap = new();
+            ActivityPage ap = new();
 
             if (ap.ComboBoxUser != null)
             {

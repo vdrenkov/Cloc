@@ -46,6 +46,21 @@ namespace Cloc.AdditionalWindows
             this.Close();
         }
 
+        internal static bool AddUser()
+        {
+            //TODO Логика
+
+            return true;
+        }
+
+        private void ButtonAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (AddUser())
+            {
+                MessageBox.Show("Потребителят беше добавен успешно.");
+            }
+        }
+
         private void ButtonSetup_Click(object sender, RoutedEventArgs e)
         {
             Person person = new();

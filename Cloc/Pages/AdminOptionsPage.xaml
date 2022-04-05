@@ -9,6 +9,22 @@
       Title="AdminOptionsPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ComboBox x:Name="ComboBoxUsers" HorizontalAlignment="right" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="0" Height="50" Width="200"/>
+
+        <Button x:Name="AddUserButton" Content="Добави нов потребител" Grid.Column="0" Grid.Row="0" Height="50" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Click="AddUserButton_Click"/>
+        <Button x:Name="DeleteUserButton" Content="Изтрий потребител" Grid.Column="1" Grid.Row="0" Height="50" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DeleteUserButton_Click"/>
+        <Button x:Name="CheckSalaryButton" Content="Проверка на текуща сума за изплащане" Grid.Column="0" Grid.Row="1" Height="50" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CheckSalaryButton_Click"/>
+        <Button x:Name="ChangeDataButton" Content="Промени данни" Grid.Column="1" Grid.Row="1" Height="50" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ChangeDataButton_Click"/>
+    
     </Grid>
 </Page>
