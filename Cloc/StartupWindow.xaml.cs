@@ -19,8 +19,13 @@ using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
 using static Cloc.Session.UserToken;
 
-//TODO AdminOptionsPage
 /*
+ * TODO AdminOptionsPage ->
+ * Добавяне на нов служител
+ * Изтриване на съществуващ
+ * Проверка сума за изплащане на служител + опция за изплащане (нулиране)
+ * Смяна всички данни на служител
+
  * Check
  * Design
  * Full System Setup + Installation

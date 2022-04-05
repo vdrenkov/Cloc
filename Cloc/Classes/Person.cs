@@ -25,9 +25,9 @@ namespace Cloc.Classes
         Hostess,
         FnB,
         Manager,
-        Owner,
         Admin
     }
+
     internal class Person
     {
         public string UCN { get; set; }

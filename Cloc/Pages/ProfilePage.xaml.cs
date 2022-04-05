@@ -59,7 +59,7 @@ namespace Cloc.Pages
                     TextBlockCountry.Text = "Country: " + person.Country;
                     TextBlockCity.Text = "City: " + person.City;
                     TextBlockAddress.Text = "Address: " + person.Address;
-                    TextBlockPosition.Text = "Position: " + person.Position.ToString();
+                    TextBlockPosition.Text = "Position: " + TranslateWorkPosition(person.Position);
                     TextBlockHourPayment.Text = "Hour payment: " + user.HourPayment.ToString();
                     TextBlockPercent.Text = "Percent: " + user.Percent.ToString();
                 }));
@@ -83,6 +83,31 @@ namespace Cloc.Pages
             {
                 MessageBox.Show("Възникна неочаквана грешка при изпълнението на вашата заявка.");
             }
+        }
+
+        private static string TranslateWorkPosition(WorkPosition wp)
+        {
+            return wp switch
+            {
+                WorkPosition.Hygienist => "Хигиенист/ка",
+                WorkPosition.PrepCook => "Заготовщик",
+                WorkPosition.LineCook => "Готвач поточна линия",
+                WorkPosition.Cook => "Готвач",
+                WorkPosition.SousChef => "Помощник главен готвач",
+                WorkPosition.Chef => "Главен готвач",
+                WorkPosition.Bartender => "Барман",
+                WorkPosition.Barmaid => "Барманка",
+                WorkPosition.Barista => "Бариста",
+                WorkPosition.Waiter => "Сервитьор",
+                WorkPosition.Waitress => "Сервитьорка",
+                WorkPosition.Busser => "Помощник-сервитьор/ка",
+                WorkPosition.Host => "Хост",
+                WorkPosition.Hostess => "Хостеса",
+                WorkPosition.FnB => "Специалист храни и напитки",
+                WorkPosition.Manager => "Мениджър",
+                WorkPosition.Admin => "Администратор / Собственик",
+                _ => "На изпитателен срок",
+            };
         }
     }
 }
