@@ -18,6 +18,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
+        <ComboBox x:Name="ComboBoxUser" HorizontalAlignment="center" VerticalAlignment="center" Grid.Row="0" Grid.Column="1" Height="50" Width="200" Visibility="Hidden" SelectionChanged="ComboBoxUser_SelectionChanged"/>
+
         <ComboBox x:Name="ComboBoxCount" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Height="100" Width="200" SelectionChanged="ComboBoxCount_SelectionChanged">
             <ComboBoxItem Content="5"/>
             <ComboBoxItem Content="10"/>

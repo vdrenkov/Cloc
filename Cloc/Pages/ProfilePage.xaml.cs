@@ -22,19 +22,17 @@ namespace Cloc.Pages
     /// </summary>
     public partial class ProfilePage : Page
     {
-        readonly Person person = new();
-        readonly User user = new();
-        static string ucn;
+        Person person = new();
+        User user = new();
+        static string UCN;
 
         public ProfilePage()
         {
             try
             {
-                ucn = Session.UserToken.GetLoginData();
-                person = SelectPersonQuery(ucn);
-                user = SelectUserQuery(ucn);
+                UCN = Session.UserToken.GetLoginData();
 
-                FillData(person, user);
+                FillData(UCN);
             }
             catch (Exception)
             { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните!"); }
@@ -44,10 +42,13 @@ namespace Cloc.Pages
             }
         }
 
-        private void FillData(Person person, User user)
+        private void FillData(string ucn)
         {
             try
             {
+                person = SelectPersonQuery(ucn);
+                user = SelectUserQuery(ucn);
+
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     TextBlockUCN.Text = "UCN: " + person.UCN;
@@ -68,8 +69,20 @@ namespace Cloc.Pages
 
         private void ComboBoxPerson_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string str = (e.AddedItems[0] as ComboBoxItem).Content.ToString();//null reference
-            MessageBox.Show(str);
+            try
+            {
+                string personInfo = ComboBoxPerson.SelectedItem.ToString();
+                string[] split = personInfo.Split(", ");
+
+                FillData(split[1]);
+
+                if (Session.UserToken.GetLoginData() != split[1])
+                { Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед данните на профила на " + split[0] + "."); }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Възникна неочаквана грешка при изпълнението на вашата заявка.");
+            }
         }
     }
 }

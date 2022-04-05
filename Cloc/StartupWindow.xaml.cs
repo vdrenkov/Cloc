@@ -19,16 +19,18 @@ using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
 using static Cloc.Session.UserToken;
 
-//TODO AdminWindow, ActivityPage -> count + IsSelected
+//TODO AdminOptionsPage
 /*
-Full System Setup + Installation
-Language menu
-StartupWindow -> Exit confirmation uncomment, delete test button
-
-Access Password -> 1cm13*8vCt19_xRc
-DB Password -> 348_sha765_KaD3l
-
-Задание: Да се разработи информационна система за управление на човешките ресурси.
+ * Check
+ * Design
+ * Full System Setup + Installation
+ * Language menu
+ * StartupWindow -> Exit confirmation uncomment, delete test button
+ * 
+ * Access Password -> 1cm13*8vCt19_xRc
+ * DB Password -> 348_sha765_KaD3l
+ * 
+ * Задание: Да се разработи информационна система за управление на човешките ресурси.
 */
 
 namespace Cloc

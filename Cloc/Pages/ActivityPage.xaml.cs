@@ -23,9 +23,9 @@ namespace Cloc.Pages
     /// </summary>
     public partial class ActivityPage : Page
     {
-        const int COUNT = 30;
+        public const int COUNT = 30;
         static string ucn;
-        static int count = COUNT;
+        internal static int count = COUNT;
 
         public ActivityPage()
         {
@@ -128,7 +128,26 @@ namespace Cloc.Pages
                 ListBoxChecks.Items.Clear();
                 ListBoxLogs.Items.Clear();
             }
-            count = COUNT;
+        }
+
+        private void ComboBoxUser_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                string userInfo = ComboBoxUser.SelectedItem.ToString();
+                string[] split = userInfo.Split(", ");
+                ucn= split[1];
+
+                FillChecks(ucn, count);
+                FillLogs(ucn, count);
+
+                if (Session.UserToken.GetLoginData() != split[1])
+                { Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед активността на профила на " + split[0] + "."); }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Възникна неочаквана грешка при изпълнението на вашата заявка.");
+            }
         }
     }
 }

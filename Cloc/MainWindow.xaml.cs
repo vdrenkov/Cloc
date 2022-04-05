@@ -1,4 +1,5 @@
 ﻿using Cloc.Classes;
+using Cloc.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace Cloc
         {
             Logger.AddLog(Session.UserToken.GetLoginData(), "Изход от системата.");
             Session.UserToken.RemoveLoginData();
+            ActivityPage.count = ActivityPage.COUNT;
 
             StartupWindow sw = new();
             sw.Show();

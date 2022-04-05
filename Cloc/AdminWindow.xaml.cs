@@ -1,4 +1,5 @@
 ﻿using Cloc.Classes;
+using Cloc.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,21 +28,32 @@ namespace Cloc
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             Main.Navigate(new Pages.MainPage());
         }
+
+        public void ExitCurrentSession()
+        {
+            Logger.AddLog(Session.UserToken.GetLoginData(), "Изход от системата.");
+            Session.UserToken.RemoveLoginData();
+            ActivityPage.count = ActivityPage.COUNT;
+
+            StartupWindow sw = new();
+            sw.Show();
+            this.Close();
+        }
+
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
-                StartupWindow sw = new();
-                sw.Show();
-                this.Close();
-                Session.UserToken.RemoveLoginData();
+                ExitCurrentSession();
             }
         }
+
         private void ButtonMain_Click(object sender, RoutedEventArgs e)
         {
             Main.Navigate(new Pages.MainPage());
         }
-        private void ButtonBossOptions_Click(object sender, RoutedEventArgs e)
+
+        private void ButtonAdminOptions_Click(object sender, RoutedEventArgs e)
         {
             Main.Navigate(new Pages.AdminOptionsPage());
         }
@@ -66,16 +78,29 @@ namespace Cloc
             Main.Navigate(pp);
         }
 
-        private void ButtonLogs_Click(object sender, RoutedEventArgs e)
+        private void ButtonActivity_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Pages.ActivityPage());
+            Pages.ActivityPage ap = new();
+
+            if (ap.ComboBoxUser != null)
+            {
+                ap.ComboBoxUser.Visibility = Visibility.Visible;
+                ap.ComboBoxUser.Items.Clear();
+            }
+
+            List<Person> people = SelectAllPeopleQuery();
+
+            foreach (Person person in people)
+            {
+                ap.ComboBoxUser.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
+            }
+
+            Main.Navigate(ap);
         }
+
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-            StartupWindow sw = new();
-            sw.Show();
-            this.Close();
-            Session.UserToken.RemoveLoginData();
+            ExitCurrentSession();
         }
     }
 }
