@@ -62,7 +62,28 @@ namespace Cloc.Pages
         {
             SetupWindow sw = new();
 
-            //TODO HERE
+            sw.LabelServer.Visibility = Visibility.Hidden;
+            sw.LabelUser.Visibility = Visibility.Hidden;
+            sw.LabelPassword.Visibility = Visibility.Hidden;
+            sw.LabelPort.Visibility = Visibility.Hidden;
+
+            sw.TextBoxServer.Visibility = Visibility.Hidden;
+            sw.TextBoxUser.Visibility = Visibility.Hidden;
+            sw.PasswordBoxDBPassword.Visibility = Visibility.Hidden;
+            sw.TextBoxPort.Visibility = Visibility.Hidden;
+
+            sw.ButtonAddUser.Visibility = Visibility.Visible;
+            sw.ButtonSetup.Visibility = Visibility.Hidden;
+
+            if (sw.ComboBoxPosition != null)
+            {
+                sw.ComboBoxPosition.Visibility = Visibility.Visible;
+                foreach (WorkPosition value in Enum.GetValues(typeof(WorkPosition)))
+                {
+                    string position = Person.TranslateFromWorkPosition(value);
+                        sw.ComboBoxPosition.Items.Add(position);
+                }
+            }
 
             sw.Show();
         }
