@@ -1,18 +1,8 @@
 ﻿using Cloc.Classes;
 using Cloc.Pages;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc
@@ -25,8 +15,8 @@ namespace Cloc
         public AdminWindow()
         {
             InitializeComponent();
-            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-            Main.Navigate(new Pages.MainPage());
+            PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            Main.Navigate(new MainPage());
         }
 
         public void ExitCurrentSession()
@@ -36,8 +26,8 @@ namespace Cloc
             ActivityPage.count = ActivityPage.COUNT;
 
             StartupWindow sw = new();
+            Close();
             sw.Show();
-            this.Close();
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -50,7 +40,7 @@ namespace Cloc
 
         private void ButtonMain_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Pages.MainPage());
+            Main.Navigate(new MainPage());
         }
 
         private void ButtonAdminOptions_Click(object sender, RoutedEventArgs e)

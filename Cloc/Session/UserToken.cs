@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace Cloc.Session
 {
@@ -21,7 +16,7 @@ namespace Cloc.Session
 
         public static void RemoveLoginData()
         {
-            ConfigurationManager.AppSettings.Set("UCN","");
+            ConfigurationManager.AppSettings.Set("UCN", "");
         }
     }
 }

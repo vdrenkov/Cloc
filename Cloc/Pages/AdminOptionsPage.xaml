@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminOptionsPage">
 
-    <Grid>
+    <Grid x:Name="MyGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -20,6 +20,22 @@
         </Grid.RowDefinitions>
 
         <ComboBox x:Name="ComboBoxUsers" HorizontalAlignment="right" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="0" Height="50" Width="200"/>
+
+        <ComboBox x:Name="ComboBoxChange" HorizontalAlignment="left" VerticalAlignment="top" Grid.Row="0" Grid.Column="0" Height="50" Width="200">
+            <ComboBoxItem Content="Име"/>
+            <ComboBoxItem Content="Фамилия"/>
+            <ComboBoxItem Content="Имейл"/>
+            <ComboBoxItem Content="Телефонен номер"/>
+            <ComboBoxItem Content="Държава"/>
+            <ComboBoxItem Content="Град"/>
+            <ComboBoxItem Content="Адрес"/>
+            <ComboBoxItem Content="Позиция"/>
+            <ComboBoxItem Content="Код за достъп"/>
+            <ComboBoxItem Content="Часова ставка"/>
+            <ComboBoxItem Content="Процент"/>
+        </ComboBox>
+
+        <TextBox x:Name="TextBoxChange" HorizontalAlignment="left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Height="50" Width="200"/>
 
         <Button x:Name="AddUserButton" Content="Добави нов потребител" Grid.Column="0" Grid.Row="0" Height="50" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Click="AddUserButton_Click"/>
         <Button x:Name="DeleteUserButton" Content="Изтрий потребител" Grid.Column="1" Grid.Row="0" Height="50" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DeleteUserButton_Click"/>

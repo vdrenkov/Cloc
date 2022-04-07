@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Cloc.Database.DatabaseQuery;
 using static Cloc.Classes.Checker;
-using System.Windows;
+using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc.Classes
 {
@@ -50,7 +46,7 @@ namespace Cloc.Classes
             }
             catch (Exception)
             {
-                Console.WriteLine("Възникна неочаквана грешка при пресмятане на вашата заплата.");
+                Console.WriteLine("Възникна неочаквана грешка при пресмятане на вашия овъртайм.");
                 return false;
             }
         }

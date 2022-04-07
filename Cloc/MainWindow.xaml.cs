@@ -1,19 +1,7 @@
 ﻿using Cloc.Classes;
 using Cloc.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cloc
 {
@@ -25,8 +13,8 @@ namespace Cloc
         public MainWindow()
         {
             InitializeComponent();
-            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-            Main.Navigate(new Pages.MainPage());
+            PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            Main.Navigate(new MainPage());
         }
 
         public void ExitCurrentSession()
@@ -36,8 +24,8 @@ namespace Cloc
             ActivityPage.count = ActivityPage.COUNT;
 
             StartupWindow sw = new();
+            Close();
             sw.Show();
-            this.Close();
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -49,19 +37,19 @@ namespace Cloc
         }
         private void ButtonMain_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Pages.MainPage());
+            Main.Navigate(new MainPage());
         }
         private void ButtonCheck_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Pages.CheckPage());
+            Main.Navigate(new CheckPage());
         }
         private void ButtonProfile_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Pages.ProfilePage());
+            Main.Navigate(new ProfilePage());
         }
         private void ButtonLogs_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Pages.ActivityPage());
+            Main.Navigate(new ActivityPage());
         }
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {

@@ -1,25 +1,14 @@
 ﻿using Cloc.AdditionalWindows;
 using Cloc.Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using static Cloc.Classes.Security;
-using static Cloc.Database.DatabaseQuery;
-using static Cloc.Database.DatabaseConnection;
 using static Cloc.Classes.Validator;
+using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
 
 /*
+ * Дали работи системата за чекиране?
  * TODO AdminOptionsPage ->
  * Добавяне на нов служител, преход между страници, всички полета, проверка код за достъп
  * Изтриване на съществуващ
@@ -48,7 +37,7 @@ namespace Cloc
         public StartupWindow()
         {
             InitializeComponent();
-            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
         private void ButtonTest_Click(object sender, RoutedEventArgs e)
@@ -76,7 +65,7 @@ namespace Cloc
             user.TotalHours = 0;
             user.Percent = 0;
 
-            p1.UCN = "9988776655";
+            p1.UCN = "5544332233";
             p1.Name = "Любомира";
             p1.Surname = "Петрова";
             p1.Email = "lpetrova@tu-sofia.bg";
@@ -95,8 +84,9 @@ namespace Cloc
             u1.TotalHours = 10;
             u1.Percent = 20;
 
-           // MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
-            //MessageBox.Show(AddWorkerQuery(p1, u1).ToString());
+            MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
+            MessageBox.Show(AddWorkerQuery(p1, u1).ToString());
+            //MessageBox.Show(ChangeTotalHoursQuery(u1).ToString());
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -108,7 +98,7 @@ namespace Cloc
                 //{
                 //    case MessageBoxResult.Yes:
                 Close();
-                //        break;
+                //  break;
                 //}
             }
         }
@@ -122,14 +112,14 @@ namespace Cloc
                 if (IsAdmin(person))
                 {
                     AdminWindow aw = new();
+                    Close();
                     aw.Show();
-                    this.Close();
                 }
                 else
                 {
                     MainWindow mw = new();
+                    Close();
                     mw.Show();
-                    this.Close();
                 }
             }
             else
@@ -143,8 +133,9 @@ namespace Cloc
             HelpWindow hw = new();
             hw.InfoLabel.Content = "Моля, въведете ЕГН и желания код за достъп:";
             hw.ActionButton.Visibility = Visibility.Hidden;
+            hw.ChangeAccessCodeButton.IsDefault = true;
+            Close();
             hw.Show();
-            this.Close();
         }
 
         private void ButtonSetup_Click(object sender, RoutedEventArgs e)
@@ -153,8 +144,9 @@ namespace Cloc
             hw.TextBoxUCN.Visibility = Visibility.Hidden;
             hw.ChangeAccessCodeButton.Visibility = Visibility.Hidden;
             hw.PasswordBox.MaxLength = 255;
+            hw.ActionButton.IsDefault = true;
+            Close();
             hw.Show();
-            this.Close();
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
@@ -169,7 +161,7 @@ namespace Cloc
         }
         private void ButtonCredits_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Настоящият сайт бе разработен от Валентин Дренков, студент от ТУ - София, ФКСТ, специалност КСИ, IV курс, 51. група, факултетен номер: 121218025, като задание за дипломна работа." +
+            MessageBox.Show("Настоящият сайт бе разработен от Валентин Димитров Дренков, студент от ТУ - София, ФКСТ, специалност КСИ, IV курс, 51-ва група, факултетен номер: 121218025, като задание за дипломна работа." +
                 "\nВсички права запазени.\n" +
                 "Валентин Дренков, София, 03.03.2022");
         }
@@ -238,7 +230,7 @@ namespace Cloc
         }
         private void ButtonX_Click(object sender, RoutedEventArgs e)
         {
-            PasswordBoxAccessCode.Password = "";
+            PasswordBoxAccessCode.Password = null;
         }
         private void Button0_Click(object sender, RoutedEventArgs e)
         {

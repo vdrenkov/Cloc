@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cloc.Classes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static Cloc.Session.UserToken;
 using static Cloc.Database.DatabaseQuery;
-using Cloc.Classes;
+using static Cloc.Session.UserToken;
 
 namespace Cloc.Pages
 {
@@ -24,7 +13,7 @@ namespace Cloc.Pages
     public partial class CheckPage : Page
     {
         static string ucn;
-       readonly User user = new();
+        readonly User user = new();
 
         public CheckPage()
         {
@@ -35,7 +24,7 @@ namespace Cloc.Pages
             }
 
             catch (Exception)
-            { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните!"); }
+            { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните."); }
 
             finally
             { InitializeComponent(); }
@@ -48,12 +37,18 @@ namespace Cloc.Pages
                 user.CheckIn = DateTime.Now;
                 user.IsCheckedIn = true;
 
-                MessageBox.Show(CheckInQuery(user).ToString());
-                MessageBox.Show(Logger.AddLog(user.UserUCN, "Check - in.").ToString());
+                if (CheckInQuery(user) && Logger.AddLog(user.UserUCN, "Check - in."))
+                {
+                    MessageBox.Show("Успешно се чекирахте.");
+                }
+                else
+                {
+                    MessageBox.Show("Възникна грешка при чекиране, моля, опитайте отново!");
+                }
             }
             else
             {
-                MessageBox.Show("Вече сте се чекирали!");
+                MessageBox.Show("Вече сте се чекирали.");
             }
         }
 
@@ -64,21 +59,24 @@ namespace Cloc.Pages
                 user.CheckOut = DateTime.Now;
                 user.IsCheckedIn = false;
 
-                MessageBox.Show(CheckOutQuery(user).ToString());
-                MessageBox.Show(ChangeTotalHoursQuery(user).ToString());
-
-                MessageBox.Show(Logger.AddLog(user.UserUCN, "Check - out.").ToString());
-                MessageBox.Show(Checker.AddCheck(user).ToString());
+                if (CheckOutQuery(user) && ChangeTotalHoursQuery(user) && Logger.AddLog(user.UserUCN, "Check - out.") && Checker.AddCheck(user))
+                {
+                    MessageBox.Show("Готово :)");
+                }
+                else
+                {
+                    MessageBox.Show("Възникна грешка при чекиране, моля, опитайте отново!");
+                }
             }
             else
             {
-                MessageBox.Show("Не сте се чекирали!");
+                MessageBox.Show("Не сте се чекирали.");
             }
         }
 
         private void CheckSalary_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(Salary.CheckSalary(ucn).ToString());
+            MessageBox.Show("Текуща сума за получаване: " + Salary.CheckSalary(ucn).ToString() + " лева.");
             Logger.AddLog(user.UserUCN, "Проверка на текуща сума за изплащане.");
         }
     }

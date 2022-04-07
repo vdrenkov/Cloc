@@ -8,8 +8,8 @@
         WindowState="Maximized"
     WindowStyle="None"
         Title="SetupWindow" Height="auto" Width="auto">
-    <Grid Name="MainGrid">
-        
+    <Grid Name="MainGrid" FocusManager.FocusedElement="{Binding ElementName=TextBoxUCN}">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -18,6 +18,8 @@
         </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -58,6 +60,10 @@
         <TextBox x:Name="TextBoxAddress"  TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="5"/>
         <Label Content="Код за достъп:"  Grid.Column="1" Grid.Row="6"/>
         <PasswordBox x:Name="PasswordBoxAccessCode" MaxLength="5" Grid.Column="1" Grid.Row="7"/>
+        <Label x:Name="LabelHourPayment" Visibility="Hidden" Content="Часова ставка:"  Grid.Column="1" Grid.Row="8"/>
+        <TextBox x:Name="TextBoxHourPayment" Visibility="Hidden" TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="9"/>
+        <Label x:Name="LabelPercent" Visibility="Hidden" Content="Процент:"  Grid.Column="1" Grid.Row="10"/>
+        <TextBox x:Name="TextBoxPercent" Visibility="Hidden" TextWrapping="Wrap" Text=""  Grid.Column="1" Grid.Row="11"/>
 
         <ComboBox x:Name="ComboBoxPosition" Visibility="Hidden" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="Bottom"  Grid.Column="3" Grid.Row="7"/>
 

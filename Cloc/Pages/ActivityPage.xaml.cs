@@ -1,21 +1,10 @@
 ﻿using Cloc.Classes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static Cloc.Session.UserToken;
 using static Cloc.Database.DatabaseQuery;
-using Cloc.Session;
+using static Cloc.Session.UserToken;
 
 namespace Cloc.Pages
 {
@@ -39,7 +28,7 @@ namespace Cloc.Pages
             }
 
             catch (Exception)
-            { MessageBox.Show("Възникнa неочаквана грешка при зареждане на данните!"); }
+            { MessageBox.Show("Възникнa неочаквана грешка при зареждане на данните."); }
 
             finally
             { InitializeComponent(); }
@@ -53,7 +42,7 @@ namespace Cloc.Pages
 
             if (ListBoxChecks != null)
             {
-                if (Int32.TryParse(this.ListBoxChecks.Items.Count.ToString(), out count))
+                if (int.TryParse(ListBoxChecks.Items.Count.ToString(), out count))
                 {
                     if (count > 0)
                     {
@@ -62,13 +51,24 @@ namespace Cloc.Pages
                 }
             }
 
-            if (checks.Count > 0)
+            Person person = SelectPersonQuery(ucn);
+            if (!Validator.IsAdmin(person))
             {
-                foreach (string check in checks)
+                if (checks.Count > 0)
+                {
+                    foreach (string check in checks)
+                    {
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            ListBoxChecks.Items.Add(check);
+                        }));
+                    }
+                }
+                else
                 {
                     Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        ListBoxChecks.Items.Add(check);
+                        ListBoxChecks.Items.Add("Няма чекирания за показване...");
                     }));
                 }
             }
@@ -89,7 +89,7 @@ namespace Cloc.Pages
 
             if (ListBoxLogs != null)
             {
-                if (Int32.TryParse(this.ListBoxLogs.Items.Count.ToString(), out count))
+                if (int.TryParse(ListBoxLogs.Items.Count.ToString(), out count))
                 {
                     if (count > 0)
                     {
@@ -119,7 +119,7 @@ namespace Cloc.Pages
 
         private void ComboBoxCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Int32.TryParse((e.AddedItems[0] as ComboBoxItem).Content.ToString(), out count))
+            if (int.TryParse((e.AddedItems[0] as ComboBoxItem).Content.ToString(), out count))
             {
                 FillChecks(ucn, count);
                 FillLogs(ucn, count);
@@ -137,7 +137,7 @@ namespace Cloc.Pages
             {
                 string userInfo = ComboBoxUser.SelectedItem.ToString();
                 string[] split = userInfo.Split(", ");
-                ucn= split[1];
+                ucn = split[1];
 
                 FillChecks(ucn, count);
                 FillLogs(ucn, count);
@@ -147,7 +147,7 @@ namespace Cloc.Pages
             }
             catch (Exception)
             {
-                MessageBox.Show("Възникна неочаквана грешка при изпълнението на вашата заявка.");
+                MessageBox.Show("Възникна неочаквана грешка при изпълнение на вашата заявка.");
             }
         }
     }

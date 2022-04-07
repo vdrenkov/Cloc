@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
 using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc.Classes
@@ -28,11 +23,9 @@ namespace Cloc.Classes
             }
             catch (Exception)
             {
-                Console.WriteLine("Грешка при валидация на ЕГН..");
+                Console.WriteLine("Грешка при валидацията на ЕГН.");
                 return false;
             }
-
-
         }
 
         public static bool ValidateAccessCode(string accessCode)

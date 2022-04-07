@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using static Cloc.Classes.Security;
-using static Cloc.Database.DatabaseConnection;
 using static Cloc.Settings.SystemSetup;
 
 namespace Cloc.Database
@@ -356,7 +355,7 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Човек с посоченото ЕГН не беше намерен.");
+                    MessageBox.Show("Възникна неочаквана грешка при обработка на заявката.");
                 }
             }
             return person;
@@ -399,7 +398,7 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Човек с посоченото ЕГН не беше намерен.");
+                    MessageBox.Show("Възникна неочаквана грешка при обработка на заявката.");
                 }
             }
             return people;
@@ -438,7 +437,7 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Потребител с посоченото ЕГН не беше намерен.");
+                    MessageBox.Show("Възникна неочаквана грешка при обработка на заявката.");
                 }
             }
             return user;
@@ -476,7 +475,7 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Потребител с посоченото ЕГН не беше намерен.");
+                    MessageBox.Show("Възникна неочаквана грешка при обработка на заявката.");
                 }
             }
             return user;
@@ -503,7 +502,7 @@ namespace Cloc.Database
                         DBAccessCode = reader.GetString(0);
                     }
 
-                    if (!String.IsNullOrEmpty(DBAccessCode))
+                    if (!string.IsNullOrEmpty(DBAccessCode))
                     {
                         flag = true;
                     }
@@ -513,7 +512,7 @@ namespace Cloc.Database
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Възникна неочаквана грешка при обработката на вашата заявка.");
+                    MessageBox.Show("Възникна неочаквана грешка при обработка на заявката.");
                 }
             }
 

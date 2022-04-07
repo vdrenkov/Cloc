@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Cloc.Classes
@@ -28,9 +25,9 @@ namespace Cloc.Classes
 
                     ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
-                    using MemoryStream memoryStream = new ();
-                    using CryptoStream cryptoStream = new ((Stream)memoryStream, encryptor, CryptoStreamMode.Write);
-                    using (StreamWriter streamWriter = new ((Stream)cryptoStream))
+                    using MemoryStream memoryStream = new();
+                    using CryptoStream cryptoStream = new(memoryStream, encryptor, CryptoStreamMode.Write);
+                    using (StreamWriter streamWriter = new(cryptoStream))
                     {
                         streamWriter.Write(plainText);
                     }
@@ -59,12 +56,12 @@ namespace Cloc.Classes
                 aes.IV = iv;
                 ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
-                using MemoryStream memoryStream = new (buffer);
-                using CryptoStream cryptoStream = new((Stream)memoryStream, decryptor, CryptoStreamMode.Read);
-                using StreamReader streamReader = new((Stream)cryptoStream);
+                using MemoryStream memoryStream = new(buffer);
+                using CryptoStream cryptoStream = new(memoryStream, decryptor, CryptoStreamMode.Read);
+                using StreamReader streamReader = new(cryptoStream);
                 return streamReader.ReadToEnd();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return null;
             }
@@ -78,10 +75,10 @@ namespace Cloc.Classes
 
             try
             {
-                accessCode = String.Concat(salt, accessCode);
+                accessCode = string.Concat(salt, accessCode);
                 byte[] accessCodeBytes = Encoding.UTF8.GetBytes(accessCode);
                 byte[] hashBytes = sha256.ComputeHash(accessCodeBytes);
-                hashedString = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+                hashedString = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
             }
             catch (Exception)
             {

@@ -1,18 +1,7 @@
 ﻿using Cloc.Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc.Pages
@@ -35,7 +24,7 @@ namespace Cloc.Pages
                 FillData(UCN);
             }
             catch (Exception)
-            { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните!"); }
+            { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните."); }
             finally
             {
                 InitializeComponent();

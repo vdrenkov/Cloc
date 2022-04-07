@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cloc.Classes;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using static Cloc.Database.DatabaseQuery;
 using static Cloc.Classes.Validator;
-using Cloc.Classes;
 
 namespace Cloc.AdditionalWindows
 {
@@ -25,7 +14,7 @@ namespace Cloc.AdditionalWindows
         public HelpWindow()
         {
             InitializeComponent();
-            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -33,8 +22,8 @@ namespace Cloc.AdditionalWindows
             if (e.Key == Key.Escape)
             {
                 StartupWindow sw = new();
+                Close();
                 sw.Show();
-                this.Close();
             }
         }
 
@@ -45,15 +34,16 @@ namespace Cloc.AdditionalWindows
             {
                 MessageBox.Show("Внимание!\nМоля уверете се, че сте прочели README.txt файла, преди да продължите!");
                 SetupWindow sw = new();
+                sw.ButtonSetup.IsDefault = true;
+                Close();
                 sw.Show();
-                this.Close();
             }
             else
             {
                 MessageBox.Show("Въвели сте грешна парола!");
                 StartupWindow stw = new();
+                Close();
                 stw.Show();
-                this.Close();
             }
         }
 
@@ -64,12 +54,12 @@ namespace Cloc.AdditionalWindows
                 Logger.AddLog(TextBoxUCN.Text.ToString(), "Промяна на кода за достъп.");
                 MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {PasswordBox.Password}");
                 StartupWindow stw = new();
+                Close();
                 stw.Show();
-                this.Close();
             }
             else
             {
-                MessageBox.Show("Въвели сте грешни или вече съществуващи данни!");
+                MessageBox.Show("Въвели сте неправилни или вече съществуващи данни!");
                 TextBoxUCN.Text = null;
                 PasswordBox.Password = null;
             }
@@ -78,8 +68,8 @@ namespace Cloc.AdditionalWindows
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             StartupWindow stw = new();
+            Close();
             stw.Show();
-            this.Close();
         }
     }
 }
