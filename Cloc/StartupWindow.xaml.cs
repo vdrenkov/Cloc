@@ -8,8 +8,6 @@ using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
 
 /*
- * AddUserPage ->
- * Добавяне на нов служител, преход между страници, всички полета, проверка код за достъп
  * ReportsPage
  * Файлове
  

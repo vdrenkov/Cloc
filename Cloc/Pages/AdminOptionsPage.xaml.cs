@@ -17,7 +17,7 @@ namespace Cloc.Pages
             InitializeComponent();
         }
 
-        private void ComboBoxPositionReload()
+        private void ComboBoxPositionLoad()
         {
             if (ComboBoxChange != null && ComboBoxChange.SelectedIndex == 7)
             {
@@ -48,7 +48,7 @@ namespace Cloc.Pages
 
         private void ComboBoxChange_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxPositionReload();
+            ComboBoxPositionLoad();
         }
 
         private void ReloadPage()
@@ -66,7 +66,7 @@ namespace Cloc.Pages
 
                 ComboBoxChange.SelectedIndex = -1;
             }
-            ComboBoxPositionReload();
+            ComboBoxPositionLoad();
             if (TextBoxChange != null)
             { TextBoxChange.Text = null; }
         }

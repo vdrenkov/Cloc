@@ -1,5 +1,6 @@
 ﻿using Cloc.Classes;
 using Cloc.Pages;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -64,7 +65,18 @@ namespace Cloc
 
         private void ButtonAddUser_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new AddUserPage());
+            AddUserPage aup = new();
+
+            if (aup.ComboBoxPosition != null)
+            {
+                foreach (WorkPosition value in Enum.GetValues(typeof(WorkPosition)))
+                {
+                    string position = Person.TranslateFromWorkPosition(value);
+                    aup.ComboBoxPosition.Items.Add(position);
+                }
+            }
+
+            Main.Navigate(aup);
         }
 
         private void ButtonReports_Click(object sender, RoutedEventArgs e)
