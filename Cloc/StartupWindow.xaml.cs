@@ -8,12 +8,14 @@ using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
 
 /*
- * Дали работи системата за чекиране?
  * TODO AdminOptionsPage ->
  * Добавяне на нов служител, преход между страници, всички полета, проверка код за достъп
  * Изтриване на съществуващ
  * Проверка сума за изплащане на служител + опция за изплащане (нулиране)
  * Смяна всички данни на служител
+ * Справки
+ * Файлове
+ * Реална проверка
 
  * Check
  * Design
@@ -25,6 +27,7 @@ using static Cloc.Session.UserToken;
  * DB Password -> 348_sha765_KaD3l
  * 
  * Задание: Да се разработи информационна система за управление на човешките ресурси.
+ * проектиране или разработка на
 */
 
 namespace Cloc
@@ -65,7 +68,7 @@ namespace Cloc
             user.TotalHours = 0;
             user.Percent = 0;
 
-            p1.UCN = "5544332233";
+            p1.UCN = "0000000000";
             p1.Name = "Любомира";
             p1.Surname = "Петрова";
             p1.Email = "lpetrova@tu-sofia.bg";
@@ -78,7 +81,7 @@ namespace Cloc
             u1.UserUCN = p1.UCN;
             u1.AccessCode = "00000";
             u1.CheckIn = DateTime.Now;
-            u1.CheckOut = DateTime.Now.AddHours(8);
+            u1.CheckOut = DateTime.Now.AddHours(18.1245);
             u1.IsCheckedIn = false;
             u1.HourPayment = 15;
             u1.TotalHours = 10;
@@ -86,7 +89,6 @@ namespace Cloc
 
             MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
             MessageBox.Show(AddWorkerQuery(p1, u1).ToString());
-            //MessageBox.Show(ChangeTotalHoursQuery(u1).ToString());
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)

@@ -20,8 +20,10 @@
         </Grid.RowDefinitions>
 
         <ComboBox x:Name="ComboBoxUsers" HorizontalAlignment="right" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="0" Height="50" Width="200"/>
+       
+        <ComboBox x:Name="ComboBoxPosition" Visibility="Hidden" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="Bottom"  Grid.Column="1" Grid.Row="1"/>
 
-        <ComboBox x:Name="ComboBoxChange" HorizontalAlignment="left" VerticalAlignment="top" Grid.Row="0" Grid.Column="0" Height="50" Width="200">
+        <ComboBox x:Name="ComboBoxChange" HorizontalAlignment="left" VerticalAlignment="top" Grid.Row="0" Grid.Column="0" Height="50" Width="200" SelectionChanged="ComboBoxChange_SelectionChanged">
             <ComboBoxItem Content="Име"/>
             <ComboBoxItem Content="Фамилия"/>
             <ComboBoxItem Content="Имейл"/>

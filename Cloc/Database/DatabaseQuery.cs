@@ -28,7 +28,7 @@ namespace Cloc.Database
                     "country varchar(50),city varchar(50)," +
                     "address varchar(50), position varchar(20)); create table if not exists Users(userUcn varchar(255) not null unique primary key," +
                     "accessCode text, checkIn DateTime default Now(),checkOut DateTime default Now(), isCheckedIn boolean default false," +
-                    "totalHours double default 0, hourPayment double default 0,percent double default 0," +
+                    "totalHours double(16,4) default 0, hourPayment double(16,4) default 0,percent double(16,4) default 0," +
                     "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade); " +
                     "insert into People(ucn, name, surname, email, phoneNumber, country, city, address, position)" +
                     $" values('{person.UCN}', '{person.Name}', '{person.Surname}', '{person.Email}', '{person.PhoneNumber}', '{person.Country}'," +
@@ -70,12 +70,27 @@ namespace Cloc.Database
                     { return false; }
 
                     string query = "use ClocDB; insert into People (ucn,name,surname,email,phoneNumber,country,city,address,position) values" +
-                       $"('{person.UCN}','{person.Name}','{person.Surname}','{person.Email}','{person.PhoneNumber}','{person.Country}','{person.City}','{person.Address}','{person.Position}');";
+                       $"(@UCN,@Name,@Surname,@Email,@PhoneNumber,@Country,@City,@Address,@Position);";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@UCN", person.UCN);
+                    cmd.Parameters.AddWithValue("@Name", person.Name);
+                    cmd.Parameters.AddWithValue("@Surname", person.Surname);
+                    cmd.Parameters.AddWithValue("@Email", person.Email);
+                    cmd.Parameters.AddWithValue("@PhoneNumber", person.PhoneNumber);
+                    cmd.Parameters.AddWithValue("@Country", person.Country);
+                    cmd.Parameters.AddWithValue("@City", person.City);
+                    cmd.Parameters.AddWithValue("@Address", person.Address);
+                    cmd.Parameters.AddWithValue("@Position", person.Position.ToString());
 
                     string secondQuery = "use ClocDB; insert into Users (userUcn,accessCode,checkIn,checkOut,isCheckedIn,hourPayment,totalHours,percent) values" +
-                        $"('{user.UserUCN}','{user.AccessCode}','{user.CheckIn:yyyy-MM-dd HH:mm:ss}','{user.CheckOut:yyyy-MM-dd HH:mm:ss}',{user.IsCheckedIn},{user.HourPayment},{user.TotalHours},{user.Percent});";
+                        $"(@UserUCN,@AccessCode,'{user.CheckIn:yyyy-MM-dd HH:mm:ss}','{user.CheckOut:yyyy-MM-dd HH:mm:ss}',@IsCheckedIn,@HourPayment,@TotalHours,@Percent);";
                     var command = new MySqlCommand(secondQuery, dbConn.Connection);
+                    command.Parameters.AddWithValue("@UserUCN", user.UserUCN);
+                    command.Parameters.AddWithValue("@AccessCode", user.AccessCode);
+                    command.Parameters.AddWithValue("@IsCheckedIn", user.IsCheckedIn);
+                    command.Parameters.AddWithValue("@HourPayment", user.HourPayment);
+                    command.Parameters.AddWithValue("@TotalHours", user.TotalHours);
+                    command.Parameters.AddWithValue("@Percent", user.Percent);
 
                     if (cmd.ExecuteNonQuery() > 0 && command.ExecuteNonQuery() > 0)
                     { flag = true; }
@@ -104,8 +119,9 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = $"use ClocDB; delete from People where ucn = '{UCN}';";
+                    string query = $"use ClocDB; delete from People where ucn = @UCN;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@UCN", UCN);
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
@@ -130,8 +146,11 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = $"use ClocDB; update Users set accessCode = '{accessCode}' where userUcn ='{UCN}';";
+                    string query = $"use ClocDB; update Users set accessCode = @accessCode where userUcn =@UCN;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@accessCode", accessCode);
+                    cmd.Parameters.AddWithValue("@UCN", UCN);
+
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
                     dbConn.Close();
@@ -155,11 +174,13 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = $"use ClocDB; update Users set checkIn = '{user.CheckIn:yyyy-MM-dd HH:mm:ss}' where userUcn = '{user.UserUCN}';";
+                    string query = $"use ClocDB; update Users set checkIn = '{user.CheckIn:yyyy-MM-dd HH:mm:ss}' where userUcn = @user.UserUCN;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@user.UserUCN", user.UserUCN);
 
-                    string secondQuery = $"use ClocDB; update Users set isCheckedIn = true where userUcn = '{user.UserUCN}';";
+                    string secondQuery = $"use ClocDB; update Users set isCheckedIn = true where userUcn = @user.UserUCN;";
                     var command = new MySqlCommand(secondQuery, dbConn.Connection);
+                    command.Parameters.AddWithValue("@user.UserUCN", user.UserUCN);
 
                     if (cmd.ExecuteNonQuery() > 0 && command.ExecuteNonQuery() > 0)
                     { flag = true; }
@@ -189,11 +210,13 @@ namespace Cloc.Database
 
                 try
                 {
-                    string query = $"use ClocDB; update Users set checkOut = '{user.CheckOut:yyyy-MM-dd HH:mm:ss}' where userUcn = '{user.UserUCN}';";
+                    string query = $"use ClocDB; update Users set checkOut = '{user.CheckOut:yyyy-MM-dd HH:mm:ss}' where userUcn = @user.UserUCN;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@user.UserUCN", user.UserUCN);
 
-                    string secondQuery = $"use ClocDB; update Users set isCheckedIn = false where userUcn = '{user.UserUCN}';";
+                    string secondQuery = $"use ClocDB; update Users set isCheckedIn = false where userUcn = @user.UserUCN;";
                     var command = new MySqlCommand(secondQuery, dbConn.Connection);
+                    command.Parameters.AddWithValue("@user.UserUCN", user.UserUCN);
 
                     if (cmd.ExecuteNonQuery() > 0 && command.ExecuteNonQuery() > 0)
                     { flag = true; }
@@ -216,17 +239,48 @@ namespace Cloc.Database
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
             user.AccessCode = HashString(user.AccessCode);
-            TimeSpan span = user.CheckOut.Subtract(user.CheckIn);
-            double totalHours = Math.Round((span.Hours + user.TotalHours), 4);
-
+            double totalHours = Math.Round((user.CheckOut - user.CheckIn).TotalHours + user.TotalHours, 4);
             DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
             {
                 try
                 {
-                    string query = $"use ClocDB; update Users set totalHours = '{totalHours}' where userUcn = '{user.UserUCN}';";
+                    string query = $"use ClocDB; update Users set totalHours = @totalHours where userUcn = @user.UserUCN;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@totalHours", totalHours);
+                    cmd.Parameters.AddWithValue("@user.UserUCN", user.UserUCN);
+
+                    if (cmd.ExecuteNonQuery() > 0)
+                    { flag = true; }
+                    dbConn.Close();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                finally
+                {
+                    user.UserUCN = DecryptString(user.UserUCN);
+                }
+            }
+            return flag;
+        }
+
+        public static bool NullTotalHoursQuery(User user)
+        {
+            bool flag = false;
+            user.UserUCN = EncryptString(user.UserUCN);
+            user.AccessCode = HashString(user.AccessCode);
+            DatabaseConnection dbConn = new();
+
+            if (dbConn.IsConnect())
+            {
+                try
+                {
+                    string query = $"use ClocDB; update Users set totalHours = 0 where userUcn = @user.UserUCN;";
+                    var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@user.UserUCN", user.UserUCN);
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
@@ -255,8 +309,10 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = $"use ClocDB; update Users set hourPayment = {hourPayment} where userUcn = '{userUCN}';";
+                    string query = $"use ClocDB; update Users set hourPayment = @hourPayment where userUcn = @userUCN;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@hourPayment", hourPayment);
+                    cmd.Parameters.AddWithValue("@userUCN", userUCN);
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
@@ -281,8 +337,10 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = $"use ClocDB; update Users set percent = {percent} where userUcn ='{userUCN}';";
+                    string query = $"use ClocDB; update Users set percent = @percent where userUcn =@userUCN;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@percent", percent);
+                    cmd.Parameters.AddWithValue("@userUCN", userUCN);
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
@@ -306,8 +364,10 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = $"use ClocDB; update People set {fieldParam} = '{changeParam}' where ucn = '{UCN}';";
+                    string query = $"use ClocDB; update People set {fieldParam} = @changeParam where ucn = @UCN;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@changeParam", changeParam);
+                    cmd.Parameters.AddWithValue("@UCN", UCN);
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
@@ -331,8 +391,9 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = $"use ClocDB; select * from People where ucn='{UCN}';";
+                    string query = $"use ClocDB; select * from People where ucn=@UCN;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@UCN", UCN);
 
                     MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -414,8 +475,9 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = $"use ClocDB; select * from Users where userUcn='{UserUCN}';";
+                    string query = $"use ClocDB; select * from Users where userUcn=@UserUCN;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@UserUCN", UserUCN);
 
                     MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -453,8 +515,9 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = $"use ClocDB; select * from Users where accessCode='{accessCode}';";
+                    string query = $"use ClocDB; select * from Users where accessCode=@accessCode;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@accessCode", accessCode);
 
                     MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -492,8 +555,9 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = $"use ClocDB; select accessCode from Users where accessCode='{accessCode}';";
+                    string query = $"use ClocDB; select accessCode from Users where accessCode=@accessCode;";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
+                    cmd.Parameters.AddWithValue("@accessCode", accessCode);
 
                     MySqlDataReader reader = cmd.ExecuteReader();
 

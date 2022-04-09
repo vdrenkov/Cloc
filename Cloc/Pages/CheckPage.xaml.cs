@@ -76,7 +76,7 @@ namespace Cloc.Pages
 
         private void CheckSalary_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Текуща сума за получаване: " + Salary.CheckSalary(ucn).ToString() + " лева.");
+            MessageBox.Show("Текуща сума за получаване: " + Math.Round(Salary.CheckSalary(ucn), 2).ToString() + " лева.");
             Logger.AddLog(user.UserUCN, "Проверка на текуща сума за изплащане.");
         }
     }
