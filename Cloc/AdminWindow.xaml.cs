@@ -81,7 +81,21 @@ namespace Cloc
 
         private void ButtonReports_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new ReportsPage());
+            ReportsPage rp = new();
+
+            if (rp.ComboBoxFilter != null)
+            {
+                rp.ComboBoxFilter.Items.Clear();
+            }
+
+            List<Person> people = SelectAllPeopleQuery();
+
+            foreach (Person person in people)
+            {
+                rp.ComboBoxFilter.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
+            }
+
+            Main.Navigate(rp);
         }
 
         private void ButtonProfile_Click(object sender, RoutedEventArgs e)

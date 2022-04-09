@@ -82,11 +82,9 @@ namespace Cloc.Pages
 
                 if (Session.UserToken.GetLoginData() != split[1])
                 {
-                    if (DeleteWorkerQuery(split[1]))
+                    if (DeleteWorkerQuery(split[1]) && Logger.AddLog(Session.UserToken.GetLoginData(), "Изтриване профила на " + split[0] + "."))
                     {
                         flag = true;
-
-                        Logger.AddLog(Session.UserToken.GetLoginData(), "Изтриване профила на " + split[0] + ".");
                     }
                 }
                 else
@@ -133,10 +131,9 @@ namespace Cloc.Pages
                         switch (choice)
                         {
                             case 0:
-                                if (ChangePersonQuery(ucn, "Name", changeParam))
+                                if (ChangePersonQuery(ucn, "Name", changeParam) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна името на потребител " + split[0] + " на " + changeParam + "."))
                                 {
                                     MessageBox.Show("Промяната бе успешна.");
-                                    Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна името на потребител " + split[0] + " на " + changeParam + ".");
                                 }
                                 else
                                 {
@@ -146,10 +143,9 @@ namespace Cloc.Pages
                                 ReloadPage();
                                 break;
                             case 1:
-                                if (ChangePersonQuery(ucn, "Surname", changeParam))
+                                if (ChangePersonQuery(ucn, "Surname", changeParam) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна фамилията на потребител " + split[0] + " на " + changeParam + "."))
                                 {
                                     MessageBox.Show("Промяната бе успешна.");
-                                    Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна фамилията на потребител " + split[0] + " на " + changeParam + ".");
                                 }
                                 else
                                 {
@@ -159,10 +155,9 @@ namespace Cloc.Pages
                                 ReloadPage();
                                 break;
                             case 2:
-                                if (ChangePersonQuery(ucn, "Email", changeParam))
+                                if (ChangePersonQuery(ucn, "Email", changeParam) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна имейла на потребител " + split[0] + " на " + changeParam + "."))
                                 {
                                     MessageBox.Show("Промяната бе успешна.");
-                                    Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна имейла на потребител " + split[0] + " на " + changeParam + ".");
                                 }
                                 else
                                 {
@@ -172,10 +167,9 @@ namespace Cloc.Pages
                                 ReloadPage();
                                 break;
                             case 3:
-                                if (ChangePersonQuery(ucn, "PhoneNumber", changeParam))
+                                if (ChangePersonQuery(ucn, "PhoneNumber", changeParam) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна телефонния номер на потребител " + split[0] + " на " + changeParam + "."))
                                 {
                                     MessageBox.Show("Промяната бе успешна.");
-                                    Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна телефонния номер на потребител " + split[0] + " на " + changeParam + ".");
                                 }
                                 else
                                 {
@@ -185,10 +179,9 @@ namespace Cloc.Pages
                                 ReloadPage();
                                 break;
                             case 4:
-                                if (ChangePersonQuery(ucn, "Country", changeParam))
+                                if (ChangePersonQuery(ucn, "Country", changeParam) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна държавата на потребител " + split[0] + " на " + changeParam + "."))
                                 {
                                     MessageBox.Show("Промяната бе успешна.");
-                                    Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна държавата на потребител " + split[0] + " на " + changeParam + ".");
                                 }
                                 else
                                 {
@@ -198,10 +191,9 @@ namespace Cloc.Pages
                                 ReloadPage();
                                 break;
                             case 5:
-                                if (ChangePersonQuery(ucn, "City", changeParam))
+                                if (ChangePersonQuery(ucn, "City", changeParam) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна града на потребител " + split[0] + " на " + changeParam + "."))
                                 {
                                     MessageBox.Show("Промяната бе успешна.");
-                                    Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна града на потребител " + split[0] + " на " + changeParam + ".");
                                 }
                                 else
                                 {
@@ -211,10 +203,9 @@ namespace Cloc.Pages
                                 ReloadPage();
                                 break;
                             case 6:
-                                if (ChangePersonQuery(ucn, "Address", changeParam))
+                                if (ChangePersonQuery(ucn, "Address", changeParam) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна адреса на потребител " + split[0] + " на " + changeParam + "."))
                                 {
                                     MessageBox.Show("Промяната бе успешна.");
-                                    Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна адреса на потребител " + split[0] + " на " + changeParam + ".");
                                 }
                                 else
                                 {
@@ -234,10 +225,9 @@ namespace Cloc.Pages
                                     }
                                     else
                                     {
-                                        if (ChangePersonQuery(ucn, "Position", wp.ToString()))
+                                        if (ChangePersonQuery(ucn, "Position", wp.ToString()) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна позицията на потребител " + split[0] + " на " + Person.TranslateFromWorkPosition(wp) + "."))
                                         {
                                             MessageBox.Show("Промяната бе успешна.");
-                                            Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна позицията на потребител " + split[0] + " на " + Person.TranslateFromWorkPosition(wp) + ".");
                                         }
                                         else
                                         {
@@ -256,10 +246,9 @@ namespace Cloc.Pages
                             case 8:
                                 if (Validator.ValidateAccessCode(changeParam))
                                 {
-                                    if (ChangeAccessCodeQuery(ucn, changeParam))
+                                    if (ChangeAccessCodeQuery(ucn, changeParam) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна кода за достъп на потребител " + split[0] + "."))
                                     {
                                         MessageBox.Show("Промяната бе успешна.");
-                                        Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна кода за достъп на потребител " + split[0] + ".");
                                     }
                                     else
                                     {
@@ -274,12 +263,11 @@ namespace Cloc.Pages
                                 ReloadPage();
                                 break;
                             case 9:
-                                if (double.TryParse(changeParam, out double hourPayment) && hourPayment > 0 && hourPayment <= 500)
+                                if (double.TryParse(changeParam, out double hourPayment) && hourPayment > 0 && hourPayment <= 500 && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна часовата ставка на потребител " + split[0] + "."))
                                 {
                                     if (ChangeHourPaymentQuery(ucn, hourPayment))
                                     {
                                         MessageBox.Show("Промяната бе успешна.");
-                                        Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна часовата ставка на потребител " + split[0] + ".");
                                     }
                                     else
                                     {
@@ -296,10 +284,9 @@ namespace Cloc.Pages
                             case 10:
                                 if (double.TryParse(changeParam, out double percent) && percent >= -10 && percent <= 25)
                                 {
-                                    if (ChangePercentQuery(ucn, percent))
+                                    if (ChangePercentQuery(ucn, percent) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна бонус-процента на потребител " + split[0] + "."))
                                     {
                                         MessageBox.Show("Промяната бе успешна.");
-                                        Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна бонус-процента на потребител " + split[0] + ".");
                                     }
                                     else
                                     {
@@ -354,10 +341,9 @@ namespace Cloc.Pages
                             if (confirmation == MessageBoxResult.Yes)
                             {
                                 user.TotalHours = 0;
-                                if (NullTotalHoursQuery(user))
+                                if (NullTotalHoursQuery(user) && Logger.AddLog(Session.UserToken.GetLoginData(), "Изплащане на " + salary + " лева на " + split[0] + " .") && Reporter.AddReport(split[1], split[0], salary))
                                 {
                                     MessageBox.Show("Сумата бе успешно нулирана.");
-                                    Logger.AddLog(Session.UserToken.GetLoginData(), "Изплащане на " + salary + " лева на " + split[0] + " .");
                                 }
                                 else
                                 {

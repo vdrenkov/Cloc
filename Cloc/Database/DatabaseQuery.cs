@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using static Cloc.Classes.Security;
 using static Cloc.Settings.SystemSetup;
@@ -36,6 +37,21 @@ namespace Cloc.Database
 
                 cmd.ExecuteNonQuery();
                 connection.Close();
+
+                if (!File.Exists(".\\Logs.txt"))
+                {
+                    File.Create(".\\Logs.txt");
+                }
+
+                if (!File.Exists(".\\Checks.txt"))
+                {
+                    File.Create(".\\Checks.txt");
+                }
+
+                if (!File.Exists(".\\Reports.txt"))
+                {
+                    File.Create(".\\Reports.txt");
+                }
 
                 person.UCN = DecryptString(person.UCN);
                 User user = SelectUserQuery(person.UCN);

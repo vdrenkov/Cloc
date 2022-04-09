@@ -9,6 +9,17 @@
       Title="ReportsPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ComboBox x:Name="ComboBoxFilter" Grid.Row="0" HorizontalAlignment="left" Width="300" SelectionChanged="ComboBoxFilter_SelectionChanged"/>
+
+        <DatePicker Name="DateFrom" Grid.Row="0" HorizontalAlignment="Center" Width="300"/>
+        <DatePicker Name="DateTo" Grid.Row="0" HorizontalAlignment="right" Width="300"/>
+
+        <ListBox x:Name="ListBoxPayments" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
     </Grid>
 </Page>

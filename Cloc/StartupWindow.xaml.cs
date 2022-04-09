@@ -1,6 +1,7 @@
 ﻿using Cloc.AdditionalWindows;
 using Cloc.Classes;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using static Cloc.Classes.Validator;
@@ -81,8 +82,16 @@ namespace Cloc
             u1.TotalHours = 10;
             u1.Percent = 20;
 
-            MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
-            MessageBox.Show(AddWorkerQuery(p1, u1).ToString());
+            //MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
+            // MessageBox.Show(AddWorkerQuery(p1, u1).ToString());
+            //DateTime dt = DateTime.Now.AddMonths(-13);
+            //List<string> list = Reporter.AllUserReports(DateOnly.MinValue, DateOnly.MaxValue);
+            //foreach (string item in list)
+            //{
+            //    MessageBox.Show(item);
+            //}
+            //MessageBox.Show(Reporter.SumAllPaymentsForAChosenPeriod(dt).ToString());
+            //MessageBox.Show(Reporter.SumAllPaymentsPerPerson(dt, u1.UserUCN).ToString());
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
