@@ -1,13 +1,13 @@
-﻿<Window x:Class="Cloc.AdditionalWindows.SetupWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Cloc.AdditionalWindows"
-       mc:Ignorable="d"
-        WindowState="Maximized"
-    WindowStyle="None"
-        Title="SetupWindow" Height="auto" Width="auto">
+﻿<Page x:Class="Cloc.Pages.AddUserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Cloc.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddUserPage">
+
     <Grid Name="MainGrid" FocusManager.FocusedElement="{Binding ElementName=TextBoxUCN}">
 
         <Grid.ColumnDefinitions>
@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -31,17 +31,8 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <Label x:Name="LabelServer" Content="Server:" Grid.Column="2" Grid.Row="0"/>
-        <TextBox x:Name="TextBoxServer"   TextWrapping="Wrap" Grid.Column="2" Grid.Row="1"/>
-        <Label x:Name="LabelUser" Content="User:"  Grid.Column="2" Grid.Row="2"/>
-        <TextBox x:Name="TextBoxUser"  TextWrapping="Wrap" Text=""  Grid.Column="2" Grid.Row="3"/>
-        <Label x:Name="LabelPassword" Content="Password:" Grid.Column="2" Grid.Row="4"/>
-        <PasswordBox x:Name="PasswordBoxDBPassword" Grid.Column="2" Grid.Row="5"/>
-        <Label x:Name="LabelPort" Content="Port:"  Grid.Column="2" Grid.Row="6"/>
-        <TextBox x:Name="TextBoxPort"  TextWrapping="Wrap" Text=""  Grid.Column="2" Grid.Row="7"/>
 
-        <Label Content="ЕГН:" Grid.Column="0" Grid.Row="0"/>
+         <Label Content="ЕГН:" Grid.Column="0" Grid.Row="0"/>
         <TextBox x:Name="TextBoxUCN" MaxLength="10" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1"/>
         <Label Content="Име:"  Grid.Column="0" Grid.Row="2"/>
         <TextBox x:Name="TextBoxName"  TextWrapping="Wrap" Text=""  Grid.Column="0" Grid.Row="3"/>
@@ -60,8 +51,14 @@
         <TextBox x:Name="TextBoxAddress"  TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="5"/>
         <Label Content="Код за достъп:"  Grid.Column="1" Grid.Row="6"/>
         <PasswordBox x:Name="PasswordBoxAccessCode" MaxLength="5" Grid.Column="1" Grid.Row="7"/>
+        <Label x:Name="LabelHourPayment" Visibility="Hidden" Content="Часова ставка:"  Grid.Column="1" Grid.Row="8"/>
+        <TextBox x:Name="TextBoxHourPayment" Visibility="Hidden" TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="9"/>
+        <Label x:Name="LabelPercent" Visibility="Hidden" Content="Процент:"  Grid.Column="1" Grid.Row="10"/>
+        <TextBox x:Name="TextBoxPercent" Visibility="Hidden" TextWrapping="Wrap" Text=""  Grid.Column="1" Grid.Row="11"/>
 
-        <Button x:Name="ButtonExit" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="top" Content="Изход" Click="ButtonExit_Click" Grid.Column="3" Grid.Row="0"/>
-        <Button x:Name="ButtonSetup" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="Bottom" Content="Настройка" Click="ButtonSetup_Click" Grid.Column="3" Grid.Row="9"/>
+        <ComboBox x:Name="ComboBoxPosition" Visibility="Hidden" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="Bottom"  Grid.Column="3" Grid.Row="7"/>
+
+        <Button x:Name="ButtonExit" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="top" Content="Изход" Grid.Column="3" Grid.Row="0"/>
+        <Button x:Name="ButtonAddUser" Visibility="Hidden" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="Bottom" Content="Добави потребител" Click="ButtonAddUser_Click" Grid.Column="3" Grid.Row="5"/>
     </Grid>
-</Window>
+</Page>

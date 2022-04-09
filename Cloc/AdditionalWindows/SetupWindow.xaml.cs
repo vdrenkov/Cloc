@@ -18,115 +18,24 @@ namespace Cloc.AdditionalWindows
             PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
-        private void HandleEsc(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape)
-            {
-                StartupWindow sw = new();
-                Close();
-                sw.Show();
-            }
-        }
-
-        private void ButtonExit_Click(object sender, RoutedEventArgs e)
+        private void ExitSession()
         {
             StartupWindow sw = new();
             Close();
             sw.Show();
         }
 
-        internal static bool AddUser(Person person, User user)
+        private void HandleEsc(object sender, KeyEventArgs e)
         {
-            bool flag = false;
-
-            try
+            if (e.Key == Key.Escape)
             {
-                if (AddWorkerQuery(person, user))
-                {
-                    flag = true;
-                }
+                ExitSession();
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Неуспешно добавяне на потребител. Моля, опитайте отново!");
-            }
-
-            return flag;
         }
 
-        private void ButtonAddUser_Click(object sender, RoutedEventArgs e)
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-            Person person = new();
-            User user = new();
-            if (ValidateUCN(TextBoxUCN.Text.ToString()))
-            {
-                person.UCN = TextBoxUCN.Text.ToString();
-                user.UserUCN = person.UCN;
-            }
-            else
-            {
-                MessageBox.Show("Моля, въведете правилно ЕГН!");
-                TextBoxUCN.Text = null;
-            }
-
-            person.Name = TextBoxName.Text.ToString();
-            person.Surname = TextBoxSurname.Text.ToString();
-            person.Email = TextBoxEmail.Text.ToString();
-            person.PhoneNumber = TextBoxPhoneNumber.Text.ToString();
-            person.Country = TextBoxCountry.Text.ToString();
-            person.City = TextBoxCity.Text.ToString();
-            person.Address = TextBoxAddress.Text.ToString();
-
-            if (ComboBoxPosition != null && ComboBoxPosition.SelectedIndex != -1)
-            {
-                person.Position = Person.TranslateToWorkPosition(ComboBoxPosition.SelectedItem.ToString());
-            }
-
-            if (ValidateAccessCode(PasswordBoxAccessCode.Password.ToString()))
-            {
-                if (!SelectAccessCodeQuery(PasswordBoxAccessCode.Password.ToString()))
-                { user.AccessCode = PasswordBoxAccessCode.Password.ToString(); }
-                else
-                {
-                    PasswordBoxAccessCode.Password = null;
-                    MessageBox.Show("Въведеният от вас код вече е зает.");
-                }
-            }
-
-            user.CheckIn = DateTime.Now;
-            user.CheckOut = DateTime.Now;
-            user.IsCheckedIn = false;
-            user.TotalHours = 0;
-
-            if (double.TryParse(TextBoxHourPayment.Text.ToString(), out double hourPayment))
-            {
-                user.HourPayment = hourPayment;
-            }
-            else
-            {
-                MessageBox.Show("Моля, въведете правилна часова ставка!");
-                TextBoxHourPayment.Text = null;
-            }
-
-            if (double.TryParse(TextBoxPercent.Text.ToString(), out double percent) && percent >= -10 && percent <= 25)
-            {
-                user.Percent = percent;
-            }
-            else
-            {
-                MessageBox.Show("Моля, въведете процент в диапазона от -10 до +25!");
-                TextBoxHourPayment.Text = null;
-            }
-
-            if (AddUser(person, user))
-            {
-                MessageBox.Show("Потребителят беше добавен успешно.");
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("Моля, проверете коректността на въведените данни и опитайте отново!");
-            }
+            ExitSession();
         }
 
         private void ButtonSetup_Click(object sender, RoutedEventArgs e)

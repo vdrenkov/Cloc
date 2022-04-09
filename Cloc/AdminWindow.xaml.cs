@@ -62,6 +62,16 @@ namespace Cloc
             Main.Navigate(aop);
         }
 
+        private void ButtonAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Navigate(new AddUserPage());
+        }
+
+        private void ButtonReports_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Navigate(new ReportsPage());
+        }
+
         private void ButtonProfile_Click(object sender, RoutedEventArgs e)
         {
             ProfilePage pp = new();

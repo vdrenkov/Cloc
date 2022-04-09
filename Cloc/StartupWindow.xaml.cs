@@ -8,16 +8,13 @@ using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
 
 /*
- * TODO AdminOptionsPage ->
+ * AddUserPage ->
  * Добавяне на нов служител, преход между страници, всички полета, проверка код за достъп
- * Изтриване на съществуващ
- * Проверка сума за изплащане на служител + опция за изплащане (нулиране)
- * Смяна всички данни на служител
- * Справки
+ * ReportsPage
  * Файлове
- * Реална проверка
+ 
+ * Реална проверка...
 
- * Check
  * Design
  * Full System Setup + Installation
  * Language menu
@@ -26,8 +23,7 @@ using static Cloc.Session.UserToken;
  * Access Password -> 1cm13*8vCt19_xRc
  * DB Password -> 348_sha765_KaD3l
  * 
- * Задание: Да се разработи информационна система за управление на човешките ресурси.
- * проектиране или разработка на
+ * Задание: Проектиране и разработка на информационна система за управление на човешките ресурси.
 */
 
 namespace Cloc
