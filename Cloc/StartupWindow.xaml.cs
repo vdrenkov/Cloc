@@ -1,17 +1,13 @@
 ﻿using Cloc.AdditionalWindows;
 using Cloc.Classes;
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using static Cloc.Classes.Validator;
 using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
 
-/*
- * ReportsPage
- * Файлове
- 
+/* 
  * Реална проверка...
 
  * Design
@@ -32,10 +28,22 @@ namespace Cloc
     /// </summary>
     public partial class StartupWindow : Window
     {
+        static int count = 0;
+
         public StartupWindow()
         {
             InitializeComponent();
+
             PreviewKeyDown += new KeyEventHandler(HandleEsc);
+
+            if (count == 0)
+            {
+                Logger.RefreshLogs();
+                Checker.RefreshChecks();
+                Reporter.RefreshReports();
+                
+                count++;
+            }
         }
 
         private void ButtonTest_Click(object sender, RoutedEventArgs e)
@@ -76,22 +84,14 @@ namespace Cloc
             u1.UserUCN = p1.UCN;
             u1.AccessCode = "00000";
             u1.CheckIn = DateTime.Now;
-            u1.CheckOut = DateTime.Now.AddHours(18.1245);
+            u1.CheckOut = DateTime.Now.AddHours(1.7685);
             u1.IsCheckedIn = false;
-            u1.HourPayment = 15;
+            u1.HourPayment = 1234.897;
             u1.TotalHours = 10;
             u1.Percent = 20;
 
             //MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
-            // MessageBox.Show(AddWorkerQuery(p1, u1).ToString());
-            //DateTime dt = DateTime.Now.AddMonths(-13);
-            //List<string> list = Reporter.AllUserReports(DateOnly.MinValue, DateOnly.MaxValue);
-            //foreach (string item in list)
-            //{
-            //    MessageBox.Show(item);
-            //}
-            //MessageBox.Show(Reporter.SumAllPaymentsForAChosenPeriod(dt).ToString());
-            //MessageBox.Show(Reporter.SumAllPaymentsPerPerson(dt, u1.UserUCN).ToString());
+           // MessageBox.Show(AddWorkerQuery(p1, u1).ToString());           
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)

@@ -54,7 +54,7 @@ namespace Cloc.Pages
             Person person = SelectPersonQuery(ucn);
             if (!Validator.IsAdmin(person))
             {
-                if (checks.Count > 0)
+                if (checks != null && checks.Count > 0)
                 {
                     foreach (string check in checks)
                     {
@@ -87,7 +87,7 @@ namespace Cloc.Pages
 
             logs = Logger.UserLogs(ucn, count);
 
-            if (ListBoxLogs != null)
+            if (ListBoxLogs != null && ListBoxLogs.Items != null)
             {
                 if (int.TryParse(ListBoxLogs.Items.Count.ToString(), out count))
                 {
@@ -98,7 +98,7 @@ namespace Cloc.Pages
                 }
             }
 
-            if (logs.Count > 0)
+            if (logs != null && logs.Count > 0)
             {
                 foreach (string log in logs)
                 {
@@ -135,15 +135,18 @@ namespace Cloc.Pages
         {
             try
             {
-                string userInfo = ComboBoxUser.SelectedItem.ToString();
-                string[] split = userInfo.Split(", ");
-                ucn = split[1];
+                if (ComboBoxUser != null && ComboBoxUser.SelectedItem != null)
+                {
+                    string userInfo = ComboBoxUser.SelectedItem.ToString();
+                    string[] split = userInfo.Split(", ");
+                    ucn = split[1];
 
-                FillChecks(ucn, count);
-                FillLogs(ucn, count);
+                    FillChecks(ucn, count);
+                    FillLogs(ucn, count);
 
-                if (GetLoginData() != split[1])
-                { Logger.AddLog(GetLoginData(), "Преглед активността на профила на " + split[0] + "."); }
+                    if (GetLoginData() != split[1])
+                    { Logger.AddLog(GetLoginData(), "Преглед активността на профила на " + split[0] + "."); }
+                }
             }
             catch (Exception)
             {

@@ -10,16 +10,19 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="ComboBoxFilter" Grid.Row="0" HorizontalAlignment="left" Width="300" SelectionChanged="ComboBoxFilter_SelectionChanged"/>
+        <ComboBox x:Name="ComboBoxFilter" Grid.Row="0" HorizontalAlignment="left" Width="300" SelectionChanged="SelectionChanged"/>
 
-        <DatePicker Name="DateFrom" Grid.Row="0" HorizontalAlignment="Center" Width="300"/>
-        <DatePicker Name="DateTo" Grid.Row="0" HorizontalAlignment="right" Width="300"/>
+        <DatePicker Name="DateFrom" SelectedDate="" Grid.Row="1" HorizontalAlignment="Center" Width="300" SelectedDateChanged="SelectionChanged"/>
+        <DatePicker Name="DateTo" Grid.Row="1" HorizontalAlignment="right" Width="300" SelectedDateChanged="SelectionChanged"/>
 
-        <ListBox x:Name="ListBoxPayments" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="TextBoxSum" Grid.Row="0" HorizontalAlignment="right" VerticalAlignment="Center"/>
+
+        <ListBox x:Name="ListBoxPayments" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     </Grid>
 </Page>

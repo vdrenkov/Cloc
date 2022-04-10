@@ -32,6 +32,49 @@ namespace Cloc.Classes
             }
         }
 
+        static public void RefreshChecks()
+        {
+            List<string> checks = new();
+
+            try
+            {
+                using (StreamReader reader = new(".\\Checks.txt"))
+                {
+                    var line = reader.ReadLine();
+
+                    while (line != null)
+                    {
+                        string[] results = line.Split(';', ';', ';');
+
+                        if (DateTime.TryParse(results[1], out DateTime date) && date >= DateTime.Now.AddYears(-5))
+                        {
+                            checks.Add(line);
+                        }
+                        line = reader.ReadLine();
+                    }
+                }
+
+                if (File.Exists(".\\Checks.txt"))
+                {
+                    File.Delete(".\\Checks.txt");
+                    File.Create(".\\Checks.txt").Close();
+
+                    foreach (string check in checks)
+                    {
+                        File.AppendAllText(".\\Checks.txt", check + Environment.NewLine);
+                    }
+                }
+                else
+                {
+                    File.Create(".\\Checks.txt").Close();
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Възникна неочаквана грешка по време на работа.");
+            }
+        }
+
         static public List<string> UserChecks(string ucn, int count)
         {
             List<string> checks = new();

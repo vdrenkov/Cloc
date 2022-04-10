@@ -341,7 +341,7 @@ namespace Cloc.Pages
                             if (confirmation == MessageBoxResult.Yes)
                             {
                                 user.TotalHours = 0;
-                                if (NullTotalHoursQuery(user) && Logger.AddLog(Session.UserToken.GetLoginData(), "Изплащане на " + salary + " лева на " + split[0] + " .") && Reporter.AddReport(split[1], split[0], salary))
+                                if (NullTotalHoursQuery(user) && Logger.AddLog(Session.UserToken.GetLoginData(), "Изплащане на " + Math.Round(salary, 2) + " лева на " + split[0] + " .") && Reporter.AddReport(split[1], split[0], salary))
                                 {
                                     MessageBox.Show("Сумата бе успешно нулирана.");
                                 }

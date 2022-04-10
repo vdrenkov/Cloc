@@ -32,6 +32,49 @@ namespace Cloc.Classes
             }
         }
 
+        static public void RefreshLogs()
+        {
+            List<string> logs = new();
+
+            try
+            {
+                using (StreamReader reader = new(".\\Logs.txt"))
+                {
+                    var line = reader.ReadLine();
+
+                    while (line != null)
+                    {
+                        string[] results = line.Split(';', ';', ';');
+
+                        if (DateTime.TryParse(results[0], out DateTime date) && date >= DateTime.Now.AddYears(-5))
+                        {
+                            logs.Add(line);
+                        }
+                        line = reader.ReadLine();
+                    }
+                }
+
+                if (File.Exists(".\\Logs.txt"))
+                {
+                    File.Delete(".\\Logs.txt");
+                    File.Create(".\\Logs.txt").Close();
+
+                    foreach (string log in logs)
+                    {
+                        File.AppendAllText(".\\Logs.txt", log + Environment.NewLine);
+                    }
+                }
+                else
+                {
+                    File.Create(".\\Logs.txt").Close();
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Възникна неочаквана грешка по време на работа.");
+            }
+        }
+
         static public List<string> UserLogs(string UCN, int count)
         {
             List<string> logs = new();
@@ -48,10 +91,13 @@ namespace Cloc.Classes
                         string[] results = line.Split(';', ';');
                         results[1] = DecryptString(results[1]);
 
-                        if (results[1] == UCN)
+                        if (DateTime.TryParse(results[0], out DateTime date))
                         {
-                            string temp = results[0] + "     ЕГН: " + results[1] + "     Действие: " + results[2];
-                            allLogs.Add(temp);
+                            if (results[1] == UCN)
+                            {
+                                string temp = results[0] + "     ЕГН: " + results[1] + "     Действие: " + results[2];
+                                allLogs.Add(temp);
+                            }
                         }
                         line = reader.ReadLine();
                     }

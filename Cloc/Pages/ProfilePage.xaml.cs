@@ -49,8 +49,8 @@ namespace Cloc.Pages
                     TextBlockCity.Text = "City: " + person.City;
                     TextBlockAddress.Text = "Address: " + person.Address;
                     TextBlockPosition.Text = "Position: " + Person.TranslateFromWorkPosition(person.Position);
-                    TextBlockHourPayment.Text = "Hour payment: " + user.HourPayment.ToString();
-                    TextBlockPercent.Text = "Percent: " + user.Percent.ToString();
+                    TextBlockHourPayment.Text = "Hour payment: " + Math.Round(user.HourPayment, 2).ToString();
+                    TextBlockPercent.Text = "Percent: " + Math.Round(user.Percent, 2).ToString();
                 }));
             }
             catch (Exception) { }
@@ -60,13 +60,16 @@ namespace Cloc.Pages
         {
             try
             {
-                string personInfo = ComboBoxPerson.SelectedItem.ToString();
-                string[] split = personInfo.Split(", ");
+                if (ComboBoxPerson.SelectedItem != null)
+                {
+                    string personInfo = ComboBoxPerson.SelectedItem.ToString();
+                    string[] split = personInfo.Split(", ");
 
-                FillData(split[1]);
+                    FillData(split[1]);
 
-                if (Session.UserToken.GetLoginData() != split[1])
-                { Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед данните на профила на " + split[0] + "."); }
+                    if (Session.UserToken.GetLoginData() != split[1])
+                    { Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед данните на профила на " + split[0] + "."); }
+                }
             }
             catch (Exception)
             {

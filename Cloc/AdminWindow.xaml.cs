@@ -88,6 +88,8 @@ namespace Cloc
                 rp.ComboBoxFilter.Items.Clear();
             }
 
+            rp.ComboBoxFilter.Items.Add("Всички служители");
+
             List<Person> people = SelectAllPeopleQuery();
 
             foreach (Person person in people)

@@ -29,7 +29,7 @@ namespace Cloc.Database
                     "country varchar(50),city varchar(50)," +
                     "address varchar(50), position varchar(20)); create table if not exists Users(userUcn varchar(255) not null unique primary key," +
                     "accessCode text, checkIn DateTime default Now(),checkOut DateTime default Now(), isCheckedIn boolean default false," +
-                    "totalHours double(16,4) default 0, hourPayment double(16,4) default 0,percent double(16,4) default 0," +
+                    "totalHours double(16,2) default 0, hourPayment double(16,2) default 0,percent double(16,2) default 0," +
                     "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade); " +
                     "insert into People(ucn, name, surname, email, phoneNumber, country, city, address, position)" +
                     $" values('{person.UCN}', '{person.Name}', '{person.Surname}', '{person.Email}', '{person.PhoneNumber}', '{person.Country}'," +
@@ -104,9 +104,9 @@ namespace Cloc.Database
                     command.Parameters.AddWithValue("@UserUCN", user.UserUCN);
                     command.Parameters.AddWithValue("@AccessCode", user.AccessCode);
                     command.Parameters.AddWithValue("@IsCheckedIn", user.IsCheckedIn);
-                    command.Parameters.AddWithValue("@HourPayment", user.HourPayment);
-                    command.Parameters.AddWithValue("@TotalHours", user.TotalHours);
-                    command.Parameters.AddWithValue("@Percent", user.Percent);
+                    command.Parameters.AddWithValue("@HourPayment", Math.Round(user.HourPayment, 2));
+                    command.Parameters.AddWithValue("@TotalHours", Math.Round(user.TotalHours, 2));
+                    command.Parameters.AddWithValue("@Percent", Math.Round(user.Percent, 2));
 
                     if (cmd.ExecuteNonQuery() > 0 && command.ExecuteNonQuery() > 0)
                     { flag = true; }
@@ -255,7 +255,7 @@ namespace Cloc.Database
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
             user.AccessCode = HashString(user.AccessCode);
-            double totalHours = Math.Round((user.CheckOut - user.CheckIn).TotalHours + user.TotalHours, 4);
+            double totalHours = Math.Round((user.CheckOut - user.CheckIn).TotalHours + user.TotalHours, 2);
             DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
@@ -318,7 +318,7 @@ namespace Cloc.Database
         {
             bool flag = false;
             userUCN = EncryptString(userUCN);
-            hourPayment = Math.Round(hourPayment, 4);
+            hourPayment = Math.Round(hourPayment, 2);
             DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())
@@ -346,7 +346,7 @@ namespace Cloc.Database
         {
             bool flag = false;
             userUCN = EncryptString(userUCN);
-            percent = Math.Round(percent, 4);
+            percent = Math.Round(percent, 2);
             DatabaseConnection dbConn = new();
 
             if (dbConn.IsConnect())

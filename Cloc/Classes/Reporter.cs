@@ -10,7 +10,7 @@ namespace Cloc.Classes
         static public bool AddReport(string UCN, string names, double payment)
         {
             UCN = EncryptString(UCN);
-            string activityLine = DateOnly.FromDateTime(DateTime.Now) + ";" + UCN + ";" + names + ";" + payment;
+            string activityLine = DateTime.Now + ";" + UCN + ";" + names + ";" + Math.Round(payment, 2);
 
             try
             {
@@ -32,7 +32,50 @@ namespace Cloc.Classes
             }
         }
 
-        static public List<string> AllUserReports(DateOnly dateFrom, DateOnly dateTo)
+        public static void RefreshReports()
+        {
+            List<string> reports = new();
+
+            try
+            {
+                using (StreamReader reader = new(".\\Reports.txt"))
+                {
+                    var line = reader.ReadLine();
+
+                    while (line != null)
+                    {
+                        string[] results = line.Split(';', ';', ';');
+
+                        if (DateTime.TryParse(results[0], out DateTime date) && date >= DateTime.Now.AddYears(-5))
+                        {
+                            reports.Add(line);
+                        }
+                        line = reader.ReadLine();
+                    }
+                }
+
+                if (File.Exists(".\\Reports.txt"))
+                {
+                    File.Delete(".\\Reports.txt");
+                    File.Create(".\\Reports.txt").Close();
+
+                    foreach (string report in reports)
+                    {
+                        File.AppendAllText(".\\Reports.txt", report + Environment.NewLine);
+                    }
+                }
+                else
+                {
+                    File.Create(".\\Reports.txt").Close();
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Възникна неочаквана грешка по време на работа.");
+            }
+        }
+
+        static public List<string> AllUserReports(DateTime dateFrom, DateTime dateTo)
         {
             List<string> reports = new();
 
@@ -47,7 +90,7 @@ namespace Cloc.Classes
                         string[] results = line.Split(';', ';', ';');
                         results[1] = DecryptString(results[1]);
 
-                        if (DateOnly.TryParse(results[0], out DateOnly date))
+                        if (DateTime.TryParse(results[0], out DateTime date))
                         {
                             if (dateFrom <= date && dateTo >= date)
                             {
@@ -58,6 +101,7 @@ namespace Cloc.Classes
                         line = reader.ReadLine();
                     }
                 }
+
                 reports.Reverse();
             }
             catch (Exception)
@@ -69,7 +113,7 @@ namespace Cloc.Classes
             return reports;
         }
 
-        static public List<string> UserReports(DateOnly dateFrom, DateOnly dateTo, string ucn)
+        static public List<string> UserReports(DateTime dateFrom, DateTime dateTo, string ucn)
         {
             List<string> reports = new();
 
@@ -84,7 +128,7 @@ namespace Cloc.Classes
                         string[] results = line.Split(';', ';', ';');
                         results[1] = DecryptString(results[1]);
 
-                        if (DateOnly.TryParse(results[0], out DateOnly date))
+                        if (DateTime.TryParse(results[0], out DateTime date))
                         {
                             if (dateFrom <= date && dateTo >= date && ucn == results[1])
                             {
@@ -95,6 +139,7 @@ namespace Cloc.Classes
                         line = reader.ReadLine();
                     }
                 }
+
                 reports.Reverse();
             }
             catch (Exception)
@@ -106,7 +151,7 @@ namespace Cloc.Classes
             return reports;
         }
 
-        internal static double SumAllPaymentsForAChosenPeriod(DateOnly dateFrom, DateOnly dateTo)
+        internal static double SumAllPaymentsForAChosenPeriod(DateTime dateFrom, DateTime dateTo)
         {
             double total = 0;
             try
@@ -119,7 +164,7 @@ namespace Cloc.Classes
                     string[] results = line.Split(';', ';', ';');
                     results[1] = DecryptString(results[1]);
 
-                    if (DateOnly.TryParse(results[0], out DateOnly date))
+                    if (DateTime.TryParse(results[0], out DateTime date))
                     {
                         if (dateFrom <= date && dateTo >= date)
                         {
@@ -140,7 +185,7 @@ namespace Cloc.Classes
             return total;
         }
 
-        internal static double SumAllPaymentsPerPerson(DateOnly dateFrom, DateOnly dateTo, string ucn)
+        internal static double SumAllPaymentsPerPerson(DateTime dateFrom, DateTime dateTo, string ucn)
         {
             double total = 0;
             try
@@ -153,7 +198,7 @@ namespace Cloc.Classes
                     string[] results = line.Split(';', ';', ';');
                     results[1] = DecryptString(results[1]);
 
-                    if (DateOnly.TryParse(results[0], out DateOnly date))
+                    if (DateTime.TryParse(results[0], out DateTime date))
                     {
                         if (dateFrom <= date && dateTo >= date && ucn == results[1])
                         {
