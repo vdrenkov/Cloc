@@ -51,7 +51,7 @@ namespace Cloc.Pages
             ComboBoxPositionLoad();
         }
 
-        internal static bool AddUser(Person person, User user)
+        private static bool AddUser(Person person, User user)
         {
             bool flag = false;
 

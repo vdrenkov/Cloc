@@ -20,7 +20,7 @@ namespace Cloc
             Main.Navigate(new MainPage());
         }
 
-        public void ExitCurrentSession()
+        private void ExitCurrentSession()
         {
             Logger.AddLog(Session.UserToken.GetLoginData(), "Изход от системата.");
             Session.UserToken.RemoveLoginData();

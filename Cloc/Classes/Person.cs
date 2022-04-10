@@ -1,4 +1,6 @@
-﻿namespace Cloc.Classes
+﻿using System.Collections.Generic;
+
+namespace Cloc.Classes
 {
     enum WorkPosition
     {
@@ -19,20 +21,21 @@
         Hostess,
         FnB,
         Manager,
+        Owner,
         Admin
     }
 
     internal class Person
     {
-        public string UCN { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
-        public string Address { get; set; }
-        public WorkPosition Position { get; set; }
+        internal string UCN { get; set; }
+        internal string Name { get; set; }
+        internal string Surname { get; set; }
+        internal string Email { get; set; }
+        internal string PhoneNumber { get; set; }
+        internal string Country { get; set; }
+        internal string City { get; set; }
+        internal string Address { get; set; }
+        internal WorkPosition Position { get; set; }
 
         internal static string TranslateFromWorkPosition(WorkPosition wp)
         {
@@ -54,7 +57,8 @@
                 WorkPosition.Hostess => "Хостеса",
                 WorkPosition.FnB => "Специалист храни и напитки",
                 WorkPosition.Manager => "Мениджър",
-                WorkPosition.Admin => "Администратор / Собственик",
+                WorkPosition.Owner => "Собственик",
+                WorkPosition.Admin => "Администратор",
                 _ => "На изпитателен срок",
             };
         }
@@ -79,9 +83,26 @@
                 "Хостеса" => WorkPosition.Hostess,
                 "Специалист храни и напитки" => WorkPosition.FnB,
                 "Мениджър" => WorkPosition.Manager,
-                "Администратор / Собственик" => WorkPosition.Admin,
+                "Собственик" => WorkPosition.Owner,
+                "Администратор" => WorkPosition.Admin,
                 _ => WorkPosition.OnTrial
             };
+        }
+
+        internal static int AdminCount()
+        {
+            int adminCount = 0;
+
+            List<Person> people = Database.DatabaseQuery.SelectAllPeopleQuery();
+
+            foreach (Person person in people)
+            {
+                if (person.Position==WorkPosition.Admin)
+                {
+                    adminCount++;
+                }
+            }
+            return adminCount;
         }
     }
 }

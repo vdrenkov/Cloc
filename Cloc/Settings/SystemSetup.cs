@@ -4,26 +4,26 @@ namespace Cloc.Settings
 {
     internal class SystemSetup
     {
-        public static string GetServer()
+        internal static string GetServer()
         {
             return Settings.Default.Server.ToString();
         }
 
-        public static string GetUsername()
+        internal static string GetUsername()
         {
             return Settings.Default.Username.ToString();
         }
 
-        public static string GetPassword()
+        internal static string GetPassword()
         {
             return Settings.Default.Password.ToString();
         }
-        public static string GetPort()
+        internal static string GetPort()
         {
             return Settings.Default.Port.ToString();
         }
 
-        public static bool SetSettings(string server, string username, string password, string port)
+        internal static bool SetSettings(string server, string username, string password, string port)
         {
             try
             {

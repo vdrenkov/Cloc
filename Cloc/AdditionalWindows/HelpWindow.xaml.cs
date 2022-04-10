@@ -11,7 +11,7 @@ namespace Cloc.AdditionalWindows
     /// </summary>
     public partial class HelpWindow : Window
     {
-        public HelpWindow()
+        internal HelpWindow()
         {
             InitializeComponent();
             PreviewKeyDown += new KeyEventHandler(HandleEsc);

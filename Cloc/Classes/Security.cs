@@ -6,11 +6,11 @@ using System.Windows;
 
 namespace Cloc.Classes
 {
-    internal class Security
+    internal static class Security
     {
         private readonly static string key = "b14ca5898a4e4133bbce2ea2315a1916";
 
-        public static string EncryptString(string plainText)
+        internal static string EncryptString(string plainText)
         {
             string cipherText;
             byte[] iv = new byte[16];
@@ -43,7 +43,7 @@ namespace Cloc.Classes
             return cipherText;
         }
 
-        public static string DecryptString(string cipherText)
+        internal static string DecryptString(string cipherText)
         {
             byte[] iv = new byte[16];
 
@@ -67,7 +67,7 @@ namespace Cloc.Classes
             }
         }
 
-        public static string HashString(string accessCode)
+        internal static string HashString(string accessCode)
         {
             string hashedString;
             string salt = "sw>5;1.1,2gh3<:i";

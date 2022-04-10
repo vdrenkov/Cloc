@@ -11,7 +11,7 @@ namespace Cloc.Database
 {
     internal class DatabaseQuery
     {
-        public static bool StartupQuery(string server, string username, string password, string port, Person person, string accessCode)
+        internal static bool StartupQuery(string server, string username, string password, string port, Person person, string accessCode)
         {
             bool flag = false;
             string connectionString = $"server={server};user={username};password={password}; port={port};";
@@ -68,7 +68,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static bool AddWorkerQuery(Person person, User user)
+        internal static bool AddWorkerQuery(Person person, User user)
         {
             bool flag = false;
             person.UCN = EncryptString(person.UCN);
@@ -125,7 +125,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static bool DeleteWorkerQuery(string UCN)
+        internal static bool DeleteWorkerQuery(string UCN)
         {
             bool flag = false;
             UCN = EncryptString(UCN);
@@ -151,7 +151,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static bool ChangeAccessCodeQuery(string UCN, string accessCode)
+        internal static bool ChangeAccessCodeQuery(string UCN, string accessCode)
         {
             bool flag = false;
             UCN = EncryptString(UCN);
@@ -179,7 +179,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static bool CheckInQuery(User user)
+        internal static bool CheckInQuery(User user)
         {
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
@@ -214,7 +214,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static bool CheckOutQuery(User user)
+        internal static bool CheckOutQuery(User user)
         {
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
@@ -250,7 +250,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static bool ChangeTotalHoursQuery(User user)
+        internal static bool ChangeTotalHoursQuery(User user)
         {
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
@@ -283,7 +283,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static bool NullTotalHoursQuery(User user)
+        internal static bool NullTotalHoursQuery(User user)
         {
             bool flag = false;
             user.UserUCN = EncryptString(user.UserUCN);
@@ -314,7 +314,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static bool ChangeHourPaymentQuery(string userUCN, double hourPayment)
+        internal static bool ChangeHourPaymentQuery(string userUCN, double hourPayment)
         {
             bool flag = false;
             userUCN = EncryptString(userUCN);
@@ -342,7 +342,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static bool ChangePercentQuery(string userUCN, double percent)
+        internal static bool ChangePercentQuery(string userUCN, double percent)
         {
             bool flag = false;
             userUCN = EncryptString(userUCN);
@@ -370,7 +370,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static bool ChangePersonQuery(string UCN, string fieldParam, string changeParam)
+        internal static bool ChangePersonQuery(string UCN, string fieldParam, string changeParam)
         {
             bool flag = false;
             UCN = EncryptString(UCN);
@@ -397,7 +397,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public static Person SelectPersonQuery(string UCN)
+        internal static Person SelectPersonQuery(string UCN)
         {
             UCN = EncryptString(UCN);
             DatabaseConnection dbConn = new();
@@ -438,7 +438,7 @@ namespace Cloc.Database
             return person;
         }
 
-        public static List<Person> SelectAllPeopleQuery()
+        internal static List<Person> SelectAllPeopleQuery()
         {
             DatabaseConnection dbConn = new();
             Person person = new();
@@ -481,7 +481,7 @@ namespace Cloc.Database
             return people;
         }
 
-        public static User SelectUserQuery(string UserUCN)
+        internal static User SelectUserQuery(string UserUCN)
         {
             UserUCN = EncryptString(UserUCN);
             DatabaseConnection dbConn = new();
@@ -521,7 +521,7 @@ namespace Cloc.Database
             return user;
         }
 
-        public static User SelectUserByAccessCodeQuery(string accessCode)
+        internal static User SelectUserByAccessCodeQuery(string accessCode)
         {
             accessCode = HashString(accessCode);
             DatabaseConnection dbConn = new();
@@ -560,7 +560,7 @@ namespace Cloc.Database
             return user;
         }
 
-        public static bool SelectAccessCodeQuery(string accessCode)
+        internal static bool SelectAccessCodeQuery(string accessCode)
         {
             bool flag = false;
             string DBAccessCode = null;

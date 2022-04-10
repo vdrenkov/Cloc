@@ -13,7 +13,7 @@ namespace Cloc.Pages
     /// </summary>
     public partial class ActivityPage : Page
     {
-        public const int COUNT = 30;
+        internal const int COUNT = 30;
         static string ucn;
         internal static int count = COUNT;
 

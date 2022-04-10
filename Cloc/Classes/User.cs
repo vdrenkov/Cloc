@@ -2,15 +2,15 @@
 
 namespace Cloc.Classes
 {
-    public class User
+    internal class User
     {
-        public string UserUCN { get; set; }
-        public string AccessCode { get; set; }
-        public DateTime CheckIn { get; set; }
-        public DateTime CheckOut { get; set; }
-        public bool IsCheckedIn { get; set; }
-        public double HourPayment { get; set; }
-        public double TotalHours { get; set; }
-        public double Percent { get; set; }
+        internal string UserUCN { get; set; }
+        internal string AccessCode { get; set; }
+        internal DateTime CheckIn { get; set; }
+        internal DateTime CheckOut { get; set; }
+        internal bool IsCheckedIn { get; set; }
+        internal double HourPayment { get; set; }
+        internal double TotalHours { get; set; }
+        internal double Percent { get; set; }
     }
 }

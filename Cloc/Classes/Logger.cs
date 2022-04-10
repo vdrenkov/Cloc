@@ -5,9 +5,9 @@ using static Cloc.Classes.Security;
 
 namespace Cloc.Classes
 {
-    public static class Logger
+    internal static class Logger
     {
-        static public bool AddLog(string UCN, string activity)
+        static internal bool AddLog(string UCN, string activity)
         {
             UCN = EncryptString(UCN);
             string activityLine = DateTime.Now + ";" + UCN + ";" + activity;
@@ -32,7 +32,7 @@ namespace Cloc.Classes
             }
         }
 
-        static public void RefreshLogs()
+        static internal void RefreshLogs()
         {
             List<string> logs = new();
 
@@ -75,7 +75,7 @@ namespace Cloc.Classes
             }
         }
 
-        static public List<string> UserLogs(string UCN, int count)
+        static internal List<string> UserLogs(string UCN, int count)
         {
             List<string> logs = new();
             List<string> allLogs = new();

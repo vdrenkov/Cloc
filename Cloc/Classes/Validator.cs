@@ -4,9 +4,9 @@ using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc.Classes
 {
-    internal class Validator
+    internal static class Validator
     {
-        public static bool ValidateUCN(string UCN)
+        internal static bool ValidateUCN(string UCN)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace Cloc.Classes
             }
         }
 
-        public static bool ValidateAccessCode(string accessCode)
+        internal static bool ValidateAccessCode(string accessCode)
         {
             bool flag = false;
 
@@ -46,7 +46,7 @@ namespace Cloc.Classes
             return flag;
         }
 
-        public static bool ValidateAccessCodeChange(string ucn, string accessCode)
+        internal static bool ValidateAccessCodeChange(string ucn, string accessCode)
         {
             bool flag = false;
 
@@ -75,7 +75,7 @@ namespace Cloc.Classes
             return flag;
         }
 
-        public static bool ValidateEntry(string accessCode)
+        internal static bool ValidateEntry(string accessCode)
         {
             bool flag = false;
             Person currentPerson = new();
@@ -96,7 +96,7 @@ namespace Cloc.Classes
             return flag;
         }
 
-        public static bool IsAdmin(Person person)
+        internal static bool IsAdmin(Person person)
         {
             bool flag = false;
 

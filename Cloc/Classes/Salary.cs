@@ -5,12 +5,12 @@ using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc.Classes
 {
-    internal class Salary
+    internal static class Salary
     {
         const int MonthWorkHours = 176;
         const int MaxWorkShifts = 255;
 
-        public static bool HasOvertime(User user)
+        internal static bool HasOvertime(User user)
         {
             double totalHours = 0;
             DateTime monthAgo = DateTime.Now.AddDays(-30);
@@ -51,7 +51,7 @@ namespace Cloc.Classes
             }
         }
 
-        public static double CheckSalary(string UCN)
+        internal static double CheckSalary(string UCN)
         {
             double salary = 0, overtime;
 

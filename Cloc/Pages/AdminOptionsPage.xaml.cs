@@ -87,9 +87,16 @@ namespace Cloc.Pages
                         flag = true;
                     }
                 }
+                else if(Person.AdminCount() != 1)
+                {
+                    if (DeleteWorkerQuery(split[1]) && Logger.AddLog(Session.UserToken.GetLoginData(), "Изтриване профила на " + split[0] + "."))
+                    {
+                        flag = true;
+                    }
+                }
                 else
                 {
-                    MessageBox.Show("Не може да бъде изтрит администраторски акаунт.");
+                    MessageBox.Show("Невалидна селекция. Системата не може да остане без администратор!");
                 }
             }
             else
@@ -105,8 +112,8 @@ namespace Cloc.Pages
             if (DeleteUser())
             {
                 MessageBox.Show("Избраният потребител беше изтрит успешно.");
-                ReloadPage();
             }
+            ReloadPage();
         }
 
         private void ChangeDataButton_Click(object sender, RoutedEventArgs e)
@@ -219,11 +226,7 @@ namespace Cloc.Pages
                                 {
                                     WorkPosition wp = Person.TranslateToWorkPosition(ComboBoxPosition.SelectedItem.ToString());
 
-                                    if (ucn == Session.UserToken.GetLoginData())
-                                    {
-                                        MessageBox.Show("Не може да се променя позицията на администратор.");
-                                    }
-                                    else
+                                    if (ucn != Session.UserToken.GetLoginData())
                                     {
                                         if (ChangePersonQuery(ucn, "Position", wp.ToString()) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна позицията на потребител " + split[0] + " на " + Person.TranslateFromWorkPosition(wp) + "."))
                                         {
@@ -233,6 +236,21 @@ namespace Cloc.Pages
                                         {
                                             MessageBox.Show("Промяната не бе успешна. Моля, опитайте по-късно!");
                                         }
+                                    }
+                                    else if (Person.AdminCount() != 1)
+                                    {
+                                        if (ChangePersonQuery(ucn, "Position", wp.ToString()) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна позицията на потребител " + split[0] + " на " + Person.TranslateFromWorkPosition(wp) + "."))
+                                        {
+                                            MessageBox.Show("Промяната бе успешна.");
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Промяната не бе успешна. Моля, опитайте по-късно!");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Невалидна селекция. Системата не може да остане без администратор!");
                                     }
                                 }
                                 else
@@ -244,7 +262,7 @@ namespace Cloc.Pages
                                 ComboBoxPosition.SelectedIndex = -1;
                                 break;
                             case 8:
-                                if (Validator.ValidateAccessCode(changeParam))
+                                if (Validator.ValidateAccessCode(changeParam) && !SelectAccessCodeQuery(changeParam))
                                 {
                                     if (ChangeAccessCodeQuery(ucn, changeParam) && Logger.AddLog(Session.UserToken.GetLoginData(), "Промяна кода за достъп на потребител " + split[0] + "."))
                                     {
@@ -257,7 +275,7 @@ namespace Cloc.Pages
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Въвели сте невалидни данни.");
+                                    MessageBox.Show("Въвели сте невалиден или вече съществуващ код. Той трябва да бъде 5-цифрен. Моля, опитайте отново!");
                                 }
 
                                 ReloadPage();
@@ -276,7 +294,7 @@ namespace Cloc.Pages
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Въвели сте невалидни данни.");
+                                    MessageBox.Show("Въвели сте невалидна часова ставка. Тя трябва да бъде между 0 и 500. Моля, опитайте отново!");
                                 }
 
                                 ReloadPage();
@@ -295,7 +313,7 @@ namespace Cloc.Pages
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Въвели сте невалидни данни.");
+                                    MessageBox.Show("Въвели сте невалиден процент. Той трябва да бъде между -10 и +25. Моля, опитайте отново!");
                                 }
 
                                 ReloadPage();
@@ -363,6 +381,7 @@ namespace Cloc.Pages
             {
                 MessageBox.Show("Не сте избрали потребител.");
             }
+            ReloadPage();
         }
     }
 }

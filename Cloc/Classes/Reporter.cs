@@ -5,9 +5,9 @@ using static Cloc.Classes.Security;
 
 namespace Cloc.Classes
 {
-    internal class Reporter
+    internal static class Reporter
     {
-        static public bool AddReport(string UCN, string names, double payment)
+        static internal bool AddReport(string UCN, string names, double payment)
         {
             UCN = EncryptString(UCN);
             string activityLine = DateTime.Now + ";" + UCN + ";" + names + ";" + Math.Round(payment, 2);
@@ -32,7 +32,7 @@ namespace Cloc.Classes
             }
         }
 
-        public static void RefreshReports()
+        internal static void RefreshReports()
         {
             List<string> reports = new();
 
@@ -75,7 +75,7 @@ namespace Cloc.Classes
             }
         }
 
-        static public List<string> AllUserReports(DateTime dateFrom, DateTime dateTo)
+        static internal List<string> AllUserReports(DateTime dateFrom, DateTime dateTo)
         {
             List<string> reports = new();
 
@@ -113,7 +113,7 @@ namespace Cloc.Classes
             return reports;
         }
 
-        static public List<string> UserReports(DateTime dateFrom, DateTime dateTo, string ucn)
+        static internal List<string> UserReports(DateTime dateFrom, DateTime dateTo, string ucn)
         {
             List<string> reports = new();
 

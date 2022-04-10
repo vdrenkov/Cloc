@@ -5,9 +5,9 @@ using static Cloc.Classes.Security;
 
 namespace Cloc.Classes
 {
-    public static class Checker
+    internal static class Checker
     {
-        static public bool AddCheck(User user)
+        static internal bool AddCheck(User user)
         {
             user.UserUCN = EncryptString(user.UserUCN);
             string checkLine = user.UserUCN + ";" + user.CheckIn + ";" + user.CheckOut;
@@ -32,7 +32,7 @@ namespace Cloc.Classes
             }
         }
 
-        static public void RefreshChecks()
+        static internal void RefreshChecks()
         {
             List<string> checks = new();
 
@@ -75,7 +75,7 @@ namespace Cloc.Classes
             }
         }
 
-        static public List<string> UserChecks(string ucn, int count)
+        static internal List<string> UserChecks(string ucn, int count)
         {
             List<string> checks = new();
             List<string> allChecks = new();
@@ -120,7 +120,7 @@ namespace Cloc.Classes
             return checks;
         }
 
-        public static List<string> PrintChosenChecks(string ucn, int count)
+        internal static List<string> PrintChosenChecks(string ucn, int count)
         {
             List<string> printList = new();
 

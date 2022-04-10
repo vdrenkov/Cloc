@@ -8,7 +8,7 @@ using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
 
 /* 
- * Реална проверка...
+ * Reports + Activities -> up to 100
 
  * Design
  * Full System Setup + Installation
@@ -41,7 +41,7 @@ namespace Cloc
                 Logger.RefreshLogs();
                 Checker.RefreshChecks();
                 Reporter.RefreshReports();
-                
+
                 count++;
             }
         }
@@ -71,7 +71,7 @@ namespace Cloc
             user.TotalHours = 0;
             user.Percent = 0;
 
-            p1.UCN = "0000000000";
+            p1.UCN = "1111111111";
             p1.Name = "Любомира";
             p1.Surname = "Петрова";
             p1.Email = "lpetrova@tu-sofia.bg";
@@ -82,7 +82,7 @@ namespace Cloc
             p1.Position = WorkPosition.Manager;
 
             u1.UserUCN = p1.UCN;
-            u1.AccessCode = "00000";
+            u1.AccessCode = "11111";
             u1.CheckIn = DateTime.Now;
             u1.CheckOut = DateTime.Now.AddHours(1.7685);
             u1.IsCheckedIn = false;
@@ -90,8 +90,8 @@ namespace Cloc
             u1.TotalHours = 10;
             u1.Percent = 20;
 
-            //MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
-           // MessageBox.Show(AddWorkerQuery(p1, u1).ToString());           
+            MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
+             MessageBox.Show(AddWorkerQuery(p1, u1).ToString());           
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)

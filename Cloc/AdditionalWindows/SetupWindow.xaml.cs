@@ -12,7 +12,7 @@ namespace Cloc.AdditionalWindows
     /// </summary>
     public partial class SetupWindow : Window
     {
-        public SetupWindow()
+        internal SetupWindow()
         {
             InitializeComponent();
             PreviewKeyDown += new KeyEventHandler(HandleEsc);
@@ -23,6 +23,23 @@ namespace Cloc.AdditionalWindows
             StartupWindow sw = new();
             Close();
             sw.Show();
+        }
+
+        internal void ReloadPage()
+        {
+            TextBoxServer.Text = string.Empty;
+            TextBoxUser.Text = string.Empty;
+            PasswordBoxDBPassword.Password = string.Empty;
+            TextBoxPort.Text = string.Empty;
+            TextBoxUCN.Text = string.Empty;
+            TextBoxName.Text = string.Empty;
+            TextBoxSurname.Text = string.Empty;
+            TextBoxEmail.Text = string.Empty;
+            TextBoxPhoneNumber.Text = string.Empty;
+            TextBoxCountry.Text = string.Empty;
+            TextBoxCity.Text = string.Empty;
+            TextBoxAddress.Text = string.Empty;
+            PasswordBoxAccessCode.Password = string.Empty;
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -107,6 +124,7 @@ namespace Cloc.AdditionalWindows
             {
                 MessageBox.Show("Моля, проверете коректността на въведените данни и опитайте отново!\n" +
                     "Всички полета са задължителни!");
+                ReloadPage();
             }
         }
     }

@@ -4,16 +4,16 @@ using static Cloc.Settings.SystemSetup;
 
 namespace Cloc.Database
 {
-    public class DatabaseConnection
+    internal class DatabaseConnection
     {
-        public string Server = GetServer();
-        public string Username = GetUsername();
-        public string Password = GetPassword();
-        public string Port = GetPort();
+        internal string Server = GetServer();
+        internal string Username = GetUsername();
+        internal string Password = GetPassword();
+        internal string Port = GetPort();
 
-        public MySqlConnection Connection { get; set; }
+        internal MySqlConnection Connection { get; set; }
 
-        public bool IsConnect()
+        internal bool IsConnect()
         {
             bool flag = true;
 
@@ -34,7 +34,7 @@ namespace Cloc.Database
             return flag;
         }
 
-        public void Close()
+        internal void Close()
         {
             Connection.Close();
         }

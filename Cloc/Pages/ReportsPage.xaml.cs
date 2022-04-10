@@ -70,7 +70,7 @@ namespace Cloc.Pages
                             else
                             {
                                 TextBoxSum.Text = "0";
-                                ListBoxPayments.Items.Add("Избраният потребител няма изплащания през избрания период от време...");
+                                ListBoxPayments.Items.Add("Няма изплащания за показване...");
                             }
                             if (Session.UserToken.GetLoginData() != split[1])
                             { Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед изплащанията на потребител " + split[0] + "."); }
@@ -98,7 +98,7 @@ namespace Cloc.Pages
                             else
                             {
                                 TextBoxSum.Text = "0";
-                                ListBoxPayments.Items.Add("Избраният потребител няма изплащания през избрания период от време...");
+                                ListBoxPayments.Items.Add("Няма изплащания за показване...");
                             }
                             Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед изплащанията на всички потребители.");
                         }
