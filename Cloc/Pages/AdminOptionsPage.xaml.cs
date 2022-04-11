@@ -87,7 +87,7 @@ namespace Cloc.Pages
                         flag = true;
                     }
                 }
-                else if(Person.AdminCount() != 1)
+                else if (Person.AdminCount() != 1)
                 {
                     if (DeleteWorkerQuery(split[1]) && Logger.AddLog(Session.UserToken.GetLoginData(), "Изтриване профила на " + split[0] + "."))
                     {

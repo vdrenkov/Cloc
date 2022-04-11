@@ -50,7 +50,7 @@ namespace Cloc.Pages
                         string userInfo = ComboBoxFilter.SelectedItem.ToString();
                         string[] split = userInfo.Split(", ");
                         string ucn = split[1];
-                        sum = SumAllPaymentsPerPerson(dateFrom, dateTo, ucn);
+                        sum = Math.Round(SumAllPaymentsPerPerson(dateFrom, dateTo, ucn),2);
 
                         if (ListBoxPayments != null)
                         {
@@ -78,7 +78,7 @@ namespace Cloc.Pages
                     }
                     else
                     {
-                        sum = SumAllPaymentsForAChosenPeriod(dateFrom, dateTo);
+                        sum = Math.Round(SumAllPaymentsForAChosenPeriod(dateFrom, dateTo),2);
 
                         if (ListBoxPayments != null)
                         {

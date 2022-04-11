@@ -97,7 +97,7 @@ namespace Cloc.Classes
 
             foreach (Person person in people)
             {
-                if (person.Position==WorkPosition.Admin)
+                if (person.Position == WorkPosition.Admin)
                 {
                     adminCount++;
                 }

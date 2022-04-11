@@ -86,17 +86,15 @@ namespace Cloc
             if (rp.ComboBoxFilter != null)
             {
                 rp.ComboBoxFilter.Items.Clear();
+                rp.ComboBoxFilter.Items.Add("Всички потребители");
+
+                List<Person> people = SelectAllPeopleQuery();
+
+                foreach (Person person in people)
+                {
+                    rp.ComboBoxFilter.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
+                }
             }
-
-            rp.ComboBoxFilter.Items.Add("Всички служители");
-
-            List<Person> people = SelectAllPeopleQuery();
-
-            foreach (Person person in people)
-            {
-                rp.ComboBoxFilter.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
-            }
-
             Main.Navigate(rp);
         }
 

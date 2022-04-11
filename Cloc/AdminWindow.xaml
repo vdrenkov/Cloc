@@ -13,9 +13,9 @@
             <Button Content="Main Page" Click="ButtonMain_Click" Width="auto"></Button>
             <Button Content="Admin Options" Width="auto" Click="ButtonAdminOptions_Click"></Button>
             <Button Content="Add User" Click="ButtonAddUser_Click" Width="auto"></Button>
-            <Button Content="Reports" Click="ButtonReports_Click" Width="auto"></Button>
             <Button Content="Profile Page" Width="auto" Click="ButtonProfile_Click"></Button>
             <Button Content="Activity Page"   Click="ButtonActivity_Click" Width="auto"></Button>
+            <Button Content="Reports" Click="ButtonReports_Click" Width="auto"></Button>
             <Button Content="Exit" Click="ButtonExit_Click" Width="auto"></Button>
         </StackPanel>
         <Frame x:Name="Main" Margin="0,35,0,0" NavigationUIVisibility="Hidden"></Frame>

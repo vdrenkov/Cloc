@@ -19,7 +19,7 @@
         <Border Background="#FFD2D0C4" Grid.Row="1"></Border>
         <Border Background="#FFD2D0C4" Grid.Row="2"></Border>
 
-        <Label Content="Ресторантьорска система за управление CLOC" Grid.Row="0" HorizontalAlignment="center" FontSize="22" FontWeight="Bold" FontStyle="Normal"/>
+        <Label Content="Информационна система за управление на човешки ресурси CLOC" Grid.Row="0" HorizontalAlignment="center" FontSize="22" FontWeight="Bold" FontStyle="Normal"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
