@@ -36,9 +36,11 @@ namespace Cloc.Classes
                 }
                 cipherText = Convert.ToBase64String(array);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                cipherText = null;
+                MessageBox.Show("Възникна грешка по време на работа.");
+                ErrorLog.AddErrorLog(ex.ToString());
+                cipherText = string.Empty;
             }
             return cipherText;
         }
@@ -61,9 +63,11 @@ namespace Cloc.Classes
                 using StreamReader streamReader = new(cryptoStream);
                 return streamReader.ReadToEnd();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                MessageBox.Show("Възникна грешка по време на работа.");
+                ErrorLog.AddErrorLog(ex.ToString());
+                return string.Empty;
             }
         }
 
@@ -80,10 +84,11 @@ namespace Cloc.Classes
                 byte[] hashBytes = sha256.ComputeHash(accessCodeBytes);
                 hashedString = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                hashedString = null;
-                MessageBox.Show("Възникна грешка при обработката на вашия код за достъп.");
+                hashedString = string.Empty;
+                MessageBox.Show("Възникна грешка по време на работа.");
+                ErrorLog.AddErrorLog(ex.ToString());
             }
             return hashedString;
         }

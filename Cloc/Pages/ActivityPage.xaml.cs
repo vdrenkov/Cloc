@@ -38,7 +38,7 @@ namespace Cloc.Pages
         {
             List<string> checks = new();
 
-            checks = Checker.PrintChosenChecks(ucn, count);
+            checks = Checker.PrintChosenChecks(ucn, count, false);
 
             if (ListBoxChecks != null)
             {
@@ -85,7 +85,7 @@ namespace Cloc.Pages
         {
             List<string> logs = new();
 
-            logs = Logger.UserLogs(ucn, count);
+            logs = Logger.UserLogs(ucn, count, false);
 
             if (ListBoxLogs != null && ListBoxLogs.Items != null)
             {

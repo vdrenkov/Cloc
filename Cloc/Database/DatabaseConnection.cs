@@ -1,5 +1,7 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Cloc.Classes;
+using MySql.Data.MySqlClient;
 using System;
+using System.Windows;
 using static Cloc.Settings.SystemSetup;
 
 namespace Cloc.Database
@@ -25,8 +27,10 @@ namespace Cloc.Database
                     Connection = new MySqlConnection(connstring);
                     Connection.Open();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    MessageBox.Show("Възникна неочаквана грешка.");
+                    ErrorLog.AddErrorLog(ex.ToString());
                     flag = false;
                 }
             }

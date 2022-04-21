@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Windows;
 using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc.Classes
@@ -14,6 +15,7 @@ namespace Cloc.Classes
                 MatchCollection matches;
 
                 matches = rx.Matches(UCN);
+
                 if (matches.Count > 0)
                 { return true; }
                 else
@@ -21,9 +23,10 @@ namespace Cloc.Classes
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Грешка при валидацията на ЕГН.");
+                MessageBox.Show("Въведено е неправилно ЕГН.");
+                ErrorLog.AddErrorLog(ex.ToString());
                 return false;
             }
         }
@@ -39,9 +42,10 @@ namespace Cloc.Classes
                 if (matches.Count > 0)
                 { flag = true; }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Грешка при валидация на кода за достъп.");
+                MessageBox.Show("Въведен е неправилен код за достъп.");
+                ErrorLog.AddErrorLog(ex.ToString());
             }
             return flag;
         }
@@ -54,23 +58,24 @@ namespace Cloc.Classes
             {
                 if (ValidateAccessCode(accessCode))
                 {
-                    if (!SelectAccessCodeQuery(accessCode) && ChangeAccessCodeQuery(ucn, accessCode))
+                    if (!SelectAccessCodeQuery(accessCode))
                     {
-                        flag = true;
+                        if (ChangeAccessCodeQuery(ucn, accessCode))
+                        { flag = true; }
                     }
                     else
                     {
-                        Console.WriteLine("Промяната не беше успешна. Моля, въведете съществуващо ЕГН!");
+                        MessageBox.Show("Въведеният код за достъп вече се използва.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Моля, въведете 5-цифрен код за достъп!");
+                    MessageBox.Show("Моля, въведете 5-цифрен код за достъп!");
                 }
             }
             else
             {
-                Console.WriteLine("Моля, въведете съществуващо ЕГН!");
+                MessageBox.Show("Моля, въведете съществуващо ЕГН!");
             }
             return flag;
         }
@@ -84,10 +89,10 @@ namespace Cloc.Classes
             if (ValidateAccessCode(accessCode))
             { currentUser = SelectUserByAccessCodeQuery(accessCode); }
 
-            if (currentUser.UserUCN != null)
+            if (currentUser.UserUCN != string.Empty)
             { currentPerson = SelectPersonQuery(currentUser.UserUCN); }
 
-            if (currentPerson.UCN != null)
+            if (currentPerson.UCN != string.Empty)
             {
                 Session.UserToken.SetLoginData(currentPerson.UCN);
                 flag = true;

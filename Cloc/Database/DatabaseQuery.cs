@@ -36,7 +36,6 @@ namespace Cloc.Database
                     $"'{person.City}', '{person.Address}', '{person.Position}'); insert into Users(userUcn, accessCode) values('{person.UCN}', '{accessCode}');";
 
                 cmd.ExecuteNonQuery();
-                connection.Close();
 
                 if (!File.Exists(".\\Logs.txt"))
                 {
@@ -53,18 +52,30 @@ namespace Cloc.Database
                     File.Create(".\\Reports.txt");
                 }
 
+                if (!File.Exists(".\\ErrorLogs.txt"))
+                {
+                    File.Create(".\\ErrorLogs.txt");
+                }
+
                 person.UCN = DecryptString(person.UCN);
                 User user = SelectUserQuery(person.UCN);
 
-                if (user.UserUCN != null && SetSettings(server, username, password, port) && Logger.AddLog(person.UCN, "Начална инициализация.") && Checker.AddCheck(SelectUserQuery(person.UCN)))
+                if (user.UserUCN != null && SetSettings(server, username, password, port))
                 {
-                    flag = true;
+                    if (Logger.AddLog(person.UCN, "Начална инициализация.") && Checker.AddCheck(SelectUserQuery(person.UCN)))
+                    { flag = true; }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ErrorLog.AddErrorLog(ex.ToString());
                 return false;
             }
+            finally
+            {
+                connection.Close();
+            }
+
             return flag;
         }
 
@@ -110,14 +121,15 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0 && command.ExecuteNonQuery() > 0)
                     { flag = true; }
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ErrorLog.AddErrorLog(ex.ToString());
                     return false;
                 }
                 finally
                 {
+                    dbConn.Close();
                     person.UCN = DecryptString(person.UCN);
                     user.UserUCN = person.UCN;
                 }
@@ -141,13 +153,18 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ErrorLog.AddErrorLog(ex.ToString());
                     return false;
                 }
+                finally
+                {
+                    dbConn.Close();
+                }
             }
+
             return flag;
         }
 
@@ -169,11 +186,16 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Промяната на кода за достъп не беше успешна.");
+                    ErrorLog.AddErrorLog(ex.ToString());
+                    return false;
+                }
+                finally
+                {
+                    dbConn.Close();
                 }
             }
             return flag;
@@ -200,14 +222,15 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0 && command.ExecuteNonQuery() > 0)
                     { flag = true; }
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ErrorLog.AddErrorLog(ex.ToString());
                     return false;
                 }
                 finally
                 {
+                    dbConn.Close();
                     user.UserUCN = DecryptString(user.UserUCN);
                 }
             }
@@ -236,14 +259,15 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0 && command.ExecuteNonQuery() > 0)
                     { flag = true; }
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ErrorLog.AddErrorLog(ex.ToString());
                     return false;
                 }
                 finally
                 {
+                    dbConn.Close();
                     user.UserUCN = DecryptString(user.UserUCN);
                 }
             }
@@ -269,14 +293,15 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ErrorLog.AddErrorLog(ex.ToString());
                     return false;
                 }
                 finally
                 {
+                    dbConn.Close();
                     user.UserUCN = DecryptString(user.UserUCN);
                 }
             }
@@ -300,14 +325,15 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ErrorLog.AddErrorLog(ex.ToString());
                     return false;
                 }
                 finally
                 {
+                    dbConn.Close();
                     user.UserUCN = DecryptString(user.UserUCN);
                 }
             }
@@ -332,11 +358,15 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ErrorLog.AddErrorLog(ex.ToString());
                     return false;
+                }
+                finally
+                {
+                    dbConn.Close();
                 }
             }
             return flag;
@@ -360,12 +390,13 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ErrorLog.AddErrorLog(ex.ToString());
                     return false;
                 }
+                finally { dbConn.Close(); }
             }
             return flag;
         }
@@ -387,11 +418,15 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ErrorLog.AddErrorLog(ex.ToString());
                     return false;
+                }
+                finally
+                {
+                    dbConn.Close();
                 }
             }
             return flag;
@@ -425,17 +460,27 @@ namespace Cloc.Database
                         person.Address = reader.GetString(7);
                         person.Position = (WorkPosition)Enum.Parse(typeof(WorkPosition), reader.GetString(8));
                     }
-
                     reader.Close();
-                    dbConn.Close();
                     person.UCN = DecryptString(person.UCN);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Възникна неочаквана грешка при обработка на заявката.");
+                    ErrorLog.AddErrorLog(ex.ToString());
+                    return new Person();
+                }
+                finally
+                {
+                    dbConn.Close();
                 }
             }
-            return person;
+
+            if (person.UCN != string.Empty)
+            { return person; }
+            else
+            {
+                return new Person();
+            }
         }
 
         internal static List<Person> SelectAllPeopleQuery()
@@ -469,16 +514,24 @@ namespace Cloc.Database
                         people.Add(person);
                         person = new Person();
                     }
-
                     reader.Close();
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Възникна неочаквана грешка при обработка на заявката.");
+                    ErrorLog.AddErrorLog(ex.ToString());
+                    return new List<Person>();
+                }
+                finally
+                {
+                    dbConn.Close();
                 }
             }
-            return people;
+
+            if (people.Count > 0)
+            { return people; }
+            else
+            { return new List<Person>(); }
         }
 
         internal static User SelectUserQuery(string UserUCN)
@@ -510,15 +563,24 @@ namespace Cloc.Database
 
                     }
                     reader.Close();
-                    dbConn.Close();
                     user.UserUCN = DecryptString(user.UserUCN);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Възникна неочаквана грешка при обработка на заявката.");
+                    ErrorLog.AddErrorLog(ex.ToString());
+                    return new User();
+                }
+                finally
+                {
+                    dbConn.Close();
                 }
             }
-            return user;
+
+            if (user.UserUCN != string.Empty)
+            { return user; }
+            else
+            { return new User(); }
         }
 
         internal static User SelectUserByAccessCodeQuery(string accessCode)
@@ -549,15 +611,26 @@ namespace Cloc.Database
                         user.Percent = reader.GetDouble(7);
                     }
                     reader.Close();
-                    dbConn.Close();
                     user.UserUCN = DecryptString(user.UserUCN);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Възникна неочаквана грешка при обработка на заявката.");
+                    ErrorLog.AddErrorLog(ex.ToString());
+                    return new User();
+                }
+                finally
+                {
+                    dbConn.Close();
                 }
             }
-            return user;
+
+            if (user.UserUCN != string.Empty)
+            { return user; }
+            else
+            {
+                return new User();
+            }
         }
 
         internal static bool SelectAccessCodeQuery(string accessCode)
@@ -588,12 +661,14 @@ namespace Cloc.Database
                     }
 
                     reader.Close();
-                    dbConn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Възникна неочаквана грешка при обработка на заявката.");
+                    ErrorLog.AddErrorLog(ex.ToString());
+                    return false;
                 }
+                finally { dbConn.Close(); }
             }
 
             return flag;

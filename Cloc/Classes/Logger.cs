@@ -1,88 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 using static Cloc.Classes.Security;
 
 namespace Cloc.Classes
 {
     internal static class Logger
     {
-        static internal bool AddLog(string UCN, string activity)
-        {
-            UCN = EncryptString(UCN);
-            string activityLine = DateTime.Now + ";" + UCN + ";" + activity;
+        private readonly static string path = ".\\Logs.txt";
 
-            try
+        static internal bool RefreshLogs()
+        {
+            List<string> logs = FileHelper.ReadFileForRefresh(path);
+
+            bool isSuccessful = FileHelper.RefreshFile(path, logs);
+
+            if (isSuccessful)
+            { return true; }
+            else { return false; }
+        }
+
+        static internal bool AddLog(string ucn, string activity)
+        {
+            ucn = EncryptString(ucn);
+            string activityLine = DateTime.Now + ";" + ucn + ";" + activity;
+
+            bool isSuccessful = FileHelper.WriteToFile(path, activityLine);
+
+            if (isSuccessful)
             {
-                if (File.Exists(".\\Logs.txt"))
-                {
-                    File.AppendAllText(".\\Logs.txt", activityLine + Environment.NewLine);
-                }
-                else
-                {
-                    File.Create(".\\Logs.txt").Close();
-                }
-                UCN = DecryptString(UCN);
                 return true;
             }
-            catch (Exception)
+            else
             {
-                Console.WriteLine("Възникна неочаквана грешка при записване на вашата активност.");
                 return false;
             }
         }
 
-        static internal void RefreshLogs()
+        static internal List<string> UserLogs(string UCN, int count, bool isAll)
         {
-            List<string> logs = new();
-
-            try
-            {
-                using (StreamReader reader = new(".\\Logs.txt"))
-                {
-                    var line = reader.ReadLine();
-
-                    while (line != null)
-                    {
-                        string[] results = line.Split(';', ';', ';');
-
-                        if (DateTime.TryParse(results[0], out DateTime date) && date >= DateTime.Now.AddYears(-5))
-                        {
-                            logs.Add(line);
-                        }
-                        line = reader.ReadLine();
-                    }
-                }
-
-                if (File.Exists(".\\Logs.txt"))
-                {
-                    File.Delete(".\\Logs.txt");
-                    File.Create(".\\Logs.txt").Close();
-
-                    foreach (string log in logs)
-                    {
-                        File.AppendAllText(".\\Logs.txt", log + Environment.NewLine);
-                    }
-                }
-                else
-                {
-                    File.Create(".\\Logs.txt").Close();
-                }
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Възникна неочаквана грешка по време на работа.");
-            }
-        }
-
-        static internal List<string> UserLogs(string UCN, int count)
-        {
-            List<string> logs = new();
+            List<string> logs;
             List<string> allLogs = new();
 
             try
             {
-                using (StreamReader reader = new(".\\Logs.txt"))
+                using (StreamReader reader = new(path))
                 {
                     var line = reader.ReadLine();
 
@@ -105,18 +68,12 @@ namespace Cloc.Classes
 
                 allLogs.Reverse();
 
-                for (int i = 0; i < allLogs.Count; i++)
-                {
-                    logs.Add(allLogs[i]);
-                    if (i == (count - 1))
-                    {
-                        break;
-                    }
-                }
+                logs = FileHelper.FilterItems(path, allLogs, count, isAll);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Възникна неочаквана грешка при извличане на вашата активност.");
+                MessageBox.Show("Възникна неочаквана грешка при извличане на вашата активност.");
+                ErrorLog.AddErrorLog(ex.ToString());
                 return null;
             }
 

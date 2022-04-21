@@ -91,6 +91,8 @@ namespace Cloc
             //MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
             //MessageBox.Show(AddWorkerQuery(p1, u1).ToString());
             //Reporter.AddReport("0000000000", "Vivaldi", 1500);
+            //MessageBox.Show(ChangeHourPaymentQuery("0000000000", 1000000).ToString());
+            //MessageBox.Show(ErrorLog.AddErrorLog("Error test...").ToString());
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using static Cloc.Classes.Checker;
 using static Cloc.Database.DatabaseQuery;
 
@@ -10,15 +11,15 @@ namespace Cloc.Classes
         const int MonthWorkHours = 176;
         const int MaxWorkShifts = 255;
 
-        internal static bool HasOvertime(User user)
+        internal static double TotalHours(User user)
         {
+            bool isAll = false;
             double totalHours = 0;
             DateTime monthAgo = DateTime.Now.AddDays(-30);
+            List<string> monthChecks = UserChecks(user.UserUCN, MaxWorkShifts, isAll);
 
             try
             {
-                List<string> monthChecks = UserChecks(user.UserUCN, MaxWorkShifts);
-
                 foreach (string item in monthChecks)
                 {
                     string[] results = item.Split(';', ';');
@@ -34,35 +35,46 @@ namespace Cloc.Classes
                         break;
                     }
                 }
-
-                if (totalHours > MonthWorkHours)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Възникна неочаквана грешка при пресмятане на вашия овъртайм.");
+                MessageBox.Show("Възникна грешка по време на работа.");
+                ErrorLog.AddErrorLog(ex.ToString());
+                return 0;
+            }
+
+            return totalHours;
+        }
+
+        internal static bool IsOvertime(User user)
+        {
+            double totalHours = TotalHours(user);
+
+            if (totalHours > MonthWorkHours)
+            {
+                return true;
+            }
+            else
+            {
                 return false;
             }
         }
 
-        internal static double CheckSalary(string UCN)
+        internal static double CheckSalary(string ucn)
         {
             double salary = 0, overtime;
 
             try
             {
-                User user = SelectUserQuery(UCN);
+                User user = SelectUserQuery(ucn);
+                bool isOvertime = IsOvertime(user);
 
-                if (HasOvertime(user) && user.TotalHours > MonthWorkHours)
+                if (isOvertime && user.TotalHours > MonthWorkHours)
                 {
                     overtime = (user.TotalHours - MonthWorkHours) * 1.5;
-                    salary = user.TotalHours * user.HourPayment + overtime;
+
+                    if (overtime > 0)
+                    { salary = user.TotalHours * user.HourPayment + overtime; }
                 }
                 else
                 {
@@ -70,8 +82,11 @@ namespace Cloc.Classes
                 }
                 salary += (salary * user.Percent) / 100;
             }
-            catch (Exception)
-            { Console.WriteLine("Възникна неочаквана грешка при пресмятане на вашата заплата."); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Възникна неочаквана грешка при пресмятане на вашата заплата.");
+                ErrorLog.AddErrorLog(ex.ToString());
+            }
 
             return salary;
         }

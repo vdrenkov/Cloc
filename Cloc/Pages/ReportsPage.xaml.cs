@@ -50,13 +50,14 @@ namespace Cloc.Pages
                         string userInfo = ComboBoxFilter.SelectedItem.ToString();
                         string[] split = userInfo.Split(", ");
                         string ucn = split[1];
-                        sum = Math.Round(SumAllPaymentsPerPerson(dateFrom, dateTo, ucn),2);
+                        bool isAll = false;
+                        sum = Math.Round(SumAllPayments(dateFrom, dateTo, ucn, isAll), 2);
 
                         if (ListBoxPayments != null)
                         {
                             ListBoxPayments.Items.Clear();
 
-                            List<string> UserReports = Reporter.UserReports(dateFrom, dateTo, ucn);
+                            List<string> UserReports = Reporter.UserReports(dateFrom, dateTo, ucn, false);
 
                             if (UserReports != null && UserReports.Count != 0)
                             {
@@ -78,21 +79,22 @@ namespace Cloc.Pages
                     }
                     else
                     {
-                        sum = Math.Round(SumAllPaymentsForAChosenPeriod(dateFrom, dateTo),2);
+                        bool isAll = true;
+                        sum = Math.Round(SumAllPayments(dateFrom, dateTo, string.Empty, isAll), 2);
 
                         if (ListBoxPayments != null)
                         {
                             ListBoxPayments.Items.Clear();
 
-                            List<string> UserReports = AllUserReports(dateFrom, dateTo);
+                            List<string> userReports = UserReports(dateFrom, dateTo, string.Empty, true);
 
-                            if (UserReports != null && UserReports.Count != 0)
+                            if (userReports != null && userReports.Count != 0)
                             {
                                 TextBoxSum.Text = sum.ToString();
 
-                                foreach (string UserReport in UserReports)
+                                foreach (string userReport in userReports)
                                 {
-                                    ListBoxPayments.Items.Add(UserReport);
+                                    ListBoxPayments.Items.Add(userReport);
                                 }
                             }
                             else

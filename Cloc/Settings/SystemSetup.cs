@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cloc.Classes;
+using System;
 
 namespace Cloc.Settings
 {
@@ -35,8 +36,11 @@ namespace Cloc.Settings
                 Settings.Default.Reload();
                 return true;
             }
-            catch (Exception)
-            { return false; }
+            catch (Exception ex)
+            {
+                ErrorLog.AddErrorLog(ex.ToString());
+                return false;
+            }
         }
     }
 }

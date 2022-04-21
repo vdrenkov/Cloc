@@ -19,7 +19,11 @@ namespace Cloc
 
         private void ExitCurrentSession()
         {
-            Logger.AddLog(Session.UserToken.GetLoginData(), "Изход от системата.");
+            if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Изход от системата."))
+            {
+                MessageBox.Show("Неуспешен запис на активността.");
+            }
+
             Session.UserToken.RemoveLoginData();
             ActivityPage.count = ActivityPage.COUNT;
 

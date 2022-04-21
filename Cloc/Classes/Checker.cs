@@ -1,99 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 using static Cloc.Classes.Security;
 
 namespace Cloc.Classes
 {
     internal static class Checker
     {
+        private readonly static string path = ".\\Checks.txt";
+
+        static internal bool RefreshChecks()
+        {
+            List<string> checks = FileHelper.ReadFileForRefresh(path);
+
+            bool isSuccessful = FileHelper.RefreshFile(path, checks);
+
+            if (isSuccessful)
+            { return true; }
+            else { return false; }
+        }
+
         static internal bool AddCheck(User user)
         {
             user.UserUCN = EncryptString(user.UserUCN);
-            string checkLine = user.UserUCN + ";" + user.CheckIn + ";" + user.CheckOut;
+            string checkLine = user.CheckIn + ";" + user.CheckOut + ";" + user.UserUCN;
 
-            try
+            bool isSuccessful = FileHelper.WriteToFile(path, checkLine);
+            user.UserUCN = DecryptString(user.UserUCN);
+
+            if (isSuccessful)
             {
-                if (File.Exists(".\\Checks.txt"))
-                {
-                    File.AppendAllText(".\\Checks.txt", checkLine + Environment.NewLine);
-                }
-                else
-                {
-                    File.Create(".\\Checks.txt").Close();
-                }
-                user.UserUCN = DecryptString(user.UserUCN);
                 return true;
             }
-            catch (Exception)
+            else
             {
-                Console.WriteLine("Възникна неочаквана грешка при чекиране.");
                 return false;
             }
         }
 
-        static internal void RefreshChecks()
+        static internal List<string> UserChecks(string ucn, int count, bool isAll)
         {
-            List<string> checks = new();
-
-            try
-            {
-                using (StreamReader reader = new(".\\Checks.txt"))
-                {
-                    var line = reader.ReadLine();
-
-                    while (line != null)
-                    {
-                        string[] results = line.Split(';', ';', ';');
-
-                        if (DateTime.TryParse(results[1], out DateTime date) && date >= DateTime.Now.AddYears(-5))
-                        {
-                            checks.Add(line);
-                        }
-                        line = reader.ReadLine();
-                    }
-                }
-
-                if (File.Exists(".\\Checks.txt"))
-                {
-                    File.Delete(".\\Checks.txt");
-                    File.Create(".\\Checks.txt").Close();
-
-                    foreach (string check in checks)
-                    {
-                        File.AppendAllText(".\\Checks.txt", check + Environment.NewLine);
-                    }
-                }
-                else
-                {
-                    File.Create(".\\Checks.txt").Close();
-                }
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Възникна неочаквана грешка по време на работа.");
-            }
-        }
-
-        static internal List<string> UserChecks(string ucn, int count)
-        {
-            List<string> checks = new();
+            List<string> checks;
             List<string> allChecks = new();
 
             try
             {
-                using (StreamReader reader = new(".\\Checks.txt"))
+                using (StreamReader reader = new(path))
                 {
                     var line = reader.ReadLine();
 
                     while (line != null)
                     {
                         string[] results = line.Split(';', ';');
-                        results[0] = DecryptString(results[0]);
+                        results[2] = DecryptString(results[2]);
 
-                        if (results[0] == ucn)
+                        if (results[2] == ucn)
                         {
-                            string temp = results[0] + ";" + results[1] + ";" + results[2];
+                            string temp = results[2] + ";" + results[1] + ";" + results[0];
                             allChecks.Add(temp);
                         }
                         line = reader.ReadLine();
@@ -102,42 +66,48 @@ namespace Cloc.Classes
 
                 allChecks.Reverse();
 
-                for (int i = 0; i < allChecks.Count; i++)
-                {
-                    checks.Add(allChecks[i]);
-                    if (i == (count - 1))
-                    {
-                        break;
-                    }
-                }
+                checks = FileHelper.FilterItems(path, allChecks, count, isAll);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Възникна неочаквана грешка при извличане на вашите чекирания.");
+                MessageBox.Show("Възникна неочаквана грешка при извличане на вашите чекирания.");
+                ErrorLog.AddErrorLog(ex.ToString());
                 return null;
             }
 
             return checks;
         }
 
-        internal static List<string> PrintChosenChecks(string ucn, int count)
+        internal static List<string> PrintChosenChecks(string ucn, int count, bool isAll)
         {
             List<string> printList = new();
 
             try
             {
-                List<string> list = UserChecks(ucn, count);
+                List<string> list = UserChecks(ucn, count, isAll);
                 foreach (string check in list)
                 {
                     string[] results = check.Split(';', ';');
 
-                    string temp = "ЕГН: " + results[0] + "     Check-in: " + results[1] + "     Check-out: " + results[2];
+                    string temp = "ЕГН: " + results[2] + "     Check-in: " + results[1] + "     Check-out: " + results[0];
                     printList.Add(temp);
                 }
-                return printList;
+
+                if (printList.Count > 0)
+                {
+                    return printList;
+                }
+                else
+                {
+                    return new List<string>();
+                }
             }
-            catch (Exception)
-            { return null; }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Възникна неочаквана грешка по време на работа.");
+                ErrorLog.AddErrorLog(ex.ToString());
+                return new List<string>();
+            }
         }
     }
 }
