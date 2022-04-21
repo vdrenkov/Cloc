@@ -62,6 +62,10 @@ namespace Cloc.Classes
                     {
                         if (ChangeAccessCodeQuery(ucn, accessCode))
                         { flag = true; }
+                        else
+                        {
+                            MessageBox.Show("Въвели сте несъществуващо ЕГН.");
+                        }
                     }
                     else
                     {
@@ -89,10 +93,10 @@ namespace Cloc.Classes
             if (ValidateAccessCode(accessCode))
             { currentUser = SelectUserByAccessCodeQuery(accessCode); }
 
-            if (currentUser.UserUCN != string.Empty)
+            if (currentUser.UserUCN != null)
             { currentPerson = SelectPersonQuery(currentUser.UserUCN); }
 
-            if (currentPerson.UCN != string.Empty)
+            if (currentPerson.UCN != null)
             {
                 Session.UserToken.SetLoginData(currentPerson.UCN);
                 flag = true;

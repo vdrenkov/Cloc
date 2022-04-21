@@ -17,13 +17,18 @@ namespace Cloc.AdditionalWindows
             PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
+        private void CloseTab()
+        {
+            StartupWindow sw = new();
+            Close();
+            sw.Show();
+        }
+
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
-                StartupWindow sw = new();
-                Close();
-                sw.Show();
+                CloseTab();
             }
         }
 
@@ -41,9 +46,7 @@ namespace Cloc.AdditionalWindows
             else
             {
                 MessageBox.Show("Въвели сте грешна парола!");
-                StartupWindow stw = new();
-                Close();
-                stw.Show();
+                CloseTab();
             }
         }
 
@@ -53,23 +56,18 @@ namespace Cloc.AdditionalWindows
             {
                 Logger.AddLog(TextBoxUCN.Text.ToString(), "Промяна на кода за достъп.");
                 MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {PasswordBox.Password}");
-                StartupWindow stw = new();
-                Close();
-                stw.Show();
+                CloseTab();
             }
             else
             {
-                MessageBox.Show("Въвели сте неправилни или вече съществуващи данни!");
-                TextBoxUCN.Text = null;
-                PasswordBox.Password = null;
+                TextBoxUCN.Text = string.Empty;
+                PasswordBox.Password = string.Empty;
             }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            StartupWindow stw = new();
-            Close();
-            stw.Show();
+            CloseTab();
         }
     }
 }

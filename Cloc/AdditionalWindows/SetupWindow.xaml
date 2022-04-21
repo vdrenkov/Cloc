@@ -8,6 +8,7 @@
         WindowState="Maximized"
     WindowStyle="None"
         Title="SetupWindow" Height="auto" Width="auto">
+    
     <Grid Name="MainGrid" FocusManager.FocusedElement="{Binding ElementName=TextBoxUCN}">
 
         <Grid.ColumnDefinitions>
@@ -63,5 +64,6 @@
 
         <Button x:Name="ButtonExit" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="top" Content="Изход" Click="ButtonExit_Click" Grid.Column="3" Grid.Row="0"/>
         <Button x:Name="ButtonSetup" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="Bottom" Content="Настройка" Click="ButtonSetup_Click" Grid.Column="3" Grid.Row="9"/>
+  
     </Grid>
 </Window>

@@ -36,9 +36,10 @@ namespace Cloc
 
             if (count == 0)
             {
-                Logger.RefreshLogs();
-                Checker.RefreshChecks();
-                Reporter.RefreshReports();
+                if (!Logger.RefreshLogs()) { MessageBox.Show("Неуспешно актуализиране на файла с логове."); }
+                if (!Checker.RefreshChecks()) { MessageBox.Show("Неуспешно актуализиране на файла с чекове."); }
+                if (!Reporter.RefreshReports()) { MessageBox.Show("Неуспешно актуализиране на файла със справки."); }
+                if (!ErrorLog.RefreshErrorLogs()) { MessageBox.Show("Неуспешно актуализиране на файла с грешки."); }
 
                 count++;
             }
@@ -110,27 +111,30 @@ namespace Cloc
         }
         private void ButtonEnter_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidateEntry(PasswordBoxAccessCode.Password.ToString()))
+            if (PasswordBoxAccessCode.Password != null)
             {
-                Person person = SelectPersonQuery(GetLoginData());
-                Logger.AddLog(person.UCN, "Вход в системата.");
-
-                if (IsAdmin(person))
+                if (ValidateEntry(PasswordBoxAccessCode.Password.ToString()))
                 {
-                    AdminWindow aw = new();
-                    Close();
-                    aw.Show();
+                    Person person = SelectPersonQuery(GetLoginData());
+                    Logger.AddLog(person.UCN, "Вход в системата.");
+
+                    if (IsAdmin(person))
+                    {
+                        AdminWindow aw = new();
+                        Close();
+                        aw.Show();
+                    }
+                    else
+                    {
+                        MainWindow mw = new();
+                        Close();
+                        mw.Show();
+                    }
                 }
                 else
                 {
-                    MainWindow mw = new();
-                    Close();
-                    mw.Show();
+                    PasswordBoxAccessCode.Password = null;
                 }
-            }
-            else
-            {
-                PasswordBoxAccessCode.Password = null;
             }
         }
 

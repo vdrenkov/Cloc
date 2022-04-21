@@ -475,7 +475,7 @@ namespace Cloc.Database
                 }
             }
 
-            if (person.UCN != string.Empty)
+            if (person.UCN != null)
             { return person; }
             else
             {
@@ -577,7 +577,7 @@ namespace Cloc.Database
                 }
             }
 
-            if (user.UserUCN != string.Empty)
+            if (user.UserUCN != null)
             { return user; }
             else
             { return new User(); }
@@ -625,7 +625,7 @@ namespace Cloc.Database
                 }
             }
 
-            if (user.UserUCN != string.Empty)
+            if (user.UserUCN != null)
             { return user; }
             else
             {

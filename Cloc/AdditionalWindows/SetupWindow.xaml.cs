@@ -18,6 +18,7 @@ namespace Cloc.AdditionalWindows
             PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
+        //TODO Start here
         private void ExitSession()
         {
             StartupWindow sw = new();
@@ -69,6 +70,7 @@ namespace Cloc.AdditionalWindows
             {
                 flag++;
             }
+
             if (string.IsNullOrEmpty(TextBoxName.Text)) { flag++; }
             if (string.IsNullOrEmpty(TextBoxSurname.Text)) { flag++; }
             if (string.IsNullOrEmpty(TextBoxEmail.Text)) { flag++; }
@@ -111,9 +113,7 @@ namespace Cloc.AdditionalWindows
                 if (StartupQuery(server, user, password, port, person, accessCode))
                 {
                     MessageBox.Show($"Настройката на системата беше успешна!\nВашият код за достъп е: {accessCode}");
-                    StartupWindow sw = new();
-                    Close();
-                    sw.Show();
+                    ExitSession();
                 }
                 else
                 {
