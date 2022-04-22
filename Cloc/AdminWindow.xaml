@@ -11,8 +11,8 @@
     <Grid>
         <StackPanel Orientation="horizontal" Height="70" Width="500" VerticalAlignment="top">
             <Button Content="Main Page" Click="ButtonMain_Click" Width="auto"></Button>
-            <Button Content="Admin Options" Width="auto" Click="ButtonAdminOptions_Click"></Button>
             <Button Content="Add User" Click="ButtonAddUser_Click" Width="auto"></Button>
+            <Button Content="Admin Options" Width="auto" Click="ButtonAdminOptions_Click"></Button>
             <Button Content="Profile Page" Width="auto" Click="ButtonProfile_Click"></Button>
             <Button Content="Activity Page"   Click="ButtonActivity_Click" Width="auto"></Button>
             <Button Content="Reports" Click="ButtonReports_Click" Width="auto"></Button>

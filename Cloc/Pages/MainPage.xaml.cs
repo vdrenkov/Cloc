@@ -17,7 +17,6 @@ namespace Cloc.Pages
 
         public MainPage()
         {
-
             try
             {
                 ucn = Session.UserToken.GetLoginData();

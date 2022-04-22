@@ -15,12 +15,13 @@ namespace Cloc.Database
         {
             bool flag = false;
             string connectionString = $"server={server};user={username};password={password}; port={port};";
-            var connection = new MySqlConnection(connectionString);
-            var cmd = connection.CreateCommand();
 
             try
             {
+                var connection = new MySqlConnection(connectionString);
+                var cmd = connection.CreateCommand();
                 connection.Open();
+
                 person.UCN = EncryptString(person.UCN);
                 accessCode = HashString(accessCode);
                 cmd.CommandText = "drop database if exists ClocDB; create database if not exists ClocDB; use ClocDB; " +
@@ -36,6 +37,7 @@ namespace Cloc.Database
                     $"'{person.City}', '{person.Address}', '{person.Position}'); insert into Users(userUcn, accessCode) values('{person.UCN}', '{accessCode}');";
 
                 cmd.ExecuteNonQuery();
+                connection.Close();
 
                 if (!File.Exists(".\\Logs.txt"))
                 {
@@ -70,10 +72,6 @@ namespace Cloc.Database
             {
                 ErrorLog.AddErrorLog(ex.ToString());
                 return false;
-            }
-            finally
-            {
-                connection.Close();
             }
 
             return flag;
@@ -611,7 +609,6 @@ namespace Cloc.Database
                         user.Percent = reader.GetDouble(7);
                     }
                     reader.Close();
-                    user.UserUCN = DecryptString(user.UserUCN);
                 }
                 catch (Exception ex)
                 {
@@ -626,7 +623,10 @@ namespace Cloc.Database
             }
 
             if (user.UserUCN != null)
-            { return user; }
+            {
+                user.UserUCN = DecryptString(user.UserUCN);
+                return user;
+            }
             else
             {
                 return new User();
@@ -636,7 +636,7 @@ namespace Cloc.Database
         internal static bool SelectAccessCodeQuery(string accessCode)
         {
             bool flag = false;
-            string DBAccessCode = null;
+            string DBAccessCode = string.Empty;
             accessCode = HashString(accessCode);
             DatabaseConnection dbConn = new();
 

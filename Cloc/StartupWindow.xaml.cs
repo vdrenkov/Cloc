@@ -8,15 +8,16 @@ using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
 
 /* 
- * Activity -> All
+ * ActivityPage -> All, AddUserPage, AdminOptionsPage (и трите опции по нещо) -> AddLog -> към потребител
  * Design
- * Language menu
+ * 
+ * Startup Query -> Successful test х2
  * StartupWindow -> Exit confirmation uncomment, delete test button
  * 
  * Access Password -> 1cm13*8vCt19_xRc
  * DB Password -> 348_sha765_KaD3l
  * 
- * Задание: Проектиране на информационна система за управление на човешки ресурси
+ * Задание: Проектиране на информационна система за управление на човешки ресурси.
 */
 
 namespace Cloc
@@ -133,7 +134,7 @@ namespace Cloc
                 }
                 else
                 {
-                    PasswordBoxAccessCode.Password = null;
+                    PasswordBoxAccessCode.Password = string.Empty;
                 }
             }
         }
@@ -240,7 +241,7 @@ namespace Cloc
         }
         private void ButtonX_Click(object sender, RoutedEventArgs e)
         {
-            PasswordBoxAccessCode.Password = null;
+            PasswordBoxAccessCode.Password = string.Empty;
         }
         private void Button0_Click(object sender, RoutedEventArgs e)
         {

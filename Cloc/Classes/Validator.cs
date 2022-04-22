@@ -87,21 +87,24 @@ namespace Cloc.Classes
         internal static bool ValidateEntry(string accessCode)
         {
             bool flag = false;
-            Person currentPerson = new();
-            User currentUser = new();
+            Person currentPerson;
+            User currentUser;
 
             if (ValidateAccessCode(accessCode))
-            { currentUser = SelectUserByAccessCodeQuery(accessCode); }
-
-            if (currentUser.UserUCN != null)
-            { currentPerson = SelectPersonQuery(currentUser.UserUCN); }
-
-            if (currentPerson.UCN != null)
             {
-                Session.UserToken.SetLoginData(currentPerson.UCN);
-                flag = true;
-            }
+                currentUser = SelectUserByAccessCodeQuery(accessCode);
 
+                if (currentUser.UserUCN != null)
+                {
+                    currentPerson = SelectPersonQuery(currentUser.UserUCN);
+
+                    if (currentPerson.UCN != null)
+                    {
+                        Session.UserToken.SetLoginData(currentPerson.UCN);
+                        flag = true;
+                    }
+                }
+            }
             return flag;
         }
 

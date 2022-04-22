@@ -2,7 +2,6 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows;
 
 namespace Cloc.Classes
 {
@@ -38,7 +37,6 @@ namespace Cloc.Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Възникна грешка по време на работа.");
                 ErrorLog.AddErrorLog(ex.ToString());
                 cipherText = string.Empty;
             }
@@ -65,7 +63,6 @@ namespace Cloc.Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Възникна грешка по време на работа.");
                 ErrorLog.AddErrorLog(ex.ToString());
                 return string.Empty;
             }
@@ -87,7 +84,6 @@ namespace Cloc.Classes
             catch (Exception ex)
             {
                 hashedString = string.Empty;
-                MessageBox.Show("Възникна грешка по време на работа.");
                 ErrorLog.AddErrorLog(ex.ToString());
             }
             return hashedString;

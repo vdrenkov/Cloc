@@ -49,6 +49,8 @@ namespace Cloc.Pages
             TextBoxPercent.Text = string.Empty;
 
             ComboBoxPositionLoad();
+
+            return;
         }
 
         private static bool AddUser(Person person, User user)
@@ -82,15 +84,17 @@ namespace Cloc.Pages
                 {
                     MessageBox.Show("Въведеният код за достъп вече е зает.");
                     ReloadPage();
-                    return;
                 }
             }
             else
-            { flag++; }
+            {
+                ReloadPage();
+            }
 
             if (!Validator.ValidateUCN(TextBoxUCN.Text.ToString()))
             {
-                flag++;
+                MessageBox.Show("Моля, въведете 10-цифрено ЕГН!");
+                ReloadPage();
             }
 
             if (string.IsNullOrEmpty(TextBoxName.Text)) { flag++; }

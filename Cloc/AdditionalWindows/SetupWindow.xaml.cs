@@ -18,7 +18,6 @@ namespace Cloc.AdditionalWindows
             PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
-        //TODO Start here
         private void ExitSession()
         {
             StartupWindow sw = new();
@@ -117,13 +116,16 @@ namespace Cloc.AdditionalWindows
                 }
                 else
                 {
-                    MessageBox.Show("Моля, проверете коректността на въведените данни и опитайте отново!");
+                    MessageBox.Show("Неуспешна връзка към базата данни.");
+                    ReloadPage();
                 }
             }
             else
             {
                 MessageBox.Show("Моля, проверете коректността на въведените данни и опитайте отново!\n" +
-                    "Всички полета са задължителни!");
+                    "Всички полета са задължителни!" +
+                    "\nЕГН-то трябва да бъде 10-цифрено." +
+                    "\nКодът за достъп ще бъде автоматично генериран при невалиден такъв.");
                 ReloadPage();
             }
         }

@@ -68,7 +68,7 @@ namespace Cloc.Pages
             }
             ComboBoxPositionLoad();
             if (TextBoxChange != null)
-            { TextBoxChange.Text = null; }
+            { TextBoxChange.Text = string.Empty; }
         }
 
         private bool DeleteUser()

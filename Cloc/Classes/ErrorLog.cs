@@ -20,7 +20,7 @@ namespace Cloc.Classes
 
         static internal bool AddErrorLog(string error)
         {
-            string errorLine = DateTime.Now + "     -----     " + error;
+            string errorLine = DateTime.Now + ";     -----     " + error;
 
             bool isSuccessful = FileHelper.WriteToFile(path, errorLine);
 

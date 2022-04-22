@@ -72,7 +72,7 @@ namespace Cloc.Classes
             {
                 MessageBox.Show("Възникна неочаквана грешка при извличане на вашите чекирания.");
                 ErrorLog.AddErrorLog(ex.ToString());
-                return null;
+                return new List<string>();
             }
 
             return checks;
