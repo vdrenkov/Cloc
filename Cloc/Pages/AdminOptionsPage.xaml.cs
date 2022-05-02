@@ -466,7 +466,7 @@ namespace Cloc.Pages
             {
                 string userInfo = ComboBoxUsers.SelectedItem.ToString();
                 string[] split = userInfo.Split(", ");
-                string name=split[0];
+                string name = split[0];
                 string ucn = split[1];
 
                 User user = SelectUserQuery(ucn);

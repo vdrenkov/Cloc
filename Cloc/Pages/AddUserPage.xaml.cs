@@ -157,7 +157,7 @@ namespace Cloc.Pages
                 if (AddUser(person, user))
                 {
                     MessageBox.Show("Потребителят беше добавен успешно.");
-                    if(!Logger.AddLog(Session.UserToken.GetLoginData(), "Добавяне на потребител " + person.Name + " " + person.Surname + "."))
+                    if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Добавяне на потребител " + person.Name + " " + person.Surname + "."))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }

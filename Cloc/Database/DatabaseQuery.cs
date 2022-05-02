@@ -65,11 +65,12 @@ namespace Cloc.Database
                 FileCreator();
 
                 person.UCN = DecryptString(person.UCN);
+
                 User user = SelectUserQuery(person.UCN);
 
                 if (user.UserUCN != null && SetSettings(server, username, password, port))
                 {
-                                        flag = true;
+                    flag = true;
                     if ((!Logger.AddLog(person.UCN, "Начална инициализация.")) || (!Checker.AddCheck(SelectUserQuery(person.UCN))))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
@@ -88,6 +89,7 @@ namespace Cloc.Database
         internal static bool AddWorkerQuery(Person person, User user)
         {
             bool flag = false;
+            string testUCN = person.UCN;
             person.UCN = EncryptString(person.UCN);
             user.UserUCN = person.UCN;
             user.AccessCode = HashString(user.AccessCode);
@@ -98,11 +100,14 @@ namespace Cloc.Database
             {
                 try
                 {
-                    User testUser = SelectUserQuery(DecryptString(person.UCN));
-                    if (testUser.UserUCN == null)
-                    { return false; }
+                    User testUser = SelectUserQuery(testUCN);
 
-                                        string query = "use ClocDB; insert into People (ucn,name,surname,email,phoneNumber,country,city,address,position) values" +
+                    if (testUser.UserUCN != null)
+                    {
+                        return false;
+                    }
+
+                    string query = "use ClocDB; insert into People (ucn,name,surname,email,phoneNumber,country,city,address,position) values" +
                        $"(@UCN,@Name,@Surname,@Email,@PhoneNumber,@Country,@City,@Address,@Position);";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
                     cmd.Parameters.AddWithValue("@UCN", person.UCN);
@@ -470,7 +475,6 @@ namespace Cloc.Database
                         person.Position = (WorkPosition)Enum.Parse(typeof(WorkPosition), reader.GetString(8));
                     }
                     reader.Close();
-                    person.UCN = DecryptString(person.UCN);
                 }
                 catch (Exception ex)
                 {
@@ -485,7 +489,10 @@ namespace Cloc.Database
             }
 
             if (person.UCN != null)
-            { return person; }
+            {
+                person.UCN = DecryptString(person.UCN);
+                return person;
+            }
             else
             {
                 return new Person();
@@ -572,7 +579,6 @@ namespace Cloc.Database
 
                     }
                     reader.Close();
-                    user.UserUCN = DecryptString(user.UserUCN);
                 }
                 catch (Exception ex)
                 {
@@ -587,7 +593,10 @@ namespace Cloc.Database
             }
 
             if (user.UserUCN != null)
-            { return user; }
+            {
+                user.UserUCN = DecryptString(user.UserUCN);
+                return user;
+            }
             else
             { return new User(); }
         }

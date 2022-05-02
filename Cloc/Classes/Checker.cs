@@ -23,10 +23,12 @@ namespace Cloc.Classes
 
         static internal bool AddCheck(User user)
         {
-            user.UserUCN = EncryptString(user.UserUCN);
+            if (user.UserUCN != null)
+            { user.UserUCN = EncryptString(user.UserUCN); }
             string checkLine = user.CheckIn + ";" + user.CheckOut + ";" + user.UserUCN;
 
             bool isSuccessful = FileHelper.WriteToFile(path, checkLine);
+
             user.UserUCN = DecryptString(user.UserUCN);
 
             if (isSuccessful)

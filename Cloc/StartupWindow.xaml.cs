@@ -8,8 +8,6 @@ using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
 
 /* 
- * Startup Query -> Successful test х2
- * Full system check
  * Design
  * StartupWindow -> Exit confirmation uncomment, delete test button
  * 
@@ -76,7 +74,7 @@ namespace Cloc
             user.TotalHours = 0;
             user.Percent = 0;
 
-            p1.UCN = "1234567890";
+            p1.UCN = "6666666666";
             p1.Name = "Любомира";
             p1.Surname = "Петрова";
             p1.Email = "lpetrova@tu-sofia.bg";
@@ -87,7 +85,7 @@ namespace Cloc
             p1.Position = WorkPosition.Manager;
 
             u1.UserUCN = p1.UCN;
-            u1.AccessCode = "12345";
+            u1.AccessCode = "66666";
             u1.CheckIn = DateTime.Now;
             u1.CheckOut = DateTime.Now.AddHours(1.7685);
             u1.IsCheckedIn = false;
@@ -130,7 +128,7 @@ namespace Cloc
                 if (ValidateEntry(PasswordBoxAccessCode.Password.ToString()))
                 {
                     Person person = SelectPersonQuery(GetLoginData());
-                    if(!Logger.AddLog(person.UCN, "Вход в системата."))
+                    if (!Logger.AddLog(person.UCN, "Вход в системата."))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }

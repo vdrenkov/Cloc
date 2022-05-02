@@ -24,9 +24,9 @@ namespace Cloc.Pages
                 FillData(UCN);
             }
             catch (Exception ex)
-            { 
+            {
                 MessageBox.Show("Възникна неочаквана грешка при зареждане на данните.");
-            ErrorLog.AddErrorLog(ex.ToString());
+                ErrorLog.AddErrorLog(ex.ToString());
             }
             finally
             {
@@ -71,7 +71,7 @@ namespace Cloc.Pages
                     string personInfo = ComboBoxPerson.SelectedItem.ToString();
                     string[] split = personInfo.Split(", ");
                     string name = split[0];
-                    string ucn=split[1];
+                    string ucn = split[1];
 
                     FillData(ucn);
 
@@ -84,10 +84,10 @@ namespace Cloc.Pages
                     }
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Възникна неочаквана грешка при изпълнението на вашата заявка.");
-                ErrorLog.AddErrorLog(ex.ToString()); 
+                ErrorLog.AddErrorLog(ex.ToString());
             }
         }
     }

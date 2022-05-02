@@ -11,7 +11,7 @@ namespace Cloc.Classes
         {
             List<string> errorLogs = FileHelper.ReadFileForRefresh(path);
 
-           bool isSuccessful= FileHelper.RefreshFile(path, errorLogs);
+            bool isSuccessful = FileHelper.RefreshFile(path, errorLogs);
 
             if (isSuccessful)
             { return true; }

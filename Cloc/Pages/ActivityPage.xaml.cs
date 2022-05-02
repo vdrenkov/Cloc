@@ -28,10 +28,10 @@ namespace Cloc.Pages
                 FillLogs(ucn, count);
             }
 
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show("Възникнa неочаквана грешка при зареждане на данните."); 
-                ErrorLog.AddErrorLog(ex.ToString()); 
+                MessageBox.Show("Възникнa неочаквана грешка при зареждане на данните.");
+                ErrorLog.AddErrorLog(ex.ToString());
             }
 
             finally
@@ -152,7 +152,7 @@ namespace Cloc.Pages
                 {
                     string userInfo = ComboBoxUser.SelectedItem.ToString();
                     string[] split = userInfo.Split(", ");
-                    string name=split[0];
+                    string name = split[0];
                     ucn = split[1];
 
                     FillChecks(ucn, count);
@@ -167,9 +167,9 @@ namespace Cloc.Pages
                     }
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show("Възникна неочаквана грешка при изпълнение на вашата заявка."); 
+                MessageBox.Show("Възникна неочаквана грешка при изпълнение на вашата заявка.");
                 ErrorLog.AddErrorLog(ex.ToString());
             }
         }
