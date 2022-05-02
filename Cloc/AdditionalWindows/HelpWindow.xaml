@@ -7,11 +7,11 @@
         mc:Ignorable="d"
          WindowState="Maximized"
     WindowStyle="None"
-        Title="HelpWindow" Height="auto" Width="auto">
+        Title="CLOC" Height="auto" Width="auto">
 
-    <Grid x:Name="MyGrid" FocusManager.FocusedElement="{Binding ElementName=PasswordBox}">
+    <Grid x:Name="HelpWindowGrid" FocusManager.FocusedElement="{Binding ElementName=PasswordBox}">
 
-        <Label x:Name="InfoLabel" FontSize="22" Height="80" Width="700" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Въведи парола:" Margin="10,10,0,0"/>
+        <Label x:Name="InfoLabel" FontSize="32" Height="80" Width="700" HorizontalAlignment="Center" VerticalAlignment="center" Content="Въведи парола:" Margin="10,10,0,0"/>
         <PasswordBox  x:Name="PasswordBox" MaxLength="5" FontSize="20" Width="100" Height="30"  HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
         <TextBox x:Name="TextBoxUCN" MaxLength="10" FontSize="20" Width="100" Height="30" HorizontalAlignment="left" VerticalAlignment="Center"/>
         <Button Name="BackButton" Height="20" Width="50" Content="Назад" Click="BackButton_Click" Margin="160,335,590,79"/>

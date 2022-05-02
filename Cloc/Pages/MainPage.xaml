@@ -9,13 +9,6 @@
       Title="MainPage">
 
     <Grid>
-        <!--<Grid>
-            <Image Height="auto" Width="auto" Grid.Column="1"  HorizontalAlignment="center" VerticalAlignment="center">
-                <Image.Source>
-                    <BitmapImage UriSource="../images/background.jpg"></BitmapImage>
-                </Image.Source>
-            </Image>
-        </Grid> -->
         <TextBlock Name="GreetingTextBlock" HorizontalAlignment="left" VerticalAlignment="top"/>
         <Label Name="ClockLabel"  Height="148" HorizontalAlignment="center" Margin="0,46,0,0" VerticalAlignment="Center" Width="378" FontSize="60" FontFamily="Forte" />
         <Label Content="Използвай парите си за неща, които могат да се купят с пари. Използвай времето си за неща, които не могат да се купят с пари.- Харуки Мураками" HorizontalAlignment="center" VerticalAlignment="Bottom"/>

@@ -7,16 +7,6 @@ using static Cloc.Classes.Validator;
 using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
 
-/* 
- * Design
- * StartupWindow -> Exit confirmation uncomment, delete test button
- * 
- * Access Password -> 1cm13*8vCt19_xRc
- * DB Password -> 348_sha765_KaD3l
- * 
- * Задание: Проектиране на информационна система за управление на човешки ресурси.
-*/
-
 namespace Cloc
 {
     /// <summary>
