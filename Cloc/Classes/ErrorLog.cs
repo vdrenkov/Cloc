@@ -11,27 +11,19 @@ namespace Cloc.Classes
         {
             List<string> errorLogs = FileHelper.ReadFileForRefresh(path);
 
-            bool isSuccessful = FileHelper.RefreshFile(path, errorLogs);
+           bool isSuccessful= FileHelper.RefreshFile(path, errorLogs);
 
             if (isSuccessful)
             { return true; }
-            else { return false; }
+            else
+            { return false; }
         }
 
-        static internal bool AddErrorLog(string error)
+        static internal void AddErrorLog(string error)
         {
             string errorLine = DateTime.Now + ";     -----     " + error;
 
-            bool isSuccessful = FileHelper.WriteToFile(path, errorLine);
-
-            if (isSuccessful)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            FileHelper.WriteToFile(path, errorLine);
         }
     }
 }

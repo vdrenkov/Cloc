@@ -126,10 +126,10 @@ namespace Cloc.Classes
             else
             { itemsCount = count; }
 
-            for (int i = 0; i < allItems.Count; i++)
+            for (int index = 0; index < allItems.Count; index++)
             {
-                items.Add(allItems[i]);
-                if (i == (itemsCount - 1))
+                items.Add(allItems[index]);
+                if (index == (itemsCount - 1))
                 {
                     break;
                 }

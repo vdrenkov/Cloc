@@ -8,10 +8,9 @@ using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
 
 /* 
- * ActivityPage -> All, AddUserPage, AdminOptionsPage (и трите опции по нещо) -> AddLog -> към потребител
- * Design
- * 
  * Startup Query -> Successful test х2
+ * Full system check
+ * Design
  * StartupWindow -> Exit confirmation uncomment, delete test button
  * 
  * Access Password -> 1cm13*8vCt19_xRc
@@ -35,6 +34,11 @@ namespace Cloc
 
             PreviewKeyDown += new KeyEventHandler(HandleEsc);
 
+            RefreshFiles();
+        }
+
+        private static void RefreshFiles()
+        {
             if (count == 0)
             {
                 if (!Logger.RefreshLogs()) { MessageBox.Show("Неуспешно актуализиране на файла с логове."); }
@@ -46,6 +50,7 @@ namespace Cloc
             }
         }
 
+        //TODO Final
         private void ButtonTest_Click(object sender, RoutedEventArgs e)
         {
             Person person = new();
@@ -71,7 +76,7 @@ namespace Cloc
             user.TotalHours = 0;
             user.Percent = 0;
 
-            p1.UCN = "0000000000";
+            p1.UCN = "1234567890";
             p1.Name = "Любомира";
             p1.Surname = "Петрова";
             p1.Email = "lpetrova@tu-sofia.bg";
@@ -82,7 +87,7 @@ namespace Cloc
             p1.Position = WorkPosition.Manager;
 
             u1.UserUCN = p1.UCN;
-            u1.AccessCode = "00000";
+            u1.AccessCode = "12345";
             u1.CheckIn = DateTime.Now;
             u1.CheckOut = DateTime.Now.AddHours(1.7685);
             u1.IsCheckedIn = false;
@@ -95,19 +100,27 @@ namespace Cloc
             //Reporter.AddReport("0000000000", "Vivaldi", 1500);
             //MessageBox.Show(ChangeHourPaymentQuery("0000000000", 1000000).ToString());
             //MessageBox.Show(ErrorLog.AddErrorLog("Error test...").ToString());
+
+        }
+
+        private void CloseApp()
+        {
+            MessageBoxResult result = MessageBox.Show("Сигурни ли сте, че искате да излезнете от приложението?", "CLOC", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    Close();
+                    break;
+            }
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
-                //MessageBoxResult result = MessageBox.Show("Сигурни ли сте, че искате да излезнете от приложението?", "CLOC", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-                //switch (result)
-                //{
-                //    case MessageBoxResult.Yes:
-                Close();
-                //  break;
-                //}
+                //TODO Final
+                //CloseApp(); -> Uncomment
+                Close(); // -> Delete
             }
         }
         private void ButtonEnter_Click(object sender, RoutedEventArgs e)
@@ -117,7 +130,10 @@ namespace Cloc
                 if (ValidateEntry(PasswordBoxAccessCode.Password.ToString()))
                 {
                     Person person = SelectPersonQuery(GetLoginData());
-                    Logger.AddLog(person.UCN, "Вход в системата.");
+                    if(!Logger.AddLog(person.UCN, "Вход в системата."))
+                    {
+                        MessageBox.Show("Възникна грешка при записване на активността.");
+                    }
 
                     if (IsAdmin(person))
                     {
@@ -162,20 +178,16 @@ namespace Cloc
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Сигурни ли сте, че искате да излезнете от приложението?", "CLOC", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-            switch (result)
-            {
-                case MessageBoxResult.Yes:
-                    Close();
-                    break;
-            }
+            CloseApp();
         }
+
         private void ButtonCredits_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Настоящият сайт бе разработен от Валентин Димитров Дренков, студент от ТУ - София, ФКСТ, специалност КСИ, IV курс, 51-ва група, факултетен номер: 121218025, като задание за дипломна работа." +
                 "\nВсички права запазени.\n" +
                 "Валентин Дренков, София, 03.03.2022");
         }
+
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
             if (PasswordBoxAccessCode.Password.Length < 5)

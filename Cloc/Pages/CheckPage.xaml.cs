@@ -23,8 +23,11 @@ namespace Cloc.Pages
                 user = SelectUserQuery(ucn);
             }
 
-            catch (Exception)
-            { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните."); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Възникна неочаквана грешка при зареждане на данните.");
+                ErrorLog.AddErrorLog(ex.ToString());
+            }
 
             finally
             { InitializeComponent(); }
@@ -37,9 +40,13 @@ namespace Cloc.Pages
                 user.CheckIn = DateTime.Now;
                 user.IsCheckedIn = true;
 
-                if (CheckInQuery(user) && Logger.AddLog(user.UserUCN, "Check - in."))
+                if (CheckInQuery(user))
                 {
                     MessageBox.Show("Успешно се чекирахте.");
+                    if (!Logger.AddLog(user.UserUCN, "Check - in."))
+                    {
+                        MessageBox.Show("Възникна грешка при записване на активността.");
+                    }
                 }
                 else
                 {
@@ -59,9 +66,13 @@ namespace Cloc.Pages
                 user.CheckOut = DateTime.Now;
                 user.IsCheckedIn = false;
 
-                if (CheckOutQuery(user) && ChangeTotalHoursQuery(user) && Logger.AddLog(user.UserUCN, "Check - out.") && Checker.AddCheck(user))
+                if (CheckOutQuery(user) && ChangeTotalHoursQuery(user))
                 {
                     MessageBox.Show("Готово :)");
+                    if ((!Logger.AddLog(user.UserUCN, "Check - out.")) || (!Checker.AddCheck(user)))
+                    {
+                        MessageBox.Show("Възникна грешка при записване на активността.");
+                    }
                 }
                 else
                 {
@@ -77,7 +88,10 @@ namespace Cloc.Pages
         private void CheckSalary_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Текуща сума за получаване: " + Math.Round(Salary.CheckSalary(ucn), 2).ToString() + " лева.");
-            Logger.AddLog(user.UserUCN, "Проверка на текуща сума за изплащане.");
+            if (!Logger.AddLog(user.UserUCN, "Проверка на текуща сума за изплащане."))
+            {
+                MessageBox.Show("Възникна грешка при записване на активността.");
+            }
         }
     }
 }

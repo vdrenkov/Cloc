@@ -54,8 +54,12 @@ namespace Cloc.AdditionalWindows
         {
             if (ValidateAccessCodeChange(TextBoxUCN.Text.ToString(), PasswordBox.Password.ToString()))
             {
-                Logger.AddLog(TextBoxUCN.Text.ToString(), "Промяна на кода за достъп.");
+               
                 MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {PasswordBox.Password}");
+                if (!Logger.AddLog(TextBoxUCN.Text.ToString(), "Промяна на кода за достъп."))
+                {
+                    MessageBox.Show("Възникна грешка при записване на активността.");
+                }
                 CloseTab();
             }
             else

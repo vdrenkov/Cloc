@@ -28,8 +28,11 @@ namespace Cloc.Pages
                 Timer.Interval = new TimeSpan(0, 0, 1);
                 Timer.Start();
             }
-            catch (Exception)
-            { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните."); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Възникна неочаквана грешка при зареждане на данните.");
+                ErrorLog.AddErrorLog(ex.ToString());
+            }
             finally
             { InitializeComponent(); }
         }

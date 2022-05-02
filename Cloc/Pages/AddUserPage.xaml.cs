@@ -49,8 +49,6 @@ namespace Cloc.Pages
             TextBoxPercent.Text = string.Empty;
 
             ComboBoxPositionLoad();
-
-            return;
         }
 
         private static bool AddUser(Person person, User user)
@@ -64,9 +62,10 @@ namespace Cloc.Pages
                     flag = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("Неуспешно добавяне на потребител. Моля, опитайте отново!");
+                ErrorLog.AddErrorLog(ex.ToString());
             }
 
             return flag;
@@ -78,23 +77,28 @@ namespace Cloc.Pages
             Person person = new();
             User user = new();
 
+            bool isUCNValid = Validator.ValidateUCN(TextBoxUCN.Text.ToString());
+            if (!isUCNValid)
+            {
+                MessageBox.Show("Моля, въведете 10-цифрено ЕГН!");
+                ReloadPage();
+                return;
+            }
+
             if (Validator.ValidateAccessCode(PasswordBoxAccessCode.Password.ToString()))
             {
                 if (SelectAccessCodeQuery(PasswordBoxAccessCode.Password.ToString()))
                 {
                     MessageBox.Show("Въведеният код за достъп вече е зает.");
                     ReloadPage();
+                    return;
                 }
             }
             else
             {
+                MessageBox.Show("Моля, въведете 5-цифрен код за достъп!");
                 ReloadPage();
-            }
-
-            if (!Validator.ValidateUCN(TextBoxUCN.Text.ToString()))
-            {
-                MessageBox.Show("Моля, въведете 10-цифрено ЕГН!");
-                ReloadPage();
+                return;
             }
 
             if (string.IsNullOrEmpty(TextBoxName.Text)) { flag++; }
@@ -153,11 +157,18 @@ namespace Cloc.Pages
                 if (AddUser(person, user))
                 {
                     MessageBox.Show("Потребителят беше добавен успешно.");
-                    Logger.AddLog(Session.UserToken.GetLoginData(), "Добавяне на потребител " + person.Name + " " + person.Surname + ".");
+                    if(!Logger.AddLog(Session.UserToken.GetLoginData(), "Добавяне на потребител " + person.Name + " " + person.Surname + "."))
+                    {
+                        MessageBox.Show("Възникна грешка при записване на активността.");
+                    }
+                    if (!Logger.AddLog(person.UCN, "Създаване на профил."))
+                    {
+                        MessageBox.Show("Възникна грешка при записване на активността.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Възникна неочаквана грешка. Моля, опитайте отново по-късно!");
+                    MessageBox.Show("Потребителят не беше добавен. Възможно е да сте въвели вече съществуващи данни.");
                 }
                 ReloadPage();
             }

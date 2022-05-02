@@ -49,6 +49,7 @@ namespace Cloc.Pages
                     {
                         string userInfo = ComboBoxFilter.SelectedItem.ToString();
                         string[] split = userInfo.Split(", ");
+                        string name=split[0];
                         string ucn = split[1];
                         bool isAll = false;
                         sum = Math.Round(SumAllPayments(dateFrom, dateTo, ucn, isAll), 2);
@@ -73,8 +74,13 @@ namespace Cloc.Pages
                                 TextBoxSum.Text = "0";
                                 ListBoxPayments.Items.Add("Няма изплащания за показване...");
                             }
-                            if (Session.UserToken.GetLoginData() != split[1])
-                            { Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед изплащанията на потребител " + split[0] + "."); }
+                            if (Session.UserToken.GetLoginData() != ucn)
+                            {
+                                if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед изплащанията на потребител " + name + "."))
+                                {
+                                    MessageBox.Show("Възникна грешка при записване на активността.");
+                                }
+                            }
                         }
                     }
                     else
@@ -102,14 +108,18 @@ namespace Cloc.Pages
                                 TextBoxSum.Text = "0";
                                 ListBoxPayments.Items.Add("Няма изплащания за показване...");
                             }
-                            Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед изплащанията на всички потребители.");
+                            if(!Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед изплащанията на всички потребители."))
+                            {
+                                MessageBox.Show("Възникна грешка при записване на активността.");
+                            }
                         }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("Възникна неочаквана грешка при изпълнение на вашата заявка.");
+                ErrorLog.AddErrorLog(ex.ToString());
             }
         }
     }

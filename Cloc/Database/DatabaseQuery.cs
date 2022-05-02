@@ -11,6 +11,29 @@ namespace Cloc.Database
 {
     internal class DatabaseQuery
     {
+        private static void FileCreator()
+        {
+            if (!File.Exists(".\\Logs.txt"))
+            {
+                File.Create(".\\Logs.txt");
+            }
+
+            if (!File.Exists(".\\Checks.txt"))
+            {
+                File.Create(".\\Checks.txt");
+            }
+
+            if (!File.Exists(".\\Reports.txt"))
+            {
+                File.Create(".\\Reports.txt");
+            }
+
+            if (!File.Exists(".\\ErrorLogs.txt"))
+            {
+                File.Create(".\\ErrorLogs.txt");
+            }
+        }
+
         internal static bool StartupQuery(string server, string username, string password, string port, Person person, string accessCode)
         {
             bool flag = false;
@@ -39,33 +62,18 @@ namespace Cloc.Database
                 cmd.ExecuteNonQuery();
                 connection.Close();
 
-                if (!File.Exists(".\\Logs.txt"))
-                {
-                    File.Create(".\\Logs.txt");
-                }
-
-                if (!File.Exists(".\\Checks.txt"))
-                {
-                    File.Create(".\\Checks.txt");
-                }
-
-                if (!File.Exists(".\\Reports.txt"))
-                {
-                    File.Create(".\\Reports.txt");
-                }
-
-                if (!File.Exists(".\\ErrorLogs.txt"))
-                {
-                    File.Create(".\\ErrorLogs.txt");
-                }
+                FileCreator();
 
                 person.UCN = DecryptString(person.UCN);
                 User user = SelectUserQuery(person.UCN);
 
                 if (user.UserUCN != null && SetSettings(server, username, password, port))
                 {
-                    if (Logger.AddLog(person.UCN, "Начална инициализация.") && Checker.AddCheck(SelectUserQuery(person.UCN)))
-                    { flag = true; }
+                                        flag = true;
+                    if ((!Logger.AddLog(person.UCN, "Начална инициализация.")) || (!Checker.AddCheck(SelectUserQuery(person.UCN))))
+                    {
+                        MessageBox.Show("Възникна грешка при записване на активността.");
+                    }
                 }
             }
             catch (Exception ex)
@@ -91,10 +99,10 @@ namespace Cloc.Database
                 try
                 {
                     User testUser = SelectUserQuery(DecryptString(person.UCN));
-                    if (testUser.UserUCN != null)
+                    if (testUser.UserUCN == null)
                     { return false; }
 
-                    string query = "use ClocDB; insert into People (ucn,name,surname,email,phoneNumber,country,city,address,position) values" +
+                                        string query = "use ClocDB; insert into People (ucn,name,surname,email,phoneNumber,country,city,address,position) values" +
                        $"(@UCN,@Name,@Surname,@Email,@PhoneNumber,@Country,@City,@Address,@Position);";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
                     cmd.Parameters.AddWithValue("@UCN", person.UCN);
@@ -119,6 +127,11 @@ namespace Cloc.Database
 
                     if (cmd.ExecuteNonQuery() > 0 && command.ExecuteNonQuery() > 0)
                     { flag = true; }
+                    if (person.UCN != null)
+                    {
+                        person.UCN = DecryptString(person.UCN);
+                        user.UserUCN = person.UCN;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -128,8 +141,6 @@ namespace Cloc.Database
                 finally
                 {
                     dbConn.Close();
-                    person.UCN = DecryptString(person.UCN);
-                    user.UserUCN = person.UCN;
                 }
             }
             return flag;

@@ -21,12 +21,12 @@
         <ComboBox x:Name="ComboBoxUser" HorizontalAlignment="center" VerticalAlignment="center" Grid.Row="0" Grid.Column="1" Height="50" Width="200" Visibility="Hidden" SelectionChanged="ComboBoxUser_SelectionChanged"/>
 
         <ComboBox x:Name="ComboBoxCount" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Height="100" Width="200" SelectionChanged="ComboBoxCount_SelectionChanged">
-            <ComboBoxItem Content="5"/>
             <ComboBoxItem Content="10"/>
-            <ComboBoxItem Content="15"/>
             <ComboBoxItem Content="20"/>
-            <ComboBoxItem Content="25"/>
             <ComboBoxItem Content="30"/>
+            <ComboBoxItem Content="50"/>
+            <ComboBoxItem Content="100"/>
+            <ComboBoxItem Content="Всички"/>
         </ComboBox>
         
         <ListBox x:Name="ListBoxChecks" Grid.Row="1" Grid.Column="0"  Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>

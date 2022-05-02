@@ -23,8 +23,11 @@ namespace Cloc.Pages
 
                 FillData(UCN);
             }
-            catch (Exception)
-            { MessageBox.Show("Възникна неочаквана грешка при зареждане на данните."); }
+            catch (Exception ex)
+            { 
+                MessageBox.Show("Възникна неочаквана грешка при зареждане на данните.");
+            ErrorLog.AddErrorLog(ex.ToString());
+            }
             finally
             {
                 InitializeComponent();
@@ -53,7 +56,10 @@ namespace Cloc.Pages
                     TextBlockPercent.Text = "Percent: " + Math.Round(user.Percent, 2).ToString();
                 }));
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                ErrorLog.AddErrorLog(ex.ToString());
+            }
         }
 
         private void ComboBoxPerson_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,16 +70,24 @@ namespace Cloc.Pages
                 {
                     string personInfo = ComboBoxPerson.SelectedItem.ToString();
                     string[] split = personInfo.Split(", ");
+                    string name = split[0];
+                    string ucn=split[1];
 
-                    FillData(split[1]);
+                    FillData(ucn);
 
-                    if (Session.UserToken.GetLoginData() != split[1])
-                    { Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед данните на профила на " + split[0] + "."); }
+                    if (Session.UserToken.GetLoginData() != ucn)
+                    {
+                        if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед данните на профила на " + name + "."))
+                        {
+                            MessageBox.Show("Възникна грешка при записване на активността.");
+                        }
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex) 
             {
                 MessageBox.Show("Възникна неочаквана грешка при изпълнението на вашата заявка.");
+                ErrorLog.AddErrorLog(ex.ToString()); 
             }
         }
     }

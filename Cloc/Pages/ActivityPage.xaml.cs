@@ -14,8 +14,9 @@ namespace Cloc.Pages
     public partial class ActivityPage : Page
     {
         internal const int COUNT = 100;
-        static string ucn;
+        internal static string ucn;
         internal static int count = COUNT;
+        internal readonly static string path = ".\\Logs.txt";
 
         public ActivityPage()
         {
@@ -27,8 +28,11 @@ namespace Cloc.Pages
                 FillLogs(ucn, count);
             }
 
-            catch (Exception)
-            { MessageBox.Show("Възникнa неочаквана грешка при зареждане на данните."); }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Възникнa неочаквана грешка при зареждане на данните."); 
+                ErrorLog.AddErrorLog(ex.ToString()); 
+            }
 
             finally
             { InitializeComponent(); }
@@ -119,15 +123,24 @@ namespace Cloc.Pages
 
         private void ComboBoxCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (int.TryParse((e.AddedItems[0] as ComboBoxItem).Content.ToString(), out count))
+            if (ComboBoxCount.SelectedIndex == 5)
             {
+                count = FileHelper.GetFileLines(path);
                 FillChecks(ucn, count);
                 FillLogs(ucn, count);
             }
             else
             {
-                ListBoxChecks.Items.Clear();
-                ListBoxLogs.Items.Clear();
+                if (int.TryParse((e.AddedItems[0] as ComboBoxItem).Content.ToString(), out count))
+                {
+                    FillChecks(ucn, count);
+                    FillLogs(ucn, count);
+                }
+                else
+                {
+                    ListBoxChecks.Items.Clear();
+                    ListBoxLogs.Items.Clear();
+                }
             }
         }
 
@@ -139,18 +152,25 @@ namespace Cloc.Pages
                 {
                     string userInfo = ComboBoxUser.SelectedItem.ToString();
                     string[] split = userInfo.Split(", ");
+                    string name=split[0];
                     ucn = split[1];
 
                     FillChecks(ucn, count);
                     FillLogs(ucn, count);
 
-                    if (GetLoginData() != split[1])
-                    { Logger.AddLog(GetLoginData(), "Преглед активността на профила на " + split[0] + "."); }
+                    if (GetLoginData() != ucn)
+                    {
+                        if (!Logger.AddLog(GetLoginData(), "Преглед активността на профила на " + name + "."))
+                        {
+                            MessageBox.Show("Възникна грешка при записване на активността.");
+                        }
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex) 
             {
-                MessageBox.Show("Възникна неочаквана грешка при изпълнение на вашата заявка.");
+                MessageBox.Show("Възникна неочаквана грешка при изпълнение на вашата заявка."); 
+                ErrorLog.AddErrorLog(ex.ToString());
             }
         }
     }
