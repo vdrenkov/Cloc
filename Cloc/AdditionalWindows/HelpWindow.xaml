@@ -36,12 +36,13 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <Label x:Name="InfoLabel" Style="{StaticResource LabelStyle}" Content="Моля, въведете парола за достъп:" Grid.Row="0"/>
                     <PasswordBox  x:Name="MyPasswordBox" Style="{StaticResource PasswordBoxStyle}" MaxLength="255" Grid.Row="1" />
-                    <Button x:Name="BackButton" Style="{StaticResource ButtonStyle}" Grid.Row="2" Content="Назад" Click="BackButton_Click"/>
-                    <Button x:Name="ActionButton" IsDefault="True" Style="{StaticResource ButtonStyle}" Grid.Row="3" Content="Проверка" Click="SetupButton_Click"/>
+                    <Button x:Name="BackButton" Style="{StaticResource ButtonStyle}" Grid.Row="3" Content="Назад" Click="BackButton_Click"/>
+                    <Button x:Name="ActionButton" IsDefault="True" Style="{StaticResource ButtonStyle}" Grid.Row="4" Content="Проверка" Click="SetupButton_Click"/>
               
                 </Grid>
             </Border>

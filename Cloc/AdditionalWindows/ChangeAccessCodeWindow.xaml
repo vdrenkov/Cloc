@@ -38,14 +38,15 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <Label x:Name="UCNLabel" Style="{StaticResource LabelStyle}" Grid.Row="0" Content="Моля, въведете ЕГН:"/>
                     <TextBox x:Name="TextBoxUCN" Style="{StaticResource TextBoxStyle}" MaxLength="10" Grid.Row="1"/>
                     <Label x:Name="PasswordLabel" Style="{StaticResource LabelStyle}" Grid.Row="2" Content="Моля, въведете парола:"/>
                     <PasswordBox  x:Name="MyPasswordBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="3" MaxLength="5"/>
-                    <Button x:Name="BackButton" Style="{StaticResource ButtonStyle}" Grid.Row="4" Content="Назад" Click="BackButton_Click"/>
-                    <Button x:Name="ChangeAccessCodeButton" Style="{StaticResource ButtonStyle}" IsDefault="True" Content="Напред" Grid.Row="5" Click="ChangeAccessCodeButton_Click"/>
+                    <Button x:Name="BackButton" Style="{StaticResource ButtonStyle}" Grid.Row="5" Content="Назад" Click="BackButton_Click"/>
+                    <Button x:Name="ChangeAccessCodeButton" Style="{StaticResource ButtonStyle}" IsDefault="True" Content="Напред" Grid.Row="6" Click="ChangeAccessCodeButton_Click"/>
 
                 </Grid>
             </Border>

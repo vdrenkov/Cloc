@@ -17,7 +17,7 @@ namespace Cloc
         {
             InitializeComponent();
             PreviewKeyDown += new KeyEventHandler(HandleEsc);
-            Main.Navigate(new MainPage());
+            Admin.Navigate(new MainPage());
         }
 
         private void ExitCurrentSession()
@@ -45,7 +45,7 @@ namespace Cloc
 
         private void ButtonMain_Click(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new MainPage());
+            Admin.Navigate(new MainPage());
         }
 
         private void ButtonAdminOptions_Click(object sender, RoutedEventArgs e)
@@ -64,7 +64,7 @@ namespace Cloc
                 aop.ComboBoxUsers.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
             }
 
-            Main.Navigate(aop);
+            Admin.Navigate(aop);
         }
 
         private void ButtonAddUser_Click(object sender, RoutedEventArgs e)
@@ -80,7 +80,7 @@ namespace Cloc
                 }
             }
 
-            Main.Navigate(aup);
+            Admin.Navigate(aup);
         }
 
         private void ButtonReports_Click(object sender, RoutedEventArgs e)
@@ -99,7 +99,7 @@ namespace Cloc
                     rp.ComboBoxFilter.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
                 }
             }
-            Main.Navigate(rp);
+            Admin.Navigate(rp);
         }
 
         private void ButtonProfile_Click(object sender, RoutedEventArgs e)
@@ -119,7 +119,7 @@ namespace Cloc
                 pp.ComboBoxPerson.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
             }
 
-            Main.Navigate(pp);
+            Admin.Navigate(pp);
         }
 
         private void ButtonActivity_Click(object sender, RoutedEventArgs e)
@@ -139,7 +139,7 @@ namespace Cloc
                 ap.ComboBoxUser.Items.Add(person.Name + " " + person.Surname + ", " + person.UCN);
             }
 
-            Main.Navigate(ap);
+            Admin.Navigate(ap);
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)

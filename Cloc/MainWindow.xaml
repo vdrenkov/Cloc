@@ -10,62 +10,74 @@
         Title="CLOC" Height="auto" Width="auto">
     <Grid>
 
+        <Grid.Background>
+            <ImageBrush ImageSource="../Images/Menu.png"/>
+        </Grid.Background>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Width="auto">
+        <Grid Grid.Row="0">
+            <Grid>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
 
-            <StackPanel  Orientation="horizontal" Grid.Column="1" HorizontalAlignment="center">
+                <Grid Grid.Column="1" Grid.Row="1">
+
+                    <StackPanel  Orientation="horizontal" Width="auto" Height="auto" HorizontalAlignment="center" VerticalAlignment="Center">
                 <Grid>
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <Button Grid.Column="0" Content="     Начална страница    " Click="ButtonMain_Click" FontSize="20"></Button>
-                    <Button Grid.Column="1" Content="     Чекиране     " Click="ButtonCheck_Click" FontSize="20"></Button>
-                    <Button Grid.Column="2" Content="     Моят профил     " Click="ButtonProfile_Click" FontSize="20"></Button>
-                    <Button Grid.Column="3" Content="     Моята активност     "   Click="ButtonLogs_Click"  FontSize="20"></Button>
-                    <Button Grid.Column="4" Content="     Изход     " Click="ButtonExit_Click"  FontSize="20"></Button>
-                    
-                </Grid>
-            </StackPanel>
 
+                            <Button Grid.Column="0" Content="     Начална страница     " Click="ButtonMain_Click" Style="{StaticResource MenuButtonStyle}"/>
+                            <Button Grid.Column="1" Content="     Чекиране     " Click="ButtonCheck_Click" Style="{StaticResource MenuButtonStyle}"/>
+                            <Button Grid.Column="2" Content="     Моят профил     " Click="ButtonProfile_Click" Style="{StaticResource MenuButtonStyle}"/>
+                            <Button Grid.Column="3" Content="     Моята активност     " Click="ButtonLogs_Click" Style="{StaticResource MenuButtonStyle}"/>
+                            <Button Grid.Column="4" Content="     Изход     " Click="ButtonExit_Click" Style="{StaticResource MenuButtonStyle}"/>
+
+                        </Grid>
+            </StackPanel>
+                </Grid>
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="1">
             
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
 
-            <Image Height="auto" Width="auto" Grid.Column="1" Grid.Row="1" HorizontalAlignment="center" VerticalAlignment="center">
-                <Image.Source>
-                    <BitmapImage UriSource="Images/MenuBackground.png"></BitmapImage>
-                </Image.Source>
-            </Image>
-            <Frame Grid.Row="1" Grid.Column="1" x:Name="Main" NavigationUIVisibility="Hidden"></Frame>
+            <Grid Grid.Row="1" Grid.Column="1">
+            <Frame  x:Name="Main" NavigationUIVisibility="Hidden"/>
+            </Grid>
+            
         </Grid>
-   
+
     </Grid>
 </Window>

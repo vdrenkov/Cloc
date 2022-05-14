@@ -9,15 +9,79 @@
     WindowStyle="None"
         Title="CLOC" Height="auto" Width="auto">
     <Grid>
-        <StackPanel Orientation="horizontal" Height="70" Width="500" VerticalAlignment="top">
-            <Button Content="Main Page" Click="ButtonMain_Click" Width="auto"></Button>
-            <Button Content="Add User" Click="ButtonAddUser_Click" Width="auto"></Button>
-            <Button Content="Admin Options" Width="auto" Click="ButtonAdminOptions_Click"></Button>
-            <Button Content="Profile Page" Width="auto" Click="ButtonProfile_Click"></Button>
-            <Button Content="Activity Page"   Click="ButtonActivity_Click" Width="auto"></Button>
-            <Button Content="Reports" Click="ButtonReports_Click" Width="auto"></Button>
-            <Button Content="Exit" Click="ButtonExit_Click" Width="auto"></Button>
-        </StackPanel>
-        <Frame x:Name="Main" Margin="0,35,0,0" NavigationUIVisibility="Hidden"></Frame>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="../Images/Menu.png"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Column="1" Grid.Row="1">
+
+                    <StackPanel  Orientation="horizontal" Width="auto" Height="auto" HorizontalAlignment="center" VerticalAlignment="Center">
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" Content="   Начална страница   " Click="ButtonMain_Click" Style="{StaticResource AdminButtonStyle}"/>
+                            <Button Grid.Column="1" Content="   Добави потребител   " Click="ButtonAddUser_Click" Style="{StaticResource AdminButtonStyle}"/>
+                            <Button Grid.Column="2" Content="   Администраторски опции   " Click="ButtonAdminOptions_Click" Style="{StaticResource AdminButtonStyle}"/>
+                            <Button Grid.Column="3" Content="   Профилна страница   " Click="ButtonProfile_Click" Style="{StaticResource AdminButtonStyle}"/>
+                            <Button Grid.Column="4" Content="   Активност   "   Click="ButtonActivity_Click" Style="{StaticResource AdminButtonStyle}"/>
+                            <Button Grid.Column="5" Content="   Отчети   " Click="ButtonReports_Click" Style="{StaticResource AdminButtonStyle}"/>
+                            <Button Grid.Column="6" Content="   Изход   " Click="ButtonExit_Click" Style="{StaticResource AdminButtonStyle}"/>
+
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Frame x:Name="Admin" NavigationUIVisibility="Hidden"/>
+            </Grid>
+
+        </Grid>
     </Grid>
 </Window>
