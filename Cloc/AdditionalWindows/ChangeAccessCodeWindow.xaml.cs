@@ -43,10 +43,10 @@ namespace Cloc.AdditionalWindows
 
         private void ChangeAccessCodeButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Validator.ValidateAccessCodeChange(TextBoxUCN.Text.ToString(), PasswordBox.Password.ToString()))
+            if (Validator.ValidateAccessCodeChange(TextBoxUCN.Text.ToString(), MyPasswordBox.Password.ToString()))
             {
 
-                MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {PasswordBox.Password}");
+                MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {MyPasswordBox.Password}");
                 if (!Logger.AddLog(TextBoxUCN.Text.ToString(), "Промяна на кода за достъп."))
                 {
                     MessageBox.Show("Възникна грешка при записване на активността.");
@@ -56,7 +56,7 @@ namespace Cloc.AdditionalWindows
             else
             {
                 TextBoxUCN.Text = string.Empty;
-                PasswordBox.Password = string.Empty;
+                MyPasswordBox.Password = string.Empty;
             }
         }
 

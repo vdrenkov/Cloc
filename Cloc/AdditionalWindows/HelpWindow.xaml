@@ -9,7 +9,7 @@
     WindowStyle="None"
         Title="CLOC" Height="auto" Width="auto">
 
-    <Grid x:Name="HelpWindowGrid" FocusManager.FocusedElement="{Binding ElementName=PasswordBox}">
+    <Grid x:Name="HelpWindowGrid" FocusManager.FocusedElement="{Binding ElementName=MyPasswordBox}">
 
         <Grid.Background>
             <ImageBrush ImageSource="../Images/Menu.png"/>
@@ -27,7 +27,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="1" Grid.Row="1" Background="Wheat">
+        <Grid Grid.Column="1" Grid.Row="1" Background="WhiteSmoke">
             <Border BorderBrush="MidnightBlue" BorderThickness="3">
                 
                 <Grid>
@@ -38,10 +38,10 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Label x:Name="InfoLabel" Style="{StaticResource LabelStyle}" Content="Моля, въведете парола за достъп:" Grid.Row="0" FontSize="32"/>
-                    <PasswordBox  x:Name="PasswordBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="1" MaxLength="5" Height="100" Width="400" FontSize="32"/>
-                    <Button x:Name="BackButton" Style="{StaticResource ButtonStyle}" Grid.Row="2" Content="Назад" Height="70" FontSize="25" Width="300" Click="BackButton_Click"/>
-                    <Button x:Name="ActionButton" Style="{StaticResource ButtonStyle}" Grid.Row="3" Height="70" Width="300" FontSize="25" Content="Проверка" Click="SetupButton_Click"/>
+                    <Label x:Name="InfoLabel" Style="{StaticResource LabelStyle}" Content="Моля, въведете парола за достъп:" Grid.Row="0"/>
+                    <PasswordBox  x:Name="MyPasswordBox" Style="{StaticResource PasswordBoxStyle}" MaxLength="255" Grid.Row="1" />
+                    <Button x:Name="BackButton" Style="{StaticResource ButtonStyle}" Grid.Row="2" Content="Назад" Click="BackButton_Click"/>
+                    <Button x:Name="ActionButton" IsDefault="True" Style="{StaticResource ButtonStyle}" Grid.Row="3" Content="Проверка" Click="SetupButton_Click"/>
               
                 </Grid>
             </Border>

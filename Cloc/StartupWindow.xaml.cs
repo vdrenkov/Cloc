@@ -88,7 +88,9 @@ namespace Cloc
             //Reporter.AddReport("0000000000", "Vivaldi", 1500);
             //MessageBox.Show(ChangeHourPaymentQuery("0000000000", 1000000).ToString());
             //MessageBox.Show(ErrorLog.AddErrorLog("Error test...").ToString());
-
+            SetupWindow sw = new();
+            Close();
+            sw.Show();
         }
 
         private void CloseApp()
@@ -153,11 +155,8 @@ namespace Cloc
         private void ButtonSetup_Click(object sender, RoutedEventArgs e)
         {
             HelpWindow hw = new();
-            hw.PasswordBox.MaxLength = 255;
             Close();
             hw.Show();
-            SetupWindow sw = new();//Delete
-            //sw.Show();//Delete
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)

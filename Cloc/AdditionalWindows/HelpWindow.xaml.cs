@@ -35,7 +35,7 @@ namespace Cloc.AdditionalWindows
         private void SetupButton_Click(object sender, RoutedEventArgs e)
         {
             string password = "1cm13*8vCt19_xRc";
-            if (PasswordBox.Password == password)
+            if (MyPasswordBox.Password == password)
             {
                 MessageBox.Show("Внимание!\nМоля уверете се, че сте прочели README.txt файла, преди да продължите!");
                 SetupWindow sw = new();

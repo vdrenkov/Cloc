@@ -8,6 +8,7 @@
         WindowState="Maximized"
     WindowStyle="None"
         Title="CLOC" Height="auto" Width="auto">
+    
     <Grid FocusManager.FocusedElement="{Binding ElementName=PasswordBoxAccessCode}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" ></RowDefinition>

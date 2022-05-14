@@ -9,7 +9,7 @@
     WindowStyle="None"
         Title="CLOC" Height="auto" Width="auto">
 
-    <Grid x:Name="ChangeCodeWindowGrid" FocusManager.FocusedElement="{Binding ElementName=PasswordBox}">
+    <Grid x:Name="ChangeCodeWindowGrid" FocusManager.FocusedElement="{Binding ElementName=TextBoxUCN}">
 
         <Grid.Background>
             <ImageBrush ImageSource="../Images/Menu.png"/>
@@ -27,7 +27,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="1" Grid.Row="1" Background="Wheat">
+        <Grid Grid.Column="1" Grid.Row="1" Background="WhiteSmoke">
             <Border BorderBrush="MidnightBlue" BorderThickness="3">
 
                 <Grid>
@@ -40,12 +40,12 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Label x:Name="UCNLabel" Style="{StaticResource LabelStyle}" Grid.Row="0" FontSize="32" Content="Моля, въведете ЕГН:"/>
-                    <TextBox x:Name="TextBoxUCN" Style="{StaticResource TextBoxStyle}" MaxLength="10" Grid.Row="1" FontSize="25" Width="200" Height="40"/>
-                    <Label x:Name="PasswordLabel" Style="{StaticResource LabelStyle}" Grid.Row="2" FontSize="32" Content="Моля, въведете парола:"/>
-                    <PasswordBox  x:Name="PasswordBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="3" MaxLength="5" FontSize="25" Width="200" Height="40"/>
-                    <Button x:Name="BackButton" Style="{StaticResource ButtonStyle}" Height="70" Width="300" Grid.Row="4" Content="Назад" Click="BackButton_Click"/>
-                    <Button x:Name="ChangeAccessCodeButton" Style="{StaticResource ButtonStyle}" Height="70" Width="300" Content="Напред" Grid.Row="5" Click="ChangeAccessCodeButton_Click"/>
+                    <Label x:Name="UCNLabel" Style="{StaticResource LabelStyle}" Grid.Row="0" Content="Моля, въведете ЕГН:"/>
+                    <TextBox x:Name="TextBoxUCN" Style="{StaticResource TextBoxStyle}" MaxLength="10" Grid.Row="1"/>
+                    <Label x:Name="PasswordLabel" Style="{StaticResource LabelStyle}" Grid.Row="2" Content="Моля, въведете парола:"/>
+                    <PasswordBox  x:Name="MyPasswordBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="3" MaxLength="5"/>
+                    <Button x:Name="BackButton" Style="{StaticResource ButtonStyle}" Grid.Row="4" Content="Назад" Click="BackButton_Click"/>
+                    <Button x:Name="ChangeAccessCodeButton" Style="{StaticResource ButtonStyle}" IsDefault="True" Content="Напред" Grid.Row="5" Click="ChangeAccessCodeButton_Click"/>
 
                 </Grid>
             </Border>
