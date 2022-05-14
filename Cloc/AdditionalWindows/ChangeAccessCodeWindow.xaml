@@ -1,20 +1,20 @@
-﻿<Window x:Class="Cloc.AdditionalWindows.HelpWindow"
+﻿<Window x:Class="Cloc.AdditionalWindows.ChangeAccessCodeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cloc.AdditionalWindows"
-        mc:Ignorable="d"
+         mc:Ignorable="d"
          WindowState="Maximized"
     WindowStyle="None"
         Title="CLOC" Height="auto" Width="auto">
 
-    <Grid x:Name="HelpWindowGrid" FocusManager.FocusedElement="{Binding ElementName=PasswordBox}">
+    <Grid x:Name="ChangeCodeWindowGrid" FocusManager.FocusedElement="{Binding ElementName=PasswordBox}">
 
         <Grid.Background>
             <ImageBrush ImageSource="../Images/Menu.png"/>
         </Grid.Background>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
@@ -29,20 +29,24 @@
 
         <Grid Grid.Column="1" Grid.Row="1" Background="Wheat">
             <Border BorderBrush="MidnightBlue" BorderThickness="3">
-                
+
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Label x:Name="InfoLabel" Style="{StaticResource LabelStyle}" Content="Моля, въведете парола за достъп:" Grid.Row="0" FontSize="32"/>
-                    <PasswordBox  x:Name="PasswordBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="1" MaxLength="5" Height="100" Width="400" FontSize="32"/>
-                    <Button x:Name="BackButton" Style="{StaticResource ButtonStyle}" Grid.Row="2" Content="Назад" Height="70" FontSize="25" Width="300" Click="BackButton_Click"/>
-                    <Button x:Name="ActionButton" Style="{StaticResource ButtonStyle}" Grid.Row="3" Height="70" Width="300" FontSize="25" Content="Проверка" Click="SetupButton_Click"/>
-              
+                    <Label x:Name="UCNLabel" Style="{StaticResource LabelStyle}" Grid.Row="0" FontSize="32" Content="Моля, въведете ЕГН:"/>
+                    <TextBox x:Name="TextBoxUCN" Style="{StaticResource TextBoxStyle}" MaxLength="10" Grid.Row="1" FontSize="25" Width="200" Height="40"/>
+                    <Label x:Name="PasswordLabel" Style="{StaticResource LabelStyle}" Grid.Row="2" FontSize="32" Content="Моля, въведете парола:"/>
+                    <PasswordBox  x:Name="PasswordBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="3" MaxLength="5" FontSize="25" Width="200" Height="40"/>
+                    <Button x:Name="BackButton" Style="{StaticResource ButtonStyle}" Height="70" Width="300" Grid.Row="4" Content="Назад" Click="BackButton_Click"/>
+                    <Button x:Name="ChangeAccessCodeButton" Style="{StaticResource ButtonStyle}" Height="70" Width="300" Content="Напред" Grid.Row="5" Click="ChangeAccessCodeButton_Click"/>
+
                 </Grid>
             </Border>
         </Grid>

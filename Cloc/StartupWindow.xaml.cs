@@ -145,23 +145,19 @@ namespace Cloc
 
         private void ButtonChangeAccessCode_Click(object sender, RoutedEventArgs e)
         {
-            HelpWindow hw = new();
-            hw.InfoLabel.Content = "Моля, въведете ЕГН и желания код за достъп:";
-            hw.ActionButton.Visibility = Visibility.Hidden;
-            hw.ChangeAccessCodeButton.IsDefault = true;
+            ChangeAccessCodeWindow cw = new();
             Close();
-            hw.Show();
+            cw.Show();
         }
 
         private void ButtonSetup_Click(object sender, RoutedEventArgs e)
         {
             HelpWindow hw = new();
-            hw.TextBoxUCN.Visibility = Visibility.Hidden;
-            hw.ChangeAccessCodeButton.Visibility = Visibility.Hidden;
             hw.PasswordBox.MaxLength = 255;
-            hw.ActionButton.IsDefault = true;
             Close();
             hw.Show();
+            SetupWindow sw = new();//Delete
+            //sw.Show();//Delete
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)

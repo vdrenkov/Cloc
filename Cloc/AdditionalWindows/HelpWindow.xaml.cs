@@ -50,25 +50,6 @@ namespace Cloc.AdditionalWindows
             }
         }
 
-        private void ChangeAccessCodeButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (ValidateAccessCodeChange(TextBoxUCN.Text.ToString(), PasswordBox.Password.ToString()))
-            {
-
-                MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {PasswordBox.Password}");
-                if (!Logger.AddLog(TextBoxUCN.Text.ToString(), "Промяна на кода за достъп."))
-                {
-                    MessageBox.Show("Възникна грешка при записване на активността.");
-                }
-                CloseTab();
-            }
-            else
-            {
-                TextBoxUCN.Text = string.Empty;
-                PasswordBox.Password = string.Empty;
-            }
-        }
-
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             CloseTab();
