@@ -1,6 +1,5 @@
 ﻿using Cloc.AdditionalWindows;
 using Cloc.Classes;
-using System;
 using System.Windows;
 using System.Windows.Input;
 using static Cloc.Classes.Validator;
@@ -38,61 +37,6 @@ namespace Cloc
             }
         }
 
-        //TODO Final
-        private void ButtonTest_Click(object sender, RoutedEventArgs e)
-        {
-            Person person = new();
-            Person p1 = new();
-            User user = new();
-            User u1 = new();
-
-            person.UCN = "9902130044";
-            person.Name = "Валентин";
-            person.Surname = "Дренков";
-            person.Email = "vdrenkov@tu-sofia.bg";
-            person.PhoneNumber = "+359888992278";
-            person.Country = "България";
-            person.City = "Разлог";
-            person.Address = "Цар Иван Асен II 5";
-            person.Position = WorkPosition.Admin;
-
-            user.UserUCN = person.UCN;
-            user.AccessCode = "77777";
-            user.CheckIn = DateTime.Now;
-            user.CheckOut = DateTime.Now;
-            user.HourPayment = 0;
-            user.TotalHours = 0;
-            user.Percent = 0;
-
-            p1.UCN = "6666666666";
-            p1.Name = "Любомира";
-            p1.Surname = "Петрова";
-            p1.Email = "lpetrova@tu-sofia.bg";
-            p1.PhoneNumber = "+359889153573";
-            p1.Country = "България";
-            p1.City = "Банско";
-            p1.Address = "Струма 6";
-            p1.Position = WorkPosition.Manager;
-
-            u1.UserUCN = p1.UCN;
-            u1.AccessCode = "66666";
-            u1.CheckIn = DateTime.Now;
-            u1.CheckOut = DateTime.Now.AddHours(1.7685);
-            u1.IsCheckedIn = false;
-            u1.HourPayment = 1234.897;
-            u1.TotalHours = 10;
-            u1.Percent = 20;
-
-            //MessageBox.Show(StartupQuery("localhost", "root", "348_sha765_KaD3l", "3306", person, "77777").ToString());
-            //MessageBox.Show(AddWorkerQuery(p1, u1).ToString());
-            //Reporter.AddReport("0000000000", "Vivaldi", 1500);
-            //MessageBox.Show(ChangeHourPaymentQuery("0000000000", 1000000).ToString());
-            //MessageBox.Show(ErrorLog.AddErrorLog("Error test...").ToString());
-            SetupWindow sw = new();
-            Close();
-            sw.Show();
-        }
-
         private void CloseApp()
         {
             MessageBoxResult result = MessageBox.Show("Сигурни ли сте, че искате да излезнете от приложението?", "CLOC", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
@@ -108,9 +52,7 @@ namespace Cloc
         {
             if (e.Key == Key.Escape)
             {
-                //TODO Final
-                //CloseApp(); -> Uncomment
-                Close(); // -> Delete
+                CloseApp();
             }
         }
         private void ButtonEnter_Click(object sender, RoutedEventArgs e)

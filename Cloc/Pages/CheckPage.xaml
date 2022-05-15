@@ -18,8 +18,8 @@
 
         <Label x:Name="InfoLabel" Content="Моля, изберете опция:" Grid.Row="0" Style="{StaticResource LabelStyle}" FontWeight="Bold" FontSize="44"/>
 
-        <Button Name="CheckIn" Grid.Row="1" Content="     Check - In     " Style="{StaticResource ButtonStyle}" HorizontalAlignment="left" Width="auto" MinHeight="80" Click="CheckIn_Click"/>
-        <Button Name="CheckOut" Grid.Row="2" Content="     Check - Out     " Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" Width="auto" MinHeight="80" Click="CheckOut_Click"/>
+        <Button Name="CheckIn" Grid.Row="1" Content="     Чекиране     " Style="{StaticResource ButtonStyle}" HorizontalAlignment="left" Width="auto" MinHeight="80" Click="CheckIn_Click"/>
+        <Button Name="CheckOut" Grid.Row="2" Content="     Приключване     " Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" Width="auto" MinHeight="80" Click="CheckOut_Click"/>
         <Button Name="CheckSalary" Grid.Row="3" Content="     Проверка на текуща сума     " Style="{StaticResource ButtonStyle}" HorizontalAlignment="right" MinHeight="80" Width="auto" Click="CheckSalary_Click"/>
   
     </Grid>

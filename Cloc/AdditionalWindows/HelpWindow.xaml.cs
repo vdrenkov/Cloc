@@ -1,8 +1,5 @@
-﻿using Cloc.Classes;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Input;
-using static Cloc.Classes.Validator;
 
 namespace Cloc.AdditionalWindows
 {
@@ -37,7 +34,7 @@ namespace Cloc.AdditionalWindows
             string password = "1cm13*8vCt19_xRc";
             if (MyPasswordBox.Password == password)
             {
-                MessageBox.Show("Внимание!\nМоля уверете се, че сте прочели README.txt файла, преди да продължите!");
+                MessageBox.Show("Внимание!\nМоля, уверете се, че сте прочели README.txt файла, преди да продължите!");
                 SetupWindow sw = new();
                 sw.ButtonSetup.IsDefault = true;
                 Close();

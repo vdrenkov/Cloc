@@ -10,16 +10,16 @@
         Title="CLOC" Height="auto" Width="auto">
 
     <Grid FocusManager.FocusedElement="{Binding ElementName=PasswordBoxAccessCode}">
-   
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" ></RowDefinition>
-            <RowDefinition Height="17*"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Border Background="#FFD2D0C4" Grid.Row="0"></Border>
-        <Border Background="#FFD2D0C4" Grid.Row="1"></Border>
-        <Border Background="#FFD2D0C4" Grid.Row="2"></Border>
+        <Border Background="#FFD2D0C4" Grid.Row="0" BorderThickness="1"/>
+        <Border Background="#FFD2D0C4" Grid.Row="1" BorderThickness="1"/>
+        <Border Background="#FFD2D0C4" Grid.Row="2" BorderThickness="1"/>
 
         <Label Content="Информационна система за управление на човешки ресурси CLOC" Style="{StaticResource LabelStyle}" FontSize="25" Grid.Row="0" FontWeight="Bold"/>
 
@@ -97,9 +97,9 @@
                 </Image>
 
                 <Grid>
-                    
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
                         <RowDefinition Height="1.5*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -111,33 +111,59 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="Въведи своя 5-цифрен" Grid.Row="2" FontWeight="Bold" Style="{StaticResource LabelStyle}"/>
-                    <Label Content="код за достъп:" Grid.Row="3" VerticalAlignment="Top" VerticalContentAlignment="Top" FontWeight="Bold" Style="{StaticResource LabelStyle}"/>
-                    <PasswordBox x:Name="PasswordBoxAccessCode" Grid.Row="4" MaxLength="5" Style="{StaticResource PasswordBoxStyle}" FontSize="32" Width="200" FontFamily="Verdana" FontStyle="Oblique"/>
-                    <Button x:Name="ButtonEnter" Content="Вход" Grid.Row="5" Click="ButtonEnter_Click" IsDefault="True" Style="{StaticResource ButtonStyle}" Width="200"/>
+                    <Label Content="Въведете вашия" Grid.Row="2" FontWeight="Bold" Style="{StaticResource LabelStyle}"/>
+                    <Label Content="5-цифрен код за достъп:" Grid.Row="3" VerticalAlignment="Top" VerticalContentAlignment="Top" FontWeight="Bold" Style="{StaticResource LabelStyle}"/>
+                    <PasswordBox x:Name="PasswordBoxAccessCode" Grid.Row="4" MaxLength="5" Style="{StaticResource PasswordBoxStyle}" FontSize="32" MinWidth="200"/>
+                    <Button x:Name="ButtonEnter" Content="Вход" Grid.Row="5" Click="ButtonEnter_Click" IsDefault="True" Style="{StaticResource ButtonStyle}" MinWidth="200"/>
                     <Button x:Name="ButtonChangeAccessCode" Grid.Row="7" Content="Смени код за достъп" Click="ButtonChangeAccessCode_Click" Style="{StaticResource ButtonStyle}" FontSize="25" MinWidth="300"/>
                     <Button x:Name="ButtonSetup" Content="Настройка на системата" Grid.Row="8" Click="ButtonSetup_Click" Style="{StaticResource ButtonStyle}" FontSize="25" MinWidth="300"/>
 
-                <!--TODO Final -> Delete -->
-                    <Button x:Name="ButtonTest" Content="TEST" FontSize="22" Height="40" Width="100" Grid.Row="6" Background="Azure" HorizontalAlignment="center" Click="ButtonTest_Click" BorderBrush="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
                 </Grid>
             </Grid>
 
-                <Button x:Name="ButtonExit" HorizontalAlignment="right" VerticalAlignment="top" Content="Изход от програмата" Grid.Column="2" Grid.Row="1" Style="{StaticResource ButtonStyle}" BorderBrush="Red" FontSize="25" MinWidth="300" Click="ButtonExit_Click"/>
+            <Grid Grid.Column="2" Grid.Row="1">
 
-            <Grid Background="white" Height="auto" Width="auto" Grid.Column="2" Grid.Row="1" HorizontalAlignment="center" VerticalAlignment="center">
-                <Image Height="600" Width="400" Grid.Column="2" Grid.Row="1" HorizontalAlignment="center" VerticalAlignment="center">
-                    <Image.Source>
-                        <BitmapImage UriSource="images/Restaurant_Logo.png"></BitmapImage>
-                    </Image.Source>
-                </Image>
-                <Label Content="Lotus" Height="83" Width="400" HorizontalContentAlignment="center" VerticalContentAlignment="center" FontWeight="Bold" FontSize="50" Background="white" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,427,0,0" FontStyle="Italic" FontFamily="Algerian"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="ButtonExit" Grid.Row="0" Content="Изход от програмата" Style="{StaticResource ButtonStyle}" FontSize="25" MinWidth="300" Click="ButtonExit_Click"/>
+
+                <Grid Grid.Row="1">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Background="white" Grid.Column="1">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.Row="0" VerticalAlignment="Bottom">
+                            <Image.Source>
+                                <BitmapImage UriSource="Images/Restaurant_Logo.png"></BitmapImage>
+                            </Image.Source>
+                        </Image>
+
+                        <Label Content="Lotus" Grid.Row="1" Style="{StaticResource LabelStyle}" FontWeight="Bold" FontSize="77" VerticalAlignment="Top" Background="white" FontStyle="Italic" FontFamily="Algerian"/>
+
+                    </Grid>
+                </Grid>
+
+                <Button x:Name="ButtonCredits" Grid.Row="2" Content="Кредити" Style="{StaticResource ButtonStyle}" FontSize="25" MinWidth="300" Click="ButtonCredits_Click"/>
+
             </Grid>
-
-                <Button x:Name="ButtonCredits" HorizontalAlignment="right" VerticalAlignment="Bottom" Content="Кредити" Grid.Column="2" Grid.Row="1" Style="{StaticResource ButtonStyle}" BorderBrush="Green" FontSize="25" MinWidth="300" Click="ButtonCredits_Click"/>
-
         </Grid>
+        
+        <Label Content="Валентин Дренков, София, 2022" Grid.Row="2" FontStyle="Italic" Style="{StaticResource LabelStyle}" FontSize="25" FontWeight="Bold"/>
 
-        <Label Content="Валентин Дренков, София, 2022" Grid.Row="2" FontStyle="Italic" Style="{StaticResource LabelStyle}" FontSize="25" FontWeight="Bold" ></Label>
-        </Grid>
+    </Grid>
 </Window>

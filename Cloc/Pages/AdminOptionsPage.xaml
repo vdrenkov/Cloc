@@ -7,39 +7,105 @@
         Title="CLOC" Height="auto" Width="auto">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="ComboBoxUsers" HorizontalAlignment="right" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="0" Height="50" Width="200"/>
-       
-        <ComboBox x:Name="ComboBoxPosition" Visibility="Hidden" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="Bottom"  Grid.Column="1" Grid.Row="1"/>
+        <Grid Grid.Row="0">
 
-        <ComboBox x:Name="ComboBoxChange" HorizontalAlignment="left" VerticalAlignment="top" Grid.Row="0" Grid.Column="0" Height="50" Width="200" SelectionChanged="ComboBoxChange_SelectionChanged">
-            <ComboBoxItem Content="Име"/>
-            <ComboBoxItem Content="Фамилия"/>
-            <ComboBoxItem Content="Имейл"/>
-            <ComboBoxItem Content="Телефонен номер"/>
-            <ComboBoxItem Content="Държава"/>
-            <ComboBoxItem Content="Град"/>
-            <ComboBoxItem Content="Адрес"/>
-            <ComboBoxItem Content="Позиция"/>
-            <ComboBoxItem Content="Код за достъп"/>
-            <ComboBoxItem Content="Часова ставка"/>
-            <ComboBoxItem Content="Процент"/>
-        </ComboBox>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Content="Изберете потребител: " Grid.Column="0" Style="{StaticResource LabelStyle}" FontWeight="SemiBold"/>
+            <ComboBox x:Name="ComboBoxUsers" Grid.Column="1" Style="{StaticResource ComboBoxStyle}" FontSize="25"/>
+        </Grid>
 
-        <TextBox x:Name="TextBoxChange" HorizontalAlignment="left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Height="50" Width="200"/>
+        <Grid Grid.Row="1">
 
-        <Button x:Name="DeleteUserButton" Content="Изтрий потребител" Grid.Column="1" Grid.Row="0" Height="50" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DeleteUserButton_Click"/>
-        <Button x:Name="CheckSalaryButton" Content="Проверка на текуща сума за изплащане" Grid.Column="0" Grid.Row="1" Height="50" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CheckSalaryButton_Click"/>
-        <Button x:Name="ChangeDataButton" Content="Промени данни" Grid.Column="1" Grid.Row="1" Height="50" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ChangeDataButton_Click"/>
-    
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 4 0 0"/>
+
+        </Grid>
+
+        <Label Content="ПРОМЯНА НА ДАННИ " Grid.Row="2" Style="{StaticResource LabelStyle}" FontWeight="SemiBold"/>
+
+        <Grid Grid.Row="3">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Изберете какво да бъде променено: " Grid.Column="0" Style="{StaticResource LabelStyle}" FontWeight="SemiBold"/>
+            <ComboBox x:Name="ComboBoxChange" Grid.Column="1" Style="{StaticResource ComboBoxStyle}" SelectionChanged="ComboBoxChange_SelectionChanged">
+                <ComboBoxItem Content="Име"/>
+                <ComboBoxItem Content="Фамилия"/>
+                <ComboBoxItem Content="Имейл"/>
+                <ComboBoxItem Content="Телефонен номер"/>
+                <ComboBoxItem Content="Държава"/>
+                <ComboBoxItem Content="Град"/>
+                <ComboBoxItem Content="Адрес"/>
+                <ComboBoxItem Content="Позиция"/>
+                <ComboBoxItem Content="Код за достъп"/>
+                <ComboBoxItem Content="Часова ставка"/>
+                <ComboBoxItem Content="Процент"/>
+            </ComboBox>
+            
+        </Grid>
+
+        <Grid Grid.Row="4">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Въведете нова стойност: " Grid.Column="0" Style="{StaticResource LabelStyle}" FontWeight="SemiBold"/>
+            <TextBox x:Name="TextBoxChange" Grid.Column="2" Style="{StaticResource TextBoxStyle}"/>
+            <ComboBox x:Name="ComboBoxPosition" Visibility="Hidden" Grid.Column="1" Style="{StaticResource ComboBoxStyle}" HorizontalContentAlignment="Center"/>
+        </Grid>
+
+        <Button x:Name="ChangeDataButton" Content="Промяна" Grid.Row="5" Style="{StaticResource ButtonStyle}" Click="ChangeDataButton_Click" MinHeight="70" MinWidth="300"/>
+
+        <Grid Grid.Row="6">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 4 0 0"/>
+
+        </Grid>
+
+        <Label Content="Или изберете друго действие: " Grid.Row="7" Style="{StaticResource LabelStyle}" FontWeight="SemiBold" FontSize="25"/>
+
+        <Grid Grid.Row="8">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="DeleteUserButton" Grid.Column="1" Content="Изтриване на потребител" Style="{StaticResource ButtonStyle}" FontSize="25" Click="DeleteUserButton_Click"/>
+            <Button x:Name="CheckSalaryButton" Grid.Column="0" Content="Проверка на текуща сума за изплащане" Style="{StaticResource ButtonStyle}" FontSize="25" Click="CheckSalaryButton_Click"/>
+        </Grid>
+
     </Grid>
 </Page>

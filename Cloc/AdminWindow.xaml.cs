@@ -110,7 +110,7 @@ namespace Cloc
             {
                 pp.UserLabel.Visibility = Visibility.Hidden;
             }
-            
+
             if (pp.AdminLabel != null)
             {
                 pp.AdminLabel.Visibility = Visibility.Visible;
@@ -136,7 +136,7 @@ namespace Cloc
         {
             ActivityPage ap = new();
 
-            if(ap.UserLabel!=null)
+            if (ap.UserLabel != null)
             {
                 ap.UserLabel.Visibility = Visibility.Visible;
             }

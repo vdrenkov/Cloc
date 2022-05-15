@@ -51,7 +51,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Button Grid.Column="0" Content="   Начална страница   " Click="ButtonMain_Click" Style="{StaticResource AdminButtonStyle}"/>
-                            <Button Grid.Column="1" Content="   Добави потребител   " Click="ButtonAddUser_Click" Style="{StaticResource AdminButtonStyle}"/>
+                            <Button Grid.Column="1" Content="   Добавяне на потребител   " Click="ButtonAddUser_Click" Style="{StaticResource AdminButtonStyle}"/>
                             <Button Grid.Column="2" Content="   Администраторски опции   " Click="ButtonAdminOptions_Click" Style="{StaticResource AdminButtonStyle}"/>
                             <Button Grid.Column="3" Content="   Профилна страница   " Click="ButtonProfile_Click" Style="{StaticResource AdminButtonStyle}"/>
                             <Button Grid.Column="4" Content="   Активност   "   Click="ButtonActivity_Click" Style="{StaticResource AdminButtonStyle}"/>

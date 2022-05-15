@@ -84,8 +84,8 @@
                     <Label x:Name="LabelPort" Content="Port:" Style="{StaticResource LabelStyle}" Grid.Column="2" Grid.Row="7"/>
                     <TextBox x:Name="TextBoxPort" Style="{StaticResource TextBoxStyle}" Text=""  Grid.Column="2" Grid.Row="8"/>
 
-                    <Button x:Name="ButtonExit" Style="{StaticResource ButtonStyle}" BorderBrush="Red" Content="Изход" Click="ButtonExit_Click" Grid.Column="1" Grid.Row="10"/>
-                    <Button x:Name="ButtonSetup" Style="{StaticResource ButtonStyle}" BorderBrush="Green" Content="Настройка" Click="ButtonSetup_Click" Grid.Column="2" Grid.Row="10"/>
+                    <Button x:Name="ButtonExit" Style="{StaticResource ButtonStyle}" Content="Изход" Click="ButtonExit_Click" Grid.Column="1" Grid.Row="10"/>
+                    <Button x:Name="ButtonSetup" Style="{StaticResource ButtonStyle}" Content="Настройка" Click="ButtonSetup_Click" Grid.Column="2" Grid.Row="10"/>
 
                 </Grid>
             </Border>

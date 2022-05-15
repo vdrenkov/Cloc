@@ -53,7 +53,7 @@ namespace Cloc.Pages
                     TextBlockAddress.Text = "Адрес: " + person.Address;
                     TextBlockPosition.Text = "Позиция: " + Person.TranslateFromWorkPosition(person.Position);
                     TextBlockHourPayment.Text = "Часова ставка: " + Math.Round(user.HourPayment, 2).ToString() + " лева";
-                    TextBlockPercent.Text = "Бонус процент: " + Math.Round(user.Percent, 2).ToString()+"%";
+                    TextBlockPercent.Text = "Бонус процент: " + Math.Round(user.Percent, 2).ToString() + "%";
                 }));
             }
             catch (Exception ex)
