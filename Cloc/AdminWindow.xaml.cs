@@ -106,6 +106,16 @@ namespace Cloc
         {
             ProfilePage pp = new();
 
+            if (pp.UserLabel != null)
+            {
+                pp.UserLabel.Visibility = Visibility.Hidden;
+            }
+            
+            if (pp.AdminLabel != null)
+            {
+                pp.AdminLabel.Visibility = Visibility.Visible;
+            }
+
             if (pp.ComboBoxPerson != null)
             {
                 pp.ComboBoxPerson.Visibility = Visibility.Visible;
@@ -125,6 +135,11 @@ namespace Cloc
         private void ButtonActivity_Click(object sender, RoutedEventArgs e)
         {
             ActivityPage ap = new();
+
+            if(ap.UserLabel!=null)
+            {
+                ap.UserLabel.Visibility = Visibility.Visible;
+            }
 
             if (ap.ComboBoxUser != null)
             {

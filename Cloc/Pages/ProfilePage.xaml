@@ -4,9 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cloc.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProfilePage">
+     mc:Ignorable="d"
+        Title="CLOC" Height="auto" Width="auto">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -14,27 +13,29 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="ComboBoxPerson" HorizontalAlignment="Left" VerticalAlignment="center" Grid.Row="5" Height="50" Width="200" Visibility="Hidden" SelectionChanged="ComboBoxPerson_SelectionChanged"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Name="TextBlockUCN" HorizontalAlignment="Center" Height="auto" Width="300"/>
-        <TextBlock Grid.Row="1" Name="TextBlockName" HorizontalAlignment="center" Height="auto" Width="300"/>
-        <TextBlock Grid.Row="2" Name="TextBlockSurname" HorizontalAlignment="Center" Height="auto" Width="300"/>
-        <TextBlock Grid.Row="3" Name="TextBlockEmail" HorizontalAlignment="Center" Height="auto" Width="300"/>
-        <TextBlock Grid.Row="4" Name="TextBlockPhoneNumber" HorizontalAlignment="Center" Height="auto" Width="300"/>
-        <TextBlock Grid.Row="5" Name="TextBlockCountry" HorizontalAlignment="Center" Height="auto" Width="300"/>
-        <TextBlock Grid.Row="6" Name="TextBlockCity" HorizontalAlignment="Center" Height="auto" Width="300"/>
-        <TextBlock Grid.Row="7" Name="TextBlockAddress" HorizontalAlignment="Center" Height="auto" Width="300"/>
-        <TextBlock Grid.Row="8" Name="TextBlockPosition" HorizontalAlignment="Center" Height="auto" Width="300"/>
-        <TextBlock Grid.Row="9" Name="TextBlockHourPayment" HorizontalAlignment="center" Height="auto" Width="300"/>
-        <TextBlock Grid.Row="10" Name="TextBlockPercent" HorizontalAlignment="center" Height="auto" Width="300"/>
+        <Label x:Name="AdminLabel" Content="Изберете потребител:" Visibility="Hidden" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Style="{StaticResource LabelStyle}" FontWeight="Bold"/>
+        <Label x:Name="UserLabel" Content="Лични данни:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Style="{StaticResource LabelStyle}" FontWeight="Bold"/>
+     
+        <ComboBox x:Name="ComboBoxPerson" Grid.Row="0" Grid.Column="1" Visibility="Hidden" VerticalAlignment="Bottom" SelectionChanged="ComboBoxPerson_SelectionChanged" Style="{StaticResource ComboBoxStyle}"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Name="TextBlockUCN" Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Name="TextBlockName" Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="0" Grid.Column="2" Name="TextBlockSurname" Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Name="TextBlockEmail" Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="2" Name="TextBlockPhoneNumber" Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Name="TextBlockCountry" Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Name="TextBlockCity" Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="2" Grid.Column="2" Name="TextBlockAddress" Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Name="TextBlockPosition" Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Name="TextBlockHourPayment" Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.Column="2" Name="TextBlockPercent" Style="{StaticResource TextBlockStyle}"/>
     </Grid>
 </Page>

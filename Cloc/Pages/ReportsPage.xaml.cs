@@ -43,7 +43,7 @@ namespace Cloc.Pages
                     dateTo = (DateTime)DateTo.SelectedDate;
                 }
 
-                if (ComboBoxFilter != null && ComboBoxFilter.SelectedItem != null && TextBoxSum != null)
+                if (ComboBoxFilter != null && ComboBoxFilter.SelectedItem != null && TextBlockSum != null)
                 {
                     if (ComboBoxFilter.SelectedIndex != 0)
                     {
@@ -62,7 +62,7 @@ namespace Cloc.Pages
 
                             if (UserReports != null && UserReports.Count != 0)
                             {
-                                TextBoxSum.Text = sum.ToString();
+                                TextBlockSum.Text = sum.ToString() + " лв.";
 
                                 foreach (string UserReport in UserReports)
                                 {
@@ -71,7 +71,7 @@ namespace Cloc.Pages
                             }
                             else
                             {
-                                TextBoxSum.Text = "0";
+                                TextBlockSum.Text = "0 лв.";
                                 ListBoxPayments.Items.Add("Няма изплащания за показване...");
                             }
                             if (Session.UserToken.GetLoginData() != ucn)
@@ -96,7 +96,7 @@ namespace Cloc.Pages
 
                             if (userReports != null && userReports.Count != 0)
                             {
-                                TextBoxSum.Text = sum.ToString();
+                                TextBlockSum.Text = sum.ToString() + " лв.";
 
                                 foreach (string userReport in userReports)
                                 {
@@ -105,7 +105,7 @@ namespace Cloc.Pages
                             }
                             else
                             {
-                                TextBoxSum.Text = "0";
+                                TextBlockSum.Text = "0 лв.";
                                 ListBoxPayments.Items.Add("Няма изплащания за показване...");
                             }
                             if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед изплащанията на всички потребители."))

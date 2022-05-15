@@ -12,7 +12,7 @@
     <Grid x:Name="HelpWindowGrid" FocusManager.FocusedElement="{Binding ElementName=MyPasswordBox}">
 
         <Grid.Background>
-            <ImageBrush ImageSource="../Images/Menu.png"/>
+            <ImageBrush ImageSource="../Images/Background_Menu.png"/>
         </Grid.Background>
         
         <Grid.ColumnDefinitions>

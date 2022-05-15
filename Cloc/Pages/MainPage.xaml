@@ -4,13 +4,26 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cloc.Pages"
-      mc:Ignorable="d"
-            d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainPage">
+     mc:Ignorable="d"
+        Title="CLOC" Height="auto" Width="auto">
 
     <Grid>
-        <TextBlock Name="GreetingTextBlock" HorizontalAlignment="left" VerticalAlignment="top"/>
-        <Label Name="ClockLabel"  Height="148" HorizontalAlignment="center" Margin="0,46,0,0" VerticalAlignment="Center" Width="378" FontSize="60" FontFamily="Forte" />
-        <Label Content="Използвай парите си за неща, които могат да се купят с пари. Използвай времето си за неща, които не могат да се купят с пари.- Харуки Мураками" HorizontalAlignment="center" VerticalAlignment="Bottom"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock HorizontalAlignment="Left" Name="GreetingTextBlock" Grid.Row="0" Style="{StaticResource TextBlockStyle}"/>
+        
+        <Label Name="ClockLabel" Grid.Row="1" Style="{StaticResource LabelStyle}" FontSize="80" FontFamily="Forte" />
+        
+        <Label HorizontalAlignment="Right" Content="Използвай парите си за неща, които могат да се купят с пари." Style="{StaticResource LabelStyle}" Grid.Row="2" FontWeight="SemiBold"/>
+        <Label HorizontalAlignment="Right" Content="Използвай времето си за неща, които не могат да се купят с пари." Style="{StaticResource LabelStyle}" Grid.Row="3" FontWeight="SemiBold"/>
+        <Label HorizontalAlignment="Right" Content="Харуки Мураками" Style="{StaticResource LabelStyle}" Grid.Row="4" FontWeight="SemiBold"/>
+
     </Grid>
 </Page>

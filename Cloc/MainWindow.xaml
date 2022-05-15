@@ -11,9 +11,9 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="../Images/Menu.png"/>
+            <ImageBrush ImageSource="/Images/Background_Menu.png"/>
         </Grid.Background>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="8*"/>
@@ -21,7 +21,7 @@
 
         <Grid Grid.Row="0">
             <Grid>
-                
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="*"/>
@@ -37,15 +37,15 @@
                 <Grid Grid.Column="1" Grid.Row="1">
 
                     <StackPanel  Orientation="horizontal" Width="auto" Height="auto" HorizontalAlignment="center" VerticalAlignment="Center">
-                <Grid>
+                        <Grid>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                            <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
                             <Button Grid.Column="0" Content="     Начална страница     " Click="ButtonMain_Click" Style="{StaticResource MenuButtonStyle}"/>
                             <Button Grid.Column="1" Content="     Чекиране     " Click="ButtonCheck_Click" Style="{StaticResource MenuButtonStyle}"/>
@@ -54,29 +54,29 @@
                             <Button Grid.Column="4" Content="     Изход     " Click="ButtonExit_Click" Style="{StaticResource MenuButtonStyle}"/>
 
                         </Grid>
-            </StackPanel>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Grid>
 
         <Grid Grid.Row="1">
-            
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="17*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1" Grid.Column="1">
-            <Frame  x:Name="Main" NavigationUIVisibility="Hidden"/>
+                <Frame  x:Name="Main" NavigationUIVisibility="Hidden"/>
             </Grid>
-            
+
         </Grid>
 
     </Grid>

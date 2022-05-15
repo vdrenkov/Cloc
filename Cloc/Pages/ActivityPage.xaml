@@ -4,13 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cloc.Pages"
-      mc:Ignorable="d"
-      Title="ActivityPage">
+     mc:Ignorable="d"
+        Title="CLOC" Height="auto" Width="auto">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
         
             <Grid.ColumnDefinitions>
@@ -18,19 +19,46 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-        <ComboBox x:Name="ComboBoxUser" HorizontalAlignment="center" VerticalAlignment="center" Grid.Row="0" Grid.Column="1" Height="50" Width="200" Visibility="Hidden" SelectionChanged="ComboBoxUser_SelectionChanged"/>
+        <Border Grid.Row="0" Grid.Column="0" BorderThickness=" 0 0 2 4" BorderBrush="Black"/>
+        <Border Grid.Row="0" Grid.Column="1" BorderThickness=" 2 0 0 4" BorderBrush="Black"/>
+        <Border Grid.Row="1" Grid.Column="0" BorderThickness=" 0 0 2 0" BorderBrush="Black"/>
+        <Border Grid.Row="1" Grid.Column="1" BorderThickness=" 2 0 0 0" BorderBrush="Black"/>
+        <Border Grid.Row="2" Grid.Column="0" BorderThickness=" 0 0 2 0" BorderBrush="Black"/>
+        <Border Grid.Row="2" Grid.Column="1" BorderThickness=" 2 0 0 0" BorderBrush="Black"/>
 
-        <ComboBox x:Name="ComboBoxCount" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Height="100" Width="200" SelectionChanged="ComboBoxCount_SelectionChanged">
+        <Grid Grid.Column="1" Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="UserLabel" Content="Изберете потребител: " Grid.Column="0" Visibility="Hidden" Style="{StaticResource LabelStyle}" FontWeight="Bold" FontSize="25"/>
+        <ComboBox x:Name="ComboBoxUser" MinHeight="40" Grid.Column="1" Visibility="Hidden" SelectionChanged="ComboBoxUser_SelectionChanged" Style="{StaticResource ComboBoxStyle}" FontSize="18"/>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="CountLabel" Content="Показване на:" Grid.Column="0" Style="{StaticResource LabelStyle}" FontWeight="Bold" FontSize="25"/>
+            <ComboBox x:Name="ComboBoxCount" Grid.Column="1" SelectionChanged="ComboBoxCount_SelectionChanged" MinHeight="40" Style="{StaticResource ComboBoxStyle}" FontSize="25">
             <ComboBoxItem Content="10"/>
             <ComboBoxItem Content="20"/>
             <ComboBoxItem Content="30"/>
             <ComboBoxItem Content="50"/>
             <ComboBoxItem Content="100"/>
             <ComboBoxItem Content="Всички"/>
-        </ComboBox>
-        
-        <ListBox x:Name="ListBoxChecks" Grid.Row="1" Grid.Column="0"  Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ListBox x:Name="ListBoxLogs" Grid.Row="1" Height="500" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-   
+            </ComboBox>
+        </Grid>
+
+        <Label Content="Чекирания:" Grid.Row="1" Grid.Column="1"  Style="{StaticResource LabelStyle}" FontWeight="SemiBold"/>
+        <Label Content="Логове:" Grid.Row="1" Grid.Column="0"  Style="{StaticResource LabelStyle}" FontWeight="SemiBold"/>
+
+        <ListBox x:Name="ListBoxChecks" Grid.Row="2" Grid.Column="1" Style="{StaticResource ListBoxStyle}"/>
+        <ListBox x:Name="ListBoxLogs" Grid.Row="2" Grid.Column="0" Style="{StaticResource ListBoxStyle}"/>
     </Grid>
 </Page>

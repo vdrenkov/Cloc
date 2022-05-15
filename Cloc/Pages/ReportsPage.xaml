@@ -4,25 +4,96 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cloc.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ReportsPage">
+     mc:Ignorable="d"
+        Title="CLOC" Height="auto" Width="auto">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="ComboBoxFilter" Grid.Row="0" HorizontalAlignment="left" Width="300" SelectionChanged="SelectionChanged"/>
+        <Grid Grid.Row="0">
 
-        <DatePicker Name="DateFrom" SelectedDate="" Grid.Row="1" HorizontalAlignment="Center" Width="300" SelectedDateChanged="SelectionChanged"/>
-        <DatePicker Name="DateTo" Grid.Row="1" HorizontalAlignment="right" Width="300" SelectedDateChanged="SelectionChanged"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="TextBoxSum" Grid.Row="0" HorizontalAlignment="right" VerticalAlignment="Center"/>
+            <Border Grid.Column="1" Background="White"/>
+            <Border Grid.Column="3" Background="White"/>
 
-        <ListBox x:Name="ListBoxPayments" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Начална дата: " Grid.Column="0" Style="{StaticResource LabelStyle}" FontWeight="Bold"/>
+            <Label Content="Крайна дата: " Grid.Column="2" Style="{StaticResource LabelStyle}" FontWeight="Bold"/>
 
+            <DatePicker Name="DateFrom" FontSize="25" Grid.Column="1" SelectedDate="" SelectedDateChanged="SelectionChanged"/>
+            <DatePicker Name="DateTo" Grid.Column="3" FontSize="32" SelectedDateChanged="SelectionChanged"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 4 0 0"/>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Изберете потребител: " Grid.Column="0" Style="{StaticResource LabelStyle}" FontWeight="Bold"/>
+            <ComboBox x:Name="ComboBoxFilter" Grid.Column="1" Style="{StaticResource ComboBoxStyle}" SelectionChanged="SelectionChanged" FontSize="25"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 4 0 0"/>
+
+        </Grid>
+
+        <ListBox x:Name="ListBoxPayments" Grid.Row="4" Style="{StaticResource ListBoxStyle}" FontSize="25" MinHeight="60"/>
+
+        <Grid Grid.Row="5">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 4 0 0"/>
+
+        </Grid>
+        
+        <Grid Grid.Row="6">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Обща сума: " Grid.Column="0" Style="{StaticResource LabelStyle}" FontWeight="Bold"/>
+            <TextBlock x:Name="TextBlockSum" Grid.Column="1" Style="{StaticResource TextBlockStyle}"/>
+
+        </Grid>
     </Grid>
 </Page>

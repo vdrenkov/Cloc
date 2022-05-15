@@ -43,17 +43,17 @@ namespace Cloc.Pages
 
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    TextBlockUCN.Text = "UCN: " + person.UCN;
-                    TextBlockName.Text = "Name: " + person.Name;
-                    TextBlockSurname.Text = "Surname: " + person.Surname;
-                    TextBlockEmail.Text = "Email: " + person.Email;
-                    TextBlockPhoneNumber.Text = "Phone number: " + person.PhoneNumber;
-                    TextBlockCountry.Text = "Country: " + person.Country;
-                    TextBlockCity.Text = "City: " + person.City;
-                    TextBlockAddress.Text = "Address: " + person.Address;
-                    TextBlockPosition.Text = "Position: " + Person.TranslateFromWorkPosition(person.Position);
-                    TextBlockHourPayment.Text = "Hour payment: " + Math.Round(user.HourPayment, 2).ToString();
-                    TextBlockPercent.Text = "Percent: " + Math.Round(user.Percent, 2).ToString();
+                    TextBlockUCN.Text = "ЕГН: " + person.UCN;
+                    TextBlockName.Text = "Име: " + person.Name;
+                    TextBlockSurname.Text = "Фамилия: " + person.Surname;
+                    TextBlockEmail.Text = "Имейл: " + person.Email;
+                    TextBlockPhoneNumber.Text = "Телефонен номер: " + person.PhoneNumber;
+                    TextBlockCountry.Text = "Държава: " + person.Country;
+                    TextBlockCity.Text = "Град: " + person.City;
+                    TextBlockAddress.Text = "Адрес: " + person.Address;
+                    TextBlockPosition.Text = "Позиция: " + Person.TranslateFromWorkPosition(person.Position);
+                    TextBlockHourPayment.Text = "Часова ставка: " + Math.Round(user.HourPayment, 2).ToString() + " лева";
+                    TextBlockPercent.Text = "Бонус процент: " + Math.Round(user.Percent, 2).ToString()+"%";
                 }));
             }
             catch (Exception ex)

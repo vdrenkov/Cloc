@@ -4,60 +4,59 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cloc.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddUserPage">
+     mc:Ignorable="d"
+        Title="CLOC" Height="auto" Width="auto">
 
-    <Grid Name="AddUserGrid">
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-         <Label Content="ЕГН:" Grid.Column="0" Grid.Row="0"/>
-        <TextBox x:Name="TextBoxUCN" MaxLength="10" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1"/>
-        <Label Content="Име:"  Grid.Column="0" Grid.Row="2"/>
-        <TextBox x:Name="TextBoxName"  TextWrapping="Wrap" Text=""  Grid.Column="0" Grid.Row="3"/>
-        <Label Content="Фамилия:"  Grid.Column="0" Grid.Row="4"/>
-        <TextBox x:Name="TextBoxSurname" TextWrapping="Wrap" Text=""  Grid.Column="0" Grid.Row="5"/>
-        <Label Content="Имейл:"  Grid.Column="0" Grid.Row="6"/>
-        <TextBox x:Name="TextBoxEmail" TextWrapping="Wrap" Text="" Grid.Column="0" Grid.Row="7"/>
-        <Label Content="Телефонен номер" Grid.Column="0" Grid.Row="8"/>
-        <TextBox x:Name="TextBoxPhoneNumber"  TextWrapping="Wrap" Text="" Grid.Column="0" Grid.Row="9"/>
+        <Grid Grid.Row="0">
 
-        <Label Content="Държава:"  Grid.Column="1" Grid.Row="0"/>
-        <TextBox x:Name="TextBoxCountry"  TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="1"/>
-        <Label Content="Град:"  Grid.Column="1" Grid.Row="2"/>
-        <TextBox x:Name="TextBoxCity"  TextWrapping="Wrap" Text=""  Grid.Column="1" Grid.Row="3"/>
-        <Label Content="Адрес:"  Grid.Column="1" Grid.Row="4"/>
-        <TextBox x:Name="TextBoxAddress"  TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="5"/>
-        <Label Content="Код за достъп:"  Grid.Column="1" Grid.Row="6"/>
-        <PasswordBox x:Name="PasswordBoxAccessCode" MaxLength="5" Grid.Column="1" Grid.Row="7"/>
-        <Label x:Name="LabelHourPayment" Content="Часова ставка:"  Grid.Column="1" Grid.Row="8"/>
-        <TextBox x:Name="TextBoxHourPayment" TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="9"/>
-        <Label x:Name="LabelPercent" Content="Процент:"  Grid.Column="1" Grid.Row="10"/>
-        <TextBox x:Name="TextBoxPercent" TextWrapping="Wrap" Text=""  Grid.Column="1" Grid.Row="11"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <ComboBox x:Name="ComboBoxPosition" FontSize="22" Height="100" Width="300" HorizontalAlignment="center" VerticalAlignment="center"  Grid.Column="2" Grid.Row="8"/>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Button x:Name="ButtonAddUser" FontSize="22" Height="100" Width="300" HorizontalAlignment="right" VerticalAlignment="Bottom" Content="Добави потребител" Click="ButtonAddUser_Click" Grid.Column="3" Grid.Row="5"/>
+            <Label Content="ЕГН:" Grid.Column="0" Grid.Row="0"/>
+            <TextBox x:Name="TextBoxUCN" MaxLength="10" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1"/>
+            <Label Content="Име:"  Grid.Column="0" Grid.Row="2"/>
+            <TextBox x:Name="TextBoxName"  TextWrapping="Wrap" Text=""  Grid.Column="0" Grid.Row="3"/>
+            <Label Content="Фамилия:"  Grid.Column="0" Grid.Row="4"/>
+            <TextBox x:Name="TextBoxSurname" TextWrapping="Wrap" Text=""  Grid.Column="0" Grid.Row="5"/>
+            <Label Content="Имейл:"  Grid.Column="0" Grid.Row="6"/>
+            <TextBox x:Name="TextBoxEmail" TextWrapping="Wrap" Text="" Grid.Column="0" Grid.Row="7"/>
+            <Label Content="Телефонен номер" Grid.Column="0" Grid.Row="8"/>
+            <TextBox x:Name="TextBoxPhoneNumber"  TextWrapping="Wrap" Text="" Grid.Column="0" Grid.Row="9"/>
+
+            <Label Content="Държава:"  Grid.Column="1" Grid.Row="0"/>
+            <TextBox x:Name="TextBoxCountry"  TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="1"/>
+            <Label Content="Град:"  Grid.Column="1" Grid.Row="2"/>
+            <TextBox x:Name="TextBoxCity"  TextWrapping="Wrap" Text=""  Grid.Column="1" Grid.Row="3"/>
+            <Label Content="Адрес:"  Grid.Column="1" Grid.Row="4"/>
+            <TextBox x:Name="TextBoxAddress"  TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="5"/>
+            <Label Content="Код за достъп:"  Grid.Column="1" Grid.Row="6"/>
+            <PasswordBox x:Name="PasswordBoxAccessCode" MaxLength="5" Grid.Column="1" Grid.Row="7"/>
+            <Label x:Name="LabelHourPayment" Content="Часова ставка:"  Grid.Column="1" Grid.Row="8"/>
+            <TextBox x:Name="TextBoxHourPayment" TextWrapping="Wrap" Text=""   Grid.Column="1" Grid.Row="9"/>
+            <Label x:Name="LabelPercent" Content="Процент:"  Grid.Column="1" Grid.Row="10"/>
+            <TextBox x:Name="TextBoxPercent" TextWrapping="Wrap" Text=""  Grid.Column="1" Grid.Row="11"/>
+            <ComboBox x:Name="ComboBoxPosition" FontSize="22" Height="100" Width="300" HorizontalAlignment="center" VerticalAlignment="center"  Grid.Column="2" Grid.Row="8"/>
+
+        </Grid>
+
+        <Button x:Name="ButtonAddUser" Grid.Row="1" Style="{StaticResource ButtonStyle}" Content="Добави потребител" Click="ButtonAddUser_Click"/>
+
     </Grid>
 </Page>

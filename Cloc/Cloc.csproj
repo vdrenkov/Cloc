@@ -8,19 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\Menu.png" />
-    <None Remove="Images\restaurant.png" />
-    <None Remove="Images\restaurantLogo.png" />
+    <None Remove="Images\Background_Menu.png" />
+    <None Remove="Images\Restaurant_Logo.png" />
+    <None Remove="Images\Restaurant_Menu.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\Menu.png">
+    <Content Include="Images\Background_Menu.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\restaurant.png">
+    <Content Include="Images\Restaurant_Menu.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\restaurantLogo.png">
+    <Content Include="Images\Restaurant_Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

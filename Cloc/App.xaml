@@ -11,19 +11,10 @@
             <Setter Property="BorderThickness" Value="3"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="70"/>
-            <Setter Property="Width" Value="300"/>
-            <Setter Property="FontSize" Value="32"/>
-        </Style>
-
-        <Style x:Key="SmallButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Azure"/>
-            <Setter Property="BorderBrush" Value="MidnightBlue"/>
-            <Setter Property="BorderThickness" Value="3"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="60"/>
-            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="MinHeight" Value="60"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="MinWidth" Value="250"/>
             <Setter Property="FontSize" Value="32"/>
         </Style>
 
@@ -59,7 +50,7 @@
             <Setter Property="FontSize" Value="22"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
-        
+
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -74,23 +65,11 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="70"/>
-            <Setter Property="Width" Value="250"/>
-            <Setter Property="FontSize" Value="25"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-        </Style>
-
-        <Style x:Key="SmallTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="Azure"/>
-            <Setter Property="BorderBrush" Value="MidnightBlue"/>
-            <Setter Property="BorderThickness" Value="3"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="60"/>
-            <Setter Property="Width" Value="250"/>
-            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="MinHeight" Value="60"/>
+            <Setter Property="MinWidth" Value="250"/>
+            <Setter Property="FontSize" Value="32"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
 
@@ -102,23 +81,47 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="70"/>
-            <Setter Property="Width" Value="250"/>
-            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="MinHeight" Value="60"/>
+            <Setter Property="MinWidth" Value="250"/>
+            <Setter Property="FontSize" Value="32"/>
         </Style>
-        
-        <Style x:Key="SmallPasswordBoxStyle" TargetType="PasswordBox">
+
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
             <Setter Property="Background" Value="Azure"/>
             <Setter Property="BorderBrush" Value="MidnightBlue"/>
             <Setter Property="BorderThickness" Value="3"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="60"/>
-            <Setter Property="Width" Value="250"/>
-            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="MinWidth" Value="250"/>
+            <Setter Property="MinHeight" Value="60"/>
+            <Setter Property="FontSize" Value="32"/>
         </Style>
-        
+
+        <Style x:Key="ListBoxStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="Azure"/>
+            <Setter Property="BorderBrush" Value="MidnightBlue"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="MinWidth" Value="400"/>
+        </Style>
+
     </Application.Resources>
 </Application>

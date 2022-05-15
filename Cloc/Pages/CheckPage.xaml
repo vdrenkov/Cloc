@@ -4,13 +4,23 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cloc.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="CheckPage">
+     mc:Ignorable="d"
+        Title="CLOC" Height="auto" Width="auto">
 
     <Grid>
-        <Button Name="CheckIn" Content="Check - In" HorizontalAlignment="left" VerticalAlignment="center" Width="100" Height="50" Click="CheckIn_Click"/>
-        <Button Name="CheckOut" Content="Check - Out" HorizontalAlignment="Center" VerticalAlignment="center" Width="100" Height="50" Click="CheckOut_Click"/>
-        <Button Name="CheckSalary" Content="Check Salary" HorizontalAlignment="right" VerticalAlignment="center" Width="100" Height="50" Click="CheckSalary_Click"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="InfoLabel" Content="Моля, изберете опция:" Grid.Row="0" Style="{StaticResource LabelStyle}" FontWeight="Bold" FontSize="44"/>
+
+        <Button Name="CheckIn" Grid.Row="1" Content="     Check - In     " Style="{StaticResource ButtonStyle}" HorizontalAlignment="left" Width="auto" MinHeight="80" Click="CheckIn_Click"/>
+        <Button Name="CheckOut" Grid.Row="2" Content="     Check - Out     " Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" Width="auto" MinHeight="80" Click="CheckOut_Click"/>
+        <Button Name="CheckSalary" Grid.Row="3" Content="     Проверка на текуща сума     " Style="{StaticResource ButtonStyle}" HorizontalAlignment="right" MinHeight="80" Width="auto" Click="CheckSalary_Click"/>
+  
     </Grid>
 </Page>
