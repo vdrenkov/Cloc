@@ -19,11 +19,6 @@ namespace Cloc.Database
 
             try
             {
-                if(!SetSettings(db))
-                {
-                    MessageBox.Show("Неуспешно съхранение на базата данни.");
-                }
-
                 var connection = new MySqlConnection(connectionString);
                 var cmd = connection.CreateCommand();
                 connection.Open();
@@ -54,10 +49,14 @@ namespace Cloc.Database
                 if (user.UserUCN != null)
                 {
                     flag = true;
+
                     if ((!Logger.AddLog(person.UCN, "Начална инициализация.")) || (!Checker.AddCheck(SelectUserQuery(person.UCN))))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }
+
+                    if (!SetSettings(db))
+                    { MessageBox.Show("Възникна грешка при записване на данните за базата."); }
                 }
             }
             catch (Exception ex)

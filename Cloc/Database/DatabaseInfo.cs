@@ -12,17 +12,17 @@ namespace Cloc.Database
         private readonly static int PARAMETERS_COUNT = 4;
         private readonly static string path = ".\\DBInfo.txt";
 
-        internal static bool WriteInfoToFile(string filePath, DBInfo db)
+        internal static bool WriteInfoToFile(DBInfo db)
         {
             try
             {
-                if (File.Exists(filePath))
+                if (File.Exists(path))
                 {
-                    File.WriteAllText(filePath, db.Server + Environment.NewLine + db.Port + Environment.NewLine + db.UserID + Environment.NewLine + db.Password);
+                    File.WriteAllText(path, db.Server + Environment.NewLine + db.Port + Environment.NewLine + db.UserID + Environment.NewLine + db.Password);
                 }
                 else
                 {
-                    File.Create(filePath).Close();
+                    File.Create(path).Close();
                 }
                 return true;
             }
@@ -36,7 +36,7 @@ namespace Cloc.Database
 
         static internal bool SetSettings(DBInfo db)
         {
-            bool isSaved = WriteInfoToFile(path, db);
+            bool isSaved = WriteInfoToFile(db);
 
             if (isSaved)
             {
