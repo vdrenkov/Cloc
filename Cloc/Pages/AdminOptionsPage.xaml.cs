@@ -25,6 +25,7 @@ namespace Cloc.Pages
                 {
                     if (ComboBoxPosition != null)
                     {
+                        ComboBoxPosition.Items.Clear();
                         ComboBoxPosition.Visibility = Visibility.Visible;
                         foreach (WorkPosition value in Enum.GetValues(typeof(WorkPosition)))
                         {
@@ -84,13 +85,22 @@ namespace Cloc.Pages
 
                 if (Session.UserToken.GetLoginData() != ucn)
                 {
-                    if (DeleteWorkerQuery(ucn))
+                    User user = SelectUserQuery(ucn);
+
+                    if (user.TotalHours == 0)
                     {
-                        flag = true;
-                        if ((!Logger.AddLog(ucn, "Изтриване на профила.")) || (!Logger.AddLog(Session.UserToken.GetLoginData(), "Изтриване профила на " + name + ".")))
+                        if (DeleteWorkerQuery(ucn))
                         {
-                            MessageBox.Show("Възникна грешка при записване на активността.");
+                            flag = true;
+                            if ((!Logger.AddLog(ucn, "Изтриване на профила.")) || (!Logger.AddLog(Session.UserToken.GetLoginData(), "Изтриване профила на " + name + ".")))
+                            {
+                                MessageBox.Show("Възникна грешка при записване на активността.");
+                            }
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не можете да бъде изтрит избраният потребител, понеже има неизплатена сума.");
                     }
                 }
                 else if (Person.AdminCount() != 1)

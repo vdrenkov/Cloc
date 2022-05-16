@@ -22,6 +22,7 @@ namespace Cloc.Pages
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                {
+                   ComboBoxPosition.Items.Clear();
                    foreach (WorkPosition value in Enum.GetValues(typeof(WorkPosition)))
                    {
                        string position = Person.TranslateFromWorkPosition(value);

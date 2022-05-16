@@ -91,7 +91,7 @@ namespace Cloc.Classes
                 {
                     string[] results = check.Split(';', ';');
 
-                    string temp = "ЕГН: " + results[2] + "     Чекиране: " + results[1] + "     Приключване: " + results[0];
+                    string temp = "ЕГН: " + results[0] + "     Чекиране: " + results[2] + "     Приключване: " + results[1];
                     printList.Add(temp);
                 }
 
