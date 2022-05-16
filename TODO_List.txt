@@ -1,9 +1,0 @@
- * Design
- * Final Check
- * StartupWindow -> Exit confirmation uncomment, delete test button
- * Publish
-
-Access Password -> 1cm13*8vCt19_xRc
-DB Password -> 348_sha765_KaD3l
-
-Задание: Проектиране на информационна система за управление на човешки ресурси.

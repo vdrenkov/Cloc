@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using static Cloc.Classes.Validator;
+using static Cloc.Database.DatabaseInfo;
 using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc.AdditionalWindows
@@ -58,7 +59,8 @@ namespace Cloc.AdditionalWindows
         private void ButtonSetup_Click(object sender, RoutedEventArgs e)
         {
             Person person = new();
-            string accessCode, server, user, password, port;
+            DBInfo db = new();
+            string accessCode;
             int flag = 0;
 
             if (ValidateUCN(TextBoxUCN.Text.ToString()))
@@ -102,14 +104,14 @@ namespace Cloc.AdditionalWindows
             if (string.IsNullOrEmpty(PasswordBoxDBPassword.Password)) { flag++; }
             if (string.IsNullOrEmpty(TextBoxPort.Text)) { flag++; }
 
-            server = TextBoxServer.Text.ToString();
-            user = TextBoxUser.Text.ToString();
-            password = PasswordBoxDBPassword.Password.ToString();
-            port = TextBoxPort.Text.ToString();
+           db.Server = TextBoxServer.Text.ToString();
+            db.UserID = TextBoxUser.Text.ToString();
+            db.Password = PasswordBoxDBPassword.Password.ToString();
+            db.Port = TextBoxPort.Text.ToString();
 
             if (flag == 0)
             {
-                if (StartupQuery(server, user, password, port, person, accessCode))
+                if (StartupQuery(db, person, accessCode))
                 {
                     MessageBox.Show($"Настройката на системата беше успешна!\nВашият код за достъп е: {accessCode}");
                     ExitSession();

@@ -2,17 +2,13 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Windows;
-using static Cloc.Settings.SystemSetup;
+using static Cloc.Database.DatabaseInfo;
 
 namespace Cloc.Database
 {
     internal class DatabaseConnection
     {
-        internal string Server = GetServer();
-        internal string Username = GetUsername();
-        internal string Password = GetPassword();
         internal string Port = GetPort();
-
         internal MySqlConnection Connection { get; set; }
 
         internal bool IsConnect()
@@ -21,10 +17,23 @@ namespace Cloc.Database
 
             if (Connection == null)
             {
-                string connstring = string.Format("Server={0}; Username={1}; Password={2}; Port={3}", Server, Username, Password, Port);
+                if (!uint.TryParse(Port, out uint port))
+                {
+                    port = 3306;
+                }
+
+                MySqlConnectionStringBuilder connstring = new()
+                {
+                    Server = GetServer(),
+                    Port = port,
+                    UserID = GetUserID(),
+                    Password = GetPassword(),
+                    Database = "ClocDB"
+                };
+
                 try
                 {
-                    Connection = new MySqlConnection(connstring);
+                    Connection = new MySqlConnection(connstring.ToString());
                     Connection.Open();
                 }
                 catch (Exception ex)

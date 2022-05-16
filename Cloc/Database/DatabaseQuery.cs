@@ -5,14 +5,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using static Cloc.Classes.Security;
-using static Cloc.Settings.SystemSetup;
+using static Cloc.Database.DatabaseInfo;
 
 namespace Cloc.Database
 {
     internal class DatabaseQuery
     {
-        private static void FileCreator()
+        internal static void FileCreator()
         {
+            if (!File.Exists(".\\DBInfo.txt"))
+            {
+                File.Create(".\\DBInfo.txt");
+            }
+
             if (!File.Exists(".\\Logs.txt"))
             {
                 File.Create(".\\Logs.txt");
@@ -34,10 +39,10 @@ namespace Cloc.Database
             }
         }
 
-        internal static bool StartupQuery(string server, string username, string password, string port, Person person, string accessCode)
+        internal static bool StartupQuery(DBInfo db, Person person, string accessCode)
         {
             bool flag = false;
-            string connectionString = $"server={server};user={username};password={password}; port={port};";
+            string connectionString = $"server={db.Server};port={db.Port};user={db.UserID};password={db.Password};";
 
             try
             {
@@ -68,7 +73,7 @@ namespace Cloc.Database
 
                 User user = SelectUserQuery(person.UCN);
 
-                if (user.UserUCN != null && SetSettings(server, username, password, port))
+                if (user.UserUCN != null && SetSettings(db))
                 {
                     flag = true;
                     if ((!Logger.AddLog(person.UCN, "Начална инициализация.")) || (!Checker.AddCheck(SelectUserQuery(person.UCN))))

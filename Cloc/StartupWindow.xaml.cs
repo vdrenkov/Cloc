@@ -28,6 +28,8 @@ namespace Cloc
         {
             if (count == 0)
             {
+                FileCreator();
+
                 if (!Logger.RefreshLogs()) { MessageBox.Show("Неуспешно актуализиране на файла с логове."); }
                 if (!Checker.RefreshChecks()) { MessageBox.Show("Неуспешно актуализиране на файла с чекове."); }
                 if (!Reporter.RefreshReports()) { MessageBox.Show("Неуспешно актуализиране на файла със справки."); }
@@ -55,7 +57,8 @@ namespace Cloc
                 CloseApp();
             }
         }
-        private void ButtonEnter_Click(object sender, RoutedEventArgs e)
+
+            private void ButtonEnter_Click(object sender, RoutedEventArgs e)
         {
             if (PasswordBoxAccessCode.Password != null)
             {
