@@ -6,39 +6,12 @@ using System.IO;
 using System.Windows;
 using static Cloc.Classes.Security;
 using static Cloc.Database.DatabaseInfo;
+using static Cloc.Classes.FileHelper;
 
 namespace Cloc.Database
 {
     internal class DatabaseQuery
     {
-        internal static void FileCreator()
-        {
-            if (!File.Exists(".\\DBInfo.txt"))
-            {
-                File.Create(".\\DBInfo.txt");
-            }
-
-            if (!File.Exists(".\\Logs.txt"))
-            {
-                File.Create(".\\Logs.txt");
-            }
-
-            if (!File.Exists(".\\Checks.txt"))
-            {
-                File.Create(".\\Checks.txt");
-            }
-
-            if (!File.Exists(".\\Reports.txt"))
-            {
-                File.Create(".\\Reports.txt");
-            }
-
-            if (!File.Exists(".\\ErrorLogs.txt"))
-            {
-                File.Create(".\\ErrorLogs.txt");
-            }
-        }
-
         internal static bool StartupQuery(DBInfo db, Person person, string accessCode)
         {
             bool flag = false;
@@ -46,6 +19,11 @@ namespace Cloc.Database
 
             try
             {
+                if(!SetSettings(db))
+                {
+                    MessageBox.Show("Неуспешно съхранение на базата данни.");
+                }
+
                 var connection = new MySqlConnection(connectionString);
                 var cmd = connection.CreateCommand();
                 connection.Open();
@@ -73,7 +51,7 @@ namespace Cloc.Database
 
                 User user = SelectUserQuery(person.UCN);
 
-                if (user.UserUCN != null && SetSettings(db))
+                if (user.UserUCN != null)
                 {
                     flag = true;
                     if ((!Logger.AddLog(person.UCN, "Начална инициализация.")) || (!Checker.AddCheck(SelectUserQuery(person.UCN))))

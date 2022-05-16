@@ -7,6 +7,34 @@ namespace Cloc.Classes
 {
     internal class FileHelper
     {
+        internal static void FileCreator()
+        {
+            if (!File.Exists(".\\DBInfo.txt"))
+            {
+                File.Create(".\\DBInfo.txt");
+            }
+
+            if (!File.Exists(".\\Logs.txt"))
+            {
+                File.Create(".\\Logs.txt");
+            }
+
+            if (!File.Exists(".\\Checks.txt"))
+            {
+                File.Create(".\\Checks.txt");
+            }
+
+            if (!File.Exists(".\\Reports.txt"))
+            {
+                File.Create(".\\Reports.txt");
+            }
+
+            if (!File.Exists(".\\ErrorLogs.txt"))
+            {
+                File.Create(".\\ErrorLogs.txt");
+            }
+        }
+
         internal static bool RefreshFile(string filePath, List<string> items)
         {
             try

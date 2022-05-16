@@ -59,7 +59,7 @@ namespace Cloc.AdditionalWindows
         private void ButtonSetup_Click(object sender, RoutedEventArgs e)
         {
             Person person = new();
-            DBInfo db = new();
+            Database.DBInfo db = new();
             string accessCode;
             int flag = 0;
 

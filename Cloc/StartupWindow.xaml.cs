@@ -5,6 +5,7 @@ using System.Windows.Input;
 using static Cloc.Classes.Validator;
 using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
+using static Cloc.Classes.FileHelper;
 
 namespace Cloc
 {

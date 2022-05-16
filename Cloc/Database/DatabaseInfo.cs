@@ -8,13 +8,6 @@ namespace Cloc.Database
 {
     internal class DatabaseInfo
     {
-        internal class DBInfo
-        {
-           internal string Server;
-            internal string Port;
-            internal string UserID;
-            internal string Password;
-        }
 
         private readonly static int PARAMETERS_COUNT = 4;
         private readonly static string path = ".\\DBInfo.txt";
