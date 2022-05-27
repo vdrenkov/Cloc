@@ -3,7 +3,6 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using static Cloc.Classes.Validator;
-using static Cloc.Database.DatabaseInfo;
 using static Cloc.Database.DatabaseQuery;
 
 namespace Cloc.AdditionalWindows
@@ -104,7 +103,7 @@ namespace Cloc.AdditionalWindows
             if (string.IsNullOrEmpty(PasswordBoxDBPassword.Password)) { flag++; }
             if (string.IsNullOrEmpty(TextBoxPort.Text)) { flag++; }
 
-           db.Server = TextBoxServer.Text.ToString();
+            db.Server = TextBoxServer.Text.ToString();
             db.UserID = TextBoxUser.Text.ToString();
             db.Password = PasswordBoxDBPassword.Password.ToString();
             db.Port = TextBoxPort.Text.ToString();

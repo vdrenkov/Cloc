@@ -139,22 +139,20 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Background="white" Grid.Column="1">
+                    <Grid Grid.Column="1">
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-                        <Image Grid.Row="0" VerticalAlignment="Bottom">
+                       
+                        <Image Grid.Row="0">
                             <Image.Source>
-                                <BitmapImage UriSource="Images/Restaurant_Logo.png"></BitmapImage>
+                                <BitmapImage UriSource="Images/Lotus.jpg"></BitmapImage>
                             </Image.Source>
                         </Image>
 
-                        <Label Content="Lotus" Grid.Row="1" Style="{StaticResource LabelStyle}" FontWeight="Bold" FontSize="77" VerticalAlignment="Top" Background="white" FontStyle="Italic" FontFamily="Algerian"/>
-
+                        <Label Content="&quot;Водолей 21 ЕООД&quot;&#10;ЕИК: 206512995 &#10;Държава: България&#10;Град: Разлог&#10;МОЛ: Росен Даракчиев" Grid.Row="1" Style="{StaticResource LabelStyle}" FontWeight="Bold" FontStyle="Italic"/>
                     </Grid>
                 </Grid>
 

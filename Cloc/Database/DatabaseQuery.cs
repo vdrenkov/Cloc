@@ -2,11 +2,10 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows;
+using static Cloc.Classes.FileHelper;
 using static Cloc.Classes.Security;
 using static Cloc.Database.DatabaseInfo;
-using static Cloc.Classes.FileHelper;
 
 namespace Cloc.Database
 {

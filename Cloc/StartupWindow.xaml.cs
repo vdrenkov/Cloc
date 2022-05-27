@@ -2,10 +2,10 @@
 using Cloc.Classes;
 using System.Windows;
 using System.Windows.Input;
+using static Cloc.Classes.FileHelper;
 using static Cloc.Classes.Validator;
 using static Cloc.Database.DatabaseQuery;
 using static Cloc.Session.UserToken;
-using static Cloc.Classes.FileHelper;
 
 namespace Cloc
 {
@@ -59,7 +59,7 @@ namespace Cloc
             }
         }
 
-            private void ButtonEnter_Click(object sender, RoutedEventArgs e)
+        private void ButtonEnter_Click(object sender, RoutedEventArgs e)
         {
             if (PasswordBoxAccessCode.Password != null)
             {

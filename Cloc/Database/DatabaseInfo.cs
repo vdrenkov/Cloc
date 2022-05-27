@@ -64,7 +64,7 @@ namespace Cloc.Database
                 }
             }
 
-            if (data != null&&data.Count>=PARAMETERS_COUNT)
+            if (data != null && data.Count >= PARAMETERS_COUNT)
             {
                 db.Server = data[0];
                 db.Port = data[1];
@@ -79,7 +79,7 @@ namespace Cloc.Database
         {
             DBInfo db = RetrieveInfo();
 
-            if (db.Server!=null)
+            if (db.Server != null)
                 return db.Server;
             else
                 return string.Empty;
