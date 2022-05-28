@@ -76,7 +76,7 @@ namespace Cloc.Pages
                             }
                             if (Session.UserToken.GetLoginData() != ucn)
                             {
-                                if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед изплащанията на потребител " + name + "."))
+                                if (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Преглед изплащанията на потребител " + name + "."))
                                 {
                                     MessageBox.Show("Възникна грешка при записване на активността.");
                                 }
@@ -108,7 +108,7 @@ namespace Cloc.Pages
                                 TextBlockSum.Text = "0 лв.";
                                 ListBoxPayments.Items.Add("Няма изплащания за показване...");
                             }
-                            if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед изплащанията на всички потребители."))
+                            if (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Преглед изплащанията на всички потребители."))
                             {
                                 MessageBox.Show("Възникна грешка при записване на активността.");
                             }

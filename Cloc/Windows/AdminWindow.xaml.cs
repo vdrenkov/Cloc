@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.SelectQuery;
 
 namespace Cloc
 {
@@ -22,7 +22,7 @@ namespace Cloc
 
         private void ExitCurrentSession()
         {
-            if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Изход от системата."))
+            if (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Изход от системата."))
             {
                 MessageBox.Show("Неуспешен запис на активността.");
             }

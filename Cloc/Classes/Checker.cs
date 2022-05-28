@@ -1,74 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows;
 using static Cloc.Classes.Security;
+using static Cloc.Database.SelectQuery;
+
 
 namespace Cloc.Classes
 {
     internal static class Checker
     {
-        private readonly static string path = ".\\Checks.txt";
-
-        static internal bool RefreshChecks()
-        {
-            List<string> checks = FileHelper.ReadFileForRefresh(path);
-
-            bool isSuccessful = FileHelper.RefreshFile(path, checks);
-
-            if (isSuccessful)
-            { return true; }
-            else { return false; }
-        }
-
-        static internal bool AddCheck(User user)
-        {
-            if (user.UserUCN != null)
-            { user.UserUCN = EncryptString(user.UserUCN); }
-            string checkLine = user.CheckIn + ";" + user.CheckOut + ";" + user.UserUCN;
-
-            bool isSuccessful = FileHelper.WriteToFile(path, checkLine);
-
-            user.UserUCN = DecryptString(user.UserUCN);
-
-            if (isSuccessful)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         static internal List<string> UserChecks(string ucn, int count, bool isAll)
         {
-            List<string> checks;
-            List<string> allChecks = new();
+            List<string> checks = new();
+            List<string> allChecks = SelectAllChecksQuery(ucn);
+            List<string> filteredChecks;
 
             try
             {
-                using (StreamReader reader = new(path))
+                foreach (string line in allChecks)
                 {
-                    var line = reader.ReadLine();
+                    string[] results = line.Split(';', ';');
+                    results[0] = DecryptString(results[0]);
 
-                    while (line != null)
+                    if (results[0] == ucn)
                     {
-                        string[] results = line.Split(';', ';');
-                        results[2] = DecryptString(results[2]);
-
-                        if (results[2] == ucn)
-                        {
-                            string temp = results[2] + ";" + results[1] + ";" + results[0];
-                            allChecks.Add(temp);
-                        }
-                        line = reader.ReadLine();
+                        string temp = results[0] + ";" + results[1] + ";" + results[2];
+                        checks.Add(temp);
                     }
                 }
 
-                allChecks.Reverse();
+                checks.Reverse();
 
-                checks = FileHelper.FilterItems(path, allChecks, count, isAll);
+                if (!isAll)
+                {
+                    filteredChecks = Filter.FilterItems(checks, count);
+                    return filteredChecks;
+                }
             }
             catch (Exception ex)
             {
@@ -91,7 +58,7 @@ namespace Cloc.Classes
                 {
                     string[] results = check.Split(';', ';');
 
-                    string temp = "ЕГН: " + results[0] + "     Чекиране: " + results[2] + "     Приключване: " + results[1];
+                    string temp = "ЕГН: " + results[0] + "     Чекиране: " + results[1] + "     Приключване: " + results[2];
                     printList.Add(temp);
                 }
 

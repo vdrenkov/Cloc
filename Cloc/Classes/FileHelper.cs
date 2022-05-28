@@ -14,21 +14,6 @@ namespace Cloc.Classes
                 File.Create(".\\DBInfo.txt");
             }
 
-            if (!File.Exists(".\\Logs.txt"))
-            {
-                File.Create(".\\Logs.txt");
-            }
-
-            if (!File.Exists(".\\Checks.txt"))
-            {
-                File.Create(".\\Checks.txt");
-            }
-
-            if (!File.Exists(".\\Reports.txt"))
-            {
-                File.Create(".\\Reports.txt");
-            }
-
             if (!File.Exists(".\\ErrorLogs.txt"))
             {
                 File.Create(".\\ErrorLogs.txt");
@@ -123,50 +108,6 @@ namespace Cloc.Classes
                 ErrorLog.AddErrorLog(ex.ToString());
                 return false;
             }
-        }
-
-        internal static int GetFileLines(string filePath)
-        {
-            int lines = 0;
-
-            using (StreamReader reader = new(filePath))
-            {
-                var line = reader.ReadLine();
-
-                while (line != null)
-                {
-                    lines++;
-                    line = reader.ReadLine();
-                }
-            }
-            return lines;
-        }
-
-        internal static List<string> FilterItems(string path, List<string> allItems, int count, bool isAll)
-        {
-            int itemsCount;
-            List<string> items = new();
-
-            if (isAll)
-            {
-                itemsCount = GetFileLines(path);
-            }
-            else
-            { itemsCount = count; }
-
-            for (int index = 0; index < allItems.Count; index++)
-            {
-                items.Add(allItems[index]);
-                if (index == (itemsCount - 1))
-                {
-                    break;
-                }
-            }
-
-            if (items.Count > 0)
-            { return items; }
-            else
-            { return new List<string>(); }
         }
     }
 }

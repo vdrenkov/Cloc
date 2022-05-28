@@ -2,7 +2,8 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.SelectQuery;
+using static Cloc.Database.UpdateQuery;
 using static Cloc.Session.UserToken;
 
 namespace Cloc.Pages
@@ -43,7 +44,7 @@ namespace Cloc.Pages
                 if (CheckInQuery(user))
                 {
                     MessageBox.Show("Успешно се чекирахте.");
-                    if (!Logger.AddLog(user.UserUCN, "Check - in."))
+                    if (!Cloc.Database.InsertQuery.AddLogQuery(user.UserUCN, "Check - in."))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }
@@ -69,7 +70,7 @@ namespace Cloc.Pages
                 if (CheckOutQuery(user) && ChangeTotalHoursQuery(user))
                 {
                     MessageBox.Show("Готово :)");
-                    if ((!Logger.AddLog(user.UserUCN, "Check - out.")) || (!Checker.AddCheck(user)))
+                    if ((!Cloc.Database.InsertQuery.AddLogQuery(user.UserUCN, "Check - out.")) || (!Cloc.Database.InsertQuery.AddCheckQuery(user)))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }
@@ -88,7 +89,7 @@ namespace Cloc.Pages
         private void CheckSalary_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Текуща сума за получаване: " + Math.Round(Salary.CheckSalary(ucn), 2).ToString() + " лева.");
-            if (!Logger.AddLog(user.UserUCN, "Проверка на текуща сума за изплащане."))
+            if (!Cloc.Database.InsertQuery.AddLogQuery(user.UserUCN, "Проверка на текуща сума за изплащане."))
             {
                 MessageBox.Show("Възникна грешка при записване на активността.");
             }

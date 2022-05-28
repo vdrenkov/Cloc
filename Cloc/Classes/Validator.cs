@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows;
-using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.SelectQuery;
+using static Cloc.Database.UpdateQuery;
 
 namespace Cloc.Classes
 {

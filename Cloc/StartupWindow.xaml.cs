@@ -1,10 +1,11 @@
 ﻿using Cloc.AdditionalWindows;
 using Cloc.Classes;
+using Cloc.Database;
 using System.Windows;
 using System.Windows.Input;
 using static Cloc.Classes.FileHelper;
 using static Cloc.Classes.Validator;
-using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.SelectQuery;
 using static Cloc.Session.UserToken;
 
 namespace Cloc
@@ -31,9 +32,6 @@ namespace Cloc
             {
                 FileCreator();
 
-                if (!Logger.RefreshLogs()) { MessageBox.Show("Неуспешно актуализиране на файла с логове."); }
-                if (!Checker.RefreshChecks()) { MessageBox.Show("Неуспешно актуализиране на файла с чекове."); }
-                if (!Reporter.RefreshReports()) { MessageBox.Show("Неуспешно актуализиране на файла със справки."); }
                 if (!ErrorLog.RefreshErrorLogs()) { MessageBox.Show("Неуспешно актуализиране на файла с грешки."); }
 
                 count++;
@@ -66,7 +64,7 @@ namespace Cloc
                 if (ValidateEntry(PasswordBoxAccessCode.Password.ToString()))
                 {
                     Person person = SelectPersonQuery(GetLoginData());
-                    if (!Logger.AddLog(person.UCN, "Вход в системата."))
+                    if (!Cloc.Database.InsertQuery.AddLogQuery(person.UCN, "Вход в системата."))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }
@@ -123,6 +121,28 @@ namespace Cloc
             {
                 PasswordBoxAccessCode.Password += 1;
             }
+            DatabaseParameters db = new();
+            db.Server = "localhost";
+            db.Port = "3306";
+            db.UserID = "root";
+            db.Password = "348_sha765_KaD3l";
+
+            Person person = new();
+            person.Name = "Валентин";
+            person.UCN = "9902130044";
+            person.Country = "България";
+            person.Surname = "Дренков";
+            person.Address = "Цар Иван Асен II 5";
+            person.City = "Разлог";
+            person.Email = "vdrenkov@tu-sofia.bg";
+            person.Position = WorkPosition.Admin;
+            person.PhoneNumber = "+359888992278";
+
+            User user = SelectUserQuery(person.UCN);
+
+            //  TODO binary file dbinfo.txt
+            MessageBox.Show(CreateQuery.StartupQuery(db, person, "77777").ToString());
+
         }
         private void Button2_Click(object sender, RoutedEventArgs e)
         {

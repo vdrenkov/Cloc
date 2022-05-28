@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.SelectQuery;
 using static Cloc.Session.UserToken;
 
 namespace Cloc.Pages
@@ -16,7 +16,6 @@ namespace Cloc.Pages
         internal const int COUNT = 100;
         internal static string ucn;
         internal static int count = COUNT;
-        internal readonly static string path = ".\\Logs.txt";
 
         public ActivityPage()
         {
@@ -24,8 +23,8 @@ namespace Cloc.Pages
             {
                 ucn = GetLoginData();
 
-                FillChecks(ucn, count);
-                FillLogs(ucn, count);
+                FillChecks(ucn, count, false);
+                FillLogs(ucn, count, false);
             }
 
             catch (Exception ex)
@@ -38,11 +37,11 @@ namespace Cloc.Pages
             { InitializeComponent(); }
         }
 
-        private void FillChecks(string ucn, int count)
+        private void FillChecks(string ucn, int count, bool isAll)
         {
             List<string> checks = new();
 
-            checks = Checker.PrintChosenChecks(ucn, count, false);
+            checks = Checker.PrintChosenChecks(ucn, count, isAll);
 
             if (ListBoxChecks != null)
             {
@@ -85,11 +84,11 @@ namespace Cloc.Pages
             }
         }
 
-        private void FillLogs(string ucn, int count)
+        private void FillLogs(string ucn, int count, bool isAll)
         {
             List<string> logs = new();
 
-            logs = Logger.UserLogs(ucn, count, false);
+            logs = Logger.UserLogs(ucn, count, isAll);
 
             if (ListBoxLogs != null && ListBoxLogs.Items != null)
             {
@@ -125,16 +124,17 @@ namespace Cloc.Pages
         {
             if (ComboBoxCount.SelectedIndex == 5)
             {
-                count = FileHelper.GetFileLines(path);
-                FillChecks(ucn, count);
-                FillLogs(ucn, count);
+                bool isAll = true;
+                FillChecks(ucn, count, isAll);
+                FillLogs(ucn, count, isAll);
             }
             else
             {
                 if (int.TryParse((e.AddedItems[0] as ComboBoxItem).Content.ToString(), out count))
                 {
-                    FillChecks(ucn, count);
-                    FillLogs(ucn, count);
+                    bool isAll = false;
+                    FillChecks(ucn, count, isAll);
+                    FillLogs(ucn, count, isAll);
                 }
                 else
                 {
@@ -155,12 +155,13 @@ namespace Cloc.Pages
                     string name = split[0];
                     ucn = split[1];
 
-                    FillChecks(ucn, count);
-                    FillLogs(ucn, count);
+                    bool isAll = false;
+                    FillChecks(ucn, count, isAll);
+                    FillLogs(ucn, count, isAll);
 
                     if (GetLoginData() != ucn)
                     {
-                        if (!Logger.AddLog(GetLoginData(), "Преглед активността на профила на " + name + "."))
+                        if (!Cloc.Database.InsertQuery.AddLogQuery(GetLoginData(), "Преглед активността на профила на " + name + "."))
                         {
                             MessageBox.Show("Възникна грешка при записване на активността.");
                         }

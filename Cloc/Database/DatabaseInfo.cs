@@ -12,7 +12,7 @@ namespace Cloc.Database
         private readonly static int PARAMETERS_COUNT = 4;
         private readonly static string path = ".\\DBInfo.txt";
 
-        internal static bool WriteInfoToFile(DBInfo db)
+        internal static bool WriteInfoToFile(DatabaseParameters db)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace Cloc.Database
             }
         }
 
-        static internal bool SetSettings(DBInfo db)
+        static internal bool SetSettings(DatabaseParameters db)
         {
             bool isSaved = WriteInfoToFile(db);
 
@@ -48,10 +48,10 @@ namespace Cloc.Database
             }
         }
 
-        static internal DBInfo RetrieveInfo()
+        static internal DatabaseParameters RetrieveInfo()
         {
             List<string> data = new();
-            DBInfo db = new();
+            DatabaseParameters db = new();
 
             using (StreamReader reader = new(path))
             {
@@ -77,7 +77,7 @@ namespace Cloc.Database
 
         static internal string GetServer()
         {
-            DBInfo db = RetrieveInfo();
+            DatabaseParameters db = RetrieveInfo();
 
             if (db.Server != null)
                 return db.Server;
@@ -87,7 +87,7 @@ namespace Cloc.Database
 
         static internal string GetPort()
         {
-            DBInfo db = RetrieveInfo();
+            DatabaseParameters db = RetrieveInfo();
 
             if (db.Port != null)
                 return db.Port;
@@ -97,7 +97,7 @@ namespace Cloc.Database
 
         static internal string GetUserID()
         {
-            DBInfo db = RetrieveInfo();
+            DatabaseParameters db = RetrieveInfo();
 
             if (db.UserID != null)
                 return db.UserID;
@@ -107,7 +107,7 @@ namespace Cloc.Database
 
         static internal string GetPassword()
         {
-            DBInfo db = RetrieveInfo();
+            DatabaseParameters db = RetrieveInfo();
 
             if (db.Password != null)
                 return db.Password;

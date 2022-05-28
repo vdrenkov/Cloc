@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.SelectQuery;
 
 namespace Cloc.Pages
 {
@@ -77,7 +77,7 @@ namespace Cloc.Pages
 
                     if (Session.UserToken.GetLoginData() != ucn)
                     {
-                        if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Преглед данните на профила на " + name + "."))
+                        if (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Преглед данните на профила на " + name + "."))
                         {
                             MessageBox.Show("Възникна грешка при записване на активността.");
                         }

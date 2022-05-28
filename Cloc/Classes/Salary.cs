@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using static Cloc.Classes.Checker;
-using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.SelectQuery;
 
 namespace Cloc.Classes
 {

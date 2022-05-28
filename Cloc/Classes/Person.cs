@@ -93,7 +93,7 @@ namespace Cloc.Classes
         {
             int adminCount = 0;
 
-            List<Person> people = Database.DatabaseQuery.SelectAllPeopleQuery();
+            List<Person> people = Database.SelectQuery.SelectAllPeopleQuery();
 
             foreach (Person person in people)
             {

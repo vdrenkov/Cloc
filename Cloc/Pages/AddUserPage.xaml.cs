@@ -2,7 +2,8 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.InsertQuery;
+using static Cloc.Database.SelectQuery;
 
 namespace Cloc.Pages
 {
@@ -158,11 +159,11 @@ namespace Cloc.Pages
                 if (AddUser(person, user))
                 {
                     MessageBox.Show("Потребителят беше добавен успешно.");
-                    if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Добавяне на потребител " + person.Name + " " + person.Surname + "."))
+                    if (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Добавяне на потребител " + person.Name + " " + person.Surname + "."))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }
-                    if (!Logger.AddLog(person.UCN, "Създаване на профил."))
+                    if (!Cloc.Database.InsertQuery.AddLogQuery(person.UCN, "Създаване на профил."))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }

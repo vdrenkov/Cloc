@@ -8,7 +8,6 @@ namespace Cloc.Database
 {
     internal class DatabaseConnection
     {
-        internal string Port = GetPort();
         internal MySqlConnection Connection { get; set; }
 
         internal bool IsConnect()
@@ -17,7 +16,7 @@ namespace Cloc.Database
 
             if (Connection == null)
             {
-                if (!uint.TryParse(Port, out uint port))
+                if (!uint.TryParse(GetPort(), out uint port))
                 {
                     port = 3306;
                 }

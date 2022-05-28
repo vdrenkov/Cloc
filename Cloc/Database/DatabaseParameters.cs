@@ -1,6 +1,6 @@
 ﻿namespace Cloc.Database
 {
-    internal class DBInfo
+    internal class DatabaseParameters
     {
         internal string Server;
         internal string Port;

@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.SelectQuery;
 
 namespace Cloc.Pages
 {

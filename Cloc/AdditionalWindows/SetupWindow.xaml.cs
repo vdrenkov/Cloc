@@ -3,7 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using static Cloc.Classes.Validator;
-using static Cloc.Database.DatabaseQuery;
+using static Cloc.Database.CreateQuery;
 
 namespace Cloc.AdditionalWindows
 {
@@ -58,7 +58,7 @@ namespace Cloc.AdditionalWindows
         private void ButtonSetup_Click(object sender, RoutedEventArgs e)
         {
             Person person = new();
-            Database.DBInfo db = new();
+            Database.DatabaseParameters db = new();
             string accessCode;
             int flag = 0;
 

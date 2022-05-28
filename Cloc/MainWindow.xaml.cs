@@ -1,5 +1,4 @@
-﻿using Cloc.Classes;
-using Cloc.Pages;
+﻿using Cloc.Pages;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,7 +18,7 @@ namespace Cloc
 
         private void ExitCurrentSession()
         {
-            if (!Logger.AddLog(Session.UserToken.GetLoginData(), "Изход от системата."))
+            if (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Изход от системата."))
             {
                 MessageBox.Show("Неуспешен запис на активността.");
             }
