@@ -94,7 +94,10 @@ namespace Cloc.Database
                         people.Add(person);
                         person = new Person();
                     }
+
                     reader.Close();
+
+                    people.Sort((x, y) => string.Compare(x.Name, y.Name));
                 }
                 catch (Exception ex)
                 {

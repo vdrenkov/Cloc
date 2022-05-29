@@ -481,9 +481,10 @@ namespace Cloc.Pages
                 string name = split[0];
                 string ucn = split[1];
 
+                Person person = SelectPersonQuery(ucn);
                 User user = SelectUserQuery(ucn);
 
-                if (Session.UserToken.GetLoginData() != ucn)
+                  if (person.Position!=WorkPosition.Admin)
                 {
                     double salary = Salary.CheckSalary(ucn);
                     MessageBox.Show("Текущата сума за изплащане на " + name + " е " + Math.Round(salary, 2).ToString() + " лева.");
