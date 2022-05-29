@@ -94,7 +94,7 @@ namespace Cloc.Pages
                         if (DeleteWorkerQuery(ucn))
                         {
                             flag = true;
-                            if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Изтриване на профила.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Изтриване профила на " + name + ".")))
+                            if (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Изтриване профила на " + name + "."))
                             {
                                 MessageBox.Show("Възникна грешка при записване на активността.");
                             }
@@ -110,7 +110,7 @@ namespace Cloc.Pages
                     if (DeleteWorkerQuery(ucn))
                     {
                         flag = true;
-                        if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Изтриване на профила.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Изтриване профила на " + name + ".")))
+                        if ((!Database.InsertQuery.AddLogQuery(ucn, "Изтриване на профила.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Изтриване профила на " + name + ".")))
                         {
                             MessageBox.Show("Възникна грешка при записване на активността.");
                         }
@@ -143,7 +143,7 @@ namespace Cloc.Pages
             if (ChangePersonQuery(ucn, "Name", changeParam))
             {
                 MessageBox.Show("Промяната бе успешна.");
-                if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на име от администратор.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна името на потребител " + name + " на " + changeParam + ".")))
+                if ((!Database.InsertQuery.AddLogQuery(ucn, "Промяна на име от администратор.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна името на потребител " + name + " на " + changeParam + ".")))
                 {
                     MessageBox.Show("Възникна грешка при записване на активността.");
                 }
@@ -161,7 +161,7 @@ namespace Cloc.Pages
             if (ChangePersonQuery(ucn, "Surname", changeParam))
             {
                 MessageBox.Show("Промяната бе успешна.");
-                if (!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на фамилно име от администратор.") || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна фамилията на потребител " + name + " на " + changeParam + ".")))
+                if (!Database.InsertQuery.AddLogQuery(ucn, "Промяна на фамилно име от администратор.") || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна фамилията на потребител " + name + " на " + changeParam + ".")))
                 {
                     MessageBox.Show("Възникна грешка при записване на активността.");
                 }
@@ -179,7 +179,7 @@ namespace Cloc.Pages
             if (ChangePersonQuery(ucn, "Email", changeParam))
             {
                 MessageBox.Show("Промяната бе успешна.");
-                if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на E-Mail от администратор.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна имейла на потребител " + name + " на " + changeParam + ".")))
+                if ((!Database.InsertQuery.AddLogQuery(ucn, "Промяна на E-Mail от администратор.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна имейла на потребител " + name + " на " + changeParam + ".")))
                 {
                     MessageBox.Show("Възникна грешка при записване на активността.");
                 }
@@ -197,7 +197,7 @@ namespace Cloc.Pages
             if (ChangePersonQuery(ucn, "PhoneNumber", changeParam))
             {
                 MessageBox.Show("Промяната бе успешна.");
-                if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на телефонен номер от администратор.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна телефонния номер на потребител " + name + " на " + changeParam + ".")))
+                if ((!Database.InsertQuery.AddLogQuery(ucn, "Промяна на телефонен номер от администратор.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна телефонния номер на потребител " + name + " на " + changeParam + ".")))
                 {
                     MessageBox.Show("Възникна грешка при записване на активността.");
                 }
@@ -215,7 +215,7 @@ namespace Cloc.Pages
             if (ChangePersonQuery(ucn, "Country", changeParam))
             {
                 MessageBox.Show("Промяната бе успешна.");
-                if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на държава от администратор.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна държавата на потребител " + name + " на " + changeParam + ".")))
+                if ((!Database.InsertQuery.AddLogQuery(ucn, "Промяна на държава от администратор.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна държавата на потребител " + name + " на " + changeParam + ".")))
                 {
                     MessageBox.Show("Възникна грешка при записване на активността.");
                 }
@@ -233,7 +233,7 @@ namespace Cloc.Pages
             if (ChangePersonQuery(ucn, "City", changeParam))
             {
                 MessageBox.Show("Промяната бе успешна.");
-                if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на град от администратор.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна града на потребител " + name + " на " + changeParam + ".")))
+                if ((!Database.InsertQuery.AddLogQuery(ucn, "Промяна на град от администратор.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна града на потребител " + name + " на " + changeParam + ".")))
                 {
                     MessageBox.Show("Възникна грешка при записване на активността.");
                 }
@@ -251,7 +251,7 @@ namespace Cloc.Pages
             if (ChangePersonQuery(ucn, "Address", changeParam))
             {
                 MessageBox.Show("Промяната бе успешна.");
-                if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на адрес от администратор.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна адреса на потребител " + name + " на " + changeParam + ".")))
+                if ((!Database.InsertQuery.AddLogQuery(ucn, "Промяна на адрес от администратор.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна адреса на потребител " + name + " на " + changeParam + ".")))
                 {
                     MessageBox.Show("Възникна грешка при записване на активността.");
                 }
@@ -275,7 +275,7 @@ namespace Cloc.Pages
                     if (ChangePersonQuery(ucn, "Position", wp.ToString()))
                     {
                         MessageBox.Show("Промяната бе успешна.");
-                        if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на работна позиция от администратор.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна позицията на потребител " + name + " на " + Person.TranslateFromWorkPosition(wp) + ".")))
+                        if ((!Database.InsertQuery.AddLogQuery(ucn, "Промяна на работна позиция от администратор.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна позицията на потребител " + name + " на " + Person.TranslateFromWorkPosition(wp) + ".")))
                         {
                             MessageBox.Show("Възникна грешка при записване на активността.");
                         }
@@ -292,13 +292,13 @@ namespace Cloc.Pages
                         MessageBox.Show("Промяната бе успешна.");
                         if (ucn != Session.UserToken.GetLoginData())
                         {
-                            if (!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на работна позиция от администратор."))
+                            if (!Database.InsertQuery.AddLogQuery(ucn, "Промяна на работна позиция от администратор."))
                             {
                                 MessageBox.Show("Възникна грешка при записване на активността.");
 
                             }
                         }
-                        if (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна позицията на потребител " + name + " на " + Person.TranslateFromWorkPosition(wp) + "."))
+                        if (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна позицията на потребител " + name + " на " + Person.TranslateFromWorkPosition(wp) + "."))
                         {
                             MessageBox.Show("Възникна грешка при записване на активността.");
                         }
@@ -329,7 +329,7 @@ namespace Cloc.Pages
                 if (ChangeAccessCodeQuery(ucn, changeParam))
                 {
                     MessageBox.Show("Промяната бе успешна.");
-                    if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на код за достъп от администратор.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна кода за достъп на потребител " + name + ".")))
+                    if ((!Database.InsertQuery.AddLogQuery(ucn, "Промяна на код за достъп от администратор.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна кода за достъп на потребител " + name + ".")))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }
@@ -354,7 +354,7 @@ namespace Cloc.Pages
                 if (ChangeHourPaymentQuery(ucn, hourPayment))
                 {
                     MessageBox.Show("Промяната бе успешна.");
-                    if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на часова ставка от администратор.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна часовата ставка на потребител " + name + ".")))
+                    if ((!Database.InsertQuery.AddLogQuery(ucn, "Промяна на часова ставка от администратор.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна часовата ставка на потребител " + name + ".")))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }
@@ -379,7 +379,7 @@ namespace Cloc.Pages
                 if (ChangePercentQuery(ucn, percent))
                 {
                     MessageBox.Show("Промяната бе успешна.");
-                    if ((!Cloc.Database.InsertQuery.AddLogQuery(ucn, "Промяна на процент от администратор.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна бонус-процента на потребител " + name + ".")))
+                    if ((!Database.InsertQuery.AddLogQuery(ucn, "Промяна на процент от администратор.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Промяна бонус-процента на потребител " + name + ".")))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }
@@ -499,7 +499,7 @@ namespace Cloc.Pages
                                 if (NullTotalHoursQuery(user))
                                 {
                                     MessageBox.Show("Сумата бе успешно нулирана.");
-                                    if ((!Cloc.Database.InsertQuery.AddLogQuery(user.UserUCN, "Изплащане на стойност " + Math.Round(salary, 2) + " лв.")) || (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Изплащане на " + Math.Round(salary, 2) + " лева на " + name + " .")))
+                                    if ((!Database.InsertQuery.AddLogQuery(user.UserUCN, "Изплащане на стойност " + Math.Round(salary, 2) + " лв.")) || (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Изплащане на " + Math.Round(salary, 2) + " лева на " + name + " .")))
                                     {
                                         MessageBox.Show("Възникна грешка при записване на активността.");
                                     }

@@ -18,7 +18,7 @@ namespace Cloc.Database
             {
                 if (File.Exists(path))
                 {
-                    File.WriteAllText(path, db.Server + Environment.NewLine + db.Port + Environment.NewLine + db.UserID + Environment.NewLine + db.Password);
+                    File.WriteAllText(path, Security.EncryptString(db.Server) + Environment.NewLine + Security.EncryptString(db.Port) + Environment.NewLine + Security.EncryptString(db.UserID) + Environment.NewLine + Security.EncryptString(db.Password));
                 }
                 else
                 {
@@ -66,10 +66,10 @@ namespace Cloc.Database
 
             if (data != null && data.Count >= PARAMETERS_COUNT)
             {
-                db.Server = data[0];
-                db.Port = data[1];
-                db.UserID = data[2];
-                db.Password = data[3];
+                db.Server = Security.DecryptString(data[0]);
+                db.Port = Security.DecryptString(data[1]);
+                db.UserID = Security.DecryptString(data[2]);
+                db.Password = Security.DecryptString(data[3]);
             }
 
             return db;

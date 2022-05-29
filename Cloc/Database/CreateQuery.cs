@@ -82,7 +82,7 @@ namespace Cloc.Database
 
                 cmd.CommandText = "use clocdb; create table if not exists Logs(id int primary key auto_increment, userUcn varchar(255) not null," +
                     "action text, dt DateTime default Now()," +
-                    "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade);";
+                    "constraint foreign key(userUcn) references People(ucn) on delete cascade on update cascade);";
 
                 cmd.ExecuteNonQuery();
                 connection.Close();
@@ -108,7 +108,7 @@ namespace Cloc.Database
 
                 cmd.CommandText = "use clocdb; create table if not exists Checks(id int primary key auto_increment, userUcn varchar(255) not null," +
                     "checkIn DateTime default Now(), checkOut DateTime default Now()," +
-                    "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade);";
+                    "constraint foreign key(userUcn) references People(ucn) on delete cascade on update cascade);";
 
                 cmd.ExecuteNonQuery();
                 connection.Close();
@@ -134,7 +134,7 @@ namespace Cloc.Database
 
                 cmd.CommandText = "use clocdb; create table if not exists Reports(id int primary key auto_increment, userUcn varchar(255) not null," +
                     "names text, sum double(16,2) default 0,dt DateTime default Now()," +
-                    "constraint foreign key(userUcn) references people(ucn) on delete cascade on update cascade);";
+                    "constraint foreign key(userUcn) references People(ucn) on delete cascade on update cascade);";
 
                 cmd.ExecuteNonQuery();
                 connection.Close();

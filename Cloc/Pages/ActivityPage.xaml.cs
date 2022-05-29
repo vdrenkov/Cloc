@@ -161,7 +161,7 @@ namespace Cloc.Pages
 
                     if (GetLoginData() != ucn)
                     {
-                        if (!Cloc.Database.InsertQuery.AddLogQuery(GetLoginData(), "Преглед активността на профила на " + name + "."))
+                        if (!Database.InsertQuery.AddLogQuery(GetLoginData(), "Преглед активността на профила на " + name + "."))
                         {
                             MessageBox.Show("Възникна грешка при записване на активността.");
                         }

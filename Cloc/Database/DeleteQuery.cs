@@ -21,6 +21,8 @@ namespace Cloc.Database
                     var cmd = new MySqlCommand(query, dbConn.Connection);
                     cmd.Parameters.AddWithValue("@UCN", UCN);
 
+                    UCN = DecryptString(UCN);
+
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
                 }

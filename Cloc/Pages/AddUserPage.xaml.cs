@@ -115,7 +115,7 @@ namespace Cloc.Pages
             { person.Position = Person.TranslateToWorkPosition(ComboBoxPosition.SelectedItem.ToString()); }
             else { flag++; }
 
-            if (double.TryParse(TextBoxHourPayment.Text.ToString(), out double hourPayment) && hourPayment > 0 && hourPayment <= 500)
+            if (double.TryParse(TextBoxHourPayment.Text.ToString(), out double hourPayment) && hourPayment >= 0 && hourPayment <= 500)
             {
                 user.HourPayment = hourPayment;
             }
@@ -136,7 +136,7 @@ namespace Cloc.Pages
             if (flag != 0)
             {
                 MessageBox.Show("Моля, проверете коректността на въведените данни!\nВсички полета са задължителни!" +
-                    "\nЧасова ставка: > 0 и <= 500 лева.\nПроцент: >= -10 и <= 25%.");
+                    "\nЧасова ставка: >= 0 и <= 500 лева.\nПроцент: >= -10 и <= 25%.");
                 ReloadPage();
             }
             else
@@ -159,11 +159,11 @@ namespace Cloc.Pages
                 if (AddUser(person, user))
                 {
                     MessageBox.Show("Потребителят беше добавен успешно.");
-                    if (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Добавяне на потребител " + person.Name + " " + person.Surname + "."))
+                    if (!AddLogQuery(Session.UserToken.GetLoginData(), "Добавяне на потребител " + person.Name + " " + person.Surname + "."))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }
-                    if (!Cloc.Database.InsertQuery.AddLogQuery(person.UCN, "Създаване на профил."))
+                    if (!AddLogQuery(person.UCN, "Създаване на профил."))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }

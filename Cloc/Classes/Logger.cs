@@ -10,7 +10,7 @@ namespace Cloc.Classes
         static internal List<string> UserLogs(string UCN, int count, bool isAll)
         {
             List<string> logs = new();
-            List<string> allLogs = new();
+            List<string> allLogs = Database.SelectQuery.SelectAllLogsQuery(UCN);
             List<string> filteredLogs;
 
             try
@@ -22,7 +22,7 @@ namespace Cloc.Classes
 
                     if (results[0] == UCN)
                     {
-                        string temp = results[0] + ";" + results[1] + ";" + results[2];
+                        string temp = results[2] + "     ЕГН: " + results[0] + "     Действие: " + results[1];
                         logs.Add(temp);
                     }
                 }

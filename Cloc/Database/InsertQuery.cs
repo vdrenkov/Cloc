@@ -83,10 +83,12 @@ namespace Cloc.Database
             {
                 try
                 {
-                    string query = "use ClocDB; insert into Logs (userUcn,action) values (@UCN, @action);";
+                    string query = "use ClocDB; insert into Logs (userUcn,action) values (@ucn, @action);";
                     var cmd = new MySqlCommand(query, dbConn.Connection);
-                    cmd.Parameters.AddWithValue("@UCN", ucn);
+                    cmd.Parameters.AddWithValue("@ucn", ucn);
                     cmd.Parameters.AddWithValue("@action", action);
+
+                    ucn = DecryptString(ucn);
 
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
@@ -120,6 +122,8 @@ namespace Cloc.Database
                     var cmd = new MySqlCommand(query, dbConn.Connection);
                     cmd.Parameters.AddWithValue("@UCN", user.UserUCN);
 
+                    user.UserUCN = DecryptString(user.UserUCN);
+
                     if (cmd.ExecuteNonQuery() > 0)
                     { flag = true; }
                 }
@@ -152,6 +156,8 @@ namespace Cloc.Database
                     cmd.Parameters.AddWithValue("@UCN", ucn);
                     cmd.Parameters.AddWithValue("@names", names);
                     cmd.Parameters.AddWithValue("@sum", sum);
+
+                    ucn = DecryptString(ucn);
 
                     if (cmd.ExecuteNonQuery() > 0)
                     {

@@ -1,6 +1,5 @@
 ﻿using Cloc.AdditionalWindows;
 using Cloc.Classes;
-using Cloc.Database;
 using System.Windows;
 using System.Windows.Input;
 using static Cloc.Classes.FileHelper;
@@ -64,7 +63,7 @@ namespace Cloc
                 if (ValidateEntry(PasswordBoxAccessCode.Password.ToString()))
                 {
                     Person person = SelectPersonQuery(GetLoginData());
-                    if (!Cloc.Database.InsertQuery.AddLogQuery(person.UCN, "Вход в системата."))
+                    if (!Database.InsertQuery.AddLogQuery(person.UCN, "Вход в системата."))
                     {
                         MessageBox.Show("Възникна грешка при записване на активността.");
                     }
@@ -121,28 +120,6 @@ namespace Cloc
             {
                 PasswordBoxAccessCode.Password += 1;
             }
-            DatabaseParameters db = new();
-            db.Server = "localhost";
-            db.Port = "3306";
-            db.UserID = "root";
-            db.Password = "348_sha765_KaD3l";
-
-            Person person = new();
-            person.Name = "Валентин";
-            person.UCN = "9902130044";
-            person.Country = "България";
-            person.Surname = "Дренков";
-            person.Address = "Цар Иван Асен II 5";
-            person.City = "Разлог";
-            person.Email = "vdrenkov@tu-sofia.bg";
-            person.Position = WorkPosition.Admin;
-            person.PhoneNumber = "+359888992278";
-
-            User user = SelectUserQuery(person.UCN);
-
-            //  TODO binary file dbinfo.txt
-            MessageBox.Show(CreateQuery.StartupQuery(db, person, "77777").ToString());
-
         }
         private void Button2_Click(object sender, RoutedEventArgs e)
         {

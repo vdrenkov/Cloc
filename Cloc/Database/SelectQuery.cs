@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using static Cloc.Classes.Security;
 
@@ -275,7 +276,7 @@ namespace Cloc.Database
 
                     while (reader.Read())
                     {
-                        allLogs.Add(reader.GetString(0) + ";" + reader.GetString(1) + ";" + reader.GetDateTime(2));
+                        allLogs.Add(reader.GetString(1) + ";" + reader.GetString(2) + ";" + reader.GetDateTime(3));
                     }
                     reader.Close();
                 }
@@ -318,7 +319,15 @@ namespace Cloc.Database
 
                     while (reader.Read())
                     {
-                        allLogs.Add(reader.GetString(0) + ";" + reader.GetDateTime(1) + ";" + reader.GetDateTime(2));
+                        StringBuilder sb = new();
+
+                        sb.Append(reader.GetString(1));
+                        sb.Append(';');
+                        sb.Append(reader.GetDateTime(2));
+                        sb.Append(';');
+                        sb.Append(reader.GetDateTime(3));
+
+                        allLogs.Add(sb.ToString());
                     }
                     reader.Close();
                 }
@@ -343,17 +352,26 @@ namespace Cloc.Database
             }
         }
 
-        internal static List<string> SelectAllReportsQuery(string UCN)
+        internal static List<string> SelectAllReportsQuery(string UCN, bool isAll)
         {
             UCN = EncryptString(UCN);
             DatabaseConnection dbConn = new();
             List<string> allLogs = new();
+            string query;
 
             if (dbConn.IsConnect())
             {
                 try
                 {
-                    string query = $"use ClocDB; select * from Reports where userUcn=@UCN;";
+                    if (isAll)
+                    {
+                        query = $"use ClocDB; select * from Reports;";
+                    }
+                    else
+                    {
+                        query = $"use ClocDB; select * from Reports where userUcn=@UCN;";
+                    }
+
                     var cmd = new MySqlCommand(query, dbConn.Connection);
                     cmd.Parameters.AddWithValue("@UCN", UCN);
 
@@ -361,7 +379,7 @@ namespace Cloc.Database
 
                     while (reader.Read())
                     {
-                        allLogs.Add(reader.GetString(0) + ";" + reader.GetString(1) + ";" + reader.GetDouble(2) + ";" + reader.GetDateTime(3));
+                        allLogs.Add(reader.GetString(1) + ";" + reader.GetString(2) + ";" + reader.GetDouble(3) + ";" + reader.GetDateTime(4));
                     }
                     reader.Close();
                 }

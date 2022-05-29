@@ -92,7 +92,7 @@
 
                 <Image Height="auto" Width="auto"  HorizontalAlignment="center" VerticalAlignment="center">
                     <Image.Source>
-                        <BitmapImage UriSource="Images/Restaurant_Menu.png"></BitmapImage>
+                        <BitmapImage UriSource="../Images/Restaurant_Menu.png"></BitmapImage>
                     </Image.Source>
                 </Image>
 
@@ -148,7 +148,7 @@
                        
                         <Image Grid.Row="0">
                             <Image.Source>
-                                <BitmapImage UriSource="Images/Lotus.jpg"></BitmapImage>
+                                <BitmapImage UriSource="../Images/Lotus.jpg"></BitmapImage>
                             </Image.Source>
                         </Image>
 

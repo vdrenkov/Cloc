@@ -2,7 +2,6 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows;
 
 namespace Cloc.Classes
 {
@@ -65,7 +64,6 @@ namespace Cloc.Classes
             catch (Exception ex)
             {
                 ErrorLog.AddErrorLog(ex.ToString());
-                MessageBox.Show(ex.Message);
                 return string.Empty;
             }
         }

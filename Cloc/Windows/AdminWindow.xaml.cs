@@ -22,7 +22,7 @@ namespace Cloc
 
         private void ExitCurrentSession()
         {
-            if (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Изход от системата."))
+            if (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Изход от системата."))
             {
                 MessageBox.Show("Неуспешен запис на активността.");
             }

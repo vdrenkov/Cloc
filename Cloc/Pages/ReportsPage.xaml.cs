@@ -30,6 +30,7 @@ namespace Cloc.Pages
             DateTime dateFrom = DateTime.MinValue;
             DateTime dateTo = DateTime.MaxValue;
             double sum;
+            bool isAll;
 
             try
             {
@@ -51,14 +52,15 @@ namespace Cloc.Pages
                         string[] split = userInfo.Split(", ");
                         string name = split[0];
                         string ucn = split[1];
-                        bool isAll = false;
+                        isAll = false;
+
                         sum = Math.Round(SumAllPayments(dateFrom, dateTo, ucn, isAll), 2);
 
                         if (ListBoxPayments != null)
                         {
                             ListBoxPayments.Items.Clear();
 
-                            List<string> UserReports = Reporter.UserReports(dateFrom, dateTo, ucn, false);
+                            List<string> UserReports = Reporter.UserReports(dateFrom, dateTo, ucn, isAll);
 
                             if (UserReports != null && UserReports.Count != 0)
                             {
@@ -76,7 +78,7 @@ namespace Cloc.Pages
                             }
                             if (Session.UserToken.GetLoginData() != ucn)
                             {
-                                if (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Преглед изплащанията на потребител " + name + "."))
+                                if (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Преглед изплащанията на потребител " + name + "."))
                                 {
                                     MessageBox.Show("Възникна грешка при записване на активността.");
                                 }
@@ -85,14 +87,14 @@ namespace Cloc.Pages
                     }
                     else
                     {
-                        bool isAll = true;
+                        isAll = true;
                         sum = Math.Round(SumAllPayments(dateFrom, dateTo, string.Empty, isAll), 2);
 
                         if (ListBoxPayments != null)
                         {
                             ListBoxPayments.Items.Clear();
 
-                            List<string> userReports = UserReports(dateFrom, dateTo, string.Empty, true);
+                            List<string> userReports = UserReports(dateFrom, dateTo, string.Empty, isAll);
 
                             if (userReports != null && userReports.Count != 0)
                             {
@@ -101,6 +103,7 @@ namespace Cloc.Pages
                                 foreach (string userReport in userReports)
                                 {
                                     ListBoxPayments.Items.Add(userReport);
+
                                 }
                             }
                             else
@@ -108,7 +111,7 @@ namespace Cloc.Pages
                                 TextBlockSum.Text = "0 лв.";
                                 ListBoxPayments.Items.Add("Няма изплащания за показване...");
                             }
-                            if (!Cloc.Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Преглед изплащанията на всички потребители."))
+                            if (!Database.InsertQuery.AddLogQuery(Session.UserToken.GetLoginData(), "Преглед изплащанията на всички потребители."))
                             {
                                 MessageBox.Show("Възникна грешка при записване на активността.");
                             }

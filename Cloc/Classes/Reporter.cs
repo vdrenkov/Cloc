@@ -12,7 +12,7 @@ namespace Cloc.Classes
         static internal List<string> UserReports(DateTime dateFrom, DateTime dateTo, string ucn, bool isAll)
         {
             List<string> reports = new();
-            List<string> allReports = SelectAllReportsQuery(ucn);
+            List<string> allReports = SelectAllReportsQuery(ucn, isAll);
 
             try
             {
@@ -33,7 +33,7 @@ namespace Cloc.Classes
                         }
                         else
                         {
-                            if (dateFrom <= date && dateTo >= date && ucn == results[1])
+                            if (dateFrom <= date && dateTo >= date && ucn == results[0])
                             {
                                 string temp = results[3] + "     ЕГН: " + results[0] + "     Име: " + results[1] + "     Сума: " + results[2] + " лева.";
                                 reports.Add(temp);
@@ -64,14 +64,14 @@ namespace Cloc.Classes
         internal static double SumAllPayments(DateTime dateFrom, DateTime dateTo, string ucn, bool isAll)
         {
             double total = 0;
-            List<string> allReports = SelectAllReportsQuery(ucn);
+            List<string> allReports = SelectAllReportsQuery(ucn, isAll);
 
             try
             {
                 foreach (string line in allReports)
                 {
                     string[] results = line.Split(';', ';', ';');
-                    results[1] = DecryptString(results[1]);
+                    results[0] = DecryptString(results[0]);
 
                     if (DateTime.TryParse(results[3], out DateTime date))
                     {

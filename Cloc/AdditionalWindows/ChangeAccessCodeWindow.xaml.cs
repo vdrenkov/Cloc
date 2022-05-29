@@ -36,7 +36,7 @@ namespace Cloc.AdditionalWindows
             {
 
                 MessageBox.Show($"Промяната беше успешна! Новият код за достъп е: {MyPasswordBox.Password}");
-                if (!Cloc.Database.InsertQuery.AddLogQuery(TextBoxUCN.Text.ToString(), "Промяна на кода за достъп."))
+                if (!Database.InsertQuery.AddLogQuery(TextBoxUCN.Text.ToString(), "Промяна на кода за достъп."))
                 {
                     MessageBox.Show("Възникна грешка при записване на активността.");
                 }
