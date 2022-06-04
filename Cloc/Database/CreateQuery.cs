@@ -148,11 +148,11 @@ namespace Cloc.Database
             return true;
         }
 
-        internal static bool SetupQuery(DatabaseParameters db,string accessCode)
+        internal static bool SetupQuery(DatabaseParameters db)
         {
             bool flag = false;
-
-            if (SetSettings(db))
+            bool isSuccess = SetSettings(db);
+            if (isSuccess)
             {
                 flag = true;
             }

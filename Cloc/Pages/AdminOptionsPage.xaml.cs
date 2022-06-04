@@ -484,7 +484,7 @@ namespace Cloc.Pages
                 Person person = SelectPersonQuery(ucn);
                 User user = SelectUserQuery(ucn);
 
-                  if (person.Position!=WorkPosition.Admin)
+                if (person.Position != WorkPosition.Admin)
                 {
                     double salary = Salary.CheckSalary(ucn);
                     MessageBox.Show("Текущата сума за изплащане на " + name + " е " + Math.Round(salary, 2).ToString() + " лева.");

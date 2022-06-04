@@ -37,7 +37,6 @@ namespace Cloc.Database
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Възникна неочаквана грешка.");
                     ErrorLog.AddErrorLog(ex.ToString());
                     flag = false;
                 }

@@ -8,7 +8,7 @@
          WindowState="Maximized"
     WindowStyle="None"
         Title="CLOC" Height="auto" Width="auto">
-    <Grid Name="SetupWindowGrid" FocusManager.FocusedElement="{Binding ElementName=TextBoxUCN}">
+    <Grid FocusManager.FocusedElement="{Binding ElementName=TextBoxServer}">
 
         <Grid.Background>
             <ImageBrush ImageSource="../Images/Background_Menu.png"/>

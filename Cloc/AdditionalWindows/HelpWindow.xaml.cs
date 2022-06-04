@@ -58,7 +58,7 @@ namespace Cloc.AdditionalWindows
                 }
 
 
-               
+
             }
             else
             {
