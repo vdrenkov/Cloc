@@ -53,7 +53,7 @@ namespace Cloc.Database
                         {
                             flag = true;
 
-                            if ((!AddLogQuery(person.UCN, "Начална инициализация.")))
+                            if (!AddLogQuery(person.UCN, "Начална инициализация."))
                             {
                                 MessageBox.Show("Възникна грешка при записване на активността.");
                             }
@@ -146,6 +146,18 @@ namespace Cloc.Database
             }
 
             return true;
+        }
+
+        internal static bool SetupQuery(DatabaseParameters db,string accessCode)
+        {
+            bool flag = false;
+
+            if (SetSettings(db))
+            {
+                flag = true;
+            }
+
+            return flag;
         }
     }
 }

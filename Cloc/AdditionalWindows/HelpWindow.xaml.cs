@@ -35,10 +35,30 @@ namespace Cloc.AdditionalWindows
             if (MyPasswordBox.Password == password)
             {
                 MessageBox.Show("Внимание!\nМоля, уверете се, че сте прочели README.txt файла, преди да продължите!");
-                SetupWindow sw = new();
-                sw.ButtonSetup.IsDefault = true;
-                Close();
-                sw.Show();
+
+                MessageBoxResult result = MessageBox.Show("Желаете ли да изтриете всички данни от базата данни (първоначална инициализация)?", "CLOC", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+
+                        SetupWindow sw = new();
+
+                        sw.ButtonSetup.IsDefault = true;
+                        Close();
+                        sw.Show();
+
+                        break;
+
+                    case MessageBoxResult.No:
+                        QuickSetupWindow qsw = new();
+                        qsw.ButtonSetup.IsDefault = true;
+                        Close();
+                        qsw.Show();
+                        break;
+                }
+
+
+               
             }
             else
             {
