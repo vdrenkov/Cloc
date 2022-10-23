@@ -1,7 +1,6 @@
 ﻿using Cloc.Classes;
 using MySql.Data.MySqlClient;
 using System;
-using System.Windows;
 using static Cloc.Database.DatabaseInfo;
 
 namespace Cloc.Database

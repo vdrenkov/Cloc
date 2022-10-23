@@ -1,6 +1,4 @@
-﻿using Cloc.Classes;
-using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using static Cloc.Classes.Validator;
 using static Cloc.Database.CreateQuery;
@@ -53,58 +51,58 @@ namespace Cloc.AdditionalWindows
             string accessCode;
             int flag = 0;
 
-                if (ValidateAccessCode(PasswordBoxAccessCode.Password.ToString()))
-                {
-                    accessCode = PasswordBoxAccessCode.Password.ToString();
-                }
-                else
-                {
-                    accessCode = string.Empty;
-                    flag++;
-                }
+            if (ValidateAccessCode(PasswordBoxAccessCode.Password.ToString()))
+            {
+                accessCode = PasswordBoxAccessCode.Password.ToString();
+            }
+            else
+            {
+                accessCode = string.Empty;
+                flag++;
+            }
 
-                if (string.IsNullOrEmpty(TextBoxServer.Text)) { flag++; }
-                if (string.IsNullOrEmpty(TextBoxUser.Text)) { flag++; }
-                if (string.IsNullOrEmpty(PasswordBoxDBPassword.Password)) { flag++; }
-                if (string.IsNullOrEmpty(TextBoxPort.Text)) { flag++; }
+            if (string.IsNullOrEmpty(TextBoxServer.Text)) { flag++; }
+            if (string.IsNullOrEmpty(TextBoxUser.Text)) { flag++; }
+            if (string.IsNullOrEmpty(PasswordBoxDBPassword.Password)) { flag++; }
+            if (string.IsNullOrEmpty(TextBoxPort.Text)) { flag++; }
 
-                db.Server = TextBoxServer.Text.ToString();
-                db.UserID = TextBoxUser.Text.ToString();
-                db.Password = PasswordBoxDBPassword.Password.ToString();
-                db.Port = TextBoxPort.Text.ToString();
+            db.Server = TextBoxServer.Text.ToString();
+            db.UserID = TextBoxUser.Text.ToString();
+            db.Password = PasswordBoxDBPassword.Password.ToString();
+            db.Port = TextBoxPort.Text.ToString();
 
-                if (flag == 0)
+            if (flag == 0)
+            {
+                if (SetupQuery(db))
                 {
-                    if (SetupQuery(db))
+                    bool isConnected = Database.SelectQuery.SelectAccessCodeQuery(accessCode);
+
+                    if (isConnected)
                     {
-                        bool isConnected = Database.SelectQuery.SelectAccessCodeQuery(accessCode);
-
-                        if (isConnected)
-                        {
-                            MessageBox.Show($"Настройката на системата беше успешна!");
-                            ExitSession();
-                        }
-                        else
-                        {
-                            ReloadPage();
-                            MessageBox.Show("Моля, проверете коректността на въведените данни и опитайте отново!\n" +
-                                     "Всички полета са задължителни!" +
-                                     "\nКодът за достъп се използва с цел проверка на връзката.");
-                        }
+                        MessageBox.Show($"Настройката на системата беше успешна!");
+                        ExitSession();
                     }
                     else
                     {
-                        MessageBox.Show("Неуспешна връзка към базата данни.");
                         ReloadPage();
+                        MessageBox.Show("Моля, проверете коректността на въведените данни и опитайте отново!\n" +
+                                 "Всички полета са задължителни!" +
+                                 "\nКодът за достъп се използва с цел проверка на връзката.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Моля, проверете коректността на въведените данни и опитайте отново!\n" +
-                        "Всички полета са задължителни!" +
-                        "\nКодът за достъп се използва с цел проверка на връзката.");
+                    MessageBox.Show("Неуспешна връзка към базата данни.");
                     ReloadPage();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Моля, проверете коректността на въведените данни и опитайте отново!\n" +
+                    "Всички полета са задължителни!" +
+                    "\nКодът за достъп се използва с цел проверка на връзката.");
+                ReloadPage();
+            }
         }
     }
 }
